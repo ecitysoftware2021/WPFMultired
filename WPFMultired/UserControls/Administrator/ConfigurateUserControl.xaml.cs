@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using WPFMultired.Classes;
 using WPFMultired.Resources;
@@ -25,6 +26,8 @@ namespace WPFMultired.UserControls.Administrator
                     init = new AdminPayPlus();
                 }
 
+                txtMs.DataContext = init;
+
                 Initial();
             }
             catch (Exception ex)
@@ -37,8 +40,6 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
-                this.DataContext = init;
-
                 init.callbackResult = result =>
                 {
                     ProccesResult(result);
@@ -70,14 +71,21 @@ namespace WPFMultired.UserControls.Administrator
                     {
                         if (!AdminPayPlus.DataPayPlus.StateBalanece && !AdminPayPlus.DataPayPlus.StateUpload)
                         {
-                            Utilities.navigator.Navigate(UserControlView.Main);
+                            Task.Run(() =>
+                            {
+                                Thread.Sleep(5000);
+                                Utilities.navigator.Navigate(UserControlView.Main);
+                            });
                         }
                     }
                     else
                     {
-                        Thread.Sleep(3000);
-                        Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
-                        Initial();
+                        Task.Run(() =>
+                        {
+                            Thread.Sleep(5000);
+                            Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
+                            Initial();
+                        });
                     }
                 }
             }

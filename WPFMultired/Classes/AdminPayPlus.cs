@@ -76,7 +76,7 @@ namespace WPFMultired.Classes
             set
             {
                 _descriptionStatusPayPlus = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(_descriptionStatusPayPlus)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DescriptionStatusPayPlus)));
             }
         }
 
@@ -93,6 +93,11 @@ namespace WPFMultired.Classes
             if (api == null)
             {
                 api = new Api();
+            }
+
+            if (_db == null)
+            {
+                _db = new SqliteDataAccess();
             }
 
             if (_apiIntegration == null)
@@ -119,27 +124,27 @@ namespace WPFMultired.Classes
 
         public async void Start()
         {
-            _descriptionStatusPayPlus = MessageResource.ComunicationServer;
+            DescriptionStatusPayPlus = MessageResource.ComunicationServer;
 
             if (await LoginPaypad())
             {
-                _descriptionStatusPayPlus = MessageResource.StatePayPlus;
+                DescriptionStatusPayPlus = MessageResource.StatePayPlus;
 
                 if (await ValidatePaypad())
                 {
-                    _descriptionStatusPayPlus = MessageResource.ValidatePeripherals;
+                    DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 
                     ValidatePeripherals();
                 }
                 else
                 {
-                    _descriptionStatusPayPlus = MessageResource.StatePayPlusFail;
+                    DescriptionStatusPayPlus = MessageResource.StatePayPlusFail;
                     callbackResult?.Invoke(false);
                 }
             }
             else
             {
-                _descriptionStatusPayPlus = MessageResource.ComunicationServerFail;
+                DescriptionStatusPayPlus = MessageResource.ComunicationServerFail;
                 callbackResult?.Invoke(false);
             }
         }
@@ -246,7 +251,7 @@ namespace WPFMultired.Classes
                         Level = ELevelError.Strong
                     }, ELogType.Device);
 
-                    _descriptionStatusPayPlus = MessageResource.ValidatePeripheralsFail;
+                    DescriptionStatusPayPlus = MessageResource.ValidatePeripheralsFail;
 
                     Finish(false);
                 };

@@ -61,13 +61,13 @@
                 Width="450" 
                 Height="520"
             />
-            <TextBlock 
+            <TextBlock x:Name="txtMs"
                 Text="{Binding DescriptionStatusPayPlus}"
                 FontFamily="Arial"
                 FontSize="40"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,100"
+                Margin="0,0,0,200"
                 Foreground="#FF104B6D"
                 TextWrapping="Wrap"
                 TextAlignment="Center"

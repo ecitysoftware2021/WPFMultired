@@ -426,7 +426,7 @@ namespace WPFMultired.Classes.DB
             List<T> result = default(List<T>);
             try
             {
-                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", true).ToString()))
+                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", false).ToString()))
                 {
                     try
                     {
@@ -450,7 +450,7 @@ namespace WPFMultired.Classes.DB
             object result = 0;
             try
             {
-                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", true).ToString()))
+                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", false).ToString()))
                 {
                     try
                     {
