@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="WPFMultired.UserControls.PayerUserControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:WPFMultired.UserControls"
+        xmlns:k="clr-namespace:WPFMultired.Keyboard"
+        mc:Ignorable="d"
+        Height="1920" 
+        Width="1080" >
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350" />
+            <RowDefinition Height="850" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Name="gd_payer" Margin="50,0,50,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/WPFMultired;component/Images/Backgrounds/bg-info-payer.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="154"/>
+                <RowDefinition Height="124"/>
+                <RowDefinition Height="124"/>
+                <RowDefinition Height="132"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="1">
+                <TextBlock  HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="50,5,0,0"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontFamily="Arial"
+                   FontSize="38"
+                   Foreground="#FF706F6F"
+                   Text="Tipo de Identificación" />
+
+                <ComboBox Name="cmb_type_id"
+                    Grid.Column="1" 
+                    Margin="42,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Left"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Width="885"
+                    Foreground="#FF104B6D"
+                    FontSize="48"
+                    ItemsSource="{Binding OptionsList}"
+                    SelectedValuePath="Key"
+                    DisplayMemberPath="Value"
+                    SelectionChanged="Cmb_type_id_SelectionChanged"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <TextBlock HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="50,5,0,0"
+                    FontFamily="Arial"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    FontSize="38"
+                    Foreground="#FF706F6F"
+                    Text="{Binding Row1}" />
+
+                <TextBox Name="TbxIdentification"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontFamily="Arial"
+                       FontWeight="Medium"
+                       Margin="42,0,0,2"
+                       TextAlignment="Left"
+                       FontSize="48"
+                       Width="885"
+                       Foreground="#FF104B6D"
+                       TabIndex="1"
+                       k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                       TextWrapping="Wrap"
+                       Text="{Binding Value1}" />
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <TextBlock Name="TxbData1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontFamily="Arial"
+                   Margin="50,5,0,0"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontSize="38"
+                   Foreground="#FF706F6F"
+                   Text="{Binding Row2}" />
+
+                <TextBox Name="TbxData1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="42,0,0,0"
+                   FontFamily="Arial"
+                   FontWeight="Medium"
+                   TextAlignment="Left"
+                   FontSize="48"
+                   Width="885"
+                   MaxLength="20"
+                   Foreground="#FF104B6D"
+                   TabIndex="2"
+                   TextWrapping="Wrap" 
+                   k:TouchScreenKeyboard.TouchScreenKeyboard="True"
+                   Text="{Binding Value2}" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <TextBlock Name="TxbData2"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="50,5,0,0"
+                   FontFamily="Arial"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontSize="38"  
+                   Foreground="#FF706F6F"
+                   Text="{Binding Row3}"/>
+
+                <TextBox Name="TbxData2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="42,0,0,0"
+                    FontFamily="Arial"
+                    TextAlignment="Left"
+                    FontSize="48"
+                    Width="885"
+                    TabIndex="3"
+                    FontWeight="Medium"
+                    Foreground="#FF104B6D"
+                    TextWrapping="Wrap"
+                    k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                    Text="{Binding Value3}" />
+
+                <TextBox TabIndex="5" Height="0" Width="0" />
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Image Source="/Images/Buttons/btn-pay.png"
+                    x:Name="btn_payment"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,50,0"                  
+                    Width="350"
+                    TouchDown="Btn_payment_TouchDown"/>
+
+                <Image Source="/Images/Buttons/btn-back.png"
+                    x:Name="btn_back"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Margin="50,0,0,0"                  
+                    Width="220"
+                    TouchDown="Btn_back_TouchDown"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
