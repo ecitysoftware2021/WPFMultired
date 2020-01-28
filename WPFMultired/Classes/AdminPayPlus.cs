@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -14,13 +15,11 @@ using WPFMultired.Services.Object;
 
 namespace WPFMultired.Classes
 {
-    public class AdminPayPlus
+    public class AdminPayPlus : INotifyPropertyChanged
     {
         #region "Referencias"
 
         private static Api api;
-
-
 
         public Action<bool> callbackResult;//Calback de mensaje
 
@@ -68,12 +67,22 @@ namespace WPFMultired.Classes
 
         private static SqliteDataAccess _db;
 
-        private static string _descriptionStatusPayPlus;
+        private string _descriptionStatusPayPlus;
 
-        public static string DescriptionStatusPayPlus
+
+        public string DescriptionStatusPayPlus
         {
             get { return _descriptionStatusPayPlus; }
+            set
+            {
+                _descriptionStatusPayPlus = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(_descriptionStatusPayPlus)));
+            }
         }
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         #endregion
 

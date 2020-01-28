@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Controls;
 using WPFMultired.Classes;
 using WPFMultired.Resources;
@@ -74,6 +75,7 @@ namespace WPFMultired.UserControls.Administrator
                     }
                     else
                     {
+                        Thread.Sleep(3000);
                         Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
                         Initial();
                     }

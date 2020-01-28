@@ -89,7 +89,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
+               // Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
             }
             GC.Collect();
             return response;
