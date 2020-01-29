@@ -87,4 +87,24 @@ namespace WPFMultired.Classes
         Establishment = 2
     }
 
+    public enum ETramite
+    {
+        DepositoEfectivo = 13,
+        RetiroEfectivo = 10
+    }
+
+    public enum EServicio
+    {
+        Type_Transaction = 0,
+        Institutions = 1,
+        Type_Document = 2,
+        Products_Client = 3,
+        Generate_OTP = 4,
+        Report_Transaction = 5,
+        Report_Transaction_BD = 12,
+        Validate_OTP = 6,
+        Language = 7,
+        Consult_QR = 10
+    }
+
 }

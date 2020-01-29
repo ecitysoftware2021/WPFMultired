@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://procesartransaccion.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="procesarTransaccion" targetNamespace="http://procesartransaccion.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://procesartransaccion.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrprotrn" type="tns:mtrprotrn" />
+      <xs:element name="mtrprotrnResponse" type="tns:mtrprotrnResponse" />
+      <xs:complexType name="mtrprotrn">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrprotrnInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprotrnInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_TOKEN" type="xs:string" />
+          <xs:element name="I_REFERENCIA" type="xs:string" />
+          <xs:element name="I_CODIGOTP" type="xs:string" />
+          <xs:element name="I_VALOR" type="xs:string" />
+          <xs:element name="I_CUENTA" type="xs:string" />
+          <xs:element name="I_SISTEMA" type="xs:string" />
+          <xs:element name="I_PRODUCTO" type="xs:string" />
+          <xs:element name="I_TIPOTRN" type="xs:string" />
+          <xs:element name="I_LISTAREGISTROS" type="tns:iLISTAREGISTROS" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iLISTAREGISTROS">
+        <xs:sequence>
+          <xs:element name="I_RTNCON" type="xs:long" />
+          <xs:element maxOccurs="unbounded" name="LIST" type="tns:iLISTAREGISTROSLIST" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iLISTAREGISTROSLIST">
+        <xs:sequence>
+          <xs:element name="I_MONEDA" type="xs:string" />
+          <xs:element name="I_TIPMON" type="xs:string" />
+          <xs:element name="I_CODDEN" type="xs:string" />
+          <xs:element name="I_CANDEN" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprotrnResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrprotrnResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprotrnResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_CODIGOAUTORI" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrprotrn">
+    <part name="parameters" element="tns:mtrprotrn" />
+  </message>
+  <message name="mtrprotrnResponse">
+    <part name="parameters" element="tns:mtrprotrnResponse" />
+  </message>
+  <portType name="ProcesarTransaccionServices">
+    <operation name="mtrprotrn">
+      <input wsam:Action="http://procesartransaccion.wsbeans.iseries/ProcesarTransaccionServices/mtrprotrnRequest" message="tns:mtrprotrn" />
+      <output wsam:Action="http://procesartransaccion.wsbeans.iseries/ProcesarTransaccionServices/mtrprotrnResponse" message="tns:mtrprotrnResponse" />
+    </operation>
+  </portType>
+  <binding name="ProcesarTransaccionServicesPortBinding" type="tns:ProcesarTransaccionServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrprotrn">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="procesarTransaccion">
+    <port name="ProcesarTransaccionServicesPort" binding="tns:ProcesarTransaccionServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/procesarTransaccionService/procesarTransaccion" />
+    </port>
+  </service>
+</definitions>

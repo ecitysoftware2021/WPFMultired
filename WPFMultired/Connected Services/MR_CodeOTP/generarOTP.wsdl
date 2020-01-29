@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://generarotp.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="generarOTP" targetNamespace="http://generarotp.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://generarotp.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrgenotp" type="tns:mtrgenotp" />
+      <xs:element name="mtrgenotpResponse" type="tns:mtrgenotpResponse" />
+      <xs:complexType name="mtrgenotp">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrgenotpInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgenotpInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_TOKEN" type="xs:string" />
+          <xs:element name="I_REFERENCIA" type="xs:string" />
+          <xs:element name="I_VALOR" type="xs:string" />
+          <xs:element name="I_CUENTA" type="xs:string" />
+          <xs:element name="I_SISTEMA" type="xs:string" />
+          <xs:element name="I_PRODUCTO" type="xs:string" />
+          <xs:element name="I_TIPOTRN" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgenotpResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrgenotpResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgenotpResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_CODIGOTP" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrgenotp">
+    <part name="parameters" element="tns:mtrgenotp" />
+  </message>
+  <message name="mtrgenotpResponse">
+    <part name="parameters" element="tns:mtrgenotpResponse" />
+  </message>
+  <portType name="GenerarOTPServices">
+    <operation name="mtrgenotp">
+      <input wsam:Action="http://generarotp.wsbeans.iseries/GenerarOTPServices/mtrgenotpRequest" message="tns:mtrgenotp" />
+      <output wsam:Action="http://generarotp.wsbeans.iseries/GenerarOTPServices/mtrgenotpResponse" message="tns:mtrgenotpResponse" />
+    </operation>
+  </portType>
+  <binding name="GenerarOTPServicesPortBinding" type="tns:GenerarOTPServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrgenotp">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="generarOTP">
+    <port name="GenerarOTPServicesPort" binding="tns:GenerarOTPServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/generarOTPService/generarOTP" />
+    </port>
+  </service>
+</definitions>

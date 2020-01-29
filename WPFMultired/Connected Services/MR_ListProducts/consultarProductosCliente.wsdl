@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://consultarproductoscliente.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="consultarProductosCliente" targetNamespace="http://consultarproductoscliente.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://consultarproductoscliente.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrprocli" type="tns:mtrprocli" />
+      <xs:element name="mtrprocliResponse" type="tns:mtrprocliResponse" />
+      <xs:complexType name="mtrprocli">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrprocliInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprocliInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_TIPODOCUMENTO" type="xs:string" />
+          <xs:element name="I_NUMERODOCUMENTO" type="xs:string" />
+          <xs:element name="I_TIPOTRANSACCION" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprocliResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrprocliResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrprocliResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_NOMBRECLIENTE" type="xs:string" />
+          <xs:element name="O_TOKENTRANSACCION" type="xs:string" />
+          <xs:element name="O_REFERENCIATRANSACCION" type="xs:string" />
+          <xs:element name="O_LISTAREGISTROS" type="tns:oLISTAREGISTROS" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="oLISTAREGISTROS">
+        <xs:sequence>
+          <xs:element name="O_RTNCON" type="xs:long" />
+          <xs:element maxOccurs="unbounded" name="LIST" type="tns:oLISTAREGISTROSLIST" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="oLISTAREGISTROSLIST">
+        <xs:sequence>
+          <xs:element name="O_NOMPRO" type="xs:string" />
+          <xs:element name="O_NROCTA" type="xs:string" />
+          <xs:element name="O_CODSIS" type="xs:string" />
+          <xs:element name="O_CODPRO" type="xs:string" />
+          <xs:element name="O_CTAMAS" type="xs:string" />
+          <xs:element name="O_MONMIN" type="xs:string" />
+          <xs:element name="O_MONMAX" type="xs:string" />
+          <xs:element name="O_VLRCOM" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrprocli">
+    <part name="parameters" element="tns:mtrprocli" />
+  </message>
+  <message name="mtrprocliResponse">
+    <part name="parameters" element="tns:mtrprocliResponse" />
+  </message>
+  <portType name="ConsultarProductosClienteServices">
+    <operation name="mtrprocli">
+      <input wsam:Action="http://consultarproductoscliente.wsbeans.iseries/ConsultarProductosClienteServices/mtrprocliRequest" message="tns:mtrprocli" />
+      <output wsam:Action="http://consultarproductoscliente.wsbeans.iseries/ConsultarProductosClienteServices/mtrprocliResponse" message="tns:mtrprocliResponse" />
+    </operation>
+  </portType>
+  <binding name="ConsultarProductosClienteServicesPortBinding" type="tns:ConsultarProductosClienteServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrprocli">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="consultarProductosCliente">
+    <port name="ConsultarProductosClienteServicesPort" binding="tns:ConsultarProductosClienteServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/consultarProductosClienteService/consultarProductosCliente" />
+    </port>
+  </service>
+</definitions>

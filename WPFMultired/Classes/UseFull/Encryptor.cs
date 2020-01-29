@@ -10,11 +10,6 @@ namespace WPFMultired.Classes
 {
     public static class Encryptor
     {
-        /***
-         * 
-         * Encripto el texto utilizando una llave AES de 128bits y 
-         * un cifrado de bloqueo de cadena, y retorno un string codificado en base 64
-         */
         public static String Encrypt(String plainText)
         {
             try
@@ -42,8 +37,7 @@ namespace WPFMultired.Classes
                 return null;
             }
         }
-
-        //Creo el objeto RM con la configuracion necesario para ser compatible con Multired
+        
         private static RijndaelManaged GetRijndaelManaged(String secretKey)
         {
             try

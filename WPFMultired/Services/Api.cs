@@ -2,43 +2,52 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WPFMultired.Classes;
 using WPFMultired.DataModel;
+using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 
 namespace WPFMultired.Services
 {
     public class Api
     {
+        #region "Referencias"
         private HttpClient client;
-
         private RequestAuth requestAuth;
-
         private static RequestApi requestApi;
-
         private string basseAddress;
-
         private int type = 1;
-
         private static string token;
+        #endregion
 
+        #region "Constructor"
         public Api()
         {
-            if (requestAuth == null)
+            try
             {
-                requestAuth = new RequestAuth();
-            }
+                if (requestAuth == null)
+                {
+                    requestAuth = new RequestAuth();
+                }
 
-            if (requestApi == null)
+                if (requestApi == null)
+                {
+                    requestApi = new RequestApi();
+                }
+
+                basseAddress = Utilities.GetConfiguration("basseAddress", true);
+            }
+            catch (Exception ex)
             {
-                requestApi = new RequestApi();
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
-
-            basseAddress = Utilities.GetConfiguration("basseAddress", true);
         }
+        #endregion
 
+        #region ""
         public async Task<ResponseAuth> GetSecurityToken(CONFIGURATION_PAYDAD config)
         {
             try
@@ -87,6 +96,7 @@ namespace WPFMultired.Services
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
                 return null;
             }
         }
@@ -128,9 +138,10 @@ namespace WPFMultired.Services
             }
             catch (Exception ex)
             {
-
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
             return null;
         }
+        #endregion
     }
 }
