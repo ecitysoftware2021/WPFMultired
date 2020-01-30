@@ -24,8 +24,11 @@ namespace WPFMultired.Services
     {
         #region "Referencias"
         DataService mR_DataService;
+
         private string Hora;
+
         private string Canal;
+
         private string DireccionIp;
         private string EntidadOrigen;
         private string CodigoTerminal;
@@ -39,8 +42,11 @@ namespace WPFMultired.Services
             try
             {
                 KEY = Utilities.GetConfiguration("KEY");
+
                 Canal = Utilities.GetConfiguration("i_CODCAN");
+
                 DireccionIp = Utilities.GetConfiguration("i_DIREIP");
+
                 EntidadOrigen = Utilities.GetConfiguration("i_ENTORI");
                 CodigoTerminal = Utilities.GetConfiguration("i_CODTER");
                 CodigoTerminal = Utilities.GetConfiguration("i_CODTER");

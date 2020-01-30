@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="WPFMultired.UserControls.MenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFMultired.UserControls"
+        mc:Ignorable="d"
+        Height="1920" 
+        Width="1080" >
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bg-menu.jpg"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350" />
+            <RowDefinition Height="1300" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Image x:Name="btn_exit"
+               Source="/Images/Buttons/btn-exit.png"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               Width="250"
+               Margin="20,0,0,20"
+               TouchDown="Btn_back_TouchDown" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Image x:Name="btn_payments"
+                   Source="/Images/Buttons/btn-consign.png"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Height="180" 
+                   Margin="0,0,0,400"
+                   Stretch="Uniform"
+                   Tag="1"
+                   TouchDown="BtnOptionSelect_TouchDown" />
+            
+            <Image x:Name="btn_withdrawals"
+                   Source="/Images/Buttons/btn-withdraw.png"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Height="180" 
+                   Margin="0,300,0,0"
+                   Stretch="Uniform"
+                   Tag="2"
+                   TouchDown="BtnOptionSelect_TouchDown" />
+
+            <Image x:Name="btn_qr"
+                   Source="/Images/Buttons/btn-withdraw.png"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Height="180" 
+                   Margin="0,300,0,0"
+                   Stretch="Uniform"
+                   Tag="2"
+                   TouchDown="Btn_qr_TouchDown" />
+        </Grid>
+    </Grid>
+</UserControl>

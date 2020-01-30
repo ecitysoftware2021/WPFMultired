@@ -70,7 +70,7 @@ namespace WPFMultired.Classes
     public enum ETransactionType
     {
         Withdrawal = 15,
-        PaymentFile = 19
+        Pay = 19
     }
 
     public enum ETypeAdministrator
