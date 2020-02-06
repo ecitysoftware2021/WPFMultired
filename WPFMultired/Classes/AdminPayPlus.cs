@@ -216,7 +216,7 @@ namespace WPFMultired.Classes
                         return true;
                     }
 
-                    if (_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
+                    if(_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
                     {
                         SaveLog(new RequestLog
                         {
