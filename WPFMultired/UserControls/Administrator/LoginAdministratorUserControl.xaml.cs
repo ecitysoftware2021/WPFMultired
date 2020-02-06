@@ -79,7 +79,7 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (!Validation())
                 {
-                    Utilities.ShowModal(_messageError, EModalType.Information, false);
+                    Utilities.ShowModal(_messageError, EModalType.Error, false);
                 }
                 else
                 {
