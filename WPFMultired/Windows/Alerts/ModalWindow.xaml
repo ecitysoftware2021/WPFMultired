@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Image gif:ImageBehavior.AnimatedSource="../Images/Gif/gif-preload.gif" 
+                <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                        gif:ImageBehavior.AnimateInDesignMode="True"
                        gif:ImageBehavior.AutoStart="True" 
                        x:Name="GifLoadder"  
@@ -76,7 +76,7 @@
                         Height="65"
                         Margin="0,100,0,0"
                         TouchDown="BtnOk_TouchDown"
-                        Source="../Images/Buttons/btn-continue.png" Stretch="Fill" />
+                        Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
 
                 <Image x:Name="BtnNo" 
                         VerticalAlignment="Top"
@@ -85,7 +85,7 @@
                         Height="80"
                         Margin="150,92,0,0"
                         TouchDown="BtnNo_TouchDown"
-                        Source="../Images/Buttons/btn-cancel-alert.png" Stretch="Fill" />
+                        Source="/Images/Buttons/btn-cancel-alert.png" Stretch="Fill" />
 
                 <Image x:Name="BtnYes" 
                         VerticalAlignment="Top"
@@ -94,7 +94,7 @@
                         Height="60"
                         Margin="0,105,150,0"
                         TouchDown="BtnYes_TouchDown"
-                        Source="../Images/Buttons/btn-continue.png" Stretch="Fill" />
+                        Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
             </Grid>
         </Grid>
     </Grid>

@@ -19,6 +19,7 @@ using WPFMultired.MR_ValidateStatusAdmin;
 using WPFMultired.MR_OperationAdmin;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
+using System.Collections.Generic;
 
 namespace WPFMultired.Services
 {
@@ -614,32 +615,34 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
-                            I_MOVIMIENTO = ((int)typeAdministrator).ToString()
+                            I_MOVIMIENTO = Encryptor.Encrypt(((int)typeAdministrator).ToString(), keyEncript)
                         };
 
                         var response = client.mtrretarqc(request);
-                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&response.LISTAREGISTROS != null &&
-                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 && 
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) && response.LISTAREGISTROS != null &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.LISTAREGISTROS.O_RTNCON > 0)
                         {
-                            PaypadOperationControl result = new PaypadOperationControl();
+                            PaypadOperationControl result = new PaypadOperationControl()
+                            {
+                                DATALIST = new List<List>()
+                            };
                             foreach (var denomination in response.LISTAREGISTROS.LIST)
                             {
                                 result.DATALIST.Add(new List
                                 { 
-                                    AMOUNT = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)),
-                                    AMOUNT_NEW = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)),
-                                    VALUE = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
-                                    DESCRIPTION = denomination.O_DESDON,
-                                    TOTAL_AMOUNT = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)) * 
-                                    int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
-                                    CASSETTE = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
-                                    CODE = Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_TIPMON, 2), keyDesencript),
+                                    AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
+                                    AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
+                                    VALUE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
+                                    DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
+                                    TOTAL_AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) * 
+                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
+                                    CASSETTE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CASSET, keyDesencript), 2)),
+                                    CODE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2),
                                 });
 
-                                result.TOTAL += int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)) *
-                                    int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript));
-                                   
+                                result.TOTAL += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
+                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", ""));   
                             }
 
                             return result;

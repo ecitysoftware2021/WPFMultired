@@ -689,9 +689,9 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                    var operationControl = JsonConvert.DeserializeObject<PaypadOperationControl>(response.ToString());
+                   // var operationControl = JsonConvert.DeserializeObject<PaypadOperationControl>(response.ToString());
 
-                    return operationControl;
+                    return (PaypadOperationControl)response;
                 }
 
                 return null;
