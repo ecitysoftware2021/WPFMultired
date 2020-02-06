@@ -102,14 +102,16 @@ namespace WPFMultired.UserControls.Administrator
             try
             {
                 dataContol.viewList = new CollectionViewSource();
-                if (this.type == 1 && this.typeOperation == ETypeAdministrator.Balancing)
-                {
-                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 2 || x.DEVICE_TYPE_ID == 4) && x.AMOUNT_NEW > 0).ToList();
-                }
-                else
-                {
-                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 3 || x.DEVICE_TYPE_ID == 8) && x.AMOUNT_NEW > 0).ToList();
-                }
+                //if (this.type == 1 && this.typeOperation == ETypeAdministrator.Balancing)
+                //{
+                //    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 2 || x.DEVICE_TYPE_ID == 4) && x.AMOUNT_NEW > 0).ToList();
+                //}
+                //else
+                //{
+                //    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 3 || x.DEVICE_TYPE_ID == 8) && x.AMOUNT_NEW > 0).ToList();
+                //}
+
+                dataContol.viewList.Source = dataContol.DATALIST;
 
                 Dispatcher.BeginInvoke((Action)delegate
                 {
