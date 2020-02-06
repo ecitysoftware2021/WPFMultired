@@ -59,11 +59,11 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (AdminPayPlus.DataPayPlus.StateBalanece)
                 {
-                    Utilities.navigator.Navigate(UserControlView.Login, false, 1);
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Balancing);
                 }
                 else if (AdminPayPlus.DataPayPlus.StateUpload)
                 {
-                    Utilities.navigator.Navigate(UserControlView.Login, false, 2);
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Upload);
                 }
                 else
                 {
