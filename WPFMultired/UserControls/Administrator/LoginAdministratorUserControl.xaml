@@ -92,7 +92,7 @@
                      Foreground="#FF2F302E" 
                      FontWeight="Bold" 
                      FontFamily="Myriad Pro Cond" 
-                     CaretBrush="#FFB2B0B8"
+                     CaretBrush="#FFB2B0B8" Background="White"
             />
             <!--Text="Davivienda2019$"-->
 
@@ -130,7 +130,7 @@
             <Image x:Name="btnCancell"
                    Source="/Images/Buttons/btn-cancel.png"
                    Stretch="None"
-                   Width="320"
+                   Width="340"
                    Height="130"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"

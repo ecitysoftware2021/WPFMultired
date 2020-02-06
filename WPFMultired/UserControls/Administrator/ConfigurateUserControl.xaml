@@ -37,10 +37,6 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="21*"/>
-                <ColumnDefinition Width="19*"/>
-            </Grid.ColumnDefinitions>
             <TextBlock 
                 Text="Espere mientras se configura el dispositivo para iniciar"
                 FontFamily="Arial"
@@ -51,32 +47,31 @@
                 Foreground="#FF0D679A"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                Width="900" FontWeight="Bold" Grid.ColumnSpan="2"
-            />
+                FontWeight="Bold" />
+            
             <Image 
                 gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                 gif:ImageBehavior.AnimateInDesignMode="True"
                 gif:ImageBehavior.AutoStart="True"
                 x:Name="GifLoadder" 
                 Stretch="Fill"
-                Margin="290,440,290,260" 
+                Margin="0,200,0,0" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Width="500" 
-                Height="500" Grid.ColumnSpan="2"
-            />
+                Width="450" 
+                Height="450" />
+            
             <TextBlock x:Name="txtMs"
                 Text="{Binding DescriptionStatusPayPlus}"
                 FontFamily="Arial"
                 FontSize="40"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Margin="90,0,90,200"
+                Margin="0,0,0,200"
                 Foreground="#FF0D679A"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                Width="900" FontWeight="Bold" Grid.ColumnSpan="2"
-            />
+                FontWeight="Bold"  />
         </Grid>
     </Grid>
 </UserControl>
