@@ -154,6 +154,8 @@ namespace WPFMultired.Services.Object
 
         private string _DESCRIPTION;
 
+        public string IMAGE;
+
         private int? _VALUE;
 
         public int? CURRENCY_DENOMINATION_ID { get; set; }

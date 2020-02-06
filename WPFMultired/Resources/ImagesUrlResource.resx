@@ -153,10 +153,10 @@
   <data name="ImageSelectOption" xml:space="preserve">
     <value>/Images/Others/ok.png</value>
   </data>
-  <data name="ImgCancel" xml:space="preserve">
-    <value>/Images/Others/img-cancel.png</value>
+  <data name="ImgBill" xml:space="preserve">
+    <value>/Images/Others/img-bill.png</value>
   </data>
-  <data name="ImgSelect" xml:space="preserve">
-    <value>/Images/Others/img-active.png</value>
+  <data name="ImgCoin" xml:space="preserve">
+    <value>/Images/Others/img-coin.png</value>
   </data>
 </root>

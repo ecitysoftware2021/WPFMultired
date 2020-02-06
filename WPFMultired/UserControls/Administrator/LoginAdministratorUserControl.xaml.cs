@@ -33,7 +33,6 @@ namespace WPFMultired.UserControls.Administrator
         {
             InitializeComponent();
             _typeOperation = typeOperation;
-            Search();
         }
 
         #endregion
