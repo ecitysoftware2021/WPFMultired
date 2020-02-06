@@ -613,35 +613,33 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static async Task<bool> UpdateBalance(PaypadOperationControl paypadData)
+        public static async Task<PaypadOperationControl> UpdateAdminProcess(PaypadOperationControl dataProcess)
         {
             try
             {
-                string action = "";
+                //string action = "";
 
-                if (_dataPayPlus.StateBalanece)
-                {
-                    action = "UpdateBalance";
-                }
-                else
-                {
-                    action = "UpdateUpload";
-                }
+                //if (_dataPayPlus.StateBalanece)
+                //{
+                //    action = "UpdateBalance";
+                //}
+                //else
+                //{
+                //    action = "UpdateUpload";
+                //}
 
-                var response = await api.CallApi(action, paypadData);
+                var response = await ApiIntegration.CallService(ETypeService.Procces_Admin, dataProcess);
 
                 if (response != null)
                 {
-                    return true;
+                    return (PaypadOperationControl)response;
                 }
-
-                return false;
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
-                return false;
             }
+            return null;
         }
 
         public static async Task<bool> ValidateUser(string name, string pass)

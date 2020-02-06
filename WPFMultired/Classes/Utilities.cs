@@ -202,7 +202,7 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static void PrintVoucher(PaypadOperationControl dataControl, ETypeAdministrator type)
+        public static void PrintVoucher(PaypadOperationControl dataControl)
         {
             try
             {

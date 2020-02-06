@@ -47,10 +47,10 @@ namespace WPFMultired.UserControls.Administrator
 
                     this.dataContol.viewList = null;
 
-                    var responseApi = await AdminPayPlus.UpdateBalance(this.dataContol);
-                    if (responseApi)
+                    this.dataContol = await AdminPayPlus.UpdateAdminProcess(dataContol);
+                    if (this.dataContol != null)
                     {
-                        Utilities.PrintVoucher(this.dataContol, typeOperation);
+                        Utilities.PrintVoucher(this.dataContol);
 
                         Utilities.CloseModal();
 

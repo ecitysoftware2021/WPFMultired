@@ -17,6 +17,7 @@ using WPFMultired.MR_TypeTransaction;
 using WPFMultired.MR_ValidateOTP;
 using WPFMultired.MR_ValidateStatusAdmin;
 using WPFMultired.MR_OperationAdmin;
+using WPFMultired.MR_ProcessAdmin;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
@@ -146,6 +147,10 @@ namespace WPFMultired.Services
                     case ETypeService.Operation_Admin:
 
                         return GetAdminOperation((ETypeAdministrator)data);
+
+                    case ETypeService.Procces_Admin:
+
+                        return SendAdminProcess((PaypadOperationControl)data);
 
                     default:
                         break;
@@ -646,6 +651,51 @@ namespace WPFMultired.Services
                                 result.TOTAL += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", ""));   
                             }
+
+                            return result;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+
+            return null;
+        }
+
+        private PaypadOperationControl SendAdminProcess(PaypadOperationControl dataProcess)
+        {
+            try
+            {
+                ProcessAdminServicesClient client = new ProcessAdminServicesClient();
+                using (var factory = new WebChannelFactory<ProcessAdminServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrproarqcInput request = new mtrproarqcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                            I_MOVIMIENTO = Encryptor.Encrypt(((int)dataProcess.TYPE).ToString(), keyEncript)
+                        };
+
+                        var response = client.mtrproarqc(request);
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            PaypadOperationControl result = new PaypadOperationControl()
+                            {
+                                DATALIST = new List<List>()
+                            };
 
                             return result;
                         }

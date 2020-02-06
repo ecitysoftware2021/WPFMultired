@@ -154,6 +154,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MR_ProcessAdmin\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MR_ReportTransaction\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -356,6 +361,13 @@
     <None Include="Connected Services\MR_OperationAdmin\WPFMultired.MR_OperationAdmin.mtrretarqcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\MR_ProcessAdmin\ProcessAdmin.wsdl" />
+    <None Include="Connected Services\MR_ProcessAdmin\WPFMultired.MR_ProcessAdmin.mtrproarqcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ProcessAdmin\WPFMultired.MR_ProcessAdmin.mtrproarqcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\MR_ReportTransaction\procesarTransaccion.wsdl" />
     <None Include="Connected Services\MR_ReportTransaction\WPFMultired.MR_ReportTransaction.mtrprotrnResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -530,6 +542,7 @@
     <WCFMetadataStorage Include="Connected Services\MR_Language\" />
     <WCFMetadataStorage Include="Connected Services\MR_ListProducts\" />
     <WCFMetadataStorage Include="Connected Services\MR_OperationAdmin\" />
+    <WCFMetadataStorage Include="Connected Services\MR_ProcessAdmin\" />
     <WCFMetadataStorage Include="Connected Services\MR_ReportTransaction\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeDocument\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeTransaction\" />
@@ -684,6 +697,18 @@
   <ItemGroup>
     <Resource Include="Images\Others\img-bill.jpg" />
     <Resource Include="Images\Others\img-coin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ProcessAdmin\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ProcessAdmin\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ProcessAdmin\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

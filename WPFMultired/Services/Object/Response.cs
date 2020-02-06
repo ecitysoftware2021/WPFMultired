@@ -1,137 +1,188 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using WPFMultired.Classes;
 
 namespace WPFMultired.Services.Object
 {
     public class Response
     {
-        public string codigoerror { get; set; }
-
-        public string mensajeerror { get; set; }
-
-        public string token { get; set; }
-
-        public string idliquidacion { get; set; }
-
-        public string numerorecuperacion { get; set; }
-
-        public string numerorecibo { get; set; }
-
-        public object expedientes { get; set; }
-
-        public string numerooperacion { get; set; }
-
-        public string radicacion { get; set; }
-
-        public List<UrlCertificates> certificados { get; set; }
-
-        public string claveusuario { get; set; }
-
-        public string nombres { get; set; }
-
-        public string apellido1 { get; set; }
-
-        public string apellido2 { get; set; }
     }
 
-    public class Noun
+    public class PaypadOperationControl : INotifyPropertyChanged
     {
-        public string mensajeerror { get; set; }
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
-        public string matricula { get; set; }
+        #region Attributes
+        public int ID { get; set; }
 
-        public string proponente { get; set; }
+        public string DATE { get; set; }
 
-        public string nombre { get; set; }
+        public string TIME { get; set; }
 
-        public string sigla { get; set; }
+        public string ID_TRANSACTION { get; set; }
 
-        public string idclase { get; set; }
+        public string CODE_AGENCY { get; set; }
 
-        public string identificacion { get; set; }
+        public ETypeAdministrator TYPE { get; set; }
 
-        public string nit { get; set; }
+        public string NAME_AGENCY { get; set; }
 
-        public string organizacion { get; set; }
+        public string ID_USER { get; set; }
 
-        public string organizaciontextual { get; set; }
+        public string NAME_USER { get; set; }
 
-        public string categoria { get; set; }
+        public string NAME_COMPANY { get; set; }
 
-        public string categoriatextual { get; set; }
+        private decimal _TOTAL;
 
-        public string estadomatricula { get; set; }
+        private string _DESCRIPTION;
 
-        public string estadoproponente { get; set; }
+        private List<List> _DATALIST;
 
-        public string fechamatricula { get; set; }
+        private CollectionViewSource _viewList;
 
-        public string fecharenovacion { get; set; }
+        public CollectionViewSource viewList
+        {
+            get { return _viewList; }
+            set
+            {
+                _viewList = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(viewList)));
+            }
+        }
 
-        public string ultanorenovado { get; set; }
+        public List<List> DATALIST
+        {
+            get { return _DATALIST; }
+            set
+            {
+                _DATALIST = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DATALIST)));
+            }
+        }
 
-        public string afiliado { get; set; }
+        public decimal TOTAL
+        {
+            get { return _TOTAL; }
+            set
+            {
+                _TOTAL = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TOTAL)));
+            }
+        }
 
-        public string afiliadotextual { get; set; }
-
-        public decimal saldoafiliado { get; set; }
-
-        public string embargos { get; set; }
-
-        public string direccion { get; set; }
-
-        public string municipio { get; set; }
-
-        public string municipiotextual { get; set; }
-
-        public List<Plant> establecimientos { get; set; }
-
-        public List<Certificates> certificados { get; set; }
+        public string DESCRIPTION
+        {
+            get { return _DESCRIPTION; }
+            set
+            {
+                _DESCRIPTION = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DESCRIPTION)));
+            }
+        }
+        #endregion
     }
 
-    public class Certificates
+    public class List : INotifyPropertyChanged
     {
-        public string tipocertificado { get; set; }
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
-        public string descripciontipocertificado { get; set; }
+        private int? _AMOUNT_NEW;
 
-        public string descripcioncertificado { get; set; }
+        private int? _AMOUNT;
 
-        public string servicio { get; set; }
+        public int? ID { get; set; }
 
-        public decimal valor { get; set; }
+        public int? DEVICE_PAYPAD_ID { get; set; }
 
-        public string img { get; set; }
+        private string _DESCRIPTION;
+
+        private string _IMAGE;
+
+        private int? _VALUE;
+
+        public int? CURRENCY_DENOMINATION_ID { get; set; }
+
+        public int? DEVICE_TYPE_ID { get; set; }
+
+        public string CODE { get; set; }
+
+        public int CASSETTE { get; set; }
+
+        private decimal _TOTAL_AMOUNT;
+
+        public int? AMOUNT_NEW
+        {
+            get { return _AMOUNT_NEW; }
+            set
+            {
+                _AMOUNT_NEW = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AMOUNT_NEW)));
+            }
+        }
+
+        public string IMAGE
+        {
+            get { return _IMAGE; }
+            set
+            {
+                _IMAGE = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IMAGE)));
+            }
+        }
+
+        public int? AMOUNT
+        {
+            get { return _AMOUNT; }
+            set
+            {
+                _AMOUNT = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AMOUNT)));
+            }
+        }
+
+        public string DESCRIPTION
+        {
+            get { return _DESCRIPTION; }
+            set
+            {
+                _DESCRIPTION = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DESCRIPTION)));
+            }
+        }
+
+        public int? VALUE
+        {
+            get { return _VALUE; }
+            set
+            {
+                _VALUE = value;
+                TOTAL_AMOUNT = (int)_AMOUNT_NEW * (int)value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VALUE)));
+            }
+        }
+
+        public decimal TOTAL_AMOUNT
+        {
+            get { return _TOTAL_AMOUNT; }
+            set
+            {
+                _TOTAL_AMOUNT = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TOTAL_AMOUNT)));
+            }
+        }
     }
 
-    public class UrlCertificates
-    {
-        public string codigoverificacion { get; set; }
-
-        public string tipocertificado { get; set; }
-
-        public string path { get; set; }
-
-        public int copia { get; set; }
-    }
-
-    public class Plant
-    {
-        public string categoría { get; set; }
-
-        public string matricula { get; set; }
-
-        public string nombre { get; set; }
-
-        public string ultanorenovado { get; set; }
-
-        public string fechamatricula { get; set; }
-
-        public string fecharenovacion { get; set; }
-
-        public decimal valorestablecimiento { get; set; }
-    }
 }
