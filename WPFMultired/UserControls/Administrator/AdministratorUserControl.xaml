@@ -125,15 +125,15 @@
                             <Image
                                Source="{Binding IMAGE}"
                                Stretch="Fill"
-                               Width="50"
-                               Height="50"
+                               Width="60"
+                               Height="40"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Margin="0,0,0,0"
-                               TouchDown="BtnNext_TouchDown" />
+                               Margin="0,0,0,0" />
+                            
                             <TextBlock 
                                     Text="{Binding VALUE, StringFormat={}{0:C0}}"
-                                    FontSize="35"
+                                    FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
@@ -142,10 +142,10 @@
                                     Width="500"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="0" />
+                                    Grid.Column="1" />
                             <TextBlock 
                                     Text="{Binding AMOUNT_NEW}"
-                                    FontSize="35"
+                                    FontSize="32"
                                      FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
@@ -153,10 +153,10 @@
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="1" />
+                                    Grid.Column="2" />
                             <TextBlock 
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C0}}"
-                                    FontSize="35"
+                                    FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
@@ -164,7 +164,7 @@
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="2" />
+                                    Grid.Column="3" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

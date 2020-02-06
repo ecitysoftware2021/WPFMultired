@@ -169,7 +169,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /Images/Others/img-bill.png.
+        ///   Busca una cadena traducida similar a /Images/Others/img-bill.jpg.
         /// </summary>
         internal static string ImgBill {
             get {
@@ -178,7 +178,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /Images/Others/img-coin.png.
+        ///   Busca una cadena traducida similar a /Images/Others/img-coin.jpg.
         /// </summary>
         internal static string ImgCoin {
             get {
