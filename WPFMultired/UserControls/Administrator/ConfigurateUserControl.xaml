@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg" Stretch="Uniform"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="400" />
             <RowDefinition Height="1200" />
             <RowDefinition Height="*"/>
@@ -27,7 +27,7 @@
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
                 Margin="0,0,0,0"
-                Foreground="#FF90C143" 
+                Foreground="#FF80BC4A" 
                 TextAlignment="Center"
                 TextWrapping="Wrap"
                 Width="800"
@@ -37,17 +37,21 @@
         </Grid>
 
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
             <TextBlock 
                 Text="Espere mientras se configura el dispositivo para iniciar"
                 FontFamily="Arial"
                 FontSize="60"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center"
-                Margin="0,200,0,0"
-                Foreground="#FF104B6D"
+                Margin="90,200,90,0"
+                Foreground="#FF0D679A"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                Width="900" FontWeight="Bold"
+                Width="900" FontWeight="Bold" Grid.ColumnSpan="2"
             />
             <Image 
                 gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
@@ -55,11 +59,11 @@
                 gif:ImageBehavior.AutoStart="True"
                 x:Name="GifLoadder" 
                 Stretch="Fill"
-                Margin="0,180,0,0" 
+                Margin="290,440,290,260" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Width="450" 
-                Height="520"
+                Width="500" 
+                Height="500" Grid.ColumnSpan="2"
             />
             <TextBlock x:Name="txtMs"
                 Text="{Binding DescriptionStatusPayPlus}"
@@ -67,11 +71,11 @@
                 FontSize="40"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,200"
-                Foreground="#FF104B6D"
+                Margin="90,0,90,200"
+                Foreground="#FF0D679A"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                Width="900" FontWeight="Bold"
+                Width="900" FontWeight="Bold" Grid.ColumnSpan="2"
             />
         </Grid>
     </Grid>

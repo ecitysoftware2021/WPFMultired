@@ -15,7 +15,7 @@
             <RowDefinition Height="150" />
             <RowDefinition Height="500" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="500" />
+            <RowDefinition Height="600" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
 
@@ -30,7 +30,7 @@
                 FontFamily="Myriad Pro"
                 TextWrapping="WrapWithOverflow"
                 FontWeight="Bold"
-                Foreground="White"
+                Foreground="#FF0B4E92"
                 VerticalAlignment="Top"
                 HorizontalAlignment="center" />
 
@@ -43,7 +43,7 @@
                 TextWrapping="WrapWithOverflow"
                 FontFamily="Myriad Pro"
                 FontWeight="Bold"
-                Foreground="WhiteSmoke"
+                Foreground="#FF144C87"
                 VerticalAlignment="Center"
                 HorizontalAlignment="center" />
 
@@ -116,7 +116,7 @@
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="0,0,0,0"
-                                    Foreground="White"
+                                    Foreground="#FF2F302E"
                                     Width="500"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
@@ -128,7 +128,7 @@
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
-                                    Foreground="White"
+                                    Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="1" />
@@ -139,7 +139,7 @@
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
-                                    Foreground="White"
+                                    Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="2" />
@@ -156,7 +156,7 @@
                     FontSize="50"
                     FontWeight="Bold"
                     FontFamily="Myriad Pro"
-                    Foreground="White"
+                    Foreground="#FF1F77B6"
                     Text="Valor Total"/>
 
             <TextBlock Name="txtValor"
@@ -167,26 +167,26 @@
                     FontSize="50"
                     FontWeight="Bold"
                     FontFamily="Myriad Pro"
-                    Foreground="White" />
+                    Foreground="#FF144F8B" />
 
             <Image x:Name="btnNext"
                    Source="/Images/Buttons/btn-acept.png"
-                   Stretch="None"
-                   Width="560"
-                   Height="110"
+                   Stretch="Fill"
+                   Width="300"
+                   Height="120"
                    HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Margin="0,0,0,0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,50,80"
                    TouchDown="BtnNext_TouchDown" />
 
             <Image x:Name="btnCancell"
                    Source="/Images/Buttons/btn-cancel.png"
                    Stretch="None"
-                   Width="560"
-                   Height="110"
+                   Width="380"
+                   Height="90"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
-                   Margin="0,0,0,0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,0,50"
                    TouchDown="BtnCancell_TouchDown" />
         </Grid>
     </Grid>

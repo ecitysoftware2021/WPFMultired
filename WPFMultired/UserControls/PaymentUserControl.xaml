@@ -9,7 +9,7 @@
              Width="1080">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-pay.png"
+            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"
                         Stretch="Fill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -19,7 +19,21 @@
             <RowDefinition Height="260" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock 
+                Text="Ingrese el dinero indicado"
+                FontSize="60"
+                Width="500"
+                TextAlignment="Center"
+                TextWrapping="Wrap"
+                Margin="0,0,0,0"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                Foreground="#FF0D4F92"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center" />
 
+        </Grid>
         <Grid Grid.Row="1">
             <TextBlock 
                 Text="DENOMINACIÓN"

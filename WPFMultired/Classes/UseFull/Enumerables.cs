@@ -46,6 +46,7 @@ namespace WPFMultired.Classes
     {
         Main,
         Consult,
+        MenuCompaniesUserControl,
         PaySuccess,
         Pay,
         Payer,
@@ -75,8 +76,8 @@ namespace WPFMultired.Classes
 
     public enum ETypeAdministrator
     {
-        Balancing = 1,
-        Upload = 2,
+        Balancing = 2,
+        Upload = 1,
         Finished = 3,
         ReUploat = 4
     }
@@ -93,7 +94,7 @@ namespace WPFMultired.Classes
         RetiroEfectivo = 10
     }
 
-    public enum EServicio
+    public enum ETypeService
     {
         Type_Transaction = 0,
         Institutions = 1,
@@ -103,8 +104,10 @@ namespace WPFMultired.Classes
         Report_Transaction = 5,
         Report_Transaction_BD = 12,
         Validate_OTP = 6,
-        Language = 7,
-        Consult_QR = 10
+        Idioms = 7,
+        Consult_QR = 10,
+        Validate_Status_Admin = 11,
+        Operation_Admin = 13
     }
 
 }

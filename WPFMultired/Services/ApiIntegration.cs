@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
 using WPFMultired.Classes;
-using WPFMultired.Classes.UseFull;
+using WPFMultired.Models;
 using WPFMultired.MR_CodeOTP;
 using WPFMultired.MR_CodeQR;
 using WPFMultired.MR_Institutions;
@@ -16,24 +15,33 @@ using WPFMultired.MR_ReportTransaction;
 using WPFMultired.MR_TypeDocument;
 using WPFMultired.MR_TypeTransaction;
 using WPFMultired.MR_ValidateOTP;
+using WPFMultired.MR_ValidateStatusAdmin;
+using WPFMultired.MR_OperationAdmin;
 using WPFMultired.Resources;
+using WPFMultired.Services.Object;
 
 namespace WPFMultired.Services
 {
     public class ApiIntegration
     {
         #region "Referencias"
-        DataService mR_DataService;
 
         private string Hora;
 
-        private string Canal;
+        private string codeCanal;
 
-        private string DireccionIp;
-        private string EntidadOrigen;
-        private string CodigoTerminal;
-        private String KEY;
-        private Encrytor_MR encrytor_MR;
+        private string sourceEntity;
+
+        private static string keyEncript;
+
+        private static string keyDesencript;
+
+        private static string userName;
+
+        private static string token;
+
+        private static readonly DateTime timerSeed = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
         #endregion
 
         #region "Constructor"
@@ -41,62 +49,103 @@ namespace WPFMultired.Services
         {
             try
             {
-                KEY = Utilities.GetConfiguration("KEY");
+                codeCanal = Utilities.GetConfiguration("CodCanal");
 
-                Canal = Utilities.GetConfiguration("i_CODCAN");
+                sourceEntity = Utilities.GetConfiguration("SourceEntity");
 
-                DireccionIp = Utilities.GetConfiguration("i_DIREIP");
-
-                EntidadOrigen = Utilities.GetConfiguration("i_ENTORI");
-                CodigoTerminal = Utilities.GetConfiguration("i_CODTER");
-                CodigoTerminal = Utilities.GetConfiguration("i_CODTER");
+                ConfigurateValues();
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
-        #endregion
 
-        #region "Métodos"
-        public async Task<string> CallServiceMR(DataService mR_DataService)
+        private void ConfigurateValues()
         {
             try
             {
-                this.mR_DataService = mR_DataService;
-                encrytor_MR = new Encrytor_MR();
-                Hora = DateTime.Now.ToString("yyyyMMddhhmmssfff");
+                string[] keys = Utilities.ReadFile(@"" + ConstantsResource.PathInfo);
 
-                switch (mR_DataService.etypeService)
+                if (keys.Length > 0)
                 {
-                    case EServicio.Type_Transaction:
+                    keyEncript = keys[0];
+                    keyDesencript = keys[1];
+                    userName = keys[2];
+                    token = keys[3];
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
 
-                        return TypeTransaction();
+        private string ConcatOrSplitTimeStamp(string text, int operation = 1)
+        {
+            if (operation == 1)
+            {
+                return string.Concat(text, "|", (long)(DateTime.UtcNow - timerSeed).TotalMilliseconds);
+            }
+            else
+            {
+                return text.Split('|')[0];
+            }
+        }
 
-                    case EServicio.Institutions:
+        #endregion
 
-                        return Institutions();
+        #region "Métodos"
+        public async Task<object> CallService(ETypeService typeService, object data)
+        {
+            try
+            {
+                switch (typeService)
+                {
+                    case ETypeService.Validate_Status_Admin:
 
-                    case EServicio.Type_Document:
+                        return GetAdminStatus();
 
-                        return TypeDocument();
+                    case ETypeService.Type_Transaction:
 
-                    case EServicio.Products_Client:
-                        break;
-                    case EServicio.Generate_OTP:
-                        break;
-                    case EServicio.Report_Transaction:
-                        break;
-                    case EServicio.Report_Transaction_BD:
-                        break;
-                    case EServicio.Validate_OTP:
-                        break;
-                    case EServicio.Language:
+                        return GetTypeTransaction();
 
-                        return TypeLanguage();
+                    case ETypeService.Institutions:
 
-                    case EServicio.Consult_QR:
-                        break;
+                        return GetInstitutions();
+
+                    case ETypeService.Type_Document:
+
+                        return GetTypeDocument((string)data);
+
+                    case ETypeService.Products_Client:
+
+                        return GetProductsClient((Transaction)data);
+
+                    case ETypeService.Generate_OTP:
+
+                        return GenerateCodeOTP((Transaction)data);
+
+                    case ETypeService.Validate_OTP:
+
+                        return ValidateOTP((Transaction)data);
+
+                    case ETypeService.Report_Transaction:
+
+                        return ReportTransaction((Transaction)data);
+
+                    case ETypeService.Idioms:
+
+                        return GetIdioms((string)data);
+
+                    case ETypeService.Consult_QR:
+
+                        return ConsultQR((Transaction)data);
+
+                    case ETypeService.Operation_Admin:
+
+                        return GetAdminOperation((ETypeAdministrator)data);
+
                     default:
                         break;
                 }
@@ -110,124 +159,32 @@ namespace WPFMultired.Services
         }
 
         /// <summary>
-        /// #NN Método para validar el QR
-        /// </summary>
-        /// <returns></returns>
-        private string ValidateQR()
-        {
-            try
-            {
-                QRDecodeServicesClient qRDecodeServicesClient = new QRDecodeServicesClient();
-
-                using (var factory = new WebChannelFactory<QRDecodeServicesChannel>())
-                {
-                    using (new OperationContextScope((IClientChannel)qRDecodeServicesClient.InnerChannel))
-                    {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
-
-                        mtrctlaqrcInput mtrctlaqrc = new mtrctlaqrcInput
-                        {
-                            I_CANAL = encrytor_MR.GetFullParameter(Utilities.GetConfiguration("I_CODCAN_QR"), KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(Utilities.GetConfiguration("I_DIREIP_QR"), KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(Utilities.GetConfiguration("I_ENTORI_QR"), KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(Utilities.GetConfiguration("I_CODTER_QR"), KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(Utilities.GetConfiguration("I_INS_QR"), KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_QRTEXT = encrytor_MR.GetFullParameter(mR_DataService.Text_QR, KEY)
-                        };
-
-                        var response = qRDecodeServicesClient.mtrctlaqrc(mtrctlaqrc);
-
-                        return JsonConvert.SerializeObject(response);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// #1 Método para buscar los idiomas disponibles para la aplicación
-        /// </summary>
-        /// <returns></returns>
-        private string TypeLanguage()
-        {
-            try
-            {
-                ConsultarLenguajeServicesClient clientlenguaje = new ConsultarLenguajeServicesClient();
-
-                using (var factory = new WebChannelFactory<ConsultarLenguajeServicesChannel>())
-                {
-                    using (new OperationContextScope((IClientChannel)clientlenguaje.InnerChannel))
-                    {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
-
-                        mtrindlenInput mtrindlen = new mtrindlenInput
-                        {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(EntidadOrigen, KEY)
-                        };
-
-                        var response = clientlenguaje.mtrindlen(mtrindlen);
-
-                        return JsonConvert.SerializeObject(response);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
-            }
-        }
-
-        /// <summary>
         /// #2 Método para buscar las transacciones disponibles
         /// </summary>
         /// <returns></returns>
-        private string TypeTransaction()
+        private string GetTypeTransaction()
         {
             try
             {
-                ConsultarTiposDeTransaccionServicesClient clientTipoTransaccion = new ConsultarTiposDeTransaccionServicesClient();
+                ConsultarTiposDeTransaccionServicesClient cliente = new ConsultarTiposDeTransaccionServicesClient();
 
                 using (var factory = new WebChannelFactory<ConsultarTiposDeTransaccionServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)clientTipoTransaccion.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)cliente.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrtiptrnInput mtrtiptrn = new mtrtiptrnInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript)
                         };
 
-                        var response = clientTipoTransaccion.mtrtiptrn(mtrtiptrn);
-
-                        return JsonConvert.SerializeObject(response);
+                        return JsonConvert.SerializeObject(cliente.mtrtiptrn(mtrtiptrn));
                     }
                 }
             }
@@ -242,35 +199,29 @@ namespace WPFMultired.Services
         /// #3 Método para buscar las instituciones disponibles
         /// </summary>
         /// <returns></returns>
-        private string Institutions()
+        private string GetInstitutions()
         {
             try
             {
-                ConsultarInstitucionesServicesClient clientInstituciones = new ConsultarInstitucionesServicesClient();
+                ConsultarInstitucionesServicesClient client = new ConsultarInstitucionesServicesClient();
 
                 using (var factory = new WebChannelFactory<ConsultarInstitucionesServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)clientInstituciones.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrintmulInput mtrintmul = new mtrintmulInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript)
                         };
 
-
-                        var response = clientInstituciones.mtrintmul(mtrintmul);
-
-                        return JsonConvert.SerializeObject(response);
+                        return JsonConvert.SerializeObject(client.mtrintmul(mtrintmul));
                     }
                 }
             }
@@ -285,35 +236,30 @@ namespace WPFMultired.Services
         /// #4 Método para buscar los tipos de documentos disponibles para esa institucion
         /// </summary>
         /// <returns></returns>
-        private string TypeDocument()
+        private string GetTypeDocument(string codeEntity)
         {
             try
             {
-                ConsultarTiposDeDocumentoServicesClient tipoDocumentoClient = new ConsultarTiposDeDocumentoServicesClient();
+                ConsultarTiposDeDocumentoServicesClient client = new ConsultarTiposDeDocumentoServicesClient();
 
                 using (var factory = new WebChannelFactory<ConsultarTiposDeDocumentoServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)tipoDocumentoClient.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrtipdoccInput mtrtipdocc = new mtrtipdoccInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(mR_DataService.EntidadDestino, KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript)
                         };
 
-                        var response = tipoDocumentoClient.mtrtipdocc(mtrtipdocc);
-
-                        return JsonConvert.SerializeObject(response);
+                        return JsonConvert.SerializeObject(client.mtrtipdocc(mtrtipdocc));
                     }
                 }
             }
@@ -328,38 +274,33 @@ namespace WPFMultired.Services
         /// #5 Método para buscar los productos del cliente
         /// </summary>
         /// <returns></returns>
-        private string Products()
+        private string GetProductsClient(Transaction transaction)
         {
             try
             {
-                ConsultarProductosClienteServicesClient productosCliente = new ConsultarProductosClienteServicesClient();
+                ConsultarProductosClienteServicesClient cliente = new ConsultarProductosClienteServicesClient();
 
                 using (var factory = new WebChannelFactory<ConsultarProductosClienteServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)productosCliente.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)cliente.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrprocliInput mtrprocli = new mtrprocliInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(mR_DataService.EntidadDestino, KEY),
-                            I_NUMERODOCUMENTO = encrytor_MR.GetFullParameter(mR_DataService.I_NUMDOC, KEY),
-                            I_TIPODOCUMENTO = encrytor_MR.GetFullParameter(mR_DataService.I_TIPDOC, KEY),
-                            I_TIPOTRANSACCION = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeClient), keyEncript),
+                            I_NUMERODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
+                            I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
+                            I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((int)transaction.Type).ToString()), keyEncript)
                         };
 
-                        var response = productosCliente.mtrprocli(mtrprocli);
-
-                        return JsonConvert.SerializeObject(response);
+                        return JsonConvert.SerializeObject(cliente.mtrprocli(mtrprocli));
                     }
                 }
             }
@@ -374,42 +315,37 @@ namespace WPFMultired.Services
         /// #6 Método para generar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private string CodeOTP()
+        private string GenerateCodeOTP(Transaction transaction)
         {
             try
             {
-                GenerarOTPServicesClient generarOTPClient = new GenerarOTPServicesClient();
+                GenerarOTPServicesClient client = new GenerarOTPServicesClient();
 
                 using (var factory = new WebChannelFactory<GenerarOTPServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)generarOTPClient.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrgenotpInput mtrgenotp = new mtrgenotpInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(mR_DataService.EntidadDestino, KEY),
-                            I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
-                            I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
-                            I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
-                            I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
-                            I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
-                            I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
-                            I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeClient), keyEncript),
+                            //I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
+                            //I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
+                            //I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
+                            //I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
+                            //I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
+                            //I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
+                            //I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY)
                         };
-                        
-                        var responseOTP = generarOTPClient.mtrgenotp(mtrgenotp);
-                        
-                        return JsonConvert.SerializeObject(responseOTP);
+
+                        return JsonConvert.SerializeObject(client.mtrgenotp(mtrgenotp));
                     }
                 }
             }
@@ -424,43 +360,38 @@ namespace WPFMultired.Services
         /// #7 Método para validar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private string ValidateOTP()
+        private string ValidateOTP(Transaction transaction)
         {
             try
             {
-                ValidarOTPServicesClient validarOTPClient = new ValidarOTPServicesClient();
+                ValidarOTPServicesClient client = new ValidarOTPServicesClient();
 
                 using (var factory = new WebChannelFactory<ValidarOTPServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)validarOTPClient.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
                         mtrvalotpInput mtrvalotp = new mtrvalotpInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(mR_DataService.EntidadDestino, KEY),
-                            I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
-                            I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
-                            I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
-                            I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
-                            I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
-                            I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
-                            I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY),
-                            I_CODIGOTP = encrytor_MR.GetFullParameter(mR_DataService.CodOTP, KEY)
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeClient), keyEncript),
+                            //I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
+                            //I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
+                            //I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
+                            //I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
+                            //I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
+                            //I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
+                            //I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY),
+                            //I_CODIGOTP = encrytor_MR.GetFullParameter(mR_DataService.CodOTP, KEY)
                         };
 
-                        var responseValidarOTP = validarOTPClient.mtrvalotp(mtrvalotp);
-
-                        return JsonConvert.SerializeObject(responseValidarOTP);
+                        return JsonConvert.SerializeObject(client.mtrvalotp(mtrvalotp));
                     }
                 }
             }
@@ -475,65 +406,62 @@ namespace WPFMultired.Services
         /// #8 Método para reportar la transacción
         /// </summary>
         /// <returns></returns>
-        private string ReportTransaction()
+        private string ReportTransaction(Transaction transaction)
         {
             try
             {
-                ProcesarTransaccionServicesClient posteeTransaccionClient = new ProcesarTransaccionServicesClient();
+                ProcesarTransaccionServicesClient client = new ProcesarTransaccionServicesClient();
 
                 using (var factory = new WebChannelFactory<ProcesarTransaccionServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)posteeTransaccionClient.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
-                        Random r = new Random();
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", encrytor_MR.GetFullParameter("MULTIRED", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", encrytor_MR.GetFullParameter("88A9C419F2A5D10CA8CE5391FE776D6E", KEY));
-                        WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", encrytor_MR.GetFullParameter(r.Next(1000, 9999).ToString(), KEY));
+                        SetHeaderRequest();
 
-                        List<iLISTAREGISTROS> list = new List<iLISTAREGISTROS>();
+                        //List<iLISTAREGISTROS> list = new List<iLISTAREGISTROS>();
 
-                        var notificarList = (NotifyListBills)mR_DataService.Objeto;
+                        //var notificarList = (NotifyListBills)mR_DataService.Objeto;
 
-                        if (notificarList != null)
-                        {
-                            list.Add(new iLISTAREGISTROS
-                            {
-                                I_RTNCON = notificarList.cant,
-                                LIST = notificarList.I_LIST.ToArray()
-                            });
-                        }
-                        else
-                        {
-                            list.Add(new iLISTAREGISTROS
-                            {
-                                I_RTNCON = 0,
-                                LIST = null
-                            });
-                        }
+                        //if (notificarList != null)
+                        //{
+                        //    list.Add(new iLISTAREGISTROS
+                        //    {
+                        //        I_RTNCON = notificarList.cant,
+                        //        LIST = notificarList.I_LIST.ToArray()
+
+                        //    });
+                        //}
+                        //else
+                        //{
+                        //    list.Add(new iLISTAREGISTROS
+                        //    {
+                        //        I_RTNCON = 0,
+                        //        LIST = null
+                        //    });
+                        //}
 
                         mtrprotrnInput mtrprotrn = new mtrprotrnInput
                         {
-                            I_CANAL = encrytor_MR.GetFullParameter(Canal, KEY),
-                            I_DIRECCIONIP = encrytor_MR.GetFullParameter(DireccionIp, KEY),
-                            I_ENTIDADORIGEN = encrytor_MR.GetFullParameter(EntidadOrigen, KEY),
-                            I_TERMINAL = encrytor_MR.GetFullParameter(CodigoTerminal, KEY),
-                            I_TIMESTAMP = encrytor_MR.GetFullParameter(Encrytor_MR.timeStamp, KEY),
-                            I_LENGUAJE = encrytor_MR.GetFullParameter(mR_DataService.Language, KEY),
-                            I_INSTITUCION = encrytor_MR.GetFullParameter(mR_DataService.EntidadDestino, KEY),
-                            I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
-                            I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
-                            I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
-                            I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
-                            I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
-                            I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
-                            I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY),
-                            I_CODIGOTP = encrytor_MR.GetFullParameter(mR_DataService.CodOTP, KEY),
-                            I_LISTAREGISTROS = list[0]
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeClient), keyEncript),
+
+                            //I_TIPOTRN = encrytor_MR.GetFullParameter(mR_DataService.TypeTramite.ToString(), KEY),
+                            //I_CUENTA = encrytor_MR.GetFullParameter(mR_DataService.I_CTANRO, KEY),
+                            //I_SISTEMA = encrytor_MR.GetFullParameter(mR_DataService.I_CODSIS, KEY),
+                            //I_PRODUCTO = encrytor_MR.GetFullParameter(mR_DataService.I_CODPRO, KEY),
+                            //I_REFERENCIA = encrytor_MR.GetFullParameter(mR_DataService.I_REFTRN, KEY),
+                            //I_TOKEN = encrytor_MR.GetFullParameter(mR_DataService.I_TOKTRN, KEY),
+                            //I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY),
+                            //I_CODIGOTP = encrytor_MR.GetFullParameter(mR_DataService.CodOTP, KEY),
+                            //I_LISTAREGISTROS = list[0]
                         };
 
-                        var response = posteeTransaccionClient.mtrprotrn(mtrprotrn);
-
-                        return JsonConvert.SerializeObject(response);
+                        return JsonConvert.SerializeObject(client.mtrprotrn(mtrprotrn));
                     }
                 }
             }
@@ -543,6 +471,204 @@ namespace WPFMultired.Services
                 return null;
             }
         }
+
+
+        /// <summary>
+        /// #NN Método para validar el QR
+        /// </summary>
+        /// <returns></returns>
+        private string ConsultQR(Transaction transaction)
+        {
+            try
+            {
+                QRDecodeServicesClient client = new QRDecodeServicesClient();
+
+                using (var factory = new WebChannelFactory<QRDecodeServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrctlaqrcInput mtrctlaqrc = new mtrctlaqrcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeClient), keyEncript),
+                            //I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript),
+                            I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript)
+                        };
+
+                        return JsonConvert.SerializeObject(client.mtrctlaqrc(mtrctlaqrc));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// #1 Método para buscar los idiomas disponibles para la aplicación
+        /// </summary>
+        /// <returns></returns>
+        private string GetIdioms(string codeEntity)
+        {
+            try
+            {
+                ConsultarLenguajeServicesClient client = new ConsultarLenguajeServicesClient();
+
+                using (var factory = new WebChannelFactory<ConsultarLenguajeServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrindlenInput mtrindlen = new mtrindlenInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript)
+                        };
+
+                        return JsonConvert.SerializeObject(client.mtrindlen(mtrindlen));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// #1 Método para buscar los idiomas disponibles para la aplicación
+        /// </summary>
+        /// <returns></returns>
+        private int GetAdminStatus()
+        {
+            try
+            {
+                ValidateStatusAdminServicesClient client = new ValidateStatusAdminServicesClient();
+                using (var factory = new WebChannelFactory<ValidateStatusAdminServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrvalarqcInput request = new mtrvalarqcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript)
+                        };
+
+                        var response = client.mtrvalarqc(request);
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            !string.IsNullOrEmpty(response.O_MOVIMIENTO) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            return int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MOVIMIENTO, keyDesencript), 2));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return 0;
+        }
+
+        private PaypadOperationControl GetAdminOperation(ETypeAdministrator typeAdministrator)
+        {
+            try
+            {
+                RetrieveOperationAdminServicesClient client = new RetrieveOperationAdminServicesClient();
+                using (var factory = new WebChannelFactory<RetrieveOperationAdminServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrretarqcInput request = new mtrretarqcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                            I_MOVIMIENTO = ((int)typeAdministrator).ToString()
+                        };
+
+                        var response = client.mtrretarqc(request);
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&response.LISTAREGISTROS != null &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 && 
+                            response.LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            PaypadOperationControl result = new PaypadOperationControl();
+                            foreach (var denomination in response.LISTAREGISTROS.LIST)
+                            {
+                                result.DATALIST.Add(new List
+                                { 
+                                    AMOUNT = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)),
+                                    AMOUNT_NEW = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)),
+                                    VALUE = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
+                                    DESCRIPTION = denomination.O_DESDON,
+                                    TOTAL_AMOUNT = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)) * 
+                                    int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
+                                    CASSETTE = int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript)),
+                                    CODE = Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_TIPMON, 2), keyDesencript),
+                                });
+
+                                result.TOTAL += int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CANDEN, 2), keyDesencript)) *
+                                    int.Parse(Encryptor.Decrypt(ConcatOrSplitTimeStamp(denomination.O_CODDEN, 2), keyDesencript));
+                                   
+                            }
+
+                            return result;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+
+            return null;
+        }
+
+        private void SetHeaderRequest()
+        {
+            try
+            {
+                WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", Encryptor.Encrypt(ConcatOrSplitTimeStamp(userName), keyEncript));
+                WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", Encryptor.Encrypt(ConcatOrSplitTimeStamp(token), keyEncript));
+                WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", Encryptor.Encrypt(ConcatOrSplitTimeStamp((new Random()).Next(1000, 9999).ToString()), keyEncript));
+            }
+            catch (Exception ex )
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
         #endregion
     }
 }

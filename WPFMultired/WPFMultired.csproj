@@ -114,9 +114,6 @@
     <Compile Include="Classes\AdminPayPlus.cs" />
     <Compile Include="Classes\DB\SqliteDataAccess.cs" />
     <Compile Include="Classes\Peripherals\ControlPeripherals.cs" />
-    <Compile Include="Classes\UseFull\Encryptor_MR.cs" />
-    <Compile Include="Classes\UseFull\DataService.cs" />
-    <Compile Include="Classes\UseFull\NotifyListBills.cs" />
     <Compile Include="Classes\UseFull\ReaderBarCode.cs" />
     <Compile Include="Classes\UseFull\TimerService.cs" />
     <Compile Include="Classes\UseFull\Encryptor.cs" />
@@ -152,6 +149,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MR_OperationAdmin\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MR_ReportTransaction\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +170,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\MR_ValidateOTP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MR_ValidateStatusAdmin\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -192,6 +199,11 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeDocument.cs" />
+    <Compile Include="Resources\ConstantsResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstantsResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ImagesUrlResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,8 +224,14 @@
     <Compile Include="UserControls\Administrator\LoginAdministratorUserControl.xaml.cs">
       <DependentUpon>LoginAdministratorUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MenuCompaniesUserControl.xaml.cs">
+      <DependentUpon>MenuCompaniesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MenuUserControl.xaml.cs">
       <DependentUpon>MenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Modals\ReadQRUserControl.xaml.cs">
+      <DependentUpon>ReadQRUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PayerUserControl.xaml.cs">
       <DependentUpon>PayerUserControl.xaml</DependentUpon>
@@ -252,10 +270,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Object\RequestApi.cs" />
+    <Compile Include="Windows\Alerts\ModalQRWindow.xaml.cs">
+      <DependentUpon>ModalQRWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MasterWindow.xaml.cs">
       <DependentUpon>MasterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ModalWindow.xaml.cs">
+    <Compile Include="Windows\Alerts\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -280,6 +301,10 @@
     <EmbeddedResource Include="Resources\CommonResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ConstantsResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConstantsResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ImagesUrlResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -324,6 +349,13 @@
     <None Include="Connected Services\MR_ListProducts\WPFMultired.MR_ListProducts.mtrprocliResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\MR_OperationAdmin\RetrieveOperationAdmin.wsdl" />
+    <None Include="Connected Services\MR_OperationAdmin\WPFMultired.MR_OperationAdmin.mtrretarqcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_OperationAdmin\WPFMultired.MR_OperationAdmin.mtrretarqcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\MR_ReportTransaction\procesarTransaccion.wsdl" />
     <None Include="Connected Services\MR_ReportTransaction\WPFMultired.MR_ReportTransaction.mtrprotrnResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -350,6 +382,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ValidateOTP\WPFMultired.MR_ValidateOTP.mtrvalotpResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ValidateStatusAdmin\ValidateStatusAdmin.wsdl" />
+    <None Include="Connected Services\MR_ValidateStatusAdmin\WPFMultired.MR_ValidateStatusAdmin.mtrvalarqcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ValidateStatusAdmin\WPFMultired.MR_ValidateStatusAdmin.mtrvalarqcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="DataContext\DB_Local.db" />
@@ -438,7 +477,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\MenuCompaniesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\MenuUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Modals\ReadQRUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -466,11 +513,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Alerts\ModalQRWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MasterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ModalWindow.xaml">
+    <Page Include="Windows\Alerts\ModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -484,10 +535,12 @@
     <WCFMetadataStorage Include="Connected Services\MR_Institutions\" />
     <WCFMetadataStorage Include="Connected Services\MR_Language\" />
     <WCFMetadataStorage Include="Connected Services\MR_ListProducts\" />
+    <WCFMetadataStorage Include="Connected Services\MR_OperationAdmin\" />
     <WCFMetadataStorage Include="Connected Services\MR_ReportTransaction\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeDocument\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeTransaction\" />
     <WCFMetadataStorage Include="Connected Services\MR_ValidateOTP\" />
+    <WCFMetadataStorage Include="Connected Services\MR_ValidateStatusAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MR_Institutions\configuration91.svcinfo" />
@@ -603,6 +656,36 @@
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-consign.png" />
     <Resource Include="Images\Buttons\btn-withdraw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-qr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-acept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ValidateStatusAdmin\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ValidateStatusAdmin\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ValidateStatusAdmin\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_OperationAdmin\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_OperationAdmin\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_OperationAdmin\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

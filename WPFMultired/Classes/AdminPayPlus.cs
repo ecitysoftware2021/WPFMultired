@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using WPFMultired.Classes.DB;
@@ -194,6 +193,19 @@ namespace WPFMultired.Classes
                     _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
 
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
+                    var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+                    if (((int)validateStatus) > 0)
+                    {
+                        if ((int)validateStatus == (int)ETypeAdministrator.Balancing)
+                        {
+                            _dataPayPlus.StateBalanece = true;
+                        }
+                        else
+                        {
+                            _dataPayPlus.StateUpload = true;
+                        }
+                    }
+
                     if (_dataPayPlus.StateBalanece || _dataPayPlus.StateUpload)
                     {
                         SaveLog(new RequestLog
@@ -203,6 +215,7 @@ namespace WPFMultired.Classes
                         }, ELogType.General);
                         return true;
                     }
+
                     if (_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
                     {
                         SaveLog(new RequestLog
@@ -284,43 +297,22 @@ namespace WPFMultired.Classes
         {
             try
             {
-                string[] keys = ReadKeys();
+                string[] keys = Utilities.ReadFile(@""+ConstantsResource.PathKeys);
 
-                return new CONFIGURATION_PAYDAD
+                if (keys.Length > 0)
                 {
-                    USER_API = Encryptor.Decrypt(keys[0]),
-                    PASSWORD_API = Encryptor.Decrypt(keys[1]),
-                    USER = Encryptor.Decrypt(keys[2]),
-                    PASSWORD = Encryptor.Decrypt(keys[3]),
-                    TYPE = Convert.ToInt32(keys[4])
-                };
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
-            }
-            return null;
-        }
+                    string[] server = keys[0].Split(';');
+                    string[] payplus = keys[1].Split(';');
 
-        private string[] ReadKeys()
-        {
-            try
-            {
-                string[] keys = new string[5];
-                string[] text = File.ReadAllLines(@".\keys.txt");
-
-                if (text.Length > 0)
-                {
-                    string[] line1 = text[0].Split(';');
-                    string[] line2 = text[1].Split(';');
-
-                    keys[0] = (line1[0].Split(':'))[1];
-                    keys[1] = line1[1].Split(':')[1];
-                    keys[2] = line2[0].Split(':')[1];
-                    keys[3] = line2[1].Split(':')[1];
-                    keys[4] = line2[2].Split(':')[1];
+                    return new CONFIGURATION_PAYDAD
+                    {
+                        USER_API = Encryptor.Decrypt(server[0].Split(':')[1]),
+                        PASSWORD_API = Encryptor.Decrypt(server[1].Split(':')[1]),
+                        USER = Encryptor.Decrypt(payplus[0].Split(':')[1]),
+                        PASSWORD = Encryptor.Decrypt(payplus[1].Split(':')[1]),
+                        TYPE = Convert.ToInt32(payplus[2].Split(':')[1])
+                    };
                 }
-                return keys;
             }
             catch (Exception ex)
             {
@@ -680,18 +672,20 @@ namespace WPFMultired.Classes
         {
             try
             {
-                string action = "";
+                //string action = "";
 
-                if (typeAdministrator == ETypeAdministrator.Balancing)
-                {
-                    action = "GetBalance";
-                }
-                else
-                {
-                    action = "GetUpload";
-                }
+                //if (typeAdministrator == ETypeAdministrator.Balancing)
+                //{
+                //    action = "GetBalance";
+                //}
+                //else
+                //{
+                //    action = "GetUpload";
+                //}
 
-                var response = await api.CallApi(action);
+                // var response = await api.CallApi(action);
+
+                var response = await ApiIntegration.CallService(ETypeService.Operation_Admin, typeAdministrator);
 
                 if (response != null)
                 {

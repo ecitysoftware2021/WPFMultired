@@ -64,6 +64,9 @@ namespace WPFMultired.Models
                     case UserControlView.Payer:
                         View = new PayerUserControl((Transaction)data);
                         break;
+                    case UserControlView.MenuCompaniesUserControl:
+                        View = new MenuCompaniesUserControl();
+                        break;
                 }
 
                 if (initTimer)

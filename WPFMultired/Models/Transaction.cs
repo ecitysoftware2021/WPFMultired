@@ -23,7 +23,9 @@ namespace WPFMultired.Models
 
         public string Enrollment { get; set; }
 
-        public string Tpcm { get; set; }
+        public string CodeClient { get; set; }
+
+        public int TypeDocument { get; set; }
 
         public DateTime DateTransaction { get; set; }
 

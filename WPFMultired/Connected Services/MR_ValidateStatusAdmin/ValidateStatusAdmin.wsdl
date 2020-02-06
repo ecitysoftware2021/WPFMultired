@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://validatestatusadmin.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ValidateStatusAdmin" targetNamespace="http://validatestatusadmin.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://validatestatusadmin.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrvalarqc" type="tns:mtrvalarqc" />
+      <xs:element name="mtrvalarqcResponse" type="tns:mtrvalarqcResponse" />
+      <xs:complexType name="mtrvalarqc">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrvalarqcInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrvalarqcInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrvalarqcResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrvalarqcResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrvalarqcResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_MOVIMIENTO" type="xs:string" />
+          <xs:element name="O_DESCRIPCION" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrvalarqc">
+    <part name="parameters" element="tns:mtrvalarqc" />
+  </message>
+  <message name="mtrvalarqcResponse">
+    <part name="parameters" element="tns:mtrvalarqcResponse" />
+  </message>
+  <portType name="ValidateStatusAdminServices">
+    <operation name="mtrvalarqc">
+      <input wsam:Action="http://validatestatusadmin.wsbeans.iseries/ValidateStatusAdminServices/mtrvalarqcRequest" message="tns:mtrvalarqc" />
+      <output wsam:Action="http://validatestatusadmin.wsbeans.iseries/ValidateStatusAdminServices/mtrvalarqcResponse" message="tns:mtrvalarqcResponse" />
+    </operation>
+  </portType>
+  <binding name="ValidateStatusAdminServicesPortBinding" type="tns:ValidateStatusAdminServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrvalarqc">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ValidateStatusAdmin">
+    <port name="ValidateStatusAdminServicesPort" binding="tns:ValidateStatusAdminServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/ValidateStatusAdminService/ValidateStatusAdmin" />
+    </port>
+  </service>
+</definitions>

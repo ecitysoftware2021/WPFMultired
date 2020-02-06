@@ -160,6 +160,10 @@ namespace WPFMultired.Services.Object
 
         public int? DEVICE_TYPE_ID { get; set; }
 
+        public string CODE { get; set; }
+
+        public int CASSETTE { get; set; }
+
         private decimal _TOTAL_AMOUNT;
 
         public int? AMOUNT_NEW

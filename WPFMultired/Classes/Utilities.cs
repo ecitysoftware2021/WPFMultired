@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Speech.Synthesis;
 using System.Text;
@@ -89,7 +90,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-               // Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
+                // Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
             }
             GC.Collect();
             return response;
@@ -345,5 +346,33 @@ namespace WPFMultired.Classes
             }
         }
 
+        public static string[] ReadFile(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    return File.ReadAllLines(path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
+        public static string GetIpPublish()
+        {
+            try
+            {
+                return new WebClient().DownloadString(GetConfiguration("UrlGetIp"));
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
+            }
+            return string.Empty;
+        }
     }
 }

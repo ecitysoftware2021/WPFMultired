@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFMultired.Classes
 {
     public static class Encryptor
     {
-        public static String Encrypt(String plainText)
+        public static string Encrypt(string plainText, string key = null)
         {
             try
             {
                 var plainBytes = Encoding.UTF8.GetBytes(plainText);
-                var encryptBity = GetRijndaelManaged(Assembly.GetExecutingAssembly().EntryPoint.DeclaringType.Namespace).CreateEncryptor().TransformFinalBlock(plainBytes, 0, plainBytes.Length);
+                var encryptBity = GetRijndaelManaged(key).CreateEncryptor().TransformFinalBlock(plainBytes, 0, plainBytes.Length);
                 return Convert.ToBase64String(encryptBity);
             }
             catch (Exception ex)
@@ -24,12 +21,12 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static String Decrypt(String encryptedText)
+        public static string Decrypt(string encryptedText, string key = null)
         {
             try
             {
                 var encryptedBytes = Convert.FromBase64String(encryptedText);
-                var decryptByte = GetRijndaelManaged(Assembly.GetExecutingAssembly().EntryPoint.DeclaringType.Namespace).CreateDecryptor().TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+                var decryptByte = GetRijndaelManaged(key).CreateDecryptor().TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
                 return Encoding.UTF8.GetString(decryptByte);
             }
             catch (Exception ex)
@@ -38,10 +35,15 @@ namespace WPFMultired.Classes
             }
         }
         
-        private static RijndaelManaged GetRijndaelManaged(String secretKey)
+        private static RijndaelManaged GetRijndaelManaged(string secretKey)
         {
             try
             {
+                if (secretKey == null)
+                {
+                    secretKey = Assembly.GetExecutingAssembly().EntryPoint.DeclaringType.Namespace;
+                }
+
                 var keyBytes = new byte[16];
                 var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
                 Array.Copy(secretKeyBytes, keyBytes, Math.Min(keyBytes.Length, secretKeyBytes.Length));
