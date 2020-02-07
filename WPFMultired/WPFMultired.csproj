@@ -695,10 +695,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Others\img-bill.jpg" />
-    <Resource Include="Images\Others\img-coin.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\MR_ProcessAdmin\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>

@@ -630,22 +630,23 @@ namespace WPFMultired.Services
                         {
                             PaypadOperationControl result = new PaypadOperationControl()
                             {
-                                DATALIST = new List<List>()
+                                DATALIST = new List<List>(),
+                                TYPE = typeAdministrator
                             };
                             foreach (var denomination in response.LISTAREGISTROS.LIST)
                             {
                                 result.DATALIST.Add(new List
                                 { 
                                     AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
-                                    AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
+                                    AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)),
                                     VALUE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
                                     DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
-                                    TOTAL_AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) * 
+                                    TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) + 
+                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) * 
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
                                     CASSETTE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CASSET, keyDesencript), 2)),
                                     CODE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2),
                                     IMAGE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2) == "B" ? ImagesUrlResource.ImgBill : ImagesUrlResource.ImgCoin
-
                                 });
 
                                 result.TOTAL += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
@@ -685,7 +686,7 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
-                            I_MOVIMIENTO = Encryptor.Encrypt(((int)dataProcess.TYPE).ToString(), keyEncript)
+                            I_MOVIMIENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((int)dataProcess.TYPE).ToString()), keyEncript)
                         };
 
                         var response = client.mtrproarqc(request);

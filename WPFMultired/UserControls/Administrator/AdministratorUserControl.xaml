@@ -57,7 +57,7 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock 
-                Text="Denominación"
+                Text="DEN / CASSET"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -69,7 +69,7 @@
                 Grid.Column="1"/>
 
             <TextBlock 
-                Text="Cantidad"
+                Text="CANTIDAD"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -81,7 +81,7 @@
                 Grid.Column="2"/>
 
             <TextBlock 
-                Text="Total($)"
+                Text="TOTAL($)"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -126,12 +126,12 @@
                                Source="{Binding IMAGE}"
                                Stretch="Fill"
                                Width="60"
-                               Height="40"
+                               Height="50"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="0,0,0,0"
-                                 Grid.Column="0"/>
-                            
+                               Grid.Column="0"/>
+
                             <TextBlock 
                                     Text="{Binding VALUE, StringFormat={}{0:C0}}"
                                     FontSize="32"
@@ -143,18 +143,23 @@
                                     Width="500"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="1" />
+                                    Grid.Column="1" >
+                                <Run Text="{Binding CASSETTE}" />
+                            </TextBlock>
+                            
                             <TextBlock 
-                                    Text="{Binding AMOUNT_NEW}"
+                                    Text="{Binding AMOUNT}"
                                     FontSize="32"
-                                     FontFamily="Myriad Pro"
+                                    FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="2" />
+                                    Grid.Column="2">
+                                <Run Text="{Binding AMOUNT_NEW}" />
+                            </TextBlock>
                             <TextBlock 
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C0}}"
                                     FontSize="32"
@@ -165,7 +170,8 @@
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="3" />
+                                    Grid.Column="3">
+                            </TextBlock>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
