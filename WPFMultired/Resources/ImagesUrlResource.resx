@@ -154,9 +154,9 @@
     <value>/Images/Others/ok.png</value>
   </data>
   <data name="ImgBill" xml:space="preserve">
-    <value>/Images/Others/img-bill.jpg</value>
+    <value>/Images/Others/img-bill.png</value>
   </data>
   <data name="ImgCoin" xml:space="preserve">
-    <value>/Images/Others/img-coin.jpg</value>
+    <value>/Images/Others/img-coin.png</value>
   </data>
 </root>

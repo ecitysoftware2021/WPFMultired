@@ -12,9 +12,9 @@ DEBUG;TRACE
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\App.xaml
 16-1696555245
 
-791305703718
+831747834137
 32585482936
 Themes\Generic.xaml;UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\MenuCompaniesUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\Modals\ReadQRUserControl.xaml;UserControls\PayerUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;Windows\Alerts\ModalQRWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
 
-False
+True
 
