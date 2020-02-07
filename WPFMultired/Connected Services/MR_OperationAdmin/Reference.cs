@@ -181,6 +181,12 @@ namespace WPFMultired.MR_OperationAdmin {
         
         private string o_CANDENField;
         
+        private string o_CANACTField;
+        
+        private string o_TIPDEVField;
+        
+        private string o_DESDEVField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string O_CASSET {
@@ -262,6 +268,42 @@ namespace WPFMultired.MR_OperationAdmin {
             set {
                 this.o_CANDENField = value;
                 this.RaisePropertyChanged("O_CANDEN");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string O_CANACT {
+            get {
+                return this.o_CANACTField;
+            }
+            set {
+                this.o_CANACTField = value;
+                this.RaisePropertyChanged("O_CANACT");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string O_TIPDEV {
+            get {
+                return this.o_TIPDEVField;
+            }
+            set {
+                this.o_TIPDEVField = value;
+                this.RaisePropertyChanged("O_TIPDEV");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string O_DESDEV {
+            get {
+                return this.o_DESDEVField;
+            }
+            set {
+                this.o_DESDEVField = value;
+                this.RaisePropertyChanged("O_DESDEV");
             }
         }
         

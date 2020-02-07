@@ -48,6 +48,9 @@
           <xs:element name="O_DESDON" type="xs:string" />
           <xs:element name="O_CODDEN" type="xs:string" />
           <xs:element name="O_CANDEN" type="xs:string" />
+          <xs:element name="O_CANACT" type="xs:string" />
+          <xs:element name="O_TIPDEV" type="xs:string" />
+          <xs:element name="O_DESDEV" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
