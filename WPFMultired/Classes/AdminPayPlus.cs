@@ -466,7 +466,7 @@ namespace WPFMultired.Classes
                             {
                                 AMOUNT = transaction.Amount,
                                 TRANSACTION_ID = data.ID,
-                                REFERENCE = string.Concat("Matricula: ", transaction.File.matricula ?? string.Empty),
+                                REFERENCE = string.Concat("Matricula: ", transaction.reference ?? string.Empty),
                                 OBSERVATION = string.Concat("Numero de recuperacion: ", transaction.reference),
                                 TRANSACTION_DESCRIPTION_ID = 0,
                                 STATE = true

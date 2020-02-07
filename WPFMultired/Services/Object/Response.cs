@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using WPFMultired.Classes;
+using WPFMultired.Models;
 
 namespace WPFMultired.Services.Object
 {
@@ -88,6 +89,40 @@ namespace WPFMultired.Services.Object
             }
         }
         #endregion
+
+        public List<DenominationMoney> DATALIST_FILTER()
+        {
+            List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
+            try
+            {
+                foreach (var item in this.DATALIST)
+                {
+                    if (item.AMOUNT_NEW > 0)
+                    {
+                        var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
+                        if (itemUpdate != null)
+                        {
+                            itemUpdate.Quantity += itemUpdate.Quantity;
+                            itemUpdate.Total = (int)itemUpdate.Quantity * (int)itemUpdate.Denominacion;
+                        }
+                        else
+                        {
+                            dataListsNew.Add(new DenominationMoney
+                            {
+                                Denominacion = (decimal)item.VALUE,
+                                Quantity = (decimal)item.AMOUNT_NEW,
+                                Total = item.TOTAL_AMOUNT
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dataListsNew;
+        }
     }
 
     public class List : INotifyPropertyChanged

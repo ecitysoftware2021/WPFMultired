@@ -692,12 +692,16 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            PaypadOperationControl result = new PaypadOperationControl()
-                            {
-                                DATALIST = new List<List>()
-                            };
+                            dataProcess.ID_TRANSACTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NUMEROTRANSACCION, keyDesencript), 2);
+                            dataProcess.CODE_AGENCY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_AGENCIATRANSACCION, keyDesencript), 2);
+                            dataProcess.ID_USER = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NITCAJERO, keyDesencript), 2);
+                            dataProcess.NAME_AGENCY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREAGENCIA, keyDesencript), 2);
+                            dataProcess.NAME_COMPANY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREBANCO, keyDesencript), 2);
+                            dataProcess.NAME_USER = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRECAJERO, keyDesencript), 2);
+                            dataProcess.TIME = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HORATRANSACCION, keyDesencript), 2);
+                            dataProcess.DATE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FECHAPROCESO, keyDesencript), 2);
 
-                            return result;
+                            return dataProcess;
                         }
                     }
                 }
