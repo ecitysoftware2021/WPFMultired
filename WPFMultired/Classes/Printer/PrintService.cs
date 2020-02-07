@@ -85,7 +85,7 @@ namespace WPFMultired.Classes.Printer
                     {
                         //StatusPrint();
                         this.dataPrinter = dataPrinter;
-                        if (StatePrint && dataPrinter != null)
+                        if (dataPrinter != null)
                         {
                             printDocument.Print();
                         }

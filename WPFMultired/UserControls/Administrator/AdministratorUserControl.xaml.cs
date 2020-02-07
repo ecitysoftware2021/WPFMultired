@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -48,9 +49,14 @@ namespace WPFMultired.UserControls.Administrator
                     this.dataContol.viewList = null;
 
                     this.dataContol = await AdminPayPlus.UpdateAdminProcess(dataContol);
+
+                    Thread.Sleep(2000);
+
                     if (this.dataContol != null)
                     {
                         Utilities.PrintVoucher(this.dataContol);
+
+                        Thread.Sleep(6000);
 
                         Utilities.CloseModal();
 

@@ -144,8 +144,8 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="1" >
-                                <Run Text=" / " />
-                                <Run Text="{Binding CASSETTE}" />
+                                <Run Text=" / " FontWeight="Bold" />
+                                <Run Text="{Binding CASSETTE}" Foreground="#FF87BB2B" />
                             </TextBlock>
                             
                             <TextBlock 
@@ -159,7 +159,8 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="2">
-                                <Run Text="{Binding AMOUNT_NEW}" />
+                                <Run Text=" / " FontWeight="Bold" />
+                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF87BB2B" />
                             </TextBlock>
                             <TextBlock 
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C0}}"

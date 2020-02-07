@@ -33,6 +33,7 @@ namespace WPFMultired.UserControls.Administrator
         {
             InitializeComponent();
             _typeOperation = typeOperation;
+            //Search();
         }
 
         #endregion
@@ -78,7 +79,13 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (!Validation())
                 {
-                    Utilities.ShowModal(_messageError, EModalType.Error, false);
+                   Utilities.ShowModal(_messageError, EModalType.Error, false);
+
+                    //var data = await AdminPayPlus.DataListPaypad(_typeOperation);
+
+                    // var dataContol = await AdminPayPlus.UpdateAdminProcess(data);
+
+                    //Utilities.PrintVoucher(dataContol);
                 }
                 else
                 {
