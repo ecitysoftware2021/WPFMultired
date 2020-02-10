@@ -227,21 +227,21 @@ namespace WPFMultired.Classes
                 }
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_BANCK, x = 105, y = y += 15 });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 90, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 95, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "DM", x = 25, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "TRAN", x = 75, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "FECHA", x = 135, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "HORA", x = 195, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "HORA", x = 205, y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString() ?? string.Empty, x = 23, y = y += 15 });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.ID_TRANSACTION ?? string.Empty, x = 78, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:yyyy/MM/dd}",dataControl.DATE), x = 130, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:HH:mm:ss}", dataControl.TIME), x = 190, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.ID_TRANSACTION ?? string.Empty, x = 80, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.DATE, x = 130, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.TIME, x = 200, y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "USUARIO:", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(dataControl.NAME_USER, " (", dataControl.ID_USER, ")") ?? string.Empty, x = 80, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "DENOMINACION", x = 10, y = y += 15 });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "DENOMINACION", x = 10, y = y += 20 });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "CANT", x = 130, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "MONTO", x = 230, y = y });
                 foreach (var item in dataControl.DATALIST_FILTER())
@@ -251,7 +251,7 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = 230, y = y });
                 }
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "TOTAL TRANSACCIÓN  : ", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = y, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.TOTAL.ToString(), x = y, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
                 AdminPayPlus.PrintService.Start(data);
             }
