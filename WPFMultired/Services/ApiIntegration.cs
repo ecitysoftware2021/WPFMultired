@@ -700,8 +700,8 @@ namespace WPFMultired.Services
                             dataProcess.NAME_AGENCY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREAGENCIA, keyDesencript), 2);
                             dataProcess.NAME_COMPANY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREBANCO, keyDesencript), 2);
                             dataProcess.NAME_USER = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRECAJERO, keyDesencript), 2);
-                            dataProcess.TIME = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HORATRANSACCION, keyDesencript), 2), "yyyyMMdd", null).ToString("yyyy/MM/dd");
-                            dataProcess.DATE = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FECHAPROCESO, keyDesencript), 2), "HHmmsstt", null).ToString("HH:mm:ss");
+                            dataProcess.TIME = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FECHAPROCESO, keyDesencript), 2), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                            dataProcess.DATE = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HORATRANSACCION, keyDesencript), 2), "HHmmssff", null).ToString("HH:mm:ss");
 
                             return dataProcess;
                         }
