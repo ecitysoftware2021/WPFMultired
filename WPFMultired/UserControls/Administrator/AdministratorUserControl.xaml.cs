@@ -64,10 +64,12 @@ namespace WPFMultired.UserControls.Administrator
 
                         Utilities.RestartApp();
                     }
-
-                    Utilities.CloseModal();
-                    Utilities.ShowModal(MessageResource.ErrorTransaction, EModalType.Error, false);
-                    Utilities.RestartApp();
+                    else
+                    {
+                        Utilities.CloseModal();
+                        Utilities.ShowModal(MessageResource.ErrorTransaction, EModalType.Error, false);
+                        Utilities.RestartApp();
+                    }
                 });
 
                 Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, false);

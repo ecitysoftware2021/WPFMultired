@@ -35,6 +35,8 @@ namespace WPFMultired.Services.Object
 
         public string NAME_AGENCY { get; set; }
 
+        public string NAME_BANCK { get; set; }
+
         public string ID_USER { get; set; }
 
         public string NAME_USER { get; set; }
@@ -110,7 +112,7 @@ namespace WPFMultired.Services.Object
                             dataListsNew.Add(new DenominationMoney
                             {
                                 Denominacion = (decimal)item.VALUE,
-                                Quantity = (decimal)item.AMOUNT_NEW,
+                                Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
                                 Total = item.TOTAL_AMOUNT
                             });
                         }

@@ -215,30 +215,31 @@ namespace WPFMultired.Classes
 
                 var data = new List<DataPrinter>()
                 {
-                    new DataPrinter{ image = GetConfiguration("ImageBoucher"),  x = 2, y = 2 },
+                    new DataPrinter{ image = GetConfiguration("ImageBoucher"),  x = 5, y= y },
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "DISMINUCIÓN DE EFECTIVO", x = 80, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "DISMINUCIÓN DE EFECTIVO", x = 70, y = y += 75 });
                 }
                 else
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "PROVISIÓN DE EFECTIVO", x = 80, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "PROVISIÓN DE EFECTIVO", x = 75, y = y += 75 });
                 }
 
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_COMPANY, x = 80, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 80, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "DM", x = 30, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "FECHA", x = 100, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "HORA", x = 170, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "TRAN", x = 170, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_BANCK, x = 100, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 100, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "DM", x = 25, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "TRAN", x = 85, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "FECHA", x = 135, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "HORA", x = 185, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString() ?? string.Empty, x = 30, y = y += 15 });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.DATE, x = 100, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.TIME, x = 170, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString() ?? string.Empty, x = 23, y = y += 15 });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.ID_TRANSACTION ?? string.Empty, x = 85, y = y += 15 });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.DATE, x = 130, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.TIME, x = 180, y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "USUARIO:", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(dataControl.NAME_USER, " (", dataControl.ID_USER, ")") ?? string.Empty, x = x, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(dataControl.NAME_USER, " (", dataControl.ID_USER, ")") ?? string.Empty, x = 100, y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "DENOMINACION", x = 10, y = y += 15 });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "CANT", x = 130, y = y });
@@ -251,6 +252,7 @@ namespace WPFMultired.Classes
                 }
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "TOTAL TRANSACCIÓN  : ", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = y, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
                 AdminPayPlus.PrintService.Start(data);
             }
             catch (Exception ex)
