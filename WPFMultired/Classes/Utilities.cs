@@ -251,7 +251,7 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = 230, y = y });
                 }
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "TOTAL TRANSACCIÓN  : ", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = dataControl.TOTAL.ToString(), x = y, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL.ToString()), x = x, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
                 AdminPayPlus.PrintService.Start(data);
             }
