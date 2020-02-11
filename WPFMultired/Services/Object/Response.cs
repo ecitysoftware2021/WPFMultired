@@ -43,6 +43,8 @@ namespace WPFMultired.Services.Object
 
         public string NAME_COMPANY { get; set; }
 
+        public decimal TOTAL_CURRENT;
+
         private decimal _TOTAL;
 
         private string _DESCRIPTION;

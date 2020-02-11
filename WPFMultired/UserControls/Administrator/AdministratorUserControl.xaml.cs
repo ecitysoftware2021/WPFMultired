@@ -139,16 +139,16 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
-                if (type == 1 && typeOperation == ETypeAdministrator.Balancing)
-                {
-                    type = 2;
-                    txtDescription.Text = MessageResource.RemoveMonyDispenser;
-                    RefreshList();
-                }
-                else
-                {
+                //if (type == 1 && typeOperation == ETypeAdministrator.Balancing)
+                //{
+                //    type = 2;
+                //    txtDescription.Text = MessageResource.RemoveMonyDispenser;
+                //    RefreshList();
+                //}
+                //else
+                //{
                     UpdateDataControl();
-                }
+                //}
             }
             catch (Exception ex)
             {
