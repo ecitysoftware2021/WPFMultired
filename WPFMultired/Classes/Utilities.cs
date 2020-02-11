@@ -252,14 +252,14 @@ namespace WPFMultired.Classes
                 }
                 if (dataControl.TYPE == ETypeAdministrator.Upload)
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "VALOR APROVICIONADO  : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = x, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "VALOR APROVISIONADO  : ", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = 200, y = y });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "VALOR ACTUAL : ", x = xKey, y = y += 20 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_CURRENT), x = x, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_CURRENT), x = 200, y = y });
                 }
                 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "TOTAL TRANSACCIÓN  : ", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = x, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = 200, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
                 AdminPayPlus.PrintService.Start(data);
             }
