@@ -37,8 +37,8 @@
                        HorizontalAlignment="Center" 
                        Grid.Row="1"
                        Width="180" 
-                       Height="210"
-                       Margin="0,80,0,0"
+                       Height="180"
+                       Margin="0,20,0,0"
                        Visibility="Hidden"
                        Opacity="1"/>
 

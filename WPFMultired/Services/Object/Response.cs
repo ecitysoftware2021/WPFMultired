@@ -101,7 +101,7 @@ namespace WPFMultired.Services.Object
             {
                 foreach (var item in this.DATALIST)
                 {
-                    if (item.AMOUNT_NEW > 0)
+                    if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
                     {
                         var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
                         if (itemUpdate != null)
