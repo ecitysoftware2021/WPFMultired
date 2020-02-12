@@ -20,6 +20,9 @@ namespace WPFMultired.Services.Object
 
         public bool StateUpload { get; set; }
 
+        public bool StateDiminish { get; set; }
+
+
         public object ListImages { get; set; }
 
         public int ContTransactionsNotific { get; set; }

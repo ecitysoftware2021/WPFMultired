@@ -65,6 +65,10 @@ namespace WPFMultired.UserControls.Administrator
                 {
                     Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Upload);
                 }
+                else if (AdminPayPlus.DataPayPlus.StateDiminish)
+                {
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Diminish);
+                }
                 else
                 {
                     if (result)

@@ -22,8 +22,8 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="370" />
-                <RowDefinition Height="800" />
+                <RowDefinition Height="360" />
+                <RowDefinition Height="810" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -37,7 +37,7 @@
                        HorizontalAlignment="Center" 
                        Width="160" 
                        Height="160"
-                       Margin="0,0,0,0"
+                       Margin="10,0,0,0"
                        Visibility="Hidden"/>
 
                 <TextBlock x:Name="LblTittle" 

@@ -200,9 +200,13 @@ namespace WPFMultired.Classes
                         {
                             _dataPayPlus.StateBalanece = true;
                         }
-                        else
+                        else if ((int)validateStatus == (int)ETypeAdministrator.Upload)
                         {
                             _dataPayPlus.StateUpload = true;
+                        }
+                        else
+                        {
+                            _dataPayPlus.StateDiminish = true;
                         }
                     }
 
@@ -617,21 +621,11 @@ namespace WPFMultired.Classes
         {
             try
             {
-                //string action = "";
-
-                //if (_dataPayPlus.StateBalanece)
-                //{
-                //    action = "UpdateBalance";
-                //}
-                //else
-                //{
-                //    action = "UpdateUpload";
-                //}
-
                 var response = await ApiIntegration.CallService(ETypeService.Procces_Admin, dataProcess);
 
                 if (response != null)
                 {
+                    //var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
                     return (PaypadOperationControl)response;
                 }
             }
@@ -642,7 +636,7 @@ namespace WPFMultired.Classes
             return null;
         }
 
-        public static async Task<bool> ValidateUser(string name, string pass)
+        public static async Task<int> ValidateUser(string name, string pass)
         {
             try
             {
@@ -654,15 +648,15 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                    return true;
+                    return int.Parse(response.ToString());
                 }
 
-                return false;
+                return 0;
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
-                return false;
+                return 0;
             }
         }
 

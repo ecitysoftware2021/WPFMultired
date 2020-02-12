@@ -100,7 +100,7 @@ namespace WPFMultired.UserControls.Administrator
 
                     load_gif.Visibility = Visibility.Hidden;
                     IsEnabled = true;
-                    if (!response)
+                    if (response <= 0)
                     {
                         Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
                     }
@@ -109,6 +109,7 @@ namespace WPFMultired.UserControls.Administrator
                         var data = await AdminPayPlus.DataListPaypad(_typeOperation);
                         if (data != null)
                         {
+                            data.USER_ADMIN_ID = response;
                             Utilities.navigator.Navigate(UserControlView.Admin, false, data, _typeOperation);
                         }
                         else

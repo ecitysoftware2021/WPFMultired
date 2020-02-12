@@ -39,6 +39,8 @@ namespace WPFMultired.Services.Object
 
         public string ID_USER { get; set; }
 
+        public int USER_ADMIN_ID { get; set; }
+
         public string NAME_USER { get; set; }
 
         public string NAME_COMPANY { get; set; }

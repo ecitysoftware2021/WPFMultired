@@ -67,6 +67,9 @@ namespace WPFMultired.Models
                     case UserControlView.MenuCompaniesUserControl:
                         View = new MenuCompaniesUserControl();
                         break;
+                    case UserControlView.Menu:
+                        View = new MenuUserControl();
+                        break;
                 }
 
                 if (initTimer)

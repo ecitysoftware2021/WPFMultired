@@ -38,6 +38,96 @@ namespace WPFMultired.UserControls.Administrator
         }
         #endregion
 
+        #region "ListView"
+        private void InitView()
+        {
+            try
+            {
+                this.DataContext = dataContol;
+
+                if (typeOperation == ETypeAdministrator.Balancing || typeOperation == ETypeAdministrator.Diminish)
+                {
+                    txtDescription.Text = MessageResource.RemoveMonyAceptance;
+                }
+                else
+                {
+                    txtDescription.Text = MessageResource.EnterMonyDispenser;
+                }
+
+                RefreshList();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void RefreshList()
+        {
+            try
+            {
+                dataContol.viewList = new CollectionViewSource();
+                if (this.type == 1 && this.typeOperation == ETypeAdministrator.Balancing)
+                {
+                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 2 || x.DEVICE_TYPE_ID == 4) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
+                }
+                else if (this.type == 2 && this.typeOperation == ETypeAdministrator.Balancing)
+                {
+                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 3 || x.DEVICE_TYPE_ID == 8) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
+                }
+                else
+                {
+                    dataContol.viewList.Source = dataContol.DATALIST;
+                }
+
+                Dispatcher.BeginInvoke((Action)delegate
+                {
+                    lv_denominations.DataContext = dataContol.viewList;
+                    lv_denominations.Items.Refresh();
+                });
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+        #endregion
+
+        private void BtnNext_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (type == 1 && typeOperation == ETypeAdministrator.Balancing)
+                {
+                    type = 2;
+                    txtDescription.Text = MessageResource.RemoveMonyDispenser;
+                    RefreshList();
+                }
+                else
+                {
+                    UpdateDataControl();
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.Config);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+
         #region "Eventos"
         private async void UpdateDataControl()
         {
@@ -54,6 +144,7 @@ namespace WPFMultired.UserControls.Administrator
 
                     if (this.dataContol != null)
                     {
+
                         Utilities.PrintVoucher(this.dataContol);
 
                         Thread.Sleep(6000);
@@ -80,92 +171,5 @@ namespace WPFMultired.UserControls.Administrator
             }
         }
         #endregion
-
-        #region "ListView"
-        private void InitView()
-        {
-            try
-            {
-                this.DataContext = dataContol;
-
-                if (typeOperation == ETypeAdministrator.Balancing)
-                {
-                    txtDescription.Text = MessageResource.RemoveMonyAceptance;
-                }
-                else
-                {
-                    txtDescription.Text = MessageResource.EnterMonyDispenser;
-                }
-
-                RefreshList();
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private void RefreshList()
-        {
-            try
-            {
-                dataContol.viewList = new CollectionViewSource();
-                //if (this.type == 1 && this.typeOperation == ETypeAdministrator.Balancing)
-                //{
-                //    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 2 || x.DEVICE_TYPE_ID == 4) && x.AMOUNT_NEW > 0).ToList();
-                //}
-                //else
-                //{
-                //    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 3 || x.DEVICE_TYPE_ID == 8) && x.AMOUNT_NEW > 0).ToList();
-                //}
-
-                dataContol.viewList.Source = dataContol.DATALIST;
-
-                Dispatcher.BeginInvoke((Action)delegate
-                {
-                    lv_denominations.DataContext = dataContol.viewList;
-                    lv_denominations.Items.Refresh();
-                });
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-        #endregion
-
-        private void BtnNext_TouchDown(object sender, TouchEventArgs e)
-        {
-            try
-            {
-                //if (type == 1 && typeOperation == ETypeAdministrator.Balancing)
-                //{
-                //    type = 2;
-                //    txtDescription.Text = MessageResource.RemoveMonyDispenser;
-                //    RefreshList();
-                //}
-                //else
-                //{
-                    UpdateDataControl();
-                //}
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
-        {
-            try
-            {
-                Utilities.navigator.Navigate(UserControlView.Config);
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
     }
 }
