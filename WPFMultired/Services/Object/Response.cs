@@ -108,7 +108,7 @@ namespace WPFMultired.Services.Object
                         var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
                         if (itemUpdate != null)
                         {
-                            itemUpdate.Quantity += itemUpdate.Quantity;
+                            itemUpdate.Quantity += (decimal)item.AMOUNT;
                             itemUpdate.Total = (int)itemUpdate.Quantity * (int)itemUpdate.Denominacion;
                         }
                         else

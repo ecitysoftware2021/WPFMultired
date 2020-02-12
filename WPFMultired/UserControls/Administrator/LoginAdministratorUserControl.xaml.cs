@@ -83,7 +83,9 @@ namespace WPFMultired.UserControls.Administrator
 
                     //var data = await AdminPayPlus.DataListPaypad(_typeOperation);
 
-                    // var dataContol = await AdminPayPlus.UpdateAdminProcess(data);
+                    ////Utilities.navigator.Navigate(UserControlView.Admin, false, data, _typeOperation);
+
+                    //var dataContol = await AdminPayPlus.UpdateAdminProcess(data);
 
                     //Utilities.PrintVoucher(dataContol);
                 }
