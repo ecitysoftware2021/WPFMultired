@@ -67,13 +67,24 @@ namespace WPFMultired.UserControls.Administrator
             try
             {
                 dataContol.viewList = new CollectionViewSource();
+
                 if (this.type == 1 && this.typeOperation == ETypeAdministrator.Balancing)
                 {
-                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 2 || x.DEVICE_TYPE_ID == 4) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
+                    var dataList = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == (int)ETypeDevice.AP || x.DEVICE_TYPE_ID == (int)ETypeDevice.MA) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
+
+                    if (dataList.Count > 0)
+                    {
+                        dataContol.viewList.Source = dataList;
+                    }
+                    else
+                    {
+                        ChangeView();
+                        return;
+                    }
                 }
                 else if (this.type == 2 && this.typeOperation == ETypeAdministrator.Balancing)
                 {
-                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == 3 || x.DEVICE_TYPE_ID == 8) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
+                    dataContol.viewList.Source = dataContol.DATALIST.Where(x => (x.DEVICE_TYPE_ID == (int)ETypeDevice.DP || x.DEVICE_TYPE_ID == (int)ETypeDevice.MD) && (x.AMOUNT_NEW + x.AMOUNT) > 0).ToList();
                 }
                 else
                 {
@@ -100,9 +111,7 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (type == 1 && typeOperation == ETypeAdministrator.Balancing)
                 {
-                    type = 2;
-                    txtDescription.Text = MessageResource.RemoveMonyDispenser;
-                    RefreshList();
+                    ChangeView();
                 }
                 else
                 {
@@ -113,6 +122,13 @@ namespace WPFMultired.UserControls.Administrator
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
+        }
+
+        private void ChangeView()
+        {
+            type = 2;
+            txtDescription.Text = MessageResource.RemoveMonyDispenser;
+            RefreshList();
         }
 
         private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
@@ -167,7 +183,9 @@ namespace WPFMultired.UserControls.Administrator
             }
             catch (Exception ex)
             {
+                Utilities.CloseModal();
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                Utilities.RestartApp();
             }
         }
         #endregion

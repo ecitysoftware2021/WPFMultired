@@ -103,13 +103,15 @@ namespace WPFMultired.UserControls
             {
                 if (AdminPayPlus.DataPayPlus.StateBalanece)
                 {
-                    _validatePaypad = false;
-                    Utilities.navigator.Navigate(UserControlView.Login, false, 1);
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Balancing);
                 }
                 else if (AdminPayPlus.DataPayPlus.StateUpload)
                 {
-                    _validatePaypad = false;
-                    Utilities.navigator.Navigate(UserControlView.Login, false, 2);
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Upload);
+                }
+                else if (AdminPayPlus.DataPayPlus.StateDiminish)
+                {
+                    Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Diminish);
                 }
                 else if (AdminPayPlus.DataPayPlus.State && AdminPayPlus.DataPayPlus.StateAceptance && AdminPayPlus.DataPayPlus.StateDispenser)
                 {
