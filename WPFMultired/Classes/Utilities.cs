@@ -219,11 +219,15 @@ namespace WPFMultired.Classes
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "DISMINUCIÓN DE EFECTIVO", x = 70, y = y += 80 });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "ARQUEO DEL EFECTIVO", x = 70, y = y += 80 });
+                }
+                else if (dataControl.TYPE == ETypeAdministrator.Upload)
+                {
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "PROVISIÓN DE EFECTIVO", x = 75, y = y += 80 });
                 }
                 else
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "PROVISIÓN DE EFECTIVO", x = 75, y = y += 80 });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "DISMINUCIÓN DE EFECTIVO", x = 70, y = y += 80 });
                 }
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_BANCK, x = 105, y = y += 15 });
