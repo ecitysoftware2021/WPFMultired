@@ -592,7 +592,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Validando perisfericos....
+        ///   Busca una cadena traducida similar a Validando perifericos....
         /// </summary>
         internal static string ValidatePeripherals {
             get {

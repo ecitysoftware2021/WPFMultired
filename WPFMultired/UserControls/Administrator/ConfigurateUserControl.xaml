@@ -55,7 +55,7 @@
                 gif:ImageBehavior.AutoStart="True"
                 x:Name="GifLoadder" 
                 Stretch="Fill"
-                Margin="0,200,0,0" 
+                Margin="30,180,0,0" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
                 Width="450" 
