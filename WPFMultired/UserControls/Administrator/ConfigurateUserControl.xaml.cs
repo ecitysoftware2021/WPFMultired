@@ -71,26 +71,7 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    if (result)
-                    {
-                        if (!AdminPayPlus.DataPayPlus.StateBalanece && !AdminPayPlus.DataPayPlus.StateUpload)
-                        {
-                            Task.Run(() =>
-                            {
-                                Thread.Sleep(5000);
-                                Utilities.navigator.Navigate(UserControlView.Main);
-                            });
-                        }
-                    }
-                    else
-                    {
-                        Task.Run(() =>
-                        {
-                            Thread.Sleep(5000);
-                            Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
-                            Initial();
-                        });
-                    }
+                    Finish(result);
                 }
             }
             catch (Exception ex)
@@ -98,6 +79,23 @@ namespace WPFMultired.UserControls.Administrator
                 Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
                 Initial();
             }
+        }
+
+        private void Finish(bool state)
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(5000);
+                if (state)
+                {
+                    Utilities.navigator.Navigate(UserControlView.Main);
+                }
+                else
+                {
+                    Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
+                    Initial();
+                } 
+            });
         }
     }
 }

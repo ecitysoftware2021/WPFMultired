@@ -68,7 +68,6 @@ namespace WPFMultired.Classes
 
         private string _descriptionStatusPayPlus;
 
-
         public string DescriptionStatusPayPlus
         {
             get { return _descriptionStatusPayPlus; }
