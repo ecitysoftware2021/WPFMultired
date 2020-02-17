@@ -54,6 +54,7 @@ namespace WPFMultired.UserControls.Administrator
             {
                 viewModel.TypeLogin = 2;
                 viewModel.Qr = string.Empty;
+                viewModel.Pass = TxtPassword.Password;
                 Search();   
             }
             catch (Exception ex)

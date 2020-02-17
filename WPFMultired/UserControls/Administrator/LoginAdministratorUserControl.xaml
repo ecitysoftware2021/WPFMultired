@@ -45,7 +45,7 @@
                        FontWeight="Bold" />
 
 
-            <Grid Name="gd_qr">
+            <Grid Name="gd_qr" Visibility="{Binding VisibleGdQr}">
                 <TextBlock Text="Por favor acerque el codigo QR que fue enviado a su celular"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -81,6 +81,7 @@
 
                 <TextBox Name="txt_qr"
                    Tag="0"
+                   Text="{Binding Qr , UpdateSourceTrigger=PropertyChanged}"
                    FontSize="1"
                    Foreground="Black"
                    Width="0.1" 
@@ -88,7 +89,7 @@
                    KeyDown="Txt_qr_KeyDown" />
             </Grid>
 
-            <Grid Name="gd_login" Visibility="Hidden">
+            <Grid Name="gd_login" Visibility="{Binding VisibleGdLogin}">
                 <TextBlock HorizontalAlignment="Center"
                    Text="Usuario"
                    Margin="0,0,0,460" 
@@ -108,7 +109,7 @@
                      VerticalAlignment="Center" 
                      Width="415"
                      TabIndex="0"
-                     Text=""
+                     Text="{Binding User , UpdateSourceTrigger=PropertyChanged}"
                      x:Name="TxtUser" 
                      FontSize="35" 
                      Foreground="#FF2F302E" 
