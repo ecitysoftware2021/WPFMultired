@@ -32,6 +32,7 @@ namespace WPFMultired.UserControls.Administrator
 
             
             InitView(typeOperation);
+
            // Search();
         }
 
@@ -46,7 +47,8 @@ namespace WPFMultired.UserControls.Administrator
                 Qr = string.Empty,
                 VisibleBtnAcept = Visibility.Hidden,
                 VisibleGdLogin = Visibility.Hidden,
-                VisibleGdQr = Visibility.Visible
+                VisibleGdQr = Visibility.Visible,
+                IsReadQr = false,
             };
 
             this.DataContext = viewModel;
@@ -113,11 +115,12 @@ namespace WPFMultired.UserControls.Administrator
                 {
                     load_gif.Visibility = Visibility.Visible;
                     IsEnabled = false;
-
+                    viewModel.Qr = "Serrato";
                     var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
                     
                     load_gif.Visibility = Visibility.Hidden;
                     IsEnabled = true;
+
                     if (response <= 0)
                     {
                         Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
@@ -191,10 +194,9 @@ namespace WPFMultired.UserControls.Administrator
 
         private void Txt_qr_KeyDown(object sender, KeyEventArgs e)
         {
-            var qr = ((TextBox)sender).Text;
-            if (!string.IsNullOrEmpty(qr))
-            {
-                viewModel.Qr = qr;
+            if (e.Key == Key.Enter && !viewModel.IsReadQr)
+            { 
+                viewModel.IsReadQr = true;
                 viewModel.TypeLogin = 1;
                 viewModel.User = string.Empty;
                 viewModel.Pass = string.Empty;

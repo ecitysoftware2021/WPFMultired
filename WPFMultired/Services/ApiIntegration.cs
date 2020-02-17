@@ -29,7 +29,7 @@ namespace WPFMultired.Services
     {
         #region "Referencias"
 
-        private string Hora;
+        private long timeStamp;
 
         private string codeCanal;
 
@@ -88,7 +88,7 @@ namespace WPFMultired.Services
         {
             if (operation == 1)
             {
-                return string.Concat(text, "|", (long)(DateTime.UtcNow - timerSeed).TotalMilliseconds);
+                return string.Concat(text, "|", timeStamp);
             }
             else
             {
@@ -733,7 +733,7 @@ namespace WPFMultired.Services
             try
             {
                 QRValidateAdminServicesClient client = new QRValidateAdminServicesClient();
-                using (var factory = new WebChannelFactory<QRDecodeServicesChannel>())
+                using (var factory = new WebChannelFactory<QRValidateAdminServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
@@ -751,6 +751,8 @@ namespace WPFMultired.Services
                             I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(txtQr), keyEncript),
                         };
                         var response = client.mtrvaladmc(request);
+                        var r = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2));
+                        var m = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -771,6 +773,8 @@ namespace WPFMultired.Services
         {
             try
             {
+                timeStamp = (long)(DateTime.UtcNow - timerSeed).TotalMilliseconds;
+
                 WebOperationContext.Current.OutgoingRequest.Headers.Add("USERNAME", Encryptor.Encrypt(ConcatOrSplitTimeStamp(userName), keyEncript));
                 WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", Encryptor.Encrypt(ConcatOrSplitTimeStamp(token), keyEncript));
                 WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", Encryptor.Encrypt(ConcatOrSplitTimeStamp((new Random()).Next(1000, 9999).ToString()), keyEncript));

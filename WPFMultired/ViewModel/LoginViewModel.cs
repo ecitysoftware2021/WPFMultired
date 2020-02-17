@@ -176,5 +176,7 @@ namespace WPFMultired.ViewModel
                 }
             }
         }
+
+        public bool IsReadQr { get; internal set; }
     }
 }
