@@ -121,7 +121,7 @@ namespace WPFMultired.UserControls.Administrator
                     load_gif.Visibility = Visibility.Hidden;
                     IsEnabled = true;
 
-                    if (response <= 0)
+                    if (response == 0)
                     {
                         Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
                     }

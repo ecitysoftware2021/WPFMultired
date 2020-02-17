@@ -652,7 +652,7 @@ namespace WPFMultired.Classes
                 else
                 {
                     var result = ApiIntegration.CallService(ETypeService.Validate_Admin_QR, qr);
-                    if (result != null)
+                    if (!string.IsNullOrEmpty(result.ToString()))
                     {
                         var user = JsonConvert.DeserializeObject<User>(result.ToString());
                         request = new RequestAuth
