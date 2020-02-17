@@ -30,6 +30,13 @@ namespace WPFMultired.UserControls.Administrator
         {
             InitializeComponent();
 
+            
+            InitView(typeOperation);
+           // Search();
+        }
+
+        private void InitView(ETypeAdministrator typeOperation)
+        {
             viewModel = new LoginViewModel
             {
                 TypeOperation = typeOperation,
@@ -41,7 +48,9 @@ namespace WPFMultired.UserControls.Administrator
                 VisibleGdLogin = Visibility.Hidden,
                 VisibleGdQr = Visibility.Visible
             };
-           // Search();
+
+            this.DataContext = viewModel;
+            txt_qr.Focus();
         }
 
         #endregion
