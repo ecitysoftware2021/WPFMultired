@@ -115,7 +115,6 @@ namespace WPFMultired.UserControls.Administrator
                 {
                     load_gif.Visibility = Visibility.Visible;
                     IsEnabled = false;
-                    viewModel.Qr = "Serrato";
                     var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
                     
                     load_gif.Visibility = Visibility.Hidden;

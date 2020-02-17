@@ -751,8 +751,6 @@ namespace WPFMultired.Services
                             I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(txtQr), keyEncript),
                         };
                         var response = client.mtrvaladmc(request);
-                        var r = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2));
-                        var m = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
