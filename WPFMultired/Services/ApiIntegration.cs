@@ -18,6 +18,7 @@ using WPFMultired.MR_ValidateOTP;
 using WPFMultired.MR_ValidateStatusAdmin;
 using WPFMultired.MR_OperationAdmin;
 using WPFMultired.MR_ProcessAdmin;
+using WPFMultired.MR_ValidateAdminQR;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
@@ -151,6 +152,10 @@ namespace WPFMultired.Services
                     case ETypeService.Procces_Admin:
 
                         return SendAdminProcess((PaypadOperationControl)data);
+
+                    case ETypeService.Validate_Admin_QR:
+
+                        return ValidateAdminQr((string)data);
 
                     default:
                         break;
@@ -720,6 +725,45 @@ namespace WPFMultired.Services
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
 
+            return null;
+        }
+
+        private object ValidateAdminQr(string txtQr)
+        {
+            try
+            {
+                QRValidateAdminServicesClient client = new QRValidateAdminServicesClient();
+                using (var factory = new WebChannelFactory<QRDecodeServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrvaladmcInput request = new mtrvaladmcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                            I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(txtQr), keyEncript),
+                        };
+                        var response = client.mtrvaladmc(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
             return null;
         }
 

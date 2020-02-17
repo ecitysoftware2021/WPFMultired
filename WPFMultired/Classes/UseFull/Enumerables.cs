@@ -118,7 +118,8 @@ namespace WPFMultired.Classes
         Consult_QR = 10,
         Validate_Status_Admin = 11,
         Operation_Admin = 13,
-        Procces_Admin = 14
+        Procces_Admin = 14,
+        Validate_Admin_QR = 15
     }
 
 }

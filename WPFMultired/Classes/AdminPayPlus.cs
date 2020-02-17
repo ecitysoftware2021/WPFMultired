@@ -635,28 +635,49 @@ namespace WPFMultired.Classes
             return null;
         }
 
-        public static async Task<int> ValidateUser(string name, string pass)
+        public static async Task<int> ValidateUser(string name, string pass, string qr)
         {
             try
             {
-                var response = await api.CallApi("ValidateUserPayPad", new RequestAuth
-                {
-                    UserName = name,
-                    Password = pass
-                });
+                object request = null;
 
-                if (response != null)
+                if (string.IsNullOrEmpty(qr))
                 {
-                    return int.Parse(response.ToString());
+                    request = new RequestAuth
+                    {
+                        UserName = name,
+                        Password = pass
+                    };
+                }
+                else
+                {
+                    var result = ApiIntegration.CallService(ETypeService.Validate_Admin_QR, qr);
+                    if (result != null)
+                    {
+                        var user = JsonConvert.DeserializeObject<User>(result.ToString());
+                        request = new RequestAuth
+                        {
+                            UserName = user.USER,
+                            Password = user.PASS
+                        };
+                    }
                 }
 
-                return 0;
+                if (request != null)
+                {
+                    var response = await api.CallApi("ValidateUserPayPad", request);
+
+                    if (response != null)
+                    {
+                        return int.Parse(response.ToString());
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
-                return 0;
             }
+            return 0;
         }
 
         public static async Task<PaypadOperationControl> DataListPaypad(ETypeAdministrator typeAdministrator)

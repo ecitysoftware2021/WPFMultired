@@ -42,9 +42,54 @@
                        Foreground="#FF0D4F90" 
                        TextAlignment="Center"
                        FontFamily="Myriad Pro Cond" 
-                       FontWeight="Bold" 
-            />
-            <TextBlock HorizontalAlignment="Center"
+                       FontWeight="Bold" />
+
+
+            <Grid Name="gd_qr">
+                <TextBlock Text="Por favor acerque el codigo QR que fue enviado a su celular"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="0,0,0,400"
+                       FontSize="45"
+                       TextWrapping="WrapWithOverflow"
+                       Width="700" 
+                       Foreground="#FF86BC30" 
+                       TextAlignment="Center"
+                       FontFamily="Myriad Pro Cond" 
+                       FontWeight="Bold" />
+
+                <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-qr-scan.gif"
+                   Name="qr_gif"
+                   HorizontalAlignment="Center"
+                   Height="250" 
+                   Margin="0,50,0,0"
+                   VerticalAlignment="Center"
+                   Width="450" />
+
+                <TextBlock Name="btn_no_qr" 
+                   HorizontalAlignment="Center"
+                   Text="No tengo qr"
+                   Margin="0,450,0,0" 
+                   TextAlignment="Center"
+                   VerticalAlignment="Center" 
+                   Width="300"
+                   FontSize="40"
+                   Height="56"
+                   Foreground="#FF144982" 
+                   FontFamily="Myriad Pro Cond" 
+                   TouchDown="Btn_no_qr_TouchDown"/>
+
+                <TextBox Name="txt_qr"
+                   Tag="0"
+                   FontSize="1"
+                   Foreground="Black"
+                   Width="0.1" 
+                   TabIndex="0"
+                   KeyDown="Txt_qr_KeyDown" />
+            </Grid>
+
+            <Grid Name="gd_login" Visibility="Hidden">
+                <TextBlock HorizontalAlignment="Center"
                    Text="Usuario"
                    Margin="0,0,0,460" 
                    TextAlignment="Center"
@@ -53,9 +98,9 @@
                    FontSize="40"
                    Height="56"
                    Foreground="#FF144982" 
-                   FontFamily="Myriad Pro Cond"
-            />
-            <TextBox HorizontalAlignment="Center" 
+                   FontFamily="Myriad Pro Cond" />
+                
+                <TextBox HorizontalAlignment="Center" 
                      TextAlignment="Center"
                      Height="60" 
                      Margin="0,0,0,270" 
@@ -67,9 +112,13 @@
                      x:Name="TxtUser" 
                      FontSize="35" 
                      Foreground="#FF2F302E" 
-                     FontWeight="Bold" FontFamily="Myriad Pro Cond" CaretBrush="#FFB2B0B8" Background="White" SelectionBrush="#FF545555"
-            />
-            <TextBlock HorizontalAlignment="Center"
+                     FontWeight="Bold" 
+                     FontFamily="Myriad Pro Cond"
+                     CaretBrush="#FFB2B0B8"
+                     Background="White" 
+                     SelectionBrush="#FF545555" />
+                
+                <TextBlock HorizontalAlignment="Center"
                    Text="Contraseña"
                    Margin="0,0,0,10" 
                    VerticalAlignment="Center" 
@@ -78,9 +127,9 @@
                    Height="56"
                    TextAlignment="Center"
                    Foreground="#FF15508C" 
-                   FontFamily="Myriad Pro Cond"
-            />
-            <PasswordBox HorizontalAlignment="Center" 
+                   FontFamily="Myriad Pro Cond" />
+                
+                <PasswordBox HorizontalAlignment="Center" 
                      Height="60" 
                      Margin="0,150,0,0"
                      TabIndex="1"
@@ -92,8 +141,10 @@
                      Foreground="#FF2F302E" 
                      FontWeight="Bold" 
                      FontFamily="Myriad Pro Cond" 
-                     CaretBrush="#FFB2B0B8" Background="White"
-            />
+                     CaretBrush="#FFB2B0B8" 
+                     Background="White" />
+            </Grid>
+           
             <!--Text="Davivienda2019$"-->
 
             <!--<Image x:Name="btnSearch"
@@ -112,8 +163,7 @@
                    Margin="0,0,0,0"
                    VerticalAlignment="Bottom"
                    Visibility="Hidden" 
-                   Width="300"
-            />
+                   Width="300" />
         </Grid>
 
         <Grid Grid.Row="3" >

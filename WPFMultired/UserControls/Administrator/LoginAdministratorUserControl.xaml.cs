@@ -4,7 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WPFMultired.Classes;
+using WPFMultired.Models;
 using WPFMultired.Resources;
+using WPFMultired.ViewModel;
 
 namespace WPFMultired.UserControls.Administrator
 {
@@ -15,13 +17,8 @@ namespace WPFMultired.UserControls.Administrator
     {
         #region "Referencias"
 
-        private string _messageError;
 
-        private string _name;
-
-        private string _pass;
-
-        private ETypeAdministrator _typeOperation;
+        private LoginViewModel viewModel;
 
         // ReSharper disable once UnassignedGetOnlyAutoProperty
 
@@ -32,7 +29,18 @@ namespace WPFMultired.UserControls.Administrator
         public LoginAdministratorUserControl(ETypeAdministrator typeOperation)
         {
             InitializeComponent();
-            _typeOperation = typeOperation;
+
+            viewModel = new LoginViewModel
+            {
+                TypeOperation = typeOperation,
+                TypeLogin = 1,
+                Pass = string.Empty,
+                User = string.Empty,
+                Qr = string.Empty,
+                VisibleBtnAcept = Visibility.Hidden,
+                VisibleGdLogin = Visibility.Hidden,
+                VisibleGdQr = Visibility.Visible
+            };
            // Search();
         }
 
@@ -44,7 +52,9 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
-                Search();
+                viewModel.TypeLogin = 2;
+                viewModel.Qr = string.Empty;
+                Search();   
             }
             catch (Exception ex)
             {
@@ -77,9 +87,9 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
-                if (!Validation())
+                if (viewModel.TypeLogin == 2 && !Validation())
                 {
-                   Utilities.ShowModal(_messageError, EModalType.Error, false);
+                   Utilities.ShowModal(viewModel.MessageError, EModalType.Error, false);
 
                    //var data = await AdminPayPlus.DataListPaypad(_typeOperation);
 
@@ -91,15 +101,11 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    _name = TxtUser.Text;
-
-                    _pass = TxtPassword.Password;
-
                     load_gif.Visibility = Visibility.Visible;
                     IsEnabled = false;
 
-                    var response = await AdminPayPlus.ValidateUser(_name, _pass);
-
+                    var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
+                    
                     load_gif.Visibility = Visibility.Hidden;
                     IsEnabled = true;
                     if (response <= 0)
@@ -108,11 +114,11 @@ namespace WPFMultired.UserControls.Administrator
                     }
                     else
                     {
-                        var data = await AdminPayPlus.DataListPaypad(_typeOperation);
+                        var data = await AdminPayPlus.DataListPaypad(viewModel.TypeOperation);
                         if (data != null)
                         {
                             data.USER_ADMIN_ID = response;
-                            Utilities.navigator.Navigate(UserControlView.Admin, false, data, _typeOperation);
+                            Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
                         }
                         else
                         {
@@ -133,12 +139,12 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (string.IsNullOrEmpty(TxtUser.Text))
                 {
-                    _messageError = string.Format(MessageResource.EnterField, "Usuario");
+                    viewModel.MessageError = string.Format(MessageResource.EnterField, "Usuario");
                     return false;
                 }
                 if (string.IsNullOrEmpty(TxtPassword.Password))
                 {
-                    _messageError = string.Format(MessageResource.EnterField, "Contraseña");
+                    viewModel.MessageError = string.Format(MessageResource.EnterField, "Contraseña");
                     return false;
                 }
                 return true;
@@ -150,5 +156,40 @@ namespace WPFMultired.UserControls.Administrator
             }
         }
         #endregion
+
+        private void Btn_no_qr_TouchDown(object sender, TouchEventArgs e)
+        {
+            if (viewModel.TypeLogin == 1)
+            {
+                viewModel.TypeLogin = 2;
+                viewModel.VisibleGdLogin = Visibility.Visible;
+                viewModel.VisibleGdQr = Visibility.Hidden;
+                viewModel.VisibleBtnAcept = Visibility.Visible;
+            }
+            else
+            {
+                viewModel.TypeLogin = 1;
+                viewModel.VisibleGdLogin = Visibility.Hidden;
+                viewModel.VisibleGdQr = Visibility.Visible;
+                viewModel.VisibleBtnAcept = Visibility.Hidden;
+            }
+
+            viewModel.User = string.Empty;
+            viewModel.Pass = string.Empty;
+            viewModel.Qr = string.Empty;
+        }
+
+        private void Txt_qr_KeyDown(object sender, KeyEventArgs e)
+        {
+            var qr = ((TextBox)sender).Text;
+            if (!string.IsNullOrEmpty(qr))
+            {
+                viewModel.Qr = qr;
+                viewModel.TypeLogin = 1;
+                viewModel.User = string.Empty;
+                viewModel.Pass = string.Empty;
+                Search();
+            }
+        }
     }
 }
