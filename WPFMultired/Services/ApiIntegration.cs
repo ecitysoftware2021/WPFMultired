@@ -728,7 +728,7 @@ namespace WPFMultired.Services
             return null;
         }
 
-        private object ValidateAdminQr(string txtQr)
+        private string ValidateAdminQr(string txtQr)
         {
             try
             {
@@ -755,7 +755,7 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-
+                            return ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_OBJECT, keyDesencript), 2);
                         }
                     }
                 }
@@ -764,7 +764,7 @@ namespace WPFMultired.Services
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
-            return null;
+            return string.Empty;
         }
 
         private void SetHeaderRequest()
