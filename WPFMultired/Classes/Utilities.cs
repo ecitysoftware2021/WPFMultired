@@ -247,12 +247,12 @@ namespace WPFMultired.Classes
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "DENOMINACION", x = 10, y = y += 20 });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "CANT", x = 130, y = y });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "MONTO", x = 230, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "MONTO", x = 215, y = y });
                 foreach (var item in dataControl.DATALIST_FILTER())
                 {
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Denominacion), x = 10, y = y += 18 });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = item.Quantity.ToString(), x = 130, y = y });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = 230, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = 215, y = y });
                 }
                 if (dataControl.TYPE == ETypeAdministrator.Upload)
                 {

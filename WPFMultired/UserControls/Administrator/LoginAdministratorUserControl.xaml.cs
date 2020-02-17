@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -113,34 +114,41 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    load_gif.Visibility = Visibility.Visible;
-                    IsEnabled = false;
-                    var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
-                    
-                    load_gif.Visibility = Visibility.Hidden;
-                    IsEnabled = true;
+                    Task.Run(async () =>
+                    {
+                        var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
 
-                    if (response == 0)
-                    {
-                        Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
-                    }
-                    else
-                    {
-                        var data = await AdminPayPlus.DataListPaypad(viewModel.TypeOperation);
-                        if (data != null)
+                        if (response == 0)
                         {
-                            data.USER_ADMIN_ID = response;
-                            Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
+                            Utilities.CloseModal();
+                            Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
+                            viewModel.IsReadQr = false;
                         }
                         else
                         {
-                            Utilities.ShowModal(MessageResource.NoInformation, EModalType.Error, false);
+
+                            var data = await AdminPayPlus.DataListPaypad(viewModel.TypeOperation);
+                            if (data != null)
+                            {
+                                Utilities.CloseModal();
+                                data.USER_ADMIN_ID = response;
+                                Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
+                            }
+                            else
+                            {
+                                Utilities.CloseModal();
+                                Utilities.ShowModal(MessageResource.NoInformation, EModalType.Error, false);
+                                viewModel.IsReadQr = false;
+                            }
                         }
-                    }
+                    });
+
+                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, false);
                 }
             }
             catch (Exception ex)
             {
+                Utilities.CloseModal();
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
