@@ -24,5 +24,10 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
         }
+
+        private void Lv_companies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
