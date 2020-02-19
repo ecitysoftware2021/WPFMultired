@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.UI.Xaml.2.3.200213001\build\Microsoft.UI.Xaml.props" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.3.200213001\build\Microsoft.UI.Xaml.props')" />
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -244,6 +245,9 @@
     <Compile Include="UserControls\Modals\ReadQRUserControl.xaml.cs">
       <DependentUpon>ReadQRUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Modals\SelectIdiomUserControl.xaml.cs">
+      <DependentUpon>SelectIdiomUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PayerUserControl.xaml.cs">
       <DependentUpon>PayerUserControl.xaml</DependentUpon>
     </Compile>
@@ -457,7 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-cancel-alert.png" />
-    <Resource Include="Images\Backgrounds\bg-consult.png" />
     <Resource Include="Images\Backgrounds\bg-succes-pay.png" />
     <Resource Include="Images\Gif\gif-preload.gif" />
     <Resource Include="Images\Backgrounds\bg-print-file.png" />
@@ -466,7 +469,6 @@
     <Resource Include="Images\Backgrounds\bg-pay.png" />
     <Resource Include="Images\Buttons\btn-back.png" />
     <Resource Include="Images\Buttons\btn-pay.png" />
-    <Resource Include="Images\Backgrounds\bg-info-payer.png" />
     <Resource Include="Images\Buttons\btn-continue.png" />
     <Resource Include="Images\Backgrounds\bg-detail.png" />
     <Resource Include="Images\Buttons\btn-exit.png" />
@@ -506,6 +508,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Modals\ReadQRUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Modals\SelectIdiomUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -740,6 +746,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bg-consult.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-consult.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -749,6 +761,7 @@
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.UI.Xaml.2.3.200213001\build\Microsoft.UI.Xaml.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.UI.Xaml.2.3.200213001\build\Microsoft.UI.Xaml.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
 </Project>

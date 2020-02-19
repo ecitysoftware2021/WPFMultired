@@ -6,7 +6,185 @@
              xmlns:k="clr-namespace:WPFMultired.Keyboard" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:WPFMultired.UserControls"
-             mc:Ignorable="d"
-             Height="1920" 
-             Width="1080" >
+        mc:Ignorable="d"
+        Height="1920" 
+        Width="1080" >
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="350" />
+            <RowDefinition Height="850" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Image x:Name="btn_exit"
+               Source="/Images/Buttons/btn-exit.png"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               Width="250"
+               Margin="0,20,20,0"
+               TouchDown="Btn_exit_TouchDown" />
+
+            <Image x:Name="btn_back"
+                Source="/Images/Buttons/btn-back.png"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="250"
+                Margin="20,20,0,0"
+                TouchDown="Btn_back_TouchDown" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Name="txt_title"
+                    FontSize="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,80"
+                    FontWeight="SemiBold" 
+                    Foreground="#FF35679B"
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    Text="Ingrese un número de identificación" />
+        </Grid>
+
+        <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/WPFMultired;component/Images/Backgrounds/bg-consult.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock  HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,30,0,0"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontFamily="Arial"
+                   FontSize="48"
+                   Foreground="#FF706F6F"
+                   Text="Tipo de Identificación" />
+
+                <ComboBox Name="cmb_type_id"
+                    Margin="70,31,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Width="630"
+                    Foreground="#FF104B6D"
+                    FontSize="52"
+                    ItemsSource="{Binding OptionsList}"
+                    SelectedValuePath="Key"
+                    DisplayMemberPath="Value"
+                    SelectionChanged="Cmb_type_id_SelectionChanged"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBlock HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,30,0,0"
+                    FontFamily="Arial"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    FontSize="48"
+                    Foreground="#FF706F6F"
+                    Text="Identificación" />
+
+                <TextBox Name="TbxIdentification"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Arial"
+                       FontWeight="Medium"
+                       Margin="70,8,0,0"
+                       TextAlignment="Left"
+                       FontSize="48"
+                       Width="630"
+                       Foreground="#FF104B6D"
+                       TabIndex="1"
+                       k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                       TextWrapping="Wrap"
+                       Text="{Binding Value1}" />
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <TextBlock Name="TxbData1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontFamily="Arial"
+                   Margin="50,5,0,0"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontSize="38"
+                   Foreground="#FF706F6F"
+                   Text="{Binding Row2}" />
+
+                <TextBox Name="TbxData1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="42,0,0,0"
+                   FontFamily="Arial"
+                   FontWeight="Medium"
+                   TextAlignment="Left"
+                   FontSize="48"
+                   Width="885"
+                   MaxLength="20"
+                   Foreground="#FF104B6D"
+                   TabIndex="2"
+                   TextWrapping="Wrap" 
+                   k:TouchScreenKeyboard.TouchScreenKeyboard="True"
+                   Text="{Binding Value2}" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <TextBlock Name="TxbData2"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="50,5,0,0"
+                   FontFamily="Arial"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   FontSize="38"  
+                   Foreground="#FF706F6F"
+                   Text="{Binding Row3}"/>
+
+                <TextBox Name="TbxData2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="42,0,0,0"
+                    FontFamily="Arial"
+                    TextAlignment="Left"
+                    FontSize="48"
+                    Width="885"
+                    TabIndex="3"
+                    FontWeight="Medium"
+                    Foreground="#FF104B6D"
+                    TextWrapping="Wrap"
+                    k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                    Text="{Binding Value3}" />
+
+                <TextBox TabIndex="5" Height="0" Width="0" />
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Image Source="/Images/Buttons/btn-consult.png"
+                    x:Name="btn_consult"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,0,0"                  
+                    Width="350"
+                    TouchDown="Btn_consult_TouchDown"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </UserControl>

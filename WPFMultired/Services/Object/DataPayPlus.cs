@@ -22,8 +22,15 @@ namespace WPFMultired.Services.Object
 
         public bool StateDiminish { get; set; }
 
-
         public object ListImages { get; set; }
+
+        public object ListCompanies { get; set; }
+
+        public object ListTypeTransactions { get; set; }
+
+        public int IdiomId { get; set; }
+
+        public object ListIdioms { get; set; }
 
         public int ContTransactionsNotific { get; set; }
 

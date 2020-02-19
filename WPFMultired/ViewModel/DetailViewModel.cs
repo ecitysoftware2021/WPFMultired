@@ -393,18 +393,18 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        public void LoadList()
+        public void LoadListDocuments()
         {
             try
             {
 
-                var response = Utilities.ConverJson<List<TypeDocument>>(Utilities.GetConfiguration("PathTypeDocument"));
-                if (response != null && response.Count > 0)
-                {
-                    OptionsList.Clear();
-                    OptionsList = response;
-                    OptionsEntries.Source = OptionsList;
-                }
+                //var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Type_Document, AdminPayPlus.DataPayPlus.);
+                //if (response != null && response.Count > 0)
+                //{
+                //    OptionsList.Clear();
+                //    OptionsList = response;
+                //    OptionsEntries.Source = OptionsList;
+                //}
             }
             catch (Exception ex)
             {

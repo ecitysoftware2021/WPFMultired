@@ -36,10 +36,10 @@ namespace WPFMultired.UserControls
                 switch (((Image)sender).Tag.ToString())
                 {
                     case "1":
-                        Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ETransactionType.Pay);
+                        Utilities.navigator.Navigate(UserControlView.Consult, true, ETransactionType.Pay);
                         break;
                     case "2":
-                        Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ETransactionType.Withdrawal);
+                        Utilities.navigator.Navigate(UserControlView.Consult, true, ETransactionType.Withdrawal);
                         break;
                     default:
                         break;

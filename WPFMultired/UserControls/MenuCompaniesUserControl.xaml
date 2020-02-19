@@ -25,16 +25,16 @@
                VerticalAlignment="Top"
                Width="250"
                Margin="0,20,20,0"
-               TouchDown="Btn_back_TouchDown" />
+               TouchDown="Btn_exit_TouchDown" />
 
-            <Image x:Name="BtnAtras"
+            <Image x:Name="btn_back"
                 Source="/Images/Buttons/btn-back.png"
                 Grid.Column="0"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="250"
                 Margin="20,20,0,0"
-                TouchDown="BtnAtras_TouchDown" />
+                TouchDown="Btn_back_TouchDown" />
         </Grid>
 
         <Grid Grid.Row="1">

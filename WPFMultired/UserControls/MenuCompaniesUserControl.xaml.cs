@@ -27,7 +27,38 @@ namespace WPFMultired.UserControls
 
         private void Lv_companies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void Btn_back_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

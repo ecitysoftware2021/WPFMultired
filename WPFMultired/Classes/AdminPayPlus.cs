@@ -191,8 +191,11 @@ namespace WPFMultired.Classes
                 {
                     _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
 
+                    await DownloadInformation();
+                    
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
                     var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+
                     if (((int)validateStatus) > 0)
                     {
                         if ((int)validateStatus == (int)ETypeAdministrator.Balancing)
@@ -245,6 +248,41 @@ namespace WPFMultired.Classes
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
             }
             return false;
+        }
+
+        private static async Task<bool> DownloadInformation()
+        {
+            try
+            {
+                var idioms = await ApiIntegration.CallService(ETypeService.Idioms, null);
+                if (idioms != null)
+                {
+                    DataPayPlus.ListIdioms = idioms;
+                }
+                else
+                {
+                    DataPayPlus.IdiomId = int.Parse(Utilities.GetConfiguration("IdiomDefaultId"));
+                }
+
+                var companies = await ApiIntegration.CallService(ETypeService.Institutions, null);
+                if (companies != null)
+                {
+                   DataPayPlus.ListCompanies = companies;
+                }
+
+                var typeTransactions = await ApiIntegration.CallService(ETypeService.Type_Transaction, null);
+                if (typeTransactions != null)
+                {
+                    DataPayPlus.ListTypeTransactions = typeTransactions;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
+            }
+
+            return true;
         }
 
         private void ValidatePeripherals()

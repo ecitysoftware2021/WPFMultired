@@ -170,47 +170,99 @@ namespace WPFMultired.Services
         }
 
         /// <summary>
-        /// #2 Método para buscar las transacciones disponibles
+        /// #1 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
-        private string GetTypeTransaction()
+        private object GetIdioms(string codeEntity)
         {
             try
             {
-                ConsultarTiposDeTransaccionServicesClient cliente = new ConsultarTiposDeTransaccionServicesClient();
+                ConsultarLenguajeServicesClient client = new ConsultarLenguajeServicesClient();
 
-                using (var factory = new WebChannelFactory<ConsultarTiposDeTransaccionServicesChannel>())
+                using (var factory = new WebChannelFactory<ConsultarLenguajeServicesChannel>())
                 {
-                    using (new OperationContextScope((IClientChannel)cliente.InnerChannel))
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrtiptrnInput mtrtiptrn = new mtrtiptrnInput
+                        mtrindlenInput request = new mtrindlenInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
                             I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
-                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript)
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("IdiomDefaultId")), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodeEntityDefault")), keyEncript)
                         };
 
-                        return JsonConvert.SerializeObject(cliente.mtrtiptrn(mtrtiptrn));
+                        var response = client.mtrindlen(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
+                            response.O_LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            return response.O_LISTAREGISTROS.LIST;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
             }
+            return null;
+        }
+
+        /// <summary>
+        /// #2 Método para buscar las transacciones disponibles
+        /// </summary>
+        /// <returns></returns>
+        private object GetTypeTransaction()
+        {
+            try
+            {
+                ConsultarTiposDeTransaccionServicesClient client = new ConsultarTiposDeTransaccionServicesClient();
+
+                using (var factory = new WebChannelFactory<ConsultarTiposDeTransaccionServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrtiptrnInput request = new mtrtiptrnInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript)
+                        };
+
+                        var response = client.mtrtiptrn(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
+                            response.O_LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            return response.O_LISTAREGISTROS.LIST;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
         }
 
         /// <summary>
         /// #3 Método para buscar las instituciones disponibles
         /// </summary>
         /// <returns></returns>
-        private string GetInstitutions()
+        private object GetInstitutions()
         {
             try
             {
@@ -222,32 +274,39 @@ namespace WPFMultired.Services
                     {
                         SetHeaderRequest();
 
-                        mtrintmulInput mtrintmul = new mtrintmulInput
+                        mtrintmulInput request = new mtrintmulInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
                             I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
-                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript)
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript)
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrintmul(mtrintmul));
+                        var response = client.mtrintmul(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
+                            response.O_LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            return response.O_LISTAREGISTROS.LIST;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
             }
+            return null;
         }
 
         /// <summary>
         /// #4 Método para buscar los tipos de documentos disponibles para esa institucion
         /// </summary>
         /// <returns></returns>
-        private string GetTypeDocument(string codeEntity)
+        private object GetTypeDocument(string codeEntity)
         {
             try
             {
@@ -259,7 +318,7 @@ namespace WPFMultired.Services
                     {
                         SetHeaderRequest();
 
-                        mtrtipdoccInput mtrtipdocc = new mtrtipdoccInput
+                        mtrtipdoccInput request = new mtrtipdoccInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
@@ -270,15 +329,23 @@ namespace WPFMultired.Services
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript)
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrtipdocc(mtrtipdocc));
+                        var response = client.mtrtipdocc(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
+                            response.LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            return response.LISTAREGISTROS.LIST;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
             }
+
+            return null;
         }
 
         /// <summary>
@@ -514,44 +581,6 @@ namespace WPFMultired.Services
                         };
 
                         return JsonConvert.SerializeObject(client.mtrctlaqrc(mtrctlaqrc));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// #1 Método para buscar los idiomas disponibles para la aplicación
-        /// </summary>
-        /// <returns></returns>
-        private string GetIdioms(string codeEntity)
-        {
-            try
-            {
-                ConsultarLenguajeServicesClient client = new ConsultarLenguajeServicesClient();
-
-                using (var factory = new WebChannelFactory<ConsultarLenguajeServicesChannel>())
-                {
-                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
-                    {
-                        SetHeaderRequest();
-
-                        mtrindlenInput mtrindlen = new mtrindlenInput
-                        {
-                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
-                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
-                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
-                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
-                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript)
-                        };
-
-                        return JsonConvert.SerializeObject(client.mtrindlen(mtrindlen));
                     }
                 }
             }
