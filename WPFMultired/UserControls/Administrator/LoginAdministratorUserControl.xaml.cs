@@ -80,17 +80,17 @@ namespace WPFMultired.UserControls.Administrator
         /// </summary>
         /// <param name="sender">Refrenecia al objecto</param>
         /// <param name="e">Eventos del objeto</param>
-        //private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
-        //{
-        //    try
-        //    {
-        //        Utilities.navigator.Navigate(UserControlView.Config);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-        //    }
-        //}
+        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.Config);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
 
         #endregion
 
@@ -118,29 +118,29 @@ namespace WPFMultired.UserControls.Administrator
                     {
                         var response = await AdminPayPlus.ValidateUser(viewModel.User, viewModel.Pass, viewModel.Qr);
 
-                        if (response == 0)
+                        if (response == null ||  response.Item1 == 0)
                         {
                             Utilities.CloseModal();
-                            if (viewModel.TypeLogin == 1)
+                            if (response != null && !string.IsNullOrEmpty(response.Item2))
                             {
-                                Utilities.ShowModal(MessageResource.ErrorValidaQr, EModalType.Error, false);
+                                Utilities.ShowModal(response.Item2, EModalType.Error, false);
 
                             }
                             else
                             {
                                 Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
                             }
+
                             viewModel.IsReadQr = false;
                             ClearForm();
                         }
                         else
                         {
-
                             var data = await AdminPayPlus.DataListPaypad(viewModel.TypeOperation);
                             if (data != null)
                             {
                                 Utilities.CloseModal();
-                                data.USER_ADMIN_ID = response;
+                                data.USER_ADMIN_ID = response.Item1;
                                 Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
                             }
                             else

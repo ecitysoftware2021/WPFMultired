@@ -99,7 +99,7 @@ namespace WPFMultired.Services
         #endregion
 
         #region "Métodos"
-        public async Task<object> CallService(ETypeService typeService, object data)
+        public async Task<Response> CallService(ETypeService typeService, object data)
         {
             try
             {
@@ -173,7 +173,7 @@ namespace WPFMultired.Services
         /// #1 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
-        private object GetIdioms(string codeEntity)
+        private Response GetIdioms(string codeEntity)
         {
             try
             {
@@ -202,7 +202,7 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.O_LISTAREGISTROS.O_RTNCON > 0)
                         {
-                            return response.O_LISTAREGISTROS.LIST;
+                            return new Response { Data = response.O_LISTAREGISTROS.LIST };
                         }
                     }
                 }
@@ -218,7 +218,7 @@ namespace WPFMultired.Services
         /// #2 Método para buscar las transacciones disponibles
         /// </summary>
         /// <returns></returns>
-        private object GetTypeTransaction()
+        private Response GetTypeTransaction()
         {
             try
             {
@@ -246,7 +246,7 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.O_LISTAREGISTROS.O_RTNCON > 0)
                         {
-                            return response.O_LISTAREGISTROS.LIST;
+                            return new Response { Data = response.O_LISTAREGISTROS.LIST };
                         }
                     }
                 }
@@ -262,7 +262,7 @@ namespace WPFMultired.Services
         /// #3 Método para buscar las instituciones disponibles
         /// </summary>
         /// <returns></returns>
-        private object GetInstitutions()
+        private Response GetInstitutions()
         {
             try
             {
@@ -290,7 +290,7 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.O_LISTAREGISTROS.O_RTNCON > 0)
                         {
-                            return response.O_LISTAREGISTROS.LIST;
+                            return new Response { Data = response.O_LISTAREGISTROS.LIST };
                         }
                     }
                 }
@@ -306,7 +306,7 @@ namespace WPFMultired.Services
         /// #4 Método para buscar los tipos de documentos disponibles para esa institucion
         /// </summary>
         /// <returns></returns>
-        private object GetTypeDocument(string codeEntity)
+        private Response GetTypeDocument(string codeEntity)
         {
             try
             {
@@ -335,7 +335,7 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.LISTAREGISTROS.O_RTNCON > 0)
                         {
-                            return response.LISTAREGISTROS.LIST;
+                            return new Response { Data = response.LISTAREGISTROS.LIST };
                         }
                     }
                 }
@@ -352,7 +352,7 @@ namespace WPFMultired.Services
         /// #5 Método para buscar los productos del cliente
         /// </summary>
         /// <returns></returns>
-        private string GetProductsClient(Transaction transaction)
+        private Response GetProductsClient(Transaction transaction)
         {
             try
             {
@@ -378,7 +378,7 @@ namespace WPFMultired.Services
                             I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((int)transaction.Type).ToString()), keyEncript)
                         };
 
-                        return JsonConvert.SerializeObject(cliente.mtrprocli(mtrprocli));
+                        return new Response { Data = JsonConvert.SerializeObject(cliente.mtrprocli(mtrprocli)) };
                     }
                 }
             }
@@ -393,7 +393,7 @@ namespace WPFMultired.Services
         /// #6 Método para generar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private string GenerateCodeOTP(Transaction transaction)
+        private Response GenerateCodeOTP(Transaction transaction)
         {
             try
             {
@@ -423,7 +423,7 @@ namespace WPFMultired.Services
                             //I_VALOR = encrytor_MR.GetFullParameter(mR_DataService.I_VLRTRN, KEY)
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrgenotp(mtrgenotp));
+                        return new Response { Data = JsonConvert.SerializeObject(client.mtrgenotp(mtrgenotp)) };
                     }
                 }
             }
@@ -438,7 +438,7 @@ namespace WPFMultired.Services
         /// #7 Método para validar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private string ValidateOTP(Transaction transaction)
+        private Response ValidateOTP(Transaction transaction)
         {
             try
             {
@@ -469,7 +469,7 @@ namespace WPFMultired.Services
                             //I_CODIGOTP = encrytor_MR.GetFullParameter(mR_DataService.CodOTP, KEY)
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrvalotp(mtrvalotp));
+                        return new Response { Data = JsonConvert.SerializeObject(client.mtrvalotp(mtrvalotp)) };
                     }
                 }
             }
@@ -484,7 +484,7 @@ namespace WPFMultired.Services
         /// #8 Método para reportar la transacción
         /// </summary>
         /// <returns></returns>
-        private string ReportTransaction(Transaction transaction)
+        private Response ReportTransaction(Transaction transaction)
         {
             try
             {
@@ -539,7 +539,7 @@ namespace WPFMultired.Services
                             //I_LISTAREGISTROS = list[0]
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrprotrn(mtrprotrn));
+                        return new Response { Data = JsonConvert.SerializeObject(client.mtrprotrn(mtrprotrn)) };
                     }
                 }
             }
@@ -555,7 +555,7 @@ namespace WPFMultired.Services
         /// #NN Método para validar el QR
         /// </summary>
         /// <returns></returns>
-        private string ConsultQR(Transaction transaction)
+        private Response ConsultQR(Transaction transaction)
         {
             try
             {
@@ -580,7 +580,7 @@ namespace WPFMultired.Services
                             I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript)
                         };
 
-                        return JsonConvert.SerializeObject(client.mtrctlaqrc(mtrctlaqrc));
+                        return new Response { Data = JsonConvert.SerializeObject(client.mtrctlaqrc(mtrctlaqrc)) };
                     }
                 }
             }
@@ -595,7 +595,7 @@ namespace WPFMultired.Services
         /// #1 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
-        private int GetAdminStatus()
+        private Response GetAdminStatus()
         {
             try
             {
@@ -622,7 +622,7 @@ namespace WPFMultired.Services
                             !string.IsNullOrEmpty(response.O_MOVIMIENTO) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            return int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MOVIMIENTO, keyDesencript), 2));
+                            return new Response { Data = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MOVIMIENTO, keyDesencript), 2)) };
                         }
                     }
                 }
@@ -631,10 +631,10 @@ namespace WPFMultired.Services
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
-            return 0;
+            return null;
         }
 
-        private PaypadOperationControl GetAdminOperation(ETypeAdministrator typeAdministrator)
+        private Response GetAdminOperation(ETypeAdministrator typeAdministrator)
         {
             try
             {
@@ -694,7 +694,7 @@ namespace WPFMultired.Services
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", ""));
                             }
 
-                            return result;
+                            return new Response { Data = result };
                         }
                     }
                 }
@@ -707,7 +707,7 @@ namespace WPFMultired.Services
             return null;
         }
 
-        private PaypadOperationControl SendAdminProcess(PaypadOperationControl dataProcess)
+        private Response SendAdminProcess(PaypadOperationControl dataProcess)
         {
             try
             {
@@ -744,7 +744,7 @@ namespace WPFMultired.Services
                             dataProcess.DATE = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FECHAPROCESO, keyDesencript), 2), "yyyyMMdd", null).ToString("yyyy/MM/dd");
                             dataProcess.TIME = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HORATRANSACCION, keyDesencript), 2), "HHmmssff", null).ToString("HH:mm:ss");
 
-                            return dataProcess;
+                            return new Response { Data = dataProcess };
                         }
                     }
                 }
@@ -757,7 +757,7 @@ namespace WPFMultired.Services
             return null;
         }
 
-        private string ValidateAdminQr(string txtQr)
+        private Response ValidateAdminQr(string txtQr)
         {
             try
             {
@@ -784,7 +784,11 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            return ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_OBJECT, keyDesencript), 2);
+                            return new Response { Data = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_OBJECT, keyDesencript), 2) };
+                        }
+                        else
+                        {
+                            return new Response { Data =  null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }
@@ -793,7 +797,7 @@ namespace WPFMultired.Services
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
-            return string.Empty;
+            return null;
         }
 
         private void SetHeaderRequest()

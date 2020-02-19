@@ -196,13 +196,13 @@ namespace WPFMultired.Classes
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
                     var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
 
-                    if (((int)validateStatus) > 0)
+                    if (validateStatus != null && ((int)validateStatus.Data) > 0)
                     {
-                        if ((int)validateStatus == (int)ETypeAdministrator.Balancing)
+                        if ((int)validateStatus.Data == (int)ETypeAdministrator.Balancing)
                         {
                             _dataPayPlus.StateBalanece = true;
                         }
-                        else if ((int)validateStatus == (int)ETypeAdministrator.Upload)
+                        else if ((int)validateStatus.Data == (int)ETypeAdministrator.Upload)
                         {
                             _dataPayPlus.StateUpload = true;
                         }
@@ -663,7 +663,7 @@ namespace WPFMultired.Classes
                 if (response != null)
                 {
                     //var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
-                    return (PaypadOperationControl)response;
+                    return (PaypadOperationControl)response.Data;
                 }
             }
             catch (Exception ex)
@@ -673,8 +673,9 @@ namespace WPFMultired.Classes
             return null;
         }
 
-        public static async Task<int> ValidateUser(string name, string pass, string qr)
+        public static async Task<Tuple<int, string>> ValidateUser(string name, string pass, string qr)
         {
+            Tuple<int, string> resultUser = null;
             try
             {
                 object request = null;
@@ -689,15 +690,19 @@ namespace WPFMultired.Classes
                 }
                 else
                 {
-                    var result = ApiIntegration.CallService(ETypeService.Validate_Admin_QR, qr);
-                    if (result != null && !string.IsNullOrEmpty(result.Result.ToString()))
+                    var result = await ApiIntegration.CallService(ETypeService.Validate_Admin_QR, qr);
+                    if (result != null && !string.IsNullOrEmpty(result.Data.ToString()))
                     {
-                        var user = JsonConvert.DeserializeObject<User>(result.Result.ToString());
+                        var user = JsonConvert.DeserializeObject<User>(result.Data.ToString());
                         request = new RequestAuth
                         {
                             UserName = user.USER,
                             Password = user.PASS
                         };
+                    }
+                    else
+                    {
+                        resultUser = new Tuple<int, string>(0, result.Message);
                     }
                 }
 
@@ -707,7 +712,7 @@ namespace WPFMultired.Classes
 
                     if (response != null)
                     {
-                        return int.Parse(response.ToString());
+                        resultUser = new Tuple<int, string>(int.Parse(response.ToString()), "");
                     }
                 }
             }
@@ -715,7 +720,7 @@ namespace WPFMultired.Classes
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
             }
-            return 0;
+            return resultUser;
         }
 
         public static async Task<PaypadOperationControl> DataListPaypad(ETypeAdministrator typeAdministrator)
@@ -741,7 +746,7 @@ namespace WPFMultired.Classes
                 {
                    // var operationControl = JsonConvert.DeserializeObject<PaypadOperationControl>(response.ToString());
 
-                    return (PaypadOperationControl)response;
+                    return (PaypadOperationControl)response.Data;
                 }
 
                 return null;

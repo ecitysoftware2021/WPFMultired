@@ -131,17 +131,17 @@ namespace WPFMultired.UserControls.Administrator
             RefreshList();
         }
 
-        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
-        {
-            try
-            {
-                Utilities.navigator.Navigate(UserControlView.Config);
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
+        //private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Utilities.navigator.Navigate(UserControlView.Config);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+        //    }
+        //}
 
 
         #region "Eventos"

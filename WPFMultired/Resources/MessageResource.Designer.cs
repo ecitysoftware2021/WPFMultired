@@ -268,7 +268,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Coigo QR inválido.
+        ///   Busca una cadena traducida similar a El codigo QR ingresado es inválido.
         /// </summary>
         internal static string ErrorValidaQr {
             get {

@@ -210,7 +210,7 @@
                    Margin="0,0,50,80"
                    TouchDown="BtnNext_TouchDown" />
 
-            <Image x:Name="btnCancell"
+            <!--<Image x:Name="btnCancell"
                    Source="/Images/Buttons/btn-cancel.png"
                    Stretch="Fill"
                    Width="300"
@@ -218,7 +218,7 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Margin="0,0,0,50"
-                   TouchDown="BtnCancell_TouchDown" />
+                   TouchDown="BtnCancell_TouchDown" />-->
         </Grid>
     </Grid>
 </UserControl>

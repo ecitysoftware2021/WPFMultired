@@ -304,6 +304,6 @@
     <value>¡No se lograrón iniciar los dispositivos!</value>
   </data>
   <data name="ErrorValidaQr" xml:space="preserve">
-    <value>Coigo QR inválido</value>
+    <value>El codigo QR ingresado es inválido</value>
   </data>
 </root>
