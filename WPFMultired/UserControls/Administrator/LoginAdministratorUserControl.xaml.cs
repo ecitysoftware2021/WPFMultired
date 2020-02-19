@@ -123,6 +123,7 @@ namespace WPFMultired.UserControls.Administrator
                             Utilities.CloseModal();
                             Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
                             viewModel.IsReadQr = false;
+                            ClearForm();
                         }
                         else
                         {
@@ -139,6 +140,7 @@ namespace WPFMultired.UserControls.Administrator
                                 Utilities.CloseModal();
                                 Utilities.ShowModal(MessageResource.NoInformation, EModalType.Error, false);
                                 viewModel.IsReadQr = false;
+                                ClearForm();
                             }
                         }
                     });
@@ -194,6 +196,11 @@ namespace WPFMultired.UserControls.Administrator
                 viewModel.VisibleBtnAcept = Visibility.Hidden;
             }
 
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
             viewModel.User = string.Empty;
             viewModel.Pass = string.Empty;
             viewModel.Qr = string.Empty;
