@@ -202,6 +202,8 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.O_LISTAREGISTROS.O_RTNCON > 0)
                         {
+                            
+
                             return new Response { Data = response.O_LISTAREGISTROS.LIST };
                         }
                     }
