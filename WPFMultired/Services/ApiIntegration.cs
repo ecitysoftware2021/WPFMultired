@@ -777,7 +777,7 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
-                            I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(txtQr), keyEncript),
+                            I_QRTEXT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(txtQr.Replace(" ", "+")), keyEncript),
                         };
                         var response = client.mtrvaladmc(request);
 
