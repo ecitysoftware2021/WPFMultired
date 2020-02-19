@@ -185,5 +185,10 @@ namespace WPFMultired.UserControls
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
+
+        private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
+        {
+
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace WPFMultired.UserControls
                     TypePayer = ETypePayer.Person
                 };
 
-                viewModel.LoadList();
+                //viewModel.LoadList();
                 cmb_type_id.SelectedIndex = 0;
 
                 this.DataContext = viewModel;
