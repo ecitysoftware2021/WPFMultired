@@ -303,4 +303,7 @@
   <data name="ValidatePeripheralsFail" xml:space="preserve">
     <value>¡No se lograrón iniciar los dispositivos!</value>
   </data>
+  <data name="ErrorValidaQr" xml:space="preserve">
+    <value>Coigo QR inválido</value>
+  </data>
 </root>

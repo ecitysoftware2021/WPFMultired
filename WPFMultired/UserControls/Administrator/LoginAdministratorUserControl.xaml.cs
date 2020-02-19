@@ -80,17 +80,17 @@ namespace WPFMultired.UserControls.Administrator
         /// </summary>
         /// <param name="sender">Refrenecia al objecto</param>
         /// <param name="e">Eventos del objeto</param>
-        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
-        {
-            try
-            {
-                Utilities.navigator.Navigate(UserControlView.Config);
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
+        //private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Utilities.navigator.Navigate(UserControlView.Config);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+        //    }
+        //}
 
         #endregion
 
@@ -121,7 +121,15 @@ namespace WPFMultired.UserControls.Administrator
                         if (response == 0)
                         {
                             Utilities.CloseModal();
-                            Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
+                            if (viewModel.TypeLogin == 1)
+                            {
+                                Utilities.ShowModal(MessageResource.ErrorValidaQr, EModalType.Error, false);
+
+                            }
+                            else
+                            {
+                                Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
+                            }
                             viewModel.IsReadQr = false;
                             ClearForm();
                         }

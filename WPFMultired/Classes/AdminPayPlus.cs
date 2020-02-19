@@ -130,6 +130,8 @@ namespace WPFMultired.Classes
 
                 if (await ValidatePaypad())
                 {
+                    await DownloadInformation();
+
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 
                     ValidatePeripherals();
@@ -190,8 +192,6 @@ namespace WPFMultired.Classes
                 if (response != null)
                 {
                     _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
-
-                    await DownloadInformation();
                     
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
                     var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);

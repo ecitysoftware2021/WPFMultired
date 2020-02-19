@@ -268,6 +268,15 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Coigo QR inválido.
+        /// </summary>
+        internal static string ErrorValidaQr {
+            get {
+                return ResourceManager.GetString("ErrorValidaQr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Señor usuario estamos Finalizando la transacción. Espere un momento..
         /// </summary>
         internal static string FinishTransaction {
