@@ -75,6 +75,12 @@ namespace WPFMultired.Classes
         Pay = 19
     }
 
+    public enum EProcedureType
+    {
+        Withdrawal = 3,
+        Pay = 1
+    }
+
     public enum ETypeDevice
     {
         AP = 2,
@@ -89,7 +95,6 @@ namespace WPFMultired.Classes
         Upload = 1,
         Diminish = 2,
         ReUploat = 4,
-
     }
 
     public enum ETypePayer

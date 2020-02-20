@@ -394,6 +394,15 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        internal static string NoProccessInformation {
+            get {
+                return ResourceManager.GetString("NoProccessInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El cajero está fuera de servicio en este momento, por favor intente más tarde.
         /// </summary>
         internal static string NoService {

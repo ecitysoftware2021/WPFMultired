@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="WPFMultired.UserControls.DataListUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFMultired.UserControls"
+             mc:Ignorable="d"
+             Height="1920" 
+             Width="1080" >
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="700" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Image Source="/Images/Buttons/btn-back.png"
+                   Name="btn_back"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Width="250"
+                   Margin="20,0,0,20"
+                   TouchDown="Btn_back_TouchDown" />
+
+            <TextBlock x:Name="tbTimer"
+                        FontSize="35"
+                        Grid.Column="2"
+                        Foreground="#3c3c3c"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,80,0"/>
+
+            <Image Source="/Images/Buttons/btn-exit.png"
+                   Name="btn_exit"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Grid.Column="4"
+                   Width="250"
+                   Margin="0,0,20,20"
+                   TouchDown="Btn_exit_TouchDown" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="{Binding Tittle}"
+                       Foreground="#FF71AB01"
+                       Margin="75,0,0,30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Name="lbl_tittle"
+                       FontWeight="Bold"
+                       FontSize="50" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <TextBlock Text="Productos"
+                       Foreground="Red"
+                       Margin="0,0,0,0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontWeight="Bold"
+                       FontSize="50" />
+
+        </Grid>
+        <Grid Grid.Row="3">
+            <ListView x:Name="lv_data_list" 
+                    Margin="0,20,0,0"
+                    Background="Red"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding}" 
+                    SelectionChanged="Lv_data_list_SelectionChanged">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"
+                                 HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,0,0,0"
+                            Width="1030"
+                            Height="250" >
+
+                            <TextBlock Text="{Binding Item1}"
+                                       FontSize="45"
+                                       FontFamily="Arial"
+                                       TextAlignment="Justify"
+                                       TextWrapping="Wrap"
+                                       Margin="50,50,0,0"
+                                       Foreground="#FF104B6D"
+                                       Height="60"
+                                       Width="700"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Left"
+                                       Grid.Column="0" />
+
+                            <TextBlock Text="{Binding Item2}"
+                                       FontSize="30"
+                                       FontFamily="Arial"
+                                       TextAlignment="Justify"
+                                       TextWrapping="Wrap"
+                                       Margin="50,0,0,10"
+                                       Foreground="#FF104B6D"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Grid.Column="0" />
+
+                            <Image  Source="/Images/Others/img-icon-select.png"
+                                    Width="90"
+                                    Height="90"
+                                    Margin="0,40,70,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"/>
+
+                            <Image  Source="/Images/Others/img-select.png"
+                                    Width="200"
+                                    Height="50"
+                                    Margin="0,50,30,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>

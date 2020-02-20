@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using WPFMultired.Classes;
+using WPFMultired.Models;
 using WPFMultired.Resources;
+using WPFMultired.ViewModel;
 
 namespace WPFMultired.UserControls
 {
@@ -12,9 +16,41 @@ namespace WPFMultired.UserControls
     /// </summary>
     public partial class MenuUserControl : UserControl
     {
+        private DataListViewModel viewModel;
+
         public MenuUserControl()
         {
             InitializeComponent();
+
+            ConfigurateView();
+        }
+
+        private void ConfigurateView()
+        {
+            try
+            {
+                viewModel = new DataListViewModel
+                {
+                    ViewList = new CollectionViewSource(),
+                    DataList = new List<ItemList>()
+                };
+
+                if (AdminPayPlus.DataPayPlus.ListTypeTransactions.Count > 0)
+                {
+                    this.DataContext = viewModel;
+                    viewModel.DataList = AdminPayPlus.DataPayPlus.ListTypeTransactions;
+                    viewModel.ViewList.Source = viewModel.DataList;
+                    lv_type_transactions.DataContext = viewModel.ViewList;
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
 
         private void Btn_back_TouchDown(object sender, TouchEventArgs e)
@@ -28,32 +64,16 @@ namespace WPFMultired.UserControls
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
-
-        private void BtnOptionSelect_TouchDown(object sender, TouchEventArgs e)
+        private void Lv_type_transactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                switch (((Image)sender).Tag.ToString())
-                {
-                    case "1":
-                        Utilities.navigator.Navigate(UserControlView.Consult, true, ETransactionType.Pay);
-                        break;
-                    case "2":
-                        Utilities.navigator.Navigate(UserControlView.Consult, true, ETransactionType.Withdrawal);
-                        break;
-                    default:
-                        break;
-                }
+                Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((ItemList)lv_type_transactions.SelectedItem).Item3);
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
-        }
-
-        private void Btn_qr_TouchDown(object sender, TouchEventArgs e)
-        {
-
         }
     }
 }

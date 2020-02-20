@@ -262,35 +262,42 @@ namespace WPFMultired.Keyboard
 
         static void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            isRun = true;
-            Control host = sender as Control;
-
-            // _PreviousTextBoxBackgroundBrush = host.Background;
-            //_PreviousTextBoxBorderBrush = host.BorderBrush;
-            // _PreviousTextBoxBorderThickness = host.BorderThickness;
-
-            //host.Background = Brushes.Transparent;
-            host.BorderBrush = Brushes.Transparent;
-            //host.BorderThickness = new Thickness(4);
-
-            _CurrentControl = host;
-
-            if (_InstanceObject == null)
+            try
             {
-                //if (window == null)
-                //{
-                window = (UserControl)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
-                //}
+                isRun = true;
+                Control host = sender as Control;
 
-                window.IsEnabled = false;
+                // _PreviousTextBoxBackgroundBrush = host.Background;
+                //_PreviousTextBoxBorderBrush = host.BorderBrush;
+                // _PreviousTextBoxBorderThickness = host.BorderThickness;
 
-                _InstanceObject = new TouchScreenKeyboard();
-                _InstanceObject.AllowsTransparency = true;
-                _InstanceObject.WindowStyle = WindowStyle.None;
-                _InstanceObject.ShowInTaskbar = false;
-                _InstanceObject.ShowInTaskbar = false;
-                _InstanceObject.Topmost = true;
-                host.LayoutUpdated += new EventHandler(tb_LayoutUpdated);
+                //host.Background = Brushes.Transparent;
+                host.BorderBrush = Brushes.Transparent;
+                //host.BorderThickness = new Thickness(4);
+
+                _CurrentControl = host;
+
+                if (_InstanceObject == null)
+                {
+                    //if (window == null)
+                    //{
+                    window = (UserControl)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
+                    //}
+
+                    window.IsEnabled = false;
+
+                    _InstanceObject = new TouchScreenKeyboard();
+                    _InstanceObject.AllowsTransparency = true;
+                    _InstanceObject.WindowStyle = WindowStyle.None;
+                    _InstanceObject.ShowInTaskbar = false;
+                    _InstanceObject.ShowInTaskbar = false;
+                    _InstanceObject.Topmost = true;
+                    host.LayoutUpdated += new EventHandler(tb_LayoutUpdated);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

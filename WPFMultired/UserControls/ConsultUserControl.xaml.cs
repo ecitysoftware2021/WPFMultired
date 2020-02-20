@@ -20,13 +20,26 @@ namespace WPFMultired.UserControls
     /// </summary>
     public partial class ConsultUserControl : UserControl
     {
-        private Transaction transaction;
-
         private DetailViewModel viewModel;
 
-        public ConsultUserControl()
+        private Transaction transaction;
+
+
+        public ConsultUserControl(string company, string typeTransaction)
         {
             InitializeComponent();
+
+            if (transaction == null)
+            {
+                transaction = new Transaction
+                {
+                    CodeCompany = company,
+                    CodeTypeTransaction = typeTransaction,
+                    State = ETransactionState.Initial
+                };
+            }
+
+            ConfigView();
         }
 
         private void ConfigView()
@@ -35,15 +48,14 @@ namespace WPFMultired.UserControls
             {
                 viewModel = new DetailViewModel
                 {
-                    Row1 = "Identificación *",
-                    Row2 = "Nombre *",
-                    Row3 = "Celular * ",
+                    Row1 = "Tipo de Identificación",
+                    Row2 = "Identificación",
                     OptionsEntries = new CollectionViewSource(),
                     OptionsList = new List<TypeDocument>(),
                     TypePayer = ETypePayer.Person
                 };
 
-                viewModel.LoadListDocuments();
+                viewModel.LoadListDocuments(transaction.CodeCompany);
 
                 cmb_type_id.SelectedIndex = 0;
 
@@ -55,11 +67,6 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void Btn_payment_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
-        {
-
-        }
-
         private bool ValidateFields()
         {
             try
@@ -69,15 +76,6 @@ namespace WPFMultired.UserControls
                     return false;
                 }
 
-                if (string.IsNullOrEmpty(viewModel.Value2))
-                {
-                    return false;
-                }
-
-                if (viewModel.Value3.Length < 6)
-                {
-                    return false;
-                }
                 return true;
             }
             catch (Exception ex)
@@ -87,7 +85,7 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void Consult(string typeDocument)
+        private void Consult()
         {
             try
             {
@@ -99,7 +97,7 @@ namespace WPFMultired.UserControls
 
                         if (response != null)
                         {
-                            await AdminPayPlus.SaveTransactions(this.transaction, false);
+                            transaction = (Transaction)response.Data;
 
                             Utilities.CloseModal();
                         }
@@ -125,18 +123,6 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void Btn_back_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
-        {
-            try
-            {
-                Utilities.navigator.Navigate(UserControlView.Main);
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
         private void Cmb_type_id_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -145,20 +131,7 @@ namespace WPFMultired.UserControls
 
                 if (itemSeleted.Type != (int)viewModel.TypePayer)
                 {
-                    if (itemSeleted.Type == (int)ETypePayer.Person)
-                    {
-                        viewModel.TypePayer = ETypePayer.Person;
-                        viewModel.Row2 = "Nombre *";
-                    }
-                    else
-                    {
-                        viewModel.TypePayer = ETypePayer.Establishment;
-                        viewModel.Row2 = "Razón Social*";
-                    }
-
                     viewModel.Value1 = string.Empty;
-                    viewModel.Value2 = string.Empty;
-                    viewModel.Value3 = string.Empty;
                 }
             }
             catch (Exception ex)
@@ -173,7 +146,9 @@ namespace WPFMultired.UserControls
             {
                 if (ValidateFields())
                 {
-
+                    transaction.reference = viewModel.Value1;
+                    transaction.TypeDocument = ((TypeDocument)cmb_type_id.SelectedItem).Key;
+                    Consult();
                 }
                 else
                 {
@@ -188,7 +163,26 @@ namespace WPFMultired.UserControls
 
         private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
         {
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.Main);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
 
+        private void Btn_back_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
+        {
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.Main);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

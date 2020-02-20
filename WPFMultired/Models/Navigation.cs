@@ -41,7 +41,7 @@ namespace WPFMultired.Models
                         View = data != null ? new MainUserControl((bool)data) : new MainUserControl();
                         break;
                     case UserControlView.Consult:
-                        View = new ConsultUserControl();
+                        View = new ConsultUserControl((string)data, (string)complement);
                         break;
                     case UserControlView.PaySuccess:
                         View = new SussesUserControl((Transaction)data);
@@ -65,7 +65,7 @@ namespace WPFMultired.Models
                         View = new PayerUserControl((Transaction)data);
                         break;
                     case UserControlView.MenuCompaniesUserControl:
-                        View = new MenuCompaniesUserControl();
+                        View = new MenuCompaniesUserControl((string)data);
                         break;
                     case UserControlView.Menu:
                         View = new MenuUserControl();

@@ -14,8 +14,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="150" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="300" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="280" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -39,7 +40,7 @@
 
         <Grid Grid.Row="1">
             <TextBlock Name="txt_title"
-                    FontSize="60"
+                    FontSize="68"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,20"
@@ -80,8 +81,9 @@
                                 HorizontalAlignment="Center"
                                 Height="120"    
                                 Width="520"
-                                Source="{Binding RUTA}"
-                                Stretch="Uniform" />
+                                Source="{Binding ImageSourse}"
+                                Stretch="Uniform"
+                                Tag="{Binding Item1}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

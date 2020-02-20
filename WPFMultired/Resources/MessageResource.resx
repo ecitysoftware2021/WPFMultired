@@ -306,4 +306,7 @@
   <data name="ErrorValidaQr" xml:space="preserve">
     <value>El codigo QR ingresado es inválido</value>
   </data>
+  <data name="NoProccessInformation" xml:space="preserve">
+    <value />
+  </data>
 </root>

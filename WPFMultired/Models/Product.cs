@@ -8,17 +8,13 @@ namespace WPFMultired.Models
 {
     public class Product
     {
-        public string idservicio { get; set; }
-        public string matricula { get; set; }
-        public string proponente { get; set; }
-        public int cantidad { get; set; }
-        public decimal basse { get; set; }
-        public int porcentaje { get; set; }
-        public decimal valorservicio { get; set; }
-        public decimal valor { get; set; }
-        public string anobase { get; set; }
-        public string tipocertificado { get; set; }
-        public string descripciontipocertificado { get; set; }
-        public string descripcioncertificado { get; set; }
+        public string Code { get; set; }
+        public string CodeSystem { get; set; }
+        public string AcountNumber { get; set; }
+        public decimal AmountMax { get; set; }
+        public decimal AmountMin { get; set; }
+        public decimal AmountCommission { get; set; }
+        public string Description { get; set; }
+        public string AcountNumberMasc { get; set; }
     }
 }

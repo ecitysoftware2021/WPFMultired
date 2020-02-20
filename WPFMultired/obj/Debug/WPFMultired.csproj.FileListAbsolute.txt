@@ -328,3 +328,5 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.baml
+C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.g.cs
+C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.baml

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -257,7 +258,7 @@ namespace WPFMultired.Classes
                 var idioms = await ApiIntegration.CallService(ETypeService.Idioms, null);
                 if (idioms != null)
                 {
-                    DataPayPlus.ListIdioms = idioms;
+                    DataPayPlus.ListIdioms = idioms.Data;
                 }
                 else
                 {
@@ -267,13 +268,13 @@ namespace WPFMultired.Classes
                 var companies = await ApiIntegration.CallService(ETypeService.Institutions, null);
                 if (companies != null)
                 {
-                   DataPayPlus.ListCompanies = companies;
+                   DataPayPlus.ListCompanies = (List<ItemList>)companies.Data;
                 }
 
                 var typeTransactions = await ApiIntegration.CallService(ETypeService.Type_Transaction, null);
                 if (typeTransactions != null)
                 {
-                    DataPayPlus.ListTypeTransactions = typeTransactions;
+                    DataPayPlus.ListTypeTransactions = (List<ItemList>)typeTransactions.Data;
                 }
 
             }

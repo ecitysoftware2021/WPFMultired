@@ -236,6 +236,9 @@
     <Compile Include="UserControls\Administrator\LoginAdministratorUserControl.xaml.cs">
       <DependentUpon>LoginAdministratorUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DataListUserControl.xaml.cs">
+      <DependentUpon>DataListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MenuCompaniesUserControl.xaml.cs">
       <DependentUpon>MenuCompaniesUserControl.xaml</DependentUpon>
     </Compile>
@@ -499,6 +502,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\DataListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\MenuCompaniesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -751,6 +758,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-consult.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-no-qr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\img-icon-select.png" />
+    <Resource Include="Images\Others\img-select.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

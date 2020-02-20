@@ -322,11 +322,21 @@ namespace WPFMultired.ViewModel
         }
         #endregion
 
-        internal void ConfigurateDataList(object data, ETransactionType type)
+        internal void ConfigurateDataList(object data)
         {
             try
             {
-
+                foreach (var product in (List<Product>)data)
+                {
+                    _dataList.Add(new ItemList
+                    {
+                        Item1 = product.Description,
+                        Item2 = product.AcountNumberMasc,
+                        Index = ((List<Product>)data).IndexOf(product),
+                        Data = product,
+                        ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                    });
+                }
             }
             catch (Exception ex)
             {

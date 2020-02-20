@@ -2,7 +2,7 @@
 
 namespace WPFMultired.Models
 {
-    class ItemList : INotifyPropertyChanged
+    public class ItemList : INotifyPropertyChanged
     {
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;

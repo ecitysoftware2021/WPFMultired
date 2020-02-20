@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFMultired.Models;
 
 namespace WPFMultired.Services.Object
 {
@@ -24,9 +25,9 @@ namespace WPFMultired.Services.Object
 
         public object ListImages { get; set; }
 
-        public object ListCompanies { get; set; }
+        public List<ItemList> ListCompanies { get; set; }
 
-        public object ListTypeTransactions { get; set; }
+        public List<ItemList> ListTypeTransactions { get; set; }
 
         public int IdiomId { get; set; }
 

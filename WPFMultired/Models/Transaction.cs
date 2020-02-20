@@ -23,9 +23,9 @@ namespace WPFMultired.Models
 
         public string Enrollment { get; set; }
 
-        public string CodeClient { get; set; }
+        public string CodeCompany { get; set; }
 
-        public int TypeDocument { get; set; }
+        public string TypeDocument { get; set; }
 
         public DateTime DateTransaction { get; set; }
 
@@ -38,6 +38,8 @@ namespace WPFMultired.Models
         public string Observation { get; set; }
 
         public ETransactionType Type { get; set; }
+
+        public string CodeTypeTransaction { get; set; }
 
         public PAYER payer { get; set; }
 
