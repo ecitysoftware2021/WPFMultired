@@ -154,7 +154,7 @@
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,0,60"
+                                    Margin="0,0,60,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
