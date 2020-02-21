@@ -142,7 +142,7 @@
                                     Foreground="#FF2F302E"
                                     Width="500"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
+                                    HorizontalAlignment="Center"
                                     Grid.Column="1" >
                                 <Run Text=" / " FontWeight="Bold" />
                                 <Run Text="{Binding CASSETTE}" Foreground="#FF87BB2B" />
@@ -154,7 +154,7 @@
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Center"
                                     TextWrapping="Wrap"
-                                    Margin="20,0,0,0"
+                                    Margin="0,0,0,30"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
@@ -168,7 +168,7 @@
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="20,0,0,0"
+                                    Margin="0,0,30,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
