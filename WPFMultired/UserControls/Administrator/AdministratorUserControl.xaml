@@ -57,7 +57,7 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock 
-                Text="DEN / CASSET"
+                Text="Deno / Cassete"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -69,7 +69,7 @@
                 Grid.Column="1"/>
 
             <TextBlock 
-                Text="C N / C A"
+                Text="Can N / Can A"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -81,7 +81,7 @@
                 Grid.Column="2"/>
 
             <TextBlock 
-                Text="TOTAL($)"
+                Text="Total($)"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -136,7 +136,7 @@
                                     Text="{Binding VALUE, StringFormat={}{0:C0}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
                                     Margin="0,0,0,0"
                                     Foreground="#FF2F302E"
@@ -152,7 +152,7 @@
                                     Text="{Binding AMOUNT}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
                                     Foreground="#FF2F302E"
@@ -166,7 +166,7 @@
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C0}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
                                     Foreground="#FF2F302E"
