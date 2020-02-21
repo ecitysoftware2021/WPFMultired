@@ -235,7 +235,7 @@ namespace WPFMultired.Classes
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_BANCK, x = 105, y = y += 15 });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 95, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "ACM", x = 25, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "ASM", x = 25, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Tran", x = 75, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Fecha", x = 135, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Hora", x = 205, y = y });
