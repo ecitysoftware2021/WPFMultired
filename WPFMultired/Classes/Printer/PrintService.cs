@@ -111,10 +111,10 @@ namespace WPFMultired.Classes.Printer
                 {
                     foreach (var item in dataPrinter)
                     {
-                        if (!string.IsNullOrEmpty(item.image))
+                        if (item.image != null)
                         {
                             graphics = e.Graphics;
-                            graphics.DrawImage(Image.FromFile(item.image), item.x, item.y);
+                            graphics.DrawImage(item.image, item.x, item.y);
                         }
                         else
                         {

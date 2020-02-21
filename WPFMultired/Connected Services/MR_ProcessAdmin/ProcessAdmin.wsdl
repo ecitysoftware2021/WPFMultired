@@ -45,15 +45,16 @@
           <xs:element name="O_CAJEROORIGEN" type="xs:string" />
           <xs:element name="O_NITCAJEROORIGEN" type="xs:string" />
           <xs:element name="O_NOMBRECAJEROORIGEN" type="xs:string" />
+          <xs:element name="O_SAFKEY" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrproarqcResponse">
-    <part name="parameters" element="tns:mtrproarqcResponse" />
-  </message>
   <message name="mtrproarqc">
     <part name="parameters" element="tns:mtrproarqc" />
+  </message>
+  <message name="mtrproarqcResponse">
+    <part name="parameters" element="tns:mtrproarqcResponse" />
   </message>
   <portType name="ProcessAdminServices">
     <operation name="mtrproarqc">

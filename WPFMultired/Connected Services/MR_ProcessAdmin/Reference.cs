@@ -197,6 +197,8 @@ namespace WPFMultired.MR_ProcessAdmin {
         
         private string o_NOMBRECAJEROORIGENField;
         
+        private string o_SAFKEYField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string O_CODIGOERROR {
@@ -398,6 +400,18 @@ namespace WPFMultired.MR_ProcessAdmin {
             set {
                 this.o_NOMBRECAJEROORIGENField = value;
                 this.RaisePropertyChanged("O_NOMBRECAJEROORIGEN");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
+        public string O_SAFKEY {
+            get {
+                return this.o_SAFKEYField;
+            }
+            set {
+                this.o_SAFKEYField = value;
+                this.RaisePropertyChanged("O_SAFKEY");
             }
         }
         

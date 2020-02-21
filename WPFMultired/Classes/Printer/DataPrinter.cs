@@ -13,7 +13,7 @@ namespace WPFMultired.Classes.Printer
 
         public string value { get; set; }
 
-        public string image { get; set; }
+        public Image image { get; set; }
 
         public int x { get; set; }
 

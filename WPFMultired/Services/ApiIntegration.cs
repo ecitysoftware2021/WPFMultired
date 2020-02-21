@@ -822,7 +822,7 @@ namespace WPFMultired.Services
                             dataProcess.NAME_USER = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRECAJERO, keyDesencript), 2);
                             dataProcess.DATE = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FECHAPROCESO, keyDesencript), 2), "yyyyMMdd", null).ToString("yyyy/MM/dd");
                             dataProcess.TIME = DateTime.ParseExact(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HORATRANSACCION, keyDesencript), 2), "HHmmssff", null).ToString("HH:mm:ss");
-
+                            dataProcess.SAFKEY = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_SAFKEY, keyDesencript), 2);
                             return new Response { Data = dataProcess };
                         }
                     }

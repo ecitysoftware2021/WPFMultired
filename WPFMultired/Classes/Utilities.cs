@@ -149,7 +149,7 @@ namespace WPFMultired.Classes
 
                     var data = new List<DataPrinter>()
                         {
-                            new DataPrinter{ image = GetConfiguration("ImageBoucher"),  x = 2, y = 2 },
+                            new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 2, y = 2 },
                             new DataPrinter{ brush = color, font = fontKey, value = "NIT:", x = xKey, y = y+=120 },
                             new DataPrinter{ brush = color, font = fontValue,
                                 value = GetConfiguration("NIT") ?? string.Empty, x = x, y = y },
@@ -215,7 +215,7 @@ namespace WPFMultired.Classes
 
                 var data = new List<DataPrinter>()
                 {
-                    new DataPrinter{ image = GetConfiguration("ImageBoucher"),  x = 5, y= y },
+                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 5, y= y },
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
@@ -267,12 +267,14 @@ namespace WPFMultired.Classes
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Transacción : ", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = 200, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_____________________________", x = xKey, y = y += 30 });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_____________________________", x = 150, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "__________________________", x = xKey, y = y += 50 });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "__________________________", x = 150, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 150, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", x = 150, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", x = 0, y = y + 50});
+
+                data.Add(new DataPrinter { image = DownloadImage(dataControl.SAFKEY) ?? Image.FromFile(GetConfiguration("ImageBoucher")), x = 100, y = y +=30 });
 
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
                 AdminPayPlus.PrintService.Start(data);
@@ -403,6 +405,38 @@ namespace WPFMultired.Classes
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
             }
             return string.Empty;
+        }
+
+
+        public static Image DownloadImage(string patchFile)
+        {
+            try
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    var response = webClient.DownloadData(patchFile);
+                    var contentType = webClient.ResponseHeaders["Content-Type"];
+
+                    if (response != null && contentType != null &&
+                        contentType.StartsWith("application/pdf", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using (var ms = new MemoryStream(response))
+                        {
+                            var qrImage = Image.FromStream(ms);
+
+                            if (qrImage != null)
+                            {
+                                return qrImage;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
+            }
+            return null;
         }
     }
 }
