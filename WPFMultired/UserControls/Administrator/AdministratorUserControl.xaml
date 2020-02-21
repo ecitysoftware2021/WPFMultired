@@ -24,7 +24,7 @@
 
         <Grid Grid.Row="1">
             <TextBlock x:Name="txtTittle"
-                Text="MODO ADMINISTRADOR"
+                Text="Modo Administrador"
                 FontSize="50"
                 TextAlignment="Center"
                 Margin="0,60,0,0"

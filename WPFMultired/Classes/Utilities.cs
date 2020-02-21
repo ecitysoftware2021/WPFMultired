@@ -212,7 +212,7 @@ namespace WPFMultired.Classes
                 int x = 150;
                 int xKey = 10;
                 int xMax = 230;
-                int multiplier = 5;
+                int multiplier = 4;
 
                 var data = new List<DataPrinter>()
                 {
@@ -268,14 +268,13 @@ namespace WPFMultired.Classes
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Transacción : ", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = 200, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_______________________", x = xKey, y = y += 50 });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_______________________", x = 150, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_____________________", x = 1, y = y += 50 });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "_____________________", x = 150, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 150, y = y });
 
                 data.Add(new DataPrinter { image = DownloadImage(dataControl.SAFKEY) ?? Image.FromFile(GetConfiguration("ImageBoucher")), x = 30, y = y +=30 });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += 100 });
                 AdminPayPlus.PrintService.Start(data);
             }
             catch (Exception ex)
