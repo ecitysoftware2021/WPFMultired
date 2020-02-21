@@ -214,6 +214,7 @@ namespace WPFMultired.Classes
                 int xMax = 250;
                 float multiplier = (xMax / 48);
                 int xLengthDeno = 70;
+                int xLengthQua = 150;
 
                 var data = new List<DataPrinter>()
                 {
@@ -234,7 +235,7 @@ namespace WPFMultired.Classes
 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = dataControl.NAME_BANCK, x = 105, y = y += 15 });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat(dataControl.NAME_AGENCY, " (", dataControl.CODE_AGENCY, ")"), x = 95, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontKey, value = "Dm", x = 25, y = y += sum });
+                data.Add(new DataPrinter { brush = color, font = fontKey, value = "ACM", x = 25, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Tran", x = 75, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Fecha", x = 135, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Hora", x = 205, y = y });
@@ -254,20 +255,20 @@ namespace WPFMultired.Classes
                 foreach (var item in dataControl.DATALIST_FILTER())
                 {
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Denominacion), x = (xLengthDeno - (string.Format("{0:C0}", item.Denominacion).Length * multiplier)), y = y += 18 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = item.Quantity.ToString(), x = 130, y = y });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = (xMax - (string.Format("{0:C0}", item.Total).Length * multiplier )), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = item.Quantity.ToString(), x = (xLengthDeno - (string.Format("{0:C0}", item.Quantity).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = (xLengthQua - (string.Format("{0:C0}", item.Total).Length * multiplier )), y = y });
                 }
 
                 if (dataControl.TYPE == ETypeAdministrator.Upload)
                 {
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Aprovisionado  : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = 200, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = (xLengthQua - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Actual : ", x = xKey, y = y += 20 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_CURRENT), x = 200, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_CURRENT), x = (xLengthQua - (string.Format("{0:C0}", dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
                 }
                 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Transacción : ", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = 200, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = (xLengthQua - (string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "____________________", x = 1, y = y += 50 });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "______________________", x = 140, y = y });
