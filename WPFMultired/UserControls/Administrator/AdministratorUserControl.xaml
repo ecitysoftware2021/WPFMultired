@@ -136,13 +136,13 @@
                                     Text="{Binding VALUE, StringFormat={}{0:C0}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
+                                    TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="0,0,0,0"
                                     Foreground="#FF2F302E"
                                     Width="500"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Right"
                                     Grid.Column="1" >
                                 <Run Text=" / " FontWeight="Bold" />
                                 <Run Text="{Binding CASSETTE}" Foreground="#FF87BB2B" />
@@ -152,12 +152,12 @@
                                     Text="{Binding AMOUNT}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
+                                    TextAlignment="Center"
                                     TextWrapping="Wrap"
                                     Margin="20,0,0,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Right"
                                     Grid.Column="2">
                                 <Run Text=" / " FontWeight="Bold" />
                                 <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF87BB2B" />
@@ -171,7 +171,7 @@
                                     Margin="20,0,0,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Right"
                                     Grid.Column="3">
                             </TextBlock>
                         </Grid>

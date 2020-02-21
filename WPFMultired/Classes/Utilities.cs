@@ -212,7 +212,7 @@ namespace WPFMultired.Classes
                 int x = 150;
                 int xKey = 10;
                 int xMax = 250;
-                int multiplier = 5;
+                float multiplier = (230/48);
                 int xLengthDeno = 70;
 
                 var data = new List<DataPrinter>()
@@ -269,10 +269,10 @@ namespace WPFMultired.Classes
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Transacción : ", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = 200, y = y });
 
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "____________________", x = 1, y = y += 50 });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "____________________", x = 130, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "___________________", x = 1, y = y += 50 });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "___________________", x = 140, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 130, y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 140, y = y });
 
                 data.Add(new DataPrinter { image = DownloadImage(dataControl.SAFKEY) ?? Image.FromFile(GetConfiguration("ImageBoucher")), x = 30, y = y +=30 });
 
