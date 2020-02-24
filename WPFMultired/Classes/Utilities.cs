@@ -254,21 +254,21 @@ namespace WPFMultired.Classes
 
                 foreach (var item in dataControl.DATALIST_FILTER())
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Denominacion), x = (xLengthDeno - (string.Format("{0:C0}", item.Denominacion).Length * multiplier)), y = y += 18 });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", item.Denominacion), x = (xLengthDeno - (string.Format("{0:C2}", item.Denominacion).Length * multiplier)), y = y += 18 });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = item.Quantity.ToString(), x = (xLengthQua - (string.Format("{0:C0}", item.Quantity).Length * 3)), y = y });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.Total), x = (xMax - (string.Format("{0:C0}", item.Total).Length * multiplier )), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", item.Total), x = (xMax - (string.Format("{0:C2}", item.Total).Length * multiplier )), y = y });
                 }
 
                 if (dataControl.TYPE == ETypeAdministrator.Upload)
                 {
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Aprovisionado  : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", dataControl.TOTAL), x = (xMax - (string.Format("{0:C2}", dataControl.TOTAL).Length * multiplier)), y = y });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Actual : ", x = xKey, y = y += 20 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C2}", dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
                 }
                 
                 data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Transacción : ", x = xKey, y = y += sum });
-                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
+                data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C2}", dataControl.TOTAL + dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
 
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "____________________", x = 1, y = y += 50 });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "______________________", x = 140, y = y });
