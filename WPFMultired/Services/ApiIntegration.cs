@@ -23,6 +23,7 @@ using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
 using WPFMultired.DataModel;
+using System.Globalization;
 
 namespace WPFMultired.Services
 {
@@ -752,11 +753,11 @@ namespace WPFMultired.Services
                                 { 
                                     AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
                                     AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)),
-                                    VALUE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(".", "")),
+                                    VALUE = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US")),
                                     DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
                                     TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) + 
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) * 
-                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
+                                    decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US")),
                                     CASSETTE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CASSET, keyDesencript), 2)),
                                     CODE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2),
                                     IMAGE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2) == "B" ? ImagesUrlResource.ImgBill : ImagesUrlResource.ImgCoin,
@@ -767,10 +768,10 @@ namespace WPFMultired.Services
                                 });
 
                                 result.TOTAL += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
-                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", ""));
+                                    decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"));
 
                                 result.TOTAL_CURRENT += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)) *
-                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", ""));
+                                    decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"));
                             }
 
                             return new Response { Data = result };

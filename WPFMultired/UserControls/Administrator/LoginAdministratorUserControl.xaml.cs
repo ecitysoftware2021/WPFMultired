@@ -54,6 +54,8 @@ namespace WPFMultired.UserControls.Administrator
 
             this.DataContext = viewModel;
             txt_qr.Focus();
+
+            Search();
         }
 
         #endregion
