@@ -133,7 +133,7 @@
                                Grid.Column="0"/>
 
                             <TextBlock 
-                                    Text="{Binding VALUE, StringFormat={}{0:C0}}"
+                                    Text="{Binding VALUE, StringFormat={}{0:C2}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Center"
@@ -163,7 +163,7 @@
                                 <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF87BB2B" />
                             </TextBlock>
                             <TextBlock 
-                                    Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C0}}"
+                                    Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Right"
@@ -191,7 +191,7 @@
                     Text="Valor Total:"/>
 
             <TextBlock Name="txtValor"
-                    Text="{Binding TOTAL, StringFormat={}{0:C0}}"
+                    Text="{Binding TOTAL, StringFormat={}{0:C2}}"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="0,80,0,0"
