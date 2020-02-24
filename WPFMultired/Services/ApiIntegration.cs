@@ -752,7 +752,7 @@ namespace WPFMultired.Services
                                 { 
                                     AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
                                     AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)),
-                                    VALUE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(",", "")),
+                                    VALUE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2).Replace(".", "")),
                                     DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
                                     TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) + 
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) * 
