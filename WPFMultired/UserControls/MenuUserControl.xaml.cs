@@ -41,6 +41,7 @@ namespace WPFMultired.UserControls
                     viewModel.DataList = AdminPayPlus.DataPayPlus.ListTypeTransactions;
                     viewModel.ViewList.Source = viewModel.DataList;
                     lv_type_transactions.DataContext = viewModel.ViewList;
+                    lv_type_transactions.Items.Refresh();
                 }
                 else
                 {

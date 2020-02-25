@@ -71,7 +71,8 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    Finish(result);
+                    Utilities.navigator.Navigate(UserControlView.Menu);
+                    // Finish(result);
                 }
             }
             catch (Exception ex)

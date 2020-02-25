@@ -398,13 +398,16 @@ namespace WPFMultired.Classes
         {
             try
             {
-                return new WebClient().DownloadString(GetConfiguration("UrlGetIp"));
+                using (var client = new  WebClient())
+                {
+                    return client.DownloadString(GetConfiguration("UrlGetIp"));
+                }
             }
             catch (Exception ex)
             {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
+               // Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
             }
-            return string.Empty;
+            return GetConfiguration("IpDefoult");
         }
 
 
