@@ -35,7 +35,7 @@ namespace WPFMultired.UserControls
                     DataList = new List<ItemList>()
                 };
 
-                if (AdminPayPlus.DataPayPlus.ListTypeTransactions.Count > 0)
+                if (AdminPayPlus.DataPayPlus.ListTypeTransactions != null && AdminPayPlus.DataPayPlus.ListTypeTransactions.Count > 0)
                 {
                     this.DataContext = viewModel;
                     viewModel.DataList = AdminPayPlus.DataPayPlus.ListTypeTransactions;

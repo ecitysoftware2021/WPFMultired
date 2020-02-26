@@ -156,7 +156,6 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Ma
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PaymentUserControl.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\SussesUserControl.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\MasterWindow.g.cs
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\ModalWindow.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\App.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired_MarkupCompile.cache
@@ -173,7 +172,6 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Ma
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PaymentUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\SussesUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\MasterWindow.baml
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\ModalWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.g.resources
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.Properties.Resources.resources
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.Resources.CommonResource.resources
@@ -330,3 +328,18 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csp
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.Resources.ConstantsResource.resources

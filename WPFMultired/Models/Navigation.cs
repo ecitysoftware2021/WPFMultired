@@ -70,6 +70,9 @@ namespace WPFMultired.Models
                     case UserControlView.Menu:
                         View = new MenuUserControl();
                         break;
+                    case UserControlView.DataList:
+                        View = new DataListUserControl((Transaction)data);
+                        break;
                 }
 
                 if (initTimer)

@@ -419,7 +419,7 @@ namespace WPFMultired.Services
                             I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
-                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
                             I_NUMERODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),

@@ -56,7 +56,8 @@ namespace WPFMultired.Classes
         Config,
         Admin,
         Certificates,
-        PrintFile
+        PrintFile,
+        DataList
     }
 
     public enum ETransactionState

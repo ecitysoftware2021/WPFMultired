@@ -12,10 +12,10 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250" />
+            <RowDefinition Height="150" />
             <RowDefinition Height="250" />
             <RowDefinition Height="80" />
-            <RowDefinition Height="700" />
+            <RowDefinition Height="1200" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -24,8 +24,8 @@
                    Name="btn_back"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"
-                   Width="250"
-                   Margin="20,0,0,20"
+                   Width="200"
+                   Margin="20,0,0,0"
                    TouchDown="Btn_back_TouchDown" />
 
             <TextBlock x:Name="tbTimer"
@@ -41,16 +41,16 @@
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"
                    Grid.Column="4"
-                   Width="250"
-                   Margin="0,0,20,20"
+                   Width="200"
+                   Margin="0,0,20,0"
                    TouchDown="Btn_exit_TouchDown" />
         </Grid>
 
         <Grid Grid.Row="1">
             <TextBlock Text="{Binding Tittle}"
-                       Foreground="#FF71AB01"
-                       Margin="75,0,0,30"
-                       HorizontalAlignment="Left"
+                       Foreground="#FF0D679A"
+                       Margin="0,70,0,0"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Name="lbl_tittle"
                        FontWeight="Bold"
@@ -58,8 +58,8 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <TextBlock Text="Productos"
-                       Foreground="Red"
+            <TextBlock Text="Se leccione un producto"
+                       Foreground="#FF80BC4A"
                        Margin="0,0,0,0"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Bottom"
@@ -91,14 +91,14 @@
                             VerticalAlignment="Top"
                             Margin="0,0,0,0"
                             Width="1030"
-                            Height="250" >
+                            Height="150" >
 
                             <TextBlock Text="{Binding Item1}"
                                        FontSize="45"
                                        FontFamily="Arial"
                                        TextAlignment="Justify"
                                        TextWrapping="Wrap"
-                                       Margin="50,50,0,0"
+                                       Margin="50,10,0,0"
                                        Foreground="#FF104B6D"
                                        Height="60"
                                        Width="700"
@@ -111,25 +111,25 @@
                                        FontFamily="Arial"
                                        TextAlignment="Justify"
                                        TextWrapping="Wrap"
-                                       Margin="50,0,0,10"
+                                       Margin="50,10,0,0"
                                        Foreground="#FF104B6D"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Grid.Column="0" />
 
                             <Image  Source="/Images/Others/img-icon-select.png"
-                                    Width="90"
-                                    Height="90"
-                                    Margin="0,40,70,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"/>
-
-                            <Image  Source="/Images/Others/img-select.png"
-                                    Width="200"
-                                    Height="50"
-                                    Margin="0,50,30,0"
+                                    Width="70"
+                                    Height="70"
+                                    Margin="0,10,75,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"/>
+
+                            <Image  Source="/Images/Others/img-select.png"
+                                    Width="150"
+                                    Height="50"
+                                    Margin="0,0,30,30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

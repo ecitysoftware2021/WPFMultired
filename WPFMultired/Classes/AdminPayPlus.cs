@@ -192,7 +192,15 @@ namespace WPFMultired.Classes
                 var response = await api.CallApi("InitPaypad");
                 if (response != null)
                 {
-                    _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
+                    var result = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
+
+                    _dataPayPlus.State = result.State;
+                    _dataPayPlus.StateAceptance = result.StateAceptance;
+                    _dataPayPlus.StateDispenser = result.StateDispenser;
+                    _dataPayPlus.StateBalanece = result.StateBalanece;
+                    _dataPayPlus.StateUpload = result.StateUpload;
+                    _dataPayPlus.Message = result.Message;
+                    _dataPayPlus.ListImages = result.ListImages;
                     
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
                     var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);

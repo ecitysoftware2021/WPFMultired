@@ -35,7 +35,7 @@
                     Background="Transparent"
                     BorderBrush="Transparent"
                     HorizontalAlignment="Center" 
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     SelectionChanged="Lv_type_transactions_SelectionChanged"
                     ItemsSource="{Binding}">
 
@@ -52,13 +52,13 @@
                             VerticalAlignment="Top"
                             Background="Transparent"
                             Margin="0,0,0,0"
-                            Width="400"
-                            Height="200">
+                            Width="550"
+                            Height="250">
 
                             <Image Source="{Binding ImageSourse}"
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center" 
-                                   Height="230" 
+                                   Height="250" 
                                    Stretch="Uniform"
                                    Tag="{Binding Item3}" /> 
                         </Grid>

@@ -98,14 +98,15 @@ namespace WPFMultired.UserControls
                         if (response != null)
                         {
                             transaction = (Transaction)response.Data;
-
                             Utilities.CloseModal();
+                            Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
                         }
                         else
                         {
                             Utilities.CloseModal();
-                            Utilities.ShowModal(MessageResource.ErrorTransaction, EModalType.Error);
-                            Utilities.navigator.Navigate(UserControlView.Main);
+                            Utilities.ShowModal(MessageResource.ErrorCoincidences, EModalType.Error);
+                            viewModel.Value1 = string.Empty;
+                            //Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
                     catch (Exception ex)
