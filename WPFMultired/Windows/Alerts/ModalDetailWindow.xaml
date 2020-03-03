@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ModalDetailWindow"         
         WindowStyle="None"
+        xmlns:k="clr-namespace:WPFMultired.Keyboard"
         AllowsTransparency="True"
         Topmost="False"
         WindowState="Maximized"
@@ -22,7 +23,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="250,0,250,0">
+        <Grid Grid.Row="1" Margin="200,0,200,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/Backgrounds/bg-alert-details.png"/>
             </Grid.Background>
@@ -42,16 +43,17 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        FontSize="30"
+                       Width="500"
                        Margin="0,160,0,0"
                        TextAlignment="Center"
                        FontWeight="Bold"
                        TextWrapping="Wrap"
-                       Foreground="Red" />
+                       Foreground="#FF80BC4A" />
 
-            <Grid Margin="0,250,0,200">
+            <Grid Margin="0,250,0,250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -73,16 +75,17 @@
                             Grid.Row="1" 
                             TextAlignment="Center"
                             Margin="0,0,0,0"
+                            FontWeight="Bold"
                             Foreground="Black"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Center" />
                 </Grid>
 
-                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding VisibilityQr}">
+                <Grid Grid.Row="1" Grid.RowSpan="2" Visibility="{Binding VisibilityQr}">
                     <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-qr-scan.gif"
                            Name="qr_gif"
                            HorizontalAlignment="Center"
-                           Height="280" 
+                           Height="200" 
                            Margin="0,0,0,0"
                            VerticalAlignment="Top"
                            Width="280" />
@@ -115,11 +118,26 @@
                              Width="400"
                              Height="60"
                              FontSize="35"
+                             Visibility="{Binding VisibilityAmount}"
                              Margin="0,0,0,0"
                              TextAlignment="Center"                    
                              FontWeight="Bold"
-                             TextWrapping="Wrap"
-                             TabIndex="1" />
+                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                             TabIndex="0" />
+
+                    <TextBox Name="txt_input"
+                             Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             Width="400"
+                             Height="60"
+                             FontSize="35"
+                             Visibility="{Binding VisibilityTxtImput}"
+                             Margin="0,0,0,0"
+                             TextAlignment="Center"                    
+                             FontWeight="Bold"
+                             k:TouchScreenKeyboard.TouchScreenKeyboard="True"
+                             TabIndex="0" />
                 </Grid>
                 
             </Grid>
@@ -138,7 +156,8 @@
                    Margin="0,0,50,60"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"
-                   TouchDown="Btn_finish_TouchDown"/>
+                   TouchDown="Btn_finish_TouchDown"
+                   Visibility="{Binding VisibilityAcept}"/>
             
         </Grid>
     </Grid>

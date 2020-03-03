@@ -55,14 +55,19 @@ namespace WPFMultired.Windows.Alerts
                         viewModel.VisibilityComision = Visibility.Visible;
                         viewModel.Commission = transaction.Products[0].AmountCommission;
                         viewModel.VisibilityQr = Visibility.Hidden;
+                        viewModel.VisibilityAcept = Visibility.Visible;
                         viewModel.IsReadQr = true;
                         break;
                     case ETypeDetailModel.Withdrawal:
                         viewModel.Tittle = "Detalle";
-                        viewModel.VisibilityInput = Visibility.Hidden;
+                        viewModel.VisibilityInput = Visibility.Visible;
                         viewModel.VisibilityComision = Visibility.Visible;
                         viewModel.Commission = transaction.Products[0].AmountCommission;
                         viewModel.VisibilityQr = Visibility.Hidden;
+                        viewModel.VisibilityAcept = Visibility.Visible;
+                        viewModel.VisibilityAmount = Visibility.Visible;
+                        viewModel.VisibilityTxtImput = Visibility.Hidden;
+                        viewModel.LblInput = "Ingrese el valor a retirar";
                         viewModel.IsReadQr = true;
                         break;
                     case ETypeDetailModel.CodeOTP:
@@ -70,7 +75,11 @@ namespace WPFMultired.Windows.Alerts
                         viewModel.VisibilityInput = Visibility.Visible;
                         viewModel.VisibilityComision = Visibility.Hidden;
                         viewModel.VisibilityQr = Visibility.Hidden;
+                        viewModel.VisibilityAmount = Visibility.Hidden;
+                        viewModel.VisibilityTxtImput = Visibility.Visible;
+                        viewModel.LblInput = "Ingrese el codigo OPT";
                         viewModel.IsReadQr = true;
+                        viewModel.VisibilityAcept = Visibility.Visible;
                         break;
                     case ETypeDetailModel.Qr:
                         viewModel.Tittle = "QR";
@@ -78,10 +87,14 @@ namespace WPFMultired.Windows.Alerts
                         viewModel.VisibilityComision = Visibility.Hidden;
                         viewModel.VisibilityQr = Visibility.Visible;
                         viewModel.IsReadQr = false;
+                        viewModel.Message = "Si tienes un codigo QR hacercalo al lector para iniciar la transaccion, de lo contrario presiona cancelar";
+                        viewModel.VisibilityAcept = Visibility.Hidden;
                         break;
                     default:
                         break;
                 }
+
+                this.DataContext = viewModel;
             }
             catch (Exception ex)
             {
@@ -113,7 +126,7 @@ namespace WPFMultired.Windows.Alerts
             }
         }
 
-        private async void ProcessData()
+        private void ProcessData()
         {
             try
             {
@@ -126,6 +139,7 @@ namespace WPFMultired.Windows.Alerts
                     case ETypeDetailModel.Withdrawal:
                         if (viewModel.Amount >= transaction.Product.AmountMin && viewModel.Amount <= transaction.Product.AmountMax)
                         {
+                            transaction.Amount = viewModel.Amount;
                             if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
                             {
                                 InitView(ETypeDetailModel.CodeOTP);
@@ -137,9 +151,13 @@ namespace WPFMultired.Windows.Alerts
                         }
                         break;
                     case ETypeDetailModel.CodeOTP:
-                        if (viewModel.CallService(transaction))
+                        if (!string.IsNullOrEmpty(viewModel.TxtInput))
                         {
-                            SendData();
+                            transaction.CodeOTP = viewModel.TxtInput;
+                            if (viewModel.CallService(transaction))
+                            {
+                                SendData();
+                            }
                         }
                         break;
                     case ETypeDetailModel.Qr:

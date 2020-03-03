@@ -209,15 +209,15 @@ namespace WPFMultired.Classes
                     {
                         if ((int)validateStatus.Data == (int)ETypeAdministrator.Balancing)
                         {
-                            _dataPayPlus.StateBalanece = true;
+                            _dataPayPlus.StateBalanece = false;
                         }
                         else if ((int)validateStatus.Data == (int)ETypeAdministrator.Upload)
                         {
-                            _dataPayPlus.StateUpload = true;
+                            _dataPayPlus.StateUpload = false;
                         }
                         else
                         {
-                            _dataPayPlus.StateDiminish = true;
+                            _dataPayPlus.StateDiminish = false;
                         }
                     }
 

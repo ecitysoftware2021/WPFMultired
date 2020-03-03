@@ -331,15 +331,15 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Me
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.g.cs
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.baml
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.Resources.ConstantsResource.resources
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs

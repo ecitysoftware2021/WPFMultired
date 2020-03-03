@@ -133,6 +133,7 @@ namespace WPFMultired.UserControls
             {
                 if ((ItemList)lv_data_list.SelectedItem != null)
                 {
+                    transaction.Product = (Product)((ItemList)lv_data_list.SelectedItem).Data;
                     ShowModal();
                 }
             }
@@ -149,7 +150,7 @@ namespace WPFMultired.UserControls
                 if (!Utilities.ShowModalDetails(transaction, 
                     (transaction.Type == ETransactionType.Pay ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
                 {
-                    Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
+                    //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
                 }
             }
             catch (Exception ex)

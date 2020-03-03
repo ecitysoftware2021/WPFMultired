@@ -139,6 +139,78 @@ namespace WPFMultired.ViewModel
             }
         }
 
+        private Visibility _visibilityAcept;
+
+        public Visibility VisibilityAcept
+        {
+            get
+            {
+                return _visibilityAcept;
+            }
+            set
+            {
+                if (_visibilityAcept != value)
+                {
+                    _visibilityAcept = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityAcept)));
+                }
+            }
+        }
+
+        private Visibility _visibilityAmount;
+
+        public Visibility VisibilityAmount
+        {
+            get
+            {
+                return _visibilityAmount;
+            }
+            set
+            {
+                if (_visibilityAmount != value)
+                {
+                    _visibilityAmount = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityAmount)));
+                }
+            }
+        }
+
+        private Visibility _visibilityTxtImput;
+
+        public Visibility VisibilityTxtImput
+        {
+            get
+            {
+                return _visibilityTxtImput;
+            }
+            set
+            {
+                if (_visibilityTxtImput != value)
+                {
+                    _visibilityTxtImput = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityTxtImput)));
+                }
+            }
+        }
+
+        private string _txtInput;
+
+        public string TxtInput
+        {
+            get
+            {
+                return _txtInput;
+            }
+            set
+            {
+                if (_txtInput != value)
+                {
+                    _txtInput = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TxtInput)));
+                }
+            }
+        }
+
         private string _lblInput;
 
         public string LblInput
