@@ -364,5 +364,24 @@ namespace WPFMultired.UserControls
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
             }
         }
+
+        private void ShowModal()
+        {
+            try
+            {
+                if (Utilities.ShowModal("Desea realizar cashback", EModalType.Information))
+                {
+                    if (!Utilities.ShowModalDetails(transaction, ETypeDetailModel.Withdrawal))
+                    {
+                        Utilities.ShowModal(MessageResource.NoContinueTransaction, EModalType.Error);
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
     }
 }
