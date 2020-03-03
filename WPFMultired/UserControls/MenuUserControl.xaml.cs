@@ -69,12 +69,32 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((ItemList)lv_type_transactions.SelectedItem).Item3);
+                if ((ItemList)lv_type_transactions.SelectedItem != null)
+                {
+                    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((ItemList)lv_type_transactions.SelectedItem).Item3);
+                }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
+        }
+
+        private void ShowModal()
+        {
+            try
+            {
+                Utilities.ShowModalDetails(null, ETypeDetailModel.Qr);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ShowModal();
         }
     }
 }

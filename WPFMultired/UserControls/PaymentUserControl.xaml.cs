@@ -107,8 +107,14 @@ namespace WPFMultired.UserControls
                         {
                             if (!this.paymentViewModel.StatePay)
                             {
+                                if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
+                                {
+                                    this.paymentViewModel.ImgContinue = Visibility.Visible;
+                                    this.paymentViewModel.ImgCancel = Visibility.Hidden;
+                                }
+
                                 paymentViewModel.ValorIngresado += enterValue.Item1;
-                                paymentViewModel.RefreshListDenomination(int.Parse(enterValue.Item1.ToString()), 1);
+                                paymentViewModel.RefreshListDenomination(int.Parse(enterValue.Item1.ToString()), 1, enterValue.Item2);
 
                                 AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, enterValue.Item1, 2, 1, enterValue.Item2, string.Empty);
                                 LoadView();
@@ -251,10 +257,23 @@ namespace WPFMultired.UserControls
                     transaction.State = statePay;
 
                     AdminPayPlus.ControlPeripherals.ClearValues();
-
+                    
                     if (transaction.IdTransactionAPi > 0)
                     {
-                        Utilities.navigator.Navigate(UserControlView.PrintFile, false, this.transaction);
+                        Task.Run(() =>
+                        {
+                            var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
+                            Utilities.CloseModal();
+                            if (response != null)
+                            {
+                                Utilities.navigator.Navigate(UserControlView.PrintFile, false, this.transaction);
+                            }
+                            else
+                            {
+
+                            }
+
+                        });
                     }
                     else
                     {
@@ -270,35 +289,6 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private void BtnConsult_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
-        {
-            try
-            {
-                this.paymentViewModel.ImgContinue = Visibility.Hidden;
-
-                this.paymentViewModel.ImgCancel = Visibility.Hidden;
-
-                if (Utilities.ShowModal(MessageResource.ConsignAmount, EModalType.Information))
-                {
-                    this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
-
-                    AdminPayPlus.ControlPeripherals.StopAceptance();
-
-                    SavePay(ETransactionState.Success);
-                }
-                else
-                {
-                    this.paymentViewModel.ImgContinue = Visibility.Visible;
-
-                    this.paymentViewModel.ImgCancel = Visibility.Hidden;
                 }
             }
             catch (Exception ex)
@@ -345,6 +335,33 @@ namespace WPFMultired.UserControls
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void BtnConsign_StylusDown(object sender, System.Windows.Input.StylusDownEventArgs e)
+        {
+            //StopTimer();
+
+            this.paymentViewModel.ImgContinue = Visibility.Hidden;
+
+            this.paymentViewModel.ImgCancel = Visibility.Hidden;
+
+            if (Utilities.ShowModal("¿Desea consignar el monto ingresado?", EModalType.Information))
+            {
+                this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
+
+                AdminPayPlus.ControlPeripherals.StopAceptance();
+                AdminPayPlus.ControlPeripherals.callbackLog = null;
+
+                SavePay();
+            }
+            else
+            {
+               // InitTimer();
+
+                this.paymentViewModel.ImgContinue = Visibility.Visible;
+
+                this.paymentViewModel.ImgCancel = Visibility.Hidden;
             }
         }
     }

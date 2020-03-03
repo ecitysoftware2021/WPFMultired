@@ -272,6 +272,7 @@
     <Compile Include="ViewModel\DataListViewModel.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ModalDetailsViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
     <Compile Include="Resources\CommonResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -289,8 +290,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Object\RequestApi.cs" />
-    <Compile Include="Windows\Alerts\ModalQRWindow.xaml.cs">
-      <DependentUpon>ModalQRWindow.xaml</DependentUpon>
+    <Compile Include="Windows\Alerts\ModalDetailWindow.xaml.cs">
+      <DependentUpon>ModalDetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MasterWindow.xaml.cs">
       <DependentUpon>MasterWindow.xaml</DependentUpon>
@@ -466,17 +467,14 @@
     <Resource Include="Images\Buttons\btn-cancel-alert.png" />
     <Resource Include="Images\Backgrounds\bg-succes-pay.png" />
     <Resource Include="Images\Gif\gif-preload.gif" />
-    <Resource Include="Images\Backgrounds\bg-print-file.png" />
     <Resource Include="Images\Buttons\btn-wait-mony.png" />
     <Resource Include="Images\Buttons\btn-cancel.png" />
-    <Resource Include="Images\Backgrounds\bg-pay.png" />
     <Resource Include="Images\Buttons\btn-back.png" />
     <Resource Include="Images\Buttons\btn-pay.png" />
     <Resource Include="Images\Buttons\btn-continue.png" />
     <Resource Include="Images\Backgrounds\bg-detail.png" />
     <Resource Include="Images\Buttons\btn-exit.png" />
     <Resource Include="Images\Backgrounds\bg-file.png" />
-    <Resource Include="Images\Backgrounds\bg-search.png" />
     <Resource Include="Images\Backgrounds\bg-alert-blanck.png" />
     <Resource Include="Images\Backgrounds\bg-alert-error.png" />
     <Resource Include="Images\Backgrounds\bg-alert-info.png" />
@@ -546,7 +544,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Alerts\ModalQRWindow.xaml">
+    <Page Include="Windows\Alerts\ModalDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -754,9 +752,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-consult.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Buttons\btn-consult.png" />
   </ItemGroup>
   <ItemGroup>
@@ -779,6 +774,12 @@
     <Resource Include="Images\Resources\JFK.png" />
     <Resource Include="Images\Resources\MUL.png" />
     <Resource Include="Images\Resources\RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bg-alert-details.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-continue-pay.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

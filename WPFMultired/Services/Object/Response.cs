@@ -230,4 +230,28 @@ namespace WPFMultired.Services.Object
         }
     }
 
+    public class DataQR
+    {
+        public string TIPTRN { get; set; }
+        public string DESTRN { get; set; }
+        public string TOKTRN { get; set; }
+        public string REFTRN { get; set; }
+        public string VLRTRN { get; set; }
+        public string CTANRO { get; set; }
+        public string CODSIS { get; set; }
+        public string CODPRO { get; set; }
+        public string PARSER { get; set; }
+        public string NOMPRO { get; set; }
+        public string CTAMAS { get; set; }
+        public string COMISI { get; set; }
+        public string TIPDOC { get; set; }
+        public string NRONIT { get; set; }
+        public string NOMCLI { get; set; }
+        public string MONMAX { get; set; }
+        public string MONMIN { get; set; }
+        public string RESULT { get; set; }
+        public string ENTDST { get; set; }
+        public string NOMDST { get; set; }
+    }
+
 }

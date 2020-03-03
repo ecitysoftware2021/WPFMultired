@@ -202,7 +202,7 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        public void RefreshListDenomination(int denomination, int quantity)
+        public void RefreshListDenomination(int denomination, int quantity, string code)
         {
             try
             {

@@ -128,4 +128,11 @@ namespace WPFMultired.Classes
         Validate_Admin_QR = 15
     }
 
+    public enum ETypeDetailModel
+    {
+        Payment = 3,
+        Withdrawal = 1,
+        CodeOTP = 2,
+        Qr = 4,
+    }
 }

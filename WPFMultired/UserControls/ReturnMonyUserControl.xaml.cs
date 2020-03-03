@@ -33,7 +33,6 @@ namespace WPFMultired.UserControls
             OrganizeValues();
         }
 
-
         private void OrganizeValues()
         {
             try
@@ -152,21 +151,20 @@ namespace WPFMultired.UserControls
 
                     Task.Run(async () =>
                     {
-                        // transaction = await AdminPayPlus.ApiIntegration.NotifycCancelTransaction(transaction);
+                         var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
 
                         Utilities.CloseModal();
 
-                        //if (transaction.IdTransactionAPi > 0 && transaction.State == ETransactionState.Cancel)
-                        //{
-                        //    Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
-                        //}
-                        //else
-                        //{
-                        //    AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                        //    Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error);
-
-                        Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
-                        //}
+                        if (response != null)
+                        {
+                            transaction = (Transaction)response.Data;
+                            Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
+                        }
+                        else
+                        {
+                            AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
+                            Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error);
+                        }
                     });
 
                     Utilities.ShowModal(MessageResource.FinishTransaction, EModalType.Preload);

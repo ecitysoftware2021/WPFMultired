@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Models;
@@ -82,43 +78,6 @@ namespace WPFMultired.UserControls
             try
             {
                 bool alertResult = false;
-
-                
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private async void SendData()
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                    await AdminPayPlus.SaveTransactions(this.transaction, true);
-
-                    Utilities.CloseModal();
-
-                    if (this.transaction.IdTransactionAPi == 0)
-                    {
-                        Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
-                        Utilities.navigator.Navigate(UserControlView.Main);
-                    }
-                    else
-                    {
-                        if (transaction.Type == ETransactionType.Withdrawal)
-                        {
-                            Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
-                        }
-                        else
-                        {
-                            Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
-                        }
-                    }
-                });
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
             }
             catch (Exception ex)
             {
@@ -170,7 +129,33 @@ namespace WPFMultired.UserControls
 
         private void Lv_data_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                if ((ItemList)lv_data_list.SelectedItem != null)
+                {
+                    ShowModal();
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
 
+        private void ShowModal()
+        {
+            try
+            {
+                if (!Utilities.ShowModalDetails(transaction, 
+                    (transaction.Type == ETransactionType.Pay ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
+                {
+                    Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ namespace WPFMultired.Models
 
         private decimal _Total;
 
+        private string _Code;
+
         #endregion
 
         #region Properties
@@ -63,6 +65,18 @@ namespace WPFMultired.Models
             }
         }
 
+        public string Code
+        {
+            get { return _Code; }
+            set
+            {
+                if (_Code != value)
+                {
+                    _Code = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Code)));
+                }
+            }
+        }
         #endregion
     }
 }

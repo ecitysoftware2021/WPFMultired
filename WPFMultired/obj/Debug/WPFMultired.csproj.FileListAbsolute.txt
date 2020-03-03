@@ -291,7 +291,6 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Co
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PaymentUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\SussesUserControl.g.cs
-C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\MasterWindow.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\App.g.cs
@@ -314,7 +313,6 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Co
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PaymentUserControl.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\SussesUserControl.baml
-C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\MasterWindow.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.g.resources
@@ -343,3 +341,5 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Mo
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalQRWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.Resources.ConstantsResource.resources
+C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
+C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs

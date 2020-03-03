@@ -25,6 +25,8 @@ namespace WPFMultired.Models
 
         public string CodeCompany { get; set; }
 
+        public string CodeOTP { get; set; }
+
         public string TypeDocument { get; set; }
 
         public DateTime DateTransaction { get; set; }
@@ -46,6 +48,8 @@ namespace WPFMultired.Models
         public int StateNotification { get; set; }
 
         public List<Product> Products { get; set; }
+
+        public Product Product { get; set; }
 
         private decimal _Amount;
 

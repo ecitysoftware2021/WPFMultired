@@ -17,6 +17,7 @@ using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using WPFMultired.Windows;
+using WPFMultired.Windows.Alerts;
 
 namespace WPFMultired.Classes
 {
@@ -410,6 +411,29 @@ namespace WPFMultired.Classes
             return GetConfiguration("IpDefoult");
         }
 
+        public static bool ShowModalDetails(Transaction transaction, ETypeDetailModel type)
+        {
+            bool response = false;
+            try
+            {
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    var modalDetails = new ModalDetailWindow(transaction, type);
+                    modalDetails.ShowDialog();
+
+                    if (modalDetails.DialogResult.HasValue && modalDetails.DialogResult.Value)
+                    {
+                        response = true;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
+            }
+            GC.Collect();
+            return response;
+        }
 
         public static Image DownloadImage(string patchFile)
         {

@@ -230,10 +230,22 @@
              />
         </Grid>
         <Grid Grid.Row="4">
+
+            <Image x:Name="btnConsign"
+                   Source="../Images/Buttons/btn-continue-pay.png"
+                   Stretch="Fill"
+                   Width="450"
+                   Height="130"
+                   Visibility="{Binding ImgContinue}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="0,50,50,0" 
+                   StylusDown="BtnConsign_StylusDown" />
+            
             <Image x:Name="btnCancell"
                    Source="../Images/Buttons/btn-cancel.png"
-                   Width="400"
-                   Height="80"
+                   Width="330"
+                   Height="130"
                    Visibility="{Binding ImgCancel}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
@@ -244,7 +256,7 @@
             <Image Source="../Images/Buttons/btn-wait-mony.png" 
                    Stretch="Fill"
                    Width="450"
-                   Height="80"
+                   Height="130"
                    Visibility="{Binding ImgCambio}"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
