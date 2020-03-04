@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,7 +51,6 @@ namespace WPFMultired.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Amount)));
             }
         }
-
 
         private decimal _commission;
 
@@ -247,6 +247,24 @@ namespace WPFMultired.ViewModel
             }
         }
 
+        private string _messageError;
+
+        public string MessageError
+        {
+            get
+            {
+                return _messageError;
+            }
+            set
+            {
+                if (_messageError != value)
+                {
+                    _messageError = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MessageError)));
+                }
+            }
+        }
+
         private ETypeDetailModel _type;
 
         public ETypeDetailModel Type
@@ -261,6 +279,7 @@ namespace WPFMultired.ViewModel
                 {
                     _type = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Type)));
+                    ChangeModel();
                 }
             }
         }
@@ -269,11 +288,12 @@ namespace WPFMultired.ViewModel
 
         public bool CallService(Transaction transaction)
         {
-            Response response = null;
+            bool result = false;
             try
             {
                 Task.Run(async () =>
                 {
+                    Response response = null;
                     if (this.Type == ETypeDetailModel.Withdrawal)
                     {
                         response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Generate_OTP, transaction);
@@ -289,9 +309,16 @@ namespace WPFMultired.ViewModel
 
                     if (response != null)
                     {
-                        transaction = (Transaction)response.Data;
+                        if (response.Data != null)
+                        {
+                            transaction = (Transaction)response.Data;
+                            result = true;
+                        }
+                        else
+                        {
+                            MessageError = response.Message;
+                        }
                     }
-                    
 
                     Utilities.CloseModal();
                 });
@@ -302,7 +329,62 @@ namespace WPFMultired.ViewModel
             {
 
             }
-            return response != null ? true : false;
+            return result;
+        }
+
+        private void ChangeModel()
+        {
+            try
+            {
+                switch (Type)
+                {
+                    case ETypeDetailModel.Payment:
+                        Tittle = "Detalle";
+                        VisibilityInput = Visibility.Hidden;
+                        VisibilityComision = Visibility.Visible;
+                        VisibilityQr = Visibility.Hidden;
+                        VisibilityAcept = Visibility.Visible;
+                        IsReadQr = true;
+                        break;
+                    case ETypeDetailModel.Withdrawal:
+                        Tittle = "Detalle";
+                        VisibilityInput = Visibility.Visible;
+                        VisibilityComision = Visibility.Visible;
+                        VisibilityQr = Visibility.Hidden;
+                        VisibilityAcept = Visibility.Visible;
+                        VisibilityAmount = Visibility.Visible;
+                        VisibilityTxtImput = Visibility.Hidden;
+                        LblInput = "Ingrese el valor a retirar";
+                        IsReadQr = true;
+                        break;
+                    case ETypeDetailModel.CodeOTP:
+                        Tittle = "Codigo OTP";
+                        VisibilityInput = Visibility.Visible;
+                        VisibilityComision = Visibility.Hidden;
+                        VisibilityQr = Visibility.Hidden;
+                        VisibilityAmount = Visibility.Hidden;
+                        VisibilityTxtImput = Visibility.Visible;
+                        LblInput = "Ingrese el codigo OPT";
+                        IsReadQr = true;
+                        VisibilityAcept = Visibility.Visible;
+                        break;
+                    case ETypeDetailModel.Qr:
+                        Tittle = "QR";
+                        VisibilityInput = Visibility.Hidden;
+                        VisibilityComision = Visibility.Hidden;
+                        VisibilityQr = Visibility.Visible;
+                        IsReadQr = false;
+                        Message = "Si tienes un codigo QR hacercalo al lector para iniciar la transaccion, de lo contrario presiona cancelar";
+                        VisibilityAcept = Visibility.Hidden;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

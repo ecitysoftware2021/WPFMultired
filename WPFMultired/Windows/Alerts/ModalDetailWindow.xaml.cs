@@ -33,73 +33,16 @@ namespace WPFMultired.Windows.Alerts
                 transaction = new Transaction();
             }
 
-            InitView(type);
-        }
-
-        private void InitView(ETypeDetailModel type)
-        {
-            try
+            if (viewModel == null)
             {
-                if (viewModel == null)
+                viewModel = new ModalDetailsViewModel()
                 {
-                    viewModel = new ModalDetailsViewModel();
-                }
-
-                viewModel.Type = type;
-
-                switch (viewModel.Type)
-                {
-                    case ETypeDetailModel.Payment:
-                        viewModel.Tittle = "Detalle";
-                        viewModel.VisibilityInput = Visibility.Hidden;
-                        viewModel.VisibilityComision = Visibility.Visible;
-                        viewModel.Commission = transaction.Products[0].AmountCommission;
-                        viewModel.VisibilityQr = Visibility.Hidden;
-                        viewModel.VisibilityAcept = Visibility.Visible;
-                        viewModel.IsReadQr = true;
-                        break;
-                    case ETypeDetailModel.Withdrawal:
-                        viewModel.Tittle = "Detalle";
-                        viewModel.VisibilityInput = Visibility.Visible;
-                        viewModel.VisibilityComision = Visibility.Visible;
-                        viewModel.Commission = transaction.Products[0].AmountCommission;
-                        viewModel.VisibilityQr = Visibility.Hidden;
-                        viewModel.VisibilityAcept = Visibility.Visible;
-                        viewModel.VisibilityAmount = Visibility.Visible;
-                        viewModel.VisibilityTxtImput = Visibility.Hidden;
-                        viewModel.LblInput = "Ingrese el valor a retirar";
-                        viewModel.IsReadQr = true;
-                        break;
-                    case ETypeDetailModel.CodeOTP:
-                        viewModel.Tittle = "Codigo OTP";
-                        viewModel.VisibilityInput = Visibility.Visible;
-                        viewModel.VisibilityComision = Visibility.Hidden;
-                        viewModel.VisibilityQr = Visibility.Hidden;
-                        viewModel.VisibilityAmount = Visibility.Hidden;
-                        viewModel.VisibilityTxtImput = Visibility.Visible;
-                        viewModel.LblInput = "Ingrese el codigo OPT";
-                        viewModel.IsReadQr = true;
-                        viewModel.VisibilityAcept = Visibility.Visible;
-                        break;
-                    case ETypeDetailModel.Qr:
-                        viewModel.Tittle = "QR";
-                        viewModel.VisibilityInput = Visibility.Hidden;
-                        viewModel.VisibilityComision = Visibility.Hidden;
-                        viewModel.VisibilityQr = Visibility.Visible;
-                        viewModel.IsReadQr = false;
-                        viewModel.Message = "Si tienes un codigo QR hacercalo al lector para iniciar la transaccion, de lo contrario presiona cancelar";
-                        viewModel.VisibilityAcept = Visibility.Hidden;
-                        break;
-                    default:
-                        break;
-                }
-
-                this.DataContext = viewModel;
+                    Type = type,
+                    Commission = transaction.Product.AmountCommission
+                };
             }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
+
+            this.DataContext = viewModel;
         }
 
         private void Btn_cancel_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
@@ -142,7 +85,7 @@ namespace WPFMultired.Windows.Alerts
                             transaction.Amount = viewModel.Amount;
                             if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
                             {
-                                InitView(ETypeDetailModel.CodeOTP);
+                                viewModel.Type = ETypeDetailModel.CodeOTP;
                             }
                         }
                         else
@@ -165,7 +108,7 @@ namespace WPFMultired.Windows.Alerts
                         {
                             if (transaction.Type == ETransactionType.Withdrawal)
                             {
-                                InitView(ETypeDetailModel.CodeOTP);
+                                viewModel.Type = ETypeDetailModel.CodeOTP;
                             }
                             else
                             {

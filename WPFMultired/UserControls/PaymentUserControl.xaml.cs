@@ -376,7 +376,6 @@ namespace WPFMultired.UserControls
                         Utilities.ShowModal(MessageResource.NoContinueTransaction, EModalType.Error);
                     }
                 }
-               
             }
             catch (Exception ex)
             {

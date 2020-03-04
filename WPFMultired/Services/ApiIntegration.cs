@@ -506,13 +506,17 @@ namespace WPFMultired.Services
                         };
 
                         var response = client.mtrgenotp(request);
-                        var messaje = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
+                        
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
                             transaction.CodeOTP = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOTP, keyDesencript), 2);
                             return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }
@@ -568,6 +572,10 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
                             return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }
@@ -704,6 +712,10 @@ namespace WPFMultired.Services
                             transaction.consecutive = product.TOKTRN;
                             transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Pay;
                             return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }

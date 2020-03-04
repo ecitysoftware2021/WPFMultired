@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:k="clr-namespace:WPFMultired.Keyboard" 
         mc:Ignorable="d"
         Title="ModalDetailWindow"         
         WindowStyle="None"
-        xmlns:k="clr-namespace:WPFMultired.Keyboard"
         AllowsTransparency="True"
-        Topmost="False"
         WindowState="Maximized"
         Height="2064.095" 
         Width="1250.599"
@@ -19,7 +18,7 @@
     <Grid Background="#7FBFBEBE">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="800" />
+            <RowDefinition Height="850" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -27,43 +26,47 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/Backgrounds/bg-alert-details.png"/>
             </Grid.Background>
-            <TextBlock TextWrapping="Wrap" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Top" 
-                       TextAlignment="Center"
-                       Margin="0,35,0,0"
-                       Text="{Binding Tittle}" 
-                       Name="LblTitle"
-                       FontWeight="Bold"
-                       Foreground="White" 
-                       FontSize="40" />
 
-            <TextBlock Name="lbl_message"
-                       Text="{Binding Message}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       FontSize="30"
-                       Width="500"
-                       Margin="0,160,0,0"
-                       TextAlignment="Center"
-                       FontWeight="Bold"
-                       TextWrapping="Wrap"
-                       Foreground="#FF80BC4A" />
-
-            <Grid Margin="0,250,0,250">
+            <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="280" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Visibility="{Binding VisibilityComision}">
-                    
+                <Grid Grid.Row="0">
+                    <TextBlock TextWrapping="Wrap" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Top" 
+                           TextAlignment="Center"
+                           Margin="0,35,0,0"
+                           Text="{Binding Tittle}" 
+                           Name="LblTitle"
+                           FontWeight="Bold"
+                           Foreground="White" 
+                           FontSize="40" />
+
+                    <TextBlock Name="lbl_message"
+                           Text="{Binding Message}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontSize="30"
+                           Width="600"
+                           Margin="0,160,0,0"
+                           TextAlignment="Center"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Foreground="#FF80BC4A" />
+
+                </Grid>
+
+                <Grid Grid.Row="1" Visibility="{Binding VisibilityComision}">
                     <TextBlock Name="txtValorComision"
                             Text="Valor de la Comisión:"
                             FontSize="35"
                             TextAlignment="Center"
-                            Margin="0,0,0,0"
+                            Margin="0,20,0,0"
                             FontFamily="Arial"
                             Foreground="Gray"
                             VerticalAlignment="Top"
@@ -74,10 +77,10 @@
                             FontSize="35"
                             Grid.Row="1" 
                             TextAlignment="Center"
-                            Margin="0,0,0,0"
+                            Margin="0,20,0,0"
                             FontWeight="Bold"
                             Foreground="Black"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Center"
                             HorizontalAlignment="Center" />
                 </Grid>
 
@@ -85,11 +88,11 @@
                     <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-qr-scan.gif"
                            Name="qr_gif"
                            HorizontalAlignment="Center"
-                           Height="200" 
+                           Height="280" 
                            Margin="0,0,0,0"
                            VerticalAlignment="Top"
                            Width="280" />
-                    
+
                     <TextBox Name="txt_qr"
                            Tag="0"
                            Text="{Binding TxtQr , UpdateSourceTrigger=PropertyChanged}"
@@ -101,11 +104,10 @@
                 </Grid>
 
                 <Grid Grid.Row="2" Visibility="{Binding VisibilityInput}">
-
                     <TextBlock Text="{Binding LblInput}"
                         FontSize="35"
                         TextAlignment="Center"
-                        Margin="0,0,0,0"
+                        Margin="0,20,0,0"
                         FontFamily="Arial"
                         Foreground="Gray"
                         VerticalAlignment="Top"
@@ -114,12 +116,12 @@
                     <TextBox Name="txt_amount"
                              Text="{Binding Amount, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Center"
-                             VerticalAlignment="Bottom"
-                             Width="400"
+                             VerticalAlignment="Center"
+                             Width="500"
                              Height="60"
                              FontSize="35"
                              Visibility="{Binding VisibilityAmount}"
-                             Margin="0,0,0,0"
+                             Margin="0,20,0,0"
                              TextAlignment="Center"                    
                              FontWeight="Bold"
                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
@@ -128,37 +130,48 @@
                     <TextBox Name="txt_input"
                              Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Center"
-                             VerticalAlignment="Bottom"
-                             Width="400"
+                             VerticalAlignment="Center"
+                             Width="500"
                              Height="60"
-                             FontSize="35"
+                             FontSize="25"
                              Visibility="{Binding VisibilityTxtImput}"
-                             Margin="0,0,0,0"
+                             Margin="0,20,0,0"
                              TextAlignment="Center"                    
                              FontWeight="Bold"
                              k:TouchScreenKeyboard.TouchScreenKeyboard="True"
                              TabIndex="0" />
+
+                    <TextBlock Name="txtMessageError"
+                            Text="{Binding MessageError}"
+                            FontSize="25"
+                            TextAlignment="Center"
+                            Margin="0,0,0,20"
+                            FontFamily="Arial"
+                            Foreground="Red"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center" />
                 </Grid>
-                
+
+                <Grid Grid.Row="3">
+                    <Image Source="/Images/Buttons/btn-cancel.png"
+                           Width="200"
+                           Name="btn_cancel"
+                           Margin="50,0,0,60"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           TouchDown="Btn_cancel_TouchDown" />
+
+                    <Image Source="/Images/Buttons/btn-acept.png"
+                           Width="200"
+                           Name="btn_finish"
+                           Margin="0,0,50,60"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           TouchDown="Btn_finish_TouchDown"
+                           Visibility="{Binding VisibilityAcept}" /> 
+
+                </Grid>
             </Grid>
-
-            <Image Source="/Images/Buttons/btn-cancel.png"
-                   Width="200"
-                   Name="btn_cancel"
-                   Margin="50,0,0,60"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
-                   TouchDown="Btn_cancel_TouchDown"/>
-
-            <Image Source="/Images/Buttons/btn-acept.png"
-                   Width="200"
-                   Name="btn_finish"
-                   Margin="0,0,50,60"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   TouchDown="Btn_finish_TouchDown"
-                   Visibility="{Binding VisibilityAcept}"/>
-            
         </Grid>
     </Grid>
 </Window>
