@@ -35,6 +35,56 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
+                <Grid Grid.Row="2" Visibility="{Binding VisibilityInput}">
+                    <TextBlock Text="{Binding LblInput}"
+                        FontSize="35"
+                        TextAlignment="Center"
+                        Margin="0,20,0,0"
+                        FontFamily="Arial"
+                        Foreground="Gray"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center" />
+
+                    <TextBox Name="txt_amount"
+                             Text="{Binding Amount, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Width="400"
+                             Height="60"
+                             FontSize="35"
+                             Visibility="{Binding VisibilityAmount}"
+                             Margin="0,20,0,0"
+                             TextAlignment="Center"                    
+                             FontWeight="Bold"
+                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                             TabIndex="0" />
+
+                    <TextBox Name="txt_input"
+                             Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Width="400"
+                             Height="60"
+                             FontSize="35"
+                             Visibility="{Binding VisibilityTxtImput}"
+                             Margin="0,20,0,0"
+                             TextAlignment="Center"                    
+                             FontWeight="Bold"
+                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                             TabIndex="0" />
+                    <TextBox TabIndex="1" Height="0" Width="0" />
+
+                    <TextBlock Name="txtMessageError"
+                            Text="{Binding MessageError}"
+                            FontSize="25"
+                            TextAlignment="Center"
+                            Margin="0,0,0,20"
+                            FontFamily="Arial"
+                            Foreground="Red"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center" />
+                </Grid>
+
                 <Grid Grid.Row="0">
                     <TextBlock TextWrapping="Wrap" 
                            HorizontalAlignment="Center" 
@@ -89,7 +139,7 @@
                            Name="qr_gif"
                            HorizontalAlignment="Center"
                            Height="280" 
-                           Margin="0,0,0,0"
+                           Margin="0,30,0,0"
                            VerticalAlignment="Top"
                            Width="280" />
 
@@ -101,55 +151,6 @@
                            Width="0.1" 
                            TabIndex="0"
                            KeyDown="Txt_qr_KeyDown" />
-                </Grid>
-
-                <Grid Grid.Row="2" Visibility="{Binding VisibilityInput}">
-                    <TextBlock Text="{Binding LblInput}"
-                        FontSize="35"
-                        TextAlignment="Center"
-                        Margin="0,20,0,0"
-                        FontFamily="Arial"
-                        Foreground="Gray"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center" />
-
-                    <TextBox Name="txt_amount"
-                             Text="{Binding Amount, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             Width="500"
-                             Height="60"
-                             FontSize="35"
-                             Visibility="{Binding VisibilityAmount}"
-                             Margin="0,20,0,0"
-                             TextAlignment="Center"                    
-                             FontWeight="Bold"
-                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
-                             TabIndex="0" />
-
-                    <TextBox Name="txt_input"
-                             Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             Width="500"
-                             Height="60"
-                             FontSize="25"
-                             Visibility="{Binding VisibilityTxtImput}"
-                             Margin="0,20,0,0"
-                             TextAlignment="Center"                    
-                             FontWeight="Bold"
-                             k:TouchScreenKeyboard.TouchScreenKeyboard="True"
-                             TabIndex="0" />
-
-                    <TextBlock Name="txtMessageError"
-                            Text="{Binding MessageError}"
-                            FontSize="25"
-                            TextAlignment="Center"
-                            Margin="0,0,0,20"
-                            FontFamily="Arial"
-                            Foreground="Red"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Center" />
                 </Grid>
 
                 <Grid Grid.Row="3">

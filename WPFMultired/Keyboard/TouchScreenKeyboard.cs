@@ -14,7 +14,7 @@ namespace WPFMultired.Keyboard
 
         private static bool isRun = false;
 
-        static UserControl window;
+        static object window;
 
         private static int _position;
 
@@ -190,7 +190,14 @@ namespace WPFMultired.Keyboard
 
                         if (window != null)
                         {
-                            window.IsEnabled = true;
+                            if (window is UserControl)
+                            {
+                                ((UserControl)window).IsEnabled = true;
+                            }
+                            else if (window is Grid)
+                            {
+                                ((Grid)window).IsEnabled = true;
+                            }
                         }
                         _CurrentControl.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                     }
@@ -281,10 +288,17 @@ namespace WPFMultired.Keyboard
                 {
                     //if (window == null)
                     //{
-                    window = (UserControl)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
+                    window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
                     //}
 
-                    window.IsEnabled = false;
+                    if (window is UserControl)
+                    {
+                        ((UserControl)window).IsEnabled = false;
+                    }
+                    else if (window is Grid)
+                    {
+                        ((Grid)window).IsEnabled = false;
+                    }
 
                     _InstanceObject = new TouchScreenKeyboard();
                     _InstanceObject.AllowsTransparency = true;
@@ -353,7 +367,7 @@ namespace WPFMultired.Keyboard
         static void OnLostFocus(object sender, RoutedEventArgs e)
         {
             isRun = false;
-            window.IsEnabled = true;
+            
             Control host = sender as Control;
             host.Background = _PreviousTextBoxBackgroundBrush;
             host.BorderBrush = _PreviousTextBoxBorderBrush;
@@ -362,9 +376,20 @@ namespace WPFMultired.Keyboard
 
             if (_InstanceObject != null)
             {
-
                 _InstanceObject.Close();
                 _InstanceObject = null;
+            }
+
+            if (window != null)
+            {
+                if (window is UserControl)
+                {
+                    ((UserControl)window).IsEnabled = true;
+                }
+                else if (window is Grid)
+                {
+                    ((Grid)window).IsEnabled = true;
+                }
             }
         }
 

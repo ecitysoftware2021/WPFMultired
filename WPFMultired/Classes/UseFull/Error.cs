@@ -25,7 +25,7 @@ namespace WPFMultired.Classes
                     TYPE = 1,
                 }, ELogType.Error);
 
-                Utilities.ShowModal(description, EModalType.Error);
+                //Utilities.ShowModal(description, EModalType.Error);
             }
             catch (Exception)
             {

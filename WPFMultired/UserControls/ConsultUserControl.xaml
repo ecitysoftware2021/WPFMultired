@@ -108,10 +108,12 @@
                        FontSize="48"
                        Width="630"
                        Foreground="#FF104B6D"
-                       TabIndex="1"
+                       TabIndex="0"
                        k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
                        TextWrapping="Wrap"
                        Text="{Binding Value1}" />
+                <TextBox TabIndex="1" Height="0" Width="0" />
+                
             </Grid>
 
             <Grid Grid.Row="5">

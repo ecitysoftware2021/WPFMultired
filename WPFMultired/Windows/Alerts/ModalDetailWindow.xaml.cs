@@ -38,7 +38,7 @@ namespace WPFMultired.Windows.Alerts
                 viewModel = new ModalDetailsViewModel()
                 {
                     Type = type,
-                    Commission = transaction.Product.AmountCommission
+                    Commission = (transaction != null && transaction.Product != null) ? transaction.Product.AmountCommission : 0
                 };
             }
 
@@ -135,7 +135,7 @@ namespace WPFMultired.Windows.Alerts
                 {
                     Task.Run(async () =>
                     {
-                        await AdminPayPlus.SaveTransactions(this.transaction, true);
+                        await AdminPayPlus.SaveTransactions(this.transaction, false);
 
                         Utilities.CloseModal();
 
@@ -143,19 +143,30 @@ namespace WPFMultired.Windows.Alerts
                         {
                             Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
                             Utilities.navigator.Navigate(UserControlView.Main);
-                            DialogResult = false;
+                            Application.Current.Dispatcher.Invoke(delegate
+                            {
+                                DialogResult = false;
+                            });
                         }
                         else
                         {
                             if (transaction.Type == ETransactionType.Withdrawal)
                             {
                                 Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
-                                DialogResult = true;
+                                Application.Current.Dispatcher.Invoke(delegate
+                                {
+
+                                    DialogResult = true;
+                                });
                             }
                             else
                             {
                                 Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
-                                DialogResult = true;
+                                Application.Current.Dispatcher.Invoke(delegate
+                                {
+
+                                    DialogResult = true;
+                                });
                             }
                         }
                     });

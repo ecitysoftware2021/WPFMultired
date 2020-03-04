@@ -500,16 +500,16 @@ namespace WPFMultired.Classes
                                 PAYER_ID = transaction.payer.PAYER_ID,
                                 STATE_TRANSACTION_ID = Convert.ToInt32(transaction.State),
                                 TOTAL_AMOUNT = transaction.Amount,
-                                DATE_END = DateTime.Now.ToString(),
+                                DATE_END = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                                 TRANSACTION_ID = 0,
                                 RETURN_AMOUNT = 0,
                                 INCOME_AMOUNT = 0,
                                 PAYPAD_ID = 0,
-                                DATE_BEGIN = DateTime.Now.ToString(),
+                                DATE_BEGIN = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                                 STATE_NOTIFICATION = 0,
                                 STATE = 0,
                                 DESCRIPTION = "Transaccion iniciada",
-                                TRANSACTION_REFERENCE = transaction.consecutive
+                                TRANSACTION_REFERENCE = transaction.reference
                             };
 
                             data.TRANSACTION_DESCRIPTION.Add(new TRANSACTION_DESCRIPTION
@@ -813,7 +813,7 @@ namespace WPFMultired.Classes
                 {
                     var isValidateMoney = await api.CallApi("ValidateDispenserAmount", transaction.Amount);
                     //transaction.IsReturn = (bool)isValidateMoney;
-                    return (bool)isValidateMoney;
+                    return isValidateMoney != null ? (bool)isValidateMoney : false;
                 }
             }
             catch (Exception ex)

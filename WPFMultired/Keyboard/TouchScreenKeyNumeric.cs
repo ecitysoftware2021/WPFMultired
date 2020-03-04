@@ -13,7 +13,7 @@ namespace WPFMultired.Keyboard
         #region Property & Variable & Constructorç
         private static bool isRun = false;
 
-        static UserControl window;
+        static object window;
 
         private static int _position;
 
@@ -188,7 +188,14 @@ namespace WPFMultired.Keyboard
 
                             if (window != null)
                             {
-                                window.IsEnabled = true;
+                                if (window is UserControl)
+                                {
+                                    ((UserControl)window).IsEnabled = true;
+                                }
+                                else if (window is Grid)
+                                {
+                                    ((Grid)window).IsEnabled = true;
+                                }
                             }
                         }
 
@@ -282,11 +289,18 @@ namespace WPFMultired.Keyboard
                 {
                     //if (window == null)
                     //{
-                    window = (UserControl)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
+                    window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Content;
                     //}
 
-                    window.IsEnabled = false;
-
+                    if (window is UserControl)
+                    {
+                        ((UserControl)window).IsEnabled = false;
+                    }
+                    else if (window is Grid)
+                    {
+                        ((Grid)window).IsEnabled = false;
+                    }
+                    
                     _InstanceObject = new TouchScreenKeyNumeric();
                     _InstanceObject.AllowsTransparency = true;
                     _InstanceObject.WindowStyle = WindowStyle.None;
@@ -368,7 +382,14 @@ namespace WPFMultired.Keyboard
 
             if (window != null)
             {
-                window.IsEnabled = true;
+                if (window is UserControl)
+                {
+                    ((UserControl)window).IsEnabled = true;
+                }
+                else if (window is Grid)
+                {
+                    ((Grid)window).IsEnabled = true;
+                }
             }
         }
 

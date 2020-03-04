@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFMultired.UserControls"
+             xmlns:local="clr-namespace:WPFMultired.UserControls"             
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        gif:ImageBehavior.AnimateInDesignMode="True"
                        mc:Ignorable="d"
         Height="1920" 
         Width="1080" >
@@ -19,37 +21,30 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" >
-            <TextBlock Text="{Binding Message}"
-                       TextWrapping="Wrap"
-                       TextAlignment="Justify"
-                       FontSize="60"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom"
-                       Foreground="#FFC00019" 
-                       Margin="0,0,0,0" 
-                       FontFamily="Myriad Pro"/>
         </Grid>
 
         <Grid Grid.Row="1" >
-            <TextBlock Text="Cantidad a entregar"
+            <TextBlock Text="Transacción en procceso"
                        TextWrapping="Wrap"
-                       TextAlignment="Justify"
+                       TextAlignment="Center"
                        FontSize="60"
                        FontWeight="UltraBlack"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
-                       Foreground="#FF90C143" 
-                       Margin="0,180,0,0"
-                       FontFamily="Arial Unicode MS" />
+                       Foreground="#FF80BC4A" 
+                       Margin="0,0,0,0"
+                       FontFamily="Myriad Pro" />
 
-            <TextBlock Text="{Binding ValorSobrante, StringFormat={}{0:C0}}" 
-                       Margin="0,280,0,0" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       FontFamily="Arial Unicode MS" 
-                       FontSize="70"
-                       Foreground="#FF606060" />
+            <Image  gif:ImageBehavior.AnimatedSource="/images/Gif/gif-preload.gif" 
+                    gif:ImageBehavior.AnimateInDesignMode="True"
+                    gif:ImageBehavior.AutoStart="True"
+                    x:Name="GifLoadder" 
+                    Stretch="Fill"
+                    Margin="0,300,0,0" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Width="300" 
+                    Height="300"/>
 
             <TextBlock Text="Por favor espere, estamos contando su dinero"
                        TextWrapping="Wrap"
@@ -58,10 +53,10 @@
                        Width="800"
                        FontWeight="UltraBlack"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Foreground="#FF183F5C" 
-                       Margin="0,150,0,0"
-                       FontFamily="Arial Unicode MS" />
+                       VerticalAlignment="Top"
+                       Foreground="#FF0D679A" 
+                       Margin="0,200,0,0"
+                       FontFamily="Myriad Pro" />
         </Grid>
     </Grid>
 </UserControl>
