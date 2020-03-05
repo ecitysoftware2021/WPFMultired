@@ -162,8 +162,8 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString() ?? string.Empty, x = 23, y = y += 15 });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.IdTransactionAPi.ToString() ?? string.Empty, x = 73, y = y });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DateTransaction.Date.ToString("dd/MM/yy") ?? string.Empty, x = 130, y = y });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DateTransaction.TimeOfDay.ToString("HH:mm:ss") ?? string.Empty, x = 200, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = DateTime.Now.Date.ToString()?? string.Empty, x = 130, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = DateTime.Now.TimeOfDay.ToString() ?? string.Empty, x = 200, y = y });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Usuario:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(transaction.payer.NAME, " (", transaction.payer.IDENTIFICATION, ")") ?? string.Empty, x = 80, y = y });
