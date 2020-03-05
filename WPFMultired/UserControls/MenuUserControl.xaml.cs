@@ -22,7 +22,7 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
 
-            ConfigurateView();
+            ShowModal();
         }
 
         private void ConfigurateView()
@@ -94,7 +94,14 @@ namespace WPFMultired.UserControls
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            ShowModal();
+            try
+            {
+                ConfigurateView();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

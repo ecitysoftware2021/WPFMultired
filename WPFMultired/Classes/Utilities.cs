@@ -151,35 +151,38 @@ namespace WPFMultired.Classes
                     var data = new List<DataPrinter>()
                         {
                             new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 2, y = 2 },
-                            new DataPrinter{ brush = color, font = fontKey, value = "NIT:", x = xKey, y = y+=120 },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = GetConfiguration("NIT") ?? string.Empty, x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Trámite:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = GetConfiguration("ProductName") ?? string.Empty, x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Estado:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = (transaction.State == ETransactionState.Success || transaction.State == ETransactionState.Error)
-                                ? "Aprobada" : "Cancelada", x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Fecha de pago:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = DateTime.Now.ToString(), x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Referencia:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = transaction.IdTransactionAPi.ToString() ?? string.Empty, x = x, y = y},
-                            new DataPrinter{ brush = color, font = fontKey, value = "ID Compra:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = transaction.consecutive ?? string.Empty, x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Identificación:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = transaction.payer.IDENTIFICATION ?? string.Empty, x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Nombre:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = transaction.payer.NAME ?? string.Empty, x = x, y = y },
-                            new DataPrinter{ brush = color, font = fontKey, value = "Teléfono:", x = xKey, y = y+=sum },
-                            new DataPrinter{ brush = color, font = fontValue,
-                                value = transaction.payer.PHONE.ToString() ?? string.Empty, x = x, y = y },
                         };
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "", x = 105, y = y += 15 });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat("", " (", "", ")"), x = 95, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "ASM", x = 25, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Tran", x = 75, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Fecha", x = 135, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Hora", x = 205, y = y });
+
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString() ?? string.Empty, x = 23, y = y += 15 });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.IdTransactionAPi.ToString() ?? string.Empty, x = 80, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DateTransaction.Date.ToString() ?? string.Empty, x = 130, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DateTransaction.TimeOfDay.ToString() ?? string.Empty, x = 200, y = y });
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Usuario:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(transaction.payer.NAME, " (", transaction.payer.IDENTIFICATION, ")") ?? string.Empty, x = 80, y = y });
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Estado:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter
+                    {
+                        brush = color,
+                        font = fontValue,
+                        value = (transaction.State == ETransactionState.Success || transaction.State == ETransactionState.ErrorService || transaction.State == ETransactionState.Error)
+                                ? "Aprobada" : "Cancelada",
+                        x = x,
+                        y = y
+                    });
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la comisión:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Product.AmountCommission), x = x, y = y });
+
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "--------------------------------------------", x = 2, y = y += 50 });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.PayValue), x = x, y = y });
@@ -188,6 +191,8 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = x, y = y });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "--------------------------------------------", x = 2, y = y += 50 });
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "Su transacción se ha realizado exitosamente", x = 2, y = y += 50 });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });

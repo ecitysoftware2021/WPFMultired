@@ -134,6 +134,7 @@ namespace WPFMultired.UserControls
                 if ((ItemList)lv_data_list.SelectedItem != null)
                 {
                     transaction.Product = (Product)((ItemList)lv_data_list.SelectedItem).Data;
+                    lv_data_list.SelectedItem = null;
                     ShowModal();
                 }
             }

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
-using WPFMultired.Services.Object;
 using WPFMultired.ViewModel;
 
 namespace WPFMultired.UserControls
@@ -23,7 +20,6 @@ namespace WPFMultired.UserControls
         private DetailViewModel viewModel;
 
         private Transaction transaction;
-
 
         public ConsultUserControl(string company, string typeTransaction)
         {
@@ -38,8 +34,6 @@ namespace WPFMultired.UserControls
                     State = ETransactionState.Initial
                 };
             }
-
-            ConfigView();
         }
 
         private void ConfigView()
@@ -179,6 +173,18 @@ namespace WPFMultired.UserControls
             try
             {
                 Utilities.navigator.Navigate(UserControlView.Main);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                ConfigView();
             }
             catch (Exception ex)
             {

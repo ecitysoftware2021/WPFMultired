@@ -34,8 +34,6 @@ namespace WPFMultired.UserControls
             InitializeComponent();
 
             this.typeTransaction = typeTransaction;
-
-            ConfigurateView();
         }
 
         private void ConfigurateView()
@@ -95,6 +93,18 @@ namespace WPFMultired.UserControls
             try
             {
                 Utilities.navigator.Navigate(UserControlView.Main);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                ConfigurateView();
             }
             catch (Exception ex)
             {

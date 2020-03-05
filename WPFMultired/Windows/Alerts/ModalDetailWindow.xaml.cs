@@ -43,6 +43,20 @@ namespace WPFMultired.Windows.Alerts
             }
 
             this.DataContext = viewModel;
+
+            SetFocus();
+        }
+
+        private void SetFocus()
+        {
+            if (viewModel.Type == ETypeDetailModel.Withdrawal)
+            {
+                txt_amount.Focus();
+            }
+            else if (viewModel.Type == ETypeDetailModel.Qr)
+            {
+                txt_qr.Focus();
+            }
         }
 
         private void Btn_cancel_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)

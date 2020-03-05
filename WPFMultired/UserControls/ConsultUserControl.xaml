@@ -6,9 +6,10 @@
              xmlns:k="clr-namespace:WPFMultired.Keyboard" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:WPFMultired.UserControls"
-            mc:Ignorable="d"
-            Height="1920" 
-            Width="1080" >
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d"
+             Height="1920" 
+             Width="1080" >
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
