@@ -42,7 +42,7 @@ namespace WPFMultired.UserControls
             try
             {
                 ConfiguratePublish();
-                AdminPayPlus.NotificateInformation();
+               AdminPayPlus.NotificateInformation();
                 //AdminPayPlus.VerifyTransaction();
                 InitValidation();
             }
