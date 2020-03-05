@@ -64,18 +64,6 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void Lv_companies_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                Utilities.navigator.Navigate(UserControlView.Consult, true, ((ItemList)lv_companies.SelectedItem).Item1, typeTransaction);
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
         private void Btn_back_TouchDown(object sender, TouchEventArgs e)
         {
             try
@@ -105,6 +93,21 @@ namespace WPFMultired.UserControls
             try
             {
                 ConfigurateView();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Grid_list_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (((Grid)sender).Tag != null)
+                {
+                    Utilities.navigator.Navigate(UserControlView.Consult, true, ((Grid)sender).Tag, typeTransaction);
+                }
             }
             catch (Exception ex)
             {

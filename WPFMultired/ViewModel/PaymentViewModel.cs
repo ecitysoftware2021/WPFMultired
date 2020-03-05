@@ -214,7 +214,8 @@ namespace WPFMultired.ViewModel
                     {
                         Denominacion = denomination,
                         Quantity = quantity,
-                        Total = denomination * quantity
+                        Total = denomination * quantity,
+                        Code = code
                     });
                 }
                 else

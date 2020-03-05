@@ -145,7 +145,7 @@
         <Grid Grid.Row="3">
             <TextBlock 
                 Text="Valor ingresado"
-                FontSize="40"
+                FontSize="45"
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
@@ -155,7 +155,7 @@
              />
             <TextBlock 
                 Text="{Binding ValorIngresado, StringFormat={}{0:C0}}"
-                FontSize="45"
+                FontSize="50"
                 TextAlignment="Center"
                 Margin="0,0,100,0"
                 FontFamily="Arial"
@@ -164,7 +164,7 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
              />
-            <TextBlock 
+            <!--<TextBlock 
                 Text="Valor faltante"
                 FontSize="40"
                 TextAlignment="Center"
@@ -184,9 +184,9 @@
                 FontWeight="Bold"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
-             />
+             />-->
 
-            <TextBlock 
+            <!--<TextBlock 
                 Text="Valor Sobrante"
                 FontSize="40"
                 TextAlignment="Center"
@@ -227,14 +227,14 @@
                 FontWeight="Bold"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
-             />
+             />-->
         </Grid>
         <Grid Grid.Row="4">
 
             <Image x:Name="btnConsign"
                    Source="../Images/Buttons/btn-continue-pay.png"
                    Stretch="Fill"
-                   Width="450"
+                   Width="400"
                    Height="130"
                    Visibility="{Binding ImgContinue}"
                    HorizontalAlignment="Right"

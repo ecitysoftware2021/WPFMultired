@@ -606,7 +606,8 @@ namespace WPFMultired.Services
                         {
                             denominations = new iLISTAREGISTROS
                             {
-                                I_RTNCON = transaction.Payment.Denominations.Count
+                                I_RTNCON = transaction.Payment.Denominations.Count,
+                                LIST = new iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
                             };
                             var index = 0;
 

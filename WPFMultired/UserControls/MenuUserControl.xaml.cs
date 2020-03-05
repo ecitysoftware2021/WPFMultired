@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -21,7 +22,6 @@ namespace WPFMultired.UserControls
         public MenuUserControl()
         {
             InitializeComponent();
-
             ShowModal();
         }
 
@@ -65,20 +65,6 @@ namespace WPFMultired.UserControls
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
-        private void Lv_type_transactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if ((ItemList)lv_type_transactions.SelectedItem != null)
-                {
-                    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((ItemList)lv_type_transactions.SelectedItem).Item3);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
 
         private void ShowModal()
         {
@@ -97,6 +83,21 @@ namespace WPFMultired.UserControls
             try
             {
                 ConfigurateView();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Grid_list_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (((Grid)sender).Tag != null)
+                {
+                    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
+                }
             }
             catch (Exception ex)
             {

@@ -59,8 +59,7 @@
                     BorderBrush="Transparent"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
-                    ItemsSource="{Binding}"
-                    SelectionChanged="Lv_companies_SelectionChanged">
+                    ItemsSource="{Binding}">
                 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -71,20 +70,22 @@
                 </ItemsControl.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalAlignment="Center"
+                        <Grid x:Name="grid_list"
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Background="Transparent"
                             Margin="0,0,0,0"
                             Width="500"
-                            Height="150">
+                            Height="150" 
+                            Tag="{Binding Item1}"
+                            TouchDown="Grid_list_TouchDown">
                             
                             <Image Margin="0,0,0,0"
                                 HorizontalAlignment="Center"
                                 Height="120"    
                                 Width="520"
                                 Source="{Binding ImageSourse}"
-                                Stretch="Uniform"
-                                Tag="{Binding Item1}" />
+                                Stretch="Uniform" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

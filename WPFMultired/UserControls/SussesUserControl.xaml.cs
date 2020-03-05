@@ -67,12 +67,45 @@ namespace WPFMultired.UserControls
                         }
                         else
                         {
-                            Utilities.navigator.Navigate(UserControlView.Main);
+                            if (transaction.Type == ETransactionType.Pay)
+                            {
+                                ShowModal();
+                            }
+                            else
+                            {
+                                Utilities.navigator.Navigate(UserControlView.Main);
+                            }
                         }
 
                     });
                     GC.Collect();
                 });
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void ShowModal()
+        {
+            try
+            {
+                if (Utilities.ShowModal("Desea realizar cashback", EModalType.Information))
+                {
+                    this.transaction.Type = ETransactionType.Withdrawal;
+                    transaction.CodeTypeTransaction = AdminPayPlus.DataPayPlus.ListTypeTransactions[1].Item3;
+                    transaction.Payment = null;
+
+                    if (!Utilities.ShowModalDetails(transaction, ETypeDetailModel.Withdrawal))
+                    {
+                        Utilities.navigator.Navigate(UserControlView.Main);
+                    }
+                }
+                else
+                {
+                    Utilities.navigator.Navigate(UserControlView.Main);
+                }
             }
             catch (Exception ex)
             {

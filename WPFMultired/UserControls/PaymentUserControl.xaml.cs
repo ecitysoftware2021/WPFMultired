@@ -266,13 +266,13 @@ namespace WPFMultired.UserControls
                             Utilities.CloseModal();
                             if (response != null)
                             {
-                                Utilities.navigator.Navigate(UserControlView.PrintFile, false, this.transaction);
+                                transaction.State = ETransactionState.Success;
                             }
                             else
                             {
-
+                                transaction.State = ETransactionState.ErrorService;
                             }
-
+                            Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
                         });
                     }
                     else
@@ -362,24 +362,6 @@ namespace WPFMultired.UserControls
                 this.paymentViewModel.ImgContinue = Visibility.Visible;
 
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
-            }
-        }
-
-        private void ShowModal()
-        {
-            try
-            {
-                if (Utilities.ShowModal("Desea realizar cashback", EModalType.Information))
-                {
-                    if (!Utilities.ShowModalDetails(transaction, ETypeDetailModel.Withdrawal))
-                    {
-                        Utilities.ShowModal(MessageResource.NoContinueTransaction, EModalType.Error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
     }
