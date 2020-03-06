@@ -440,11 +440,11 @@ namespace WPFMultired.Services
                                     Code = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_CODPRO, keyDesencript), 2),
                                     CodeSystem = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_CODSIS, keyDesencript), 2),
                                     AcountNumberMasc = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_CTAMAS, keyDesencript), 2),
-                                    AmountMax = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMAX, keyDesencript), 2)),
-                                    AmountMin = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2)),
+                                    AmountMax = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMAX, keyDesencript), 2), new CultureInfo("en-US")),
+                                    AmountMin = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2), new CultureInfo("en-US")),
                                     Description = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NOMPRO, keyDesencript), 2),
                                     AcountNumber = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NROCTA, keyDesencript), 2),
-                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2)),
+                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
                                 });
                             }
 
@@ -615,8 +615,8 @@ namespace WPFMultired.Services
                             {
                                 denominations.LIST[index] = new iLISTAREGISTROSLIST
                                 {
-                                    I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Quantity.ToString()), keyEncript),
-                                    I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Denominacion.ToString()), keyEncript),
+                                    I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
+                                    I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
                                     I_MONEDA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
                                     I_TIPMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
                                 };
@@ -647,7 +647,7 @@ namespace WPFMultired.Services
                             I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
                             I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Amount.ToString()), keyEncript),
+                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), ".00")), keyEncript),
                             I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
                             I_LISTAREGISTROS = denominations
                         };

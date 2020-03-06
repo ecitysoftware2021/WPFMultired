@@ -276,7 +276,6 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newtonsoft.Json
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.xml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.xml
-C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\LoginAdministratorUserControl.g.cs

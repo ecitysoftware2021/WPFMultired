@@ -375,7 +375,7 @@ namespace WPFMultired.ViewModel
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Visible;
                         IsReadQr = false;
-                        Message = "Si tienes un codigo QR hacercalo al lector para iniciar la transaccion, de lo contrario presiona cancelar";
+                        Message = "Si tienes un código QR acérquelo al lector para iniciar la transacción, de lo contrario presiona cancelar";
                         VisibilityAcept = Visibility.Hidden;
                         break;
                     default:

@@ -107,13 +107,12 @@ namespace WPFMultired.UserControls
                         {
                             if (!this.paymentViewModel.StatePay)
                             {
+                                paymentViewModel.ValorIngresado += enterValue.Item1;
                                 if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
                                 {
                                     this.paymentViewModel.ImgContinue = Visibility.Visible;
                                     this.paymentViewModel.ImgCancel = Visibility.Hidden;
                                 }
-
-                                paymentViewModel.ValorIngresado += enterValue.Item1;
                                 paymentViewModel.RefreshListDenomination(int.Parse(enterValue.Item1.ToString()), 1, enterValue.Item2);
 
                                 AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, enterValue.Item1, 2, 1, enterValue.Item2, string.Empty);
@@ -262,6 +261,7 @@ namespace WPFMultired.UserControls
                     {
                         Task.Run(() =>
                         {
+                            this.transaction.Amount = paymentViewModel.ValorIngresado;
                             var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
                             Utilities.CloseModal();
                             if (response != null)

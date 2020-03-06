@@ -62,12 +62,11 @@
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center" 
                                    Height="250" 
-                                   Stretch="Uniform" /> 
+                                   Stretch="Uniform" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </Grid>
     </Grid>
 </UserControl>
