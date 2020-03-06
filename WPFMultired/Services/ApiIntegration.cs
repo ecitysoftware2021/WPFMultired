@@ -648,8 +648,7 @@ namespace WPFMultired.Services
                             I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
                             I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), ".00")), keyEncript),
-                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
+                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), "00")), keyEncript),                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
                             I_LISTAREGISTROS = denominations
                         };
 
