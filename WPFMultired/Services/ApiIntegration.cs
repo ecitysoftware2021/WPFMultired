@@ -444,7 +444,7 @@ namespace WPFMultired.Services
                                     AmountMin = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2), new CultureInfo("en-US")),
                                     Description = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NOMPRO, keyDesencript), 2),
                                     AcountNumber = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NROCTA, keyDesencript), 2),
-                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
+                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Length - 2)), new CultureInfo("en-US")),
                                 });
                             }
 
@@ -455,6 +455,7 @@ namespace WPFMultired.Services
                             };
 
                             transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Pay;
+
                             transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIATRANSACCION, keyDesencript), 2);
                             transaction.consecutive = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_TOKENTRANSACCION, keyDesencript), 2);
 

@@ -161,6 +161,7 @@ namespace WPFMultired.UserControls
                         {
                             if (this.viewModel.ValorDispensado > 0)
                             {
+                                transaction.Amount = viewModel.ValorDispensado;
                                 var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
 
                                 Utilities.CloseModal();
