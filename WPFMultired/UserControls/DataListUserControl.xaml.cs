@@ -89,7 +89,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.Consult, true, null);
+                Utilities.navigator.Navigate(UserControlView.Consult, true, transaction.CodeCompany, transaction.CodeTypeTransaction);
             }
             catch (Exception ex)
             {

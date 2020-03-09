@@ -342,3 +342,4 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs
+C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache

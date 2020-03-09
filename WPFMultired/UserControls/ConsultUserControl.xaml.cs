@@ -172,7 +172,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.Main);
+                Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, false, transaction.CodeTypeTransaction);
             }
             catch (Exception ex)
             {
