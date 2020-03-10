@@ -104,7 +104,7 @@ namespace WPFMultired.Windows.Alerts
                         }
                         else
                         {
-                            Utilities.ShowModal(MessageResource.ConsignAmount, EModalType.Error);
+                            Utilities.ShowModal("Ingrese un valor a retirar valido", EModalType.Error);
                         }
                         break;
                     case ETypeDetailModel.CodeOTP:
