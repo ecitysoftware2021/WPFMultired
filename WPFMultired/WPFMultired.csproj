@@ -135,6 +135,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MR_ControllCash\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MR_Institutions\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -346,6 +351,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_CodeQR\WPFMultired.MR_CodeQR.mtrctlaqrcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ControllCash\ASMController.wsdl" />
+    <None Include="Connected Services\MR_ControllCash\WPFMultired.MR_ControllCash.mtrctlbllcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ControllCash\WPFMultired.MR_ControllCash.mtrctlbllcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_Institutions\consultarInstituciones.wsdl" />
@@ -563,6 +575,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\MR_CodeOTP\" />
     <WCFMetadataStorage Include="Connected Services\MR_CodeQR\" />
+    <WCFMetadataStorage Include="Connected Services\MR_ControllCash\" />
     <WCFMetadataStorage Include="Connected Services\MR_Institutions\" />
     <WCFMetadataStorage Include="Connected Services\MR_Language\" />
     <WCFMetadataStorage Include="Connected Services\MR_ListProducts\" />
@@ -780,6 +793,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-continue-pay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ControllCash\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ControllCash\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_ControllCash\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

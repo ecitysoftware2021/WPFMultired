@@ -38,7 +38,7 @@ namespace WPFMultired.UserControls
                 {
                     viewModel = new DataListViewModel
                     {
-                        Tittle = string.Concat(transaction.payer.NAME, " (", transaction.payer.IDENTIFICATION, ")" ),
+                        Tittle = string.Concat(transaction.payer.NAME, " ( *****", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")" ),
                         DataList = new List<ItemList>(),
                         ViewList = new CollectionViewSource()
                     };

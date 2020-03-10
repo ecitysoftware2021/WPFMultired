@@ -27,6 +27,8 @@ namespace WPFMultired.Models
 
         public string CodeOTP { get; set; }
 
+        public string CodeTransactionAuditory { get; set; }
+
         public string TypeDocument { get; set; }
 
         public DateTime DateTransaction { get; set; }

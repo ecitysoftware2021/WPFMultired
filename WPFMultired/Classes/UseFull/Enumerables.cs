@@ -125,7 +125,8 @@ namespace WPFMultired.Classes
         Validate_Status_Admin = 11,
         Operation_Admin = 13,
         Procces_Admin = 14,
-        Validate_Admin_QR = 15
+        Validate_Admin_QR = 15,
+        Report_Cash = 16
     }
 
     public enum ETypeDetailModel

@@ -19,6 +19,7 @@ using WPFMultired.MR_ValidateStatusAdmin;
 using WPFMultired.MR_OperationAdmin;
 using WPFMultired.MR_ProcessAdmin;
 using WPFMultired.MR_ValidateAdminQR;
+using WPFMultired.MR_ControllCash;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
@@ -158,6 +159,10 @@ namespace WPFMultired.Services
                     case ETypeService.Validate_Admin_QR:
 
                         return ValidateAdminQr((string)data);
+
+                    case ETypeService.Report_Cash:
+
+                        return RepostCash((Transaction)data);
 
                     default:
                         break;
@@ -601,20 +606,20 @@ namespace WPFMultired.Services
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
-                        iLISTAREGISTROS denominations = null;
+                        WPFMultired.MR_ReportTransaction.iLISTAREGISTROS denominations = null;
 
                         if (transaction.Payment.Denominations != null)
                         {
-                            denominations = new iLISTAREGISTROS
+                            denominations = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROS
                             {
                                 I_RTNCON = transaction.Payment.Denominations.Count,
-                                LIST = new iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
+                                LIST = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
                             };
                             var index = 0;
 
                             foreach (var denomination in transaction.Payment.Denominations)
                             {
-                                denominations.LIST[index] = new iLISTAREGISTROSLIST
+                                denominations.LIST[index] = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROSLIST
                                 {
                                     I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
                                     I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
@@ -626,7 +631,7 @@ namespace WPFMultired.Services
                         }
                         else
                         {
-                            denominations = new iLISTAREGISTROS
+                            denominations = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROS
                             {
                                 I_RTNCON = 0,
                                 LIST = {}
@@ -657,6 +662,7 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
+                            transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOAUTORI, keyDesencript), 2);
                             return new Response { Data = transaction };
                         }
                         else
@@ -946,6 +952,74 @@ namespace WPFMultired.Services
                         {
                             return new Response { Data =  null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
+        private Response RepostCash(Transaction data)
+        {
+            try
+            {
+                ASMControllerServicesClient client = new ASMControllerServicesClient();
+
+                using (var factory = new WebChannelFactory<ASMControllerServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        WPFMultired.MR_ControllCash.iLISTAREGISTROS denominations = null;
+
+                        if (data.Payment.Denominations != null)
+                        {
+                            denominations = new WPFMultired.MR_ControllCash.iLISTAREGISTROS
+                            {
+                                I_RTNCON = data.Payment.Denominations.Count,
+                                LIST = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST[data.Payment.Denominations.Count]
+                            };
+                            var index = 0;
+
+                            foreach (var denomination in data.Payment.Denominations)
+                            {
+                                denominations.LIST[index] = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST
+                                {
+                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
+                                    I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
+                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
+                                };
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            denominations = new WPFMultired.MR_ControllCash.iLISTAREGISTROS
+                            {
+                                I_RTNCON = 0,
+                                LIST = { }
+                            };
+                        }
+
+                        mtrctlbllcInput request = new mtrctlbllcInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                            I_TRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.IdTransactionAPi.ToString()), keyEncript),
+                            I_ESTADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.State == ETransactionState.Success ? "1" : "9"), keyEncript),
+                            I_TRNTAYLOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.CodeTransactionAuditory), keyEncript),
+
+                        };
                     }
                 }
             }
