@@ -364,8 +364,8 @@ namespace WPFMultired.ViewModel
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAmount = Visibility.Hidden;
                         VisibilityTxtImput = Visibility.Visible;
-                        LblInput = "Ingrese el codigo OPT";
-                        Message = "Ingresa el codigo Otp que llego a su correo, pára continuar";
+                        LblInput = "Ingrese el código OTP";
+                        Message = "Ingresa el código OTP que llego a su correo, para continuar";
                         IsReadQr = true;
                         VisibilityAcept = Visibility.Visible;
                         break;

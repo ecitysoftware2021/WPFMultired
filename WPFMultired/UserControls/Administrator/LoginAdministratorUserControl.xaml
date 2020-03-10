@@ -46,7 +46,7 @@
 
 
             <Grid Name="gd_qr" Visibility="{Binding VisibleGdQr}">
-                <TextBlock Text="Por favor acerque el codigo QR que fue enviado a su celular"
+                <TextBlock Text="Por favor acerque el código QR que fue enviado a su celular"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="0,0,0,410"

@@ -313,7 +313,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se esta validando y almacenando la información, espere un momento.
+        ///   Busca una cadena traducida similar a Se esta validando y almacenando la información, espere un momento por favor.
         /// </summary>
         internal static string LoadInformation {
             get {
@@ -592,7 +592,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La Transacción ha finalizado correctamente, La aplicación se reiniciara....
+        ///   Busca una cadena traducida similar a La transacción ha finalizado correctamente..
         /// </summary>
         internal static string TransactionFinish {
             get {

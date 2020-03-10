@@ -57,11 +57,13 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock 
-                Text="Deno / Cassete"
-                FontSize="40"
+                Text="Denominación / Casete"
+                FontSize="35"
+                Width="300"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
                 FontFamily="Myriad Pro"
+                TextWrapping="WrapWithOverflow"
                 FontWeight="Bold"
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
@@ -69,10 +71,12 @@
                 Grid.Column="1"/>
 
             <TextBlock 
-                Text="Can N / Can A"
-                FontSize="40"
+                Text="Cant. Nueva / Cant. Anterior"
+                FontSize="35"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
+                Width="300"
+                TextWrapping="WrapWithOverflow"
                 FontFamily="Myriad Pro"
                 FontWeight="Bold"
                 Foreground="#FF606060"
@@ -82,7 +86,7 @@
 
             <TextBlock 
                 Text="Total($)"
-                FontSize="40"
+                FontSize="35"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
                 FontFamily="Myriad Pro"
@@ -145,7 +149,7 @@
                                     HorizontalAlignment="Center"
                                     Grid.Column="1" >
                                 <Run Text=" / " FontWeight="Bold" />
-                                <Run Text="{Binding CASSETTE}" Foreground="#FF87BB2B" />
+                                <Run Text="{Binding CASSETTE}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             
                             <TextBlock 
@@ -160,7 +164,7 @@
                                     HorizontalAlignment="Right"
                                     Grid.Column="2">
                                 <Run Text=" / " FontWeight="Bold" />
-                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF87BB2B" />
+                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             <TextBlock 
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"
@@ -193,8 +197,8 @@
             <TextBlock Name="txtValor"
                     Text="{Binding TOTAL, StringFormat={}{0:C2}}"
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Margin="0,80,0,0"
+                    HorizontalAlignment="Left"
+                    Margin="450,80,0,0"
                     FontSize="50"
                     FontWeight="Bold"
                     FontFamily="Myriad Pro"

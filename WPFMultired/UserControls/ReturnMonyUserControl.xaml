@@ -24,7 +24,7 @@
         </Grid>
 
         <Grid Grid.Row="1" >
-            <TextBlock Text="Transacción en procceso"
+            <TextBlock Text="Transacción en Proceso"
                        TextWrapping="Wrap"
                        TextAlignment="Center"
                        FontSize="60"

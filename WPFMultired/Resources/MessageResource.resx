@@ -154,7 +154,7 @@
     <value>El error se presentó al inicio del cajero</value>
   </data>
   <data name="LoadInformation" xml:space="preserve">
-    <value>Se esta validando y almacenando la información, espere un momento</value>
+    <value>Se esta validando y almacenando la información, espere un momento por favor</value>
   </data>
   <data name="NoContinue" xml:space="preserve">
     <value>No se pudo continuar entregando el dineroç</value>
@@ -229,7 +229,7 @@
     <value>Transacción exitosa</value>
   </data>
   <data name="TransactionFinish" xml:space="preserve">
-    <value>La Transacción ha finalizado correctamente, La aplicación se reiniciara...</value>
+    <value>La transacción ha finalizado correctamente.</value>
   </data>
   <data name="TransactionFinishSucces" xml:space="preserve">
     <value>Transacción finalizada correctamente</value>
