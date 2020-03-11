@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Data;
 using WPFMultired.Classes;
 using WPFMultired.Models;
@@ -363,6 +364,36 @@ namespace WPFMultired.ViewModel
             {
                 _sourceCheckName = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SourceCheckName)));
+            }
+        }
+
+        private Visibility _visibleInput;
+
+        public Visibility VisibleInput
+        {
+            get
+            {
+                return _visibleInput;
+            }
+            set
+            {
+                _visibleInput = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibleInput)));
+            }
+        }
+
+        private Visibility _visibleId;
+
+        public Visibility VisibleId
+        {
+            get
+            {
+                return _visibleId;
+            }
+            set
+            {
+                _visibleId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibleId)));
             }
         }
 

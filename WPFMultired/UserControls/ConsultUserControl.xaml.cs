@@ -43,10 +43,12 @@ namespace WPFMultired.UserControls
                 viewModel = new DetailViewModel
                 {
                     Row1 = "Tipo de Identificación",
-                    Row2 = "Identificación",
+                    Row2 = "Número de Identificación",
                     OptionsEntries = new CollectionViewSource(),
                     OptionsList = new List<TypeDocument>(),
-                    TypePayer = ETypePayer.Person
+                    TypePayer = ETypePayer.Person,
+                    VisibleId = System.Windows.Visibility.Visible,
+                    VisibleInput = System.Windows.Visibility.Hidden
                 };
 
                 viewModel.LoadListDocuments(transaction.CodeCompany);
@@ -139,6 +141,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                viewModel.Value1 = PassBoxIdentification.Password;
                 if (ValidateFields())
                 {
                     transaction.reference = viewModel.Value1;
@@ -185,6 +188,37 @@ namespace WPFMultired.UserControls
             try
             {
                 ConfigView();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Btn_show_id_TouchEnter(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(PassBoxIdentification.Password))
+                {
+                    viewModel.Value1 = PassBoxIdentification.Password;
+                    viewModel.VisibleId = System.Windows.Visibility.Hidden;
+                    viewModel.VisibleInput = System.Windows.Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Btn_show_id_TouchLeave(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                viewModel.VisibleId = System.Windows.Visibility.Visible;
+                viewModel.VisibleInput = System.Windows.Visibility.Hidden;
             }
             catch (Exception ex)
             {

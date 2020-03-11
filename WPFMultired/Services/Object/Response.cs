@@ -100,7 +100,41 @@ namespace WPFMultired.Services.Object
         }
         #endregion
 
-        public List<DenominationMoney> DATALIST_FILTER()
+        //public List<DenominationMoney> DATALIST_FILTER()
+        //{
+        //    List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
+        //    try
+        //    {
+        //        foreach (var item in this.DATALIST)
+        //        {
+        //            if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
+        //            {
+        //                var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
+        //                if (itemUpdate != null)
+        //                {
+        //                    itemUpdate.Quantity += (decimal)item.AMOUNT;
+        //                    itemUpdate.Total = (int)itemUpdate.Quantity * (int)itemUpdate.Denominacion;
+        //                }
+        //                else
+        //                {
+        //                    dataListsNew.Add(new DenominationMoney
+        //                    {
+        //                        Denominacion = (decimal)item.VALUE,
+        //                        Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
+        //                        Total = item.TOTAL_AMOUNT
+        //                    });
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return dataListsNew;
+        //}
+
+        public List<DenominationMoney> DATALIST_FILTER(ETypeAdministrator type)
         {
             List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
             try
@@ -109,19 +143,24 @@ namespace WPFMultired.Services.Object
                 {
                     if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
                     {
-                        var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
-                        if (itemUpdate != null)
-                        {
-                            itemUpdate.Quantity += (decimal)item.AMOUNT;
-                            itemUpdate.Total = (int)itemUpdate.Quantity * (int)itemUpdate.Denominacion;
-                        }
-                        else
+                        if (type == ETypeAdministrator.Upload && (item.CODE == "MD" || item.CODE == "DP"))
                         {
                             dataListsNew.Add(new DenominationMoney
                             {
                                 Denominacion = (decimal)item.VALUE,
                                 Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
-                                Total = item.TOTAL_AMOUNT
+                                Total = item.TOTAL_AMOUNT,
+                                Code = item.CASSETTE.ToString(),
+                            });
+                        }
+                        else if (type == ETypeAdministrator.Balancing && (item.CODE == "MA" || item.CODE == "AP"))
+                        {
+                            dataListsNew.Add(new DenominationMoney
+                            {
+                                Denominacion = (decimal)item.VALUE,
+                                Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
+                                Total = item.TOTAL_AMOUNT,
+                                Code = item.CASSETTE.ToString(),
                             });
                         }
                     }

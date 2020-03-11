@@ -175,6 +175,24 @@ namespace WPFMultired.ViewModel
             }
         }
 
+        private Visibility _visibilityCancel;
+
+        public Visibility VisibilityCancel
+        {
+            get
+            {
+                return _visibilityCancel;
+            }
+            set
+            {
+                if (_visibilityCancel != value)
+                {
+                    _visibilityCancel = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityCancel)));
+                }
+            }
+        }
+
         private Visibility _visibilityTxtImput;
 
         public Visibility VisibilityTxtImput
@@ -344,6 +362,7 @@ namespace WPFMultired.ViewModel
                         VisibilityComision = Visibility.Visible;
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAcept = Visibility.Visible;
+                        VisibilityCancel = Visibility.Hidden;
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.Withdrawal:
@@ -352,6 +371,7 @@ namespace WPFMultired.ViewModel
                         VisibilityComision = Visibility.Visible;
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAcept = Visibility.Visible;
+                        VisibilityCancel = Visibility.Hidden;
                         VisibilityAmount = Visibility.Visible;
                         VisibilityTxtImput = Visibility.Hidden;
                         LblInput = "Ingrese el valor a retirar";
@@ -368,6 +388,7 @@ namespace WPFMultired.ViewModel
                         Message = "Ingresa el código OTP que llego a su correo, para continuar";
                         IsReadQr = true;
                         VisibilityAcept = Visibility.Visible;
+                        VisibilityCancel = Visibility.Hidden;
                         break;
                     case ETypeDetailModel.Qr:
                         Tittle = "QR";
@@ -377,6 +398,7 @@ namespace WPFMultired.ViewModel
                         IsReadQr = false;
                         Message = "Si tienes un código QR acérquelo al lector para iniciar la transacción, de lo contrario presiona cancelar";
                         VisibilityAcept = Visibility.Hidden;
+                        VisibilityCancel = Visibility.Visible;
                         break;
                     default:
                         break;

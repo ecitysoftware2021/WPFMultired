@@ -127,23 +127,6 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void Lv_data_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if ((ItemList)lv_data_list.SelectedItem != null)
-                {
-                    transaction.Product = (Product)((ItemList)lv_data_list.SelectedItem).Data;
-                    lv_data_list.SelectedItem = null;
-                    ShowModal();
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
         private void ShowModal()
         {
             try
@@ -152,6 +135,23 @@ namespace WPFMultired.UserControls
                     (transaction.Type == ETransactionType.Pay ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
                 {
                     //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Grid_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (((Grid)sender).Tag != null)
+                {
+                    transaction.Product = (Product)((Grid)sender).Tag;
+                    lv_data_list.SelectedItem = null;
+                    ShowModal();
                 }
             }
             catch (Exception ex)

@@ -74,8 +74,7 @@
                     BorderBrush="Transparent"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Top"
-                    ItemsSource="{Binding}" 
-                    SelectionChanged="Lv_data_list_SelectionChanged">
+                    ItemsSource="{Binding}" >
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -91,7 +90,9 @@
                             VerticalAlignment="Top"
                             Margin="0,0,0,0"
                             Width="1030"
-                            Height="150" >
+                            Height="150"
+                            Tag="{Binding Data}"
+                            TouchDown="Grid_TouchDown">
 
                             <TextBlock Text="{Binding Item1}"
                                        FontSize="45"

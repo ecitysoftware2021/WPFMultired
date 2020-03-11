@@ -160,7 +160,17 @@
                            Margin="50,0,0,60"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
+                           Visibility="{Binding VisibilityAcept}"
                            TouchDown="Btn_cancel_TouchDown" />
+
+                    <Image x:Name="btn_cancel_otp" 
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Width="200"
+                        Visibility="{Binding VisibilityCancel}"
+                        Margin="0,60,0,0"
+                        TouchDown="Btn_cancel_TouchDown"
+                        Source="/Images/Buttons/btn-cancel.png" />
 
                     <Image Source="/Images/Buttons/btn-acept.png"
                            Width="200"

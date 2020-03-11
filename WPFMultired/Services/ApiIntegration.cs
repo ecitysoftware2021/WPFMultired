@@ -25,6 +25,7 @@ using WPFMultired.Services.Object;
 using System.Collections.Generic;
 using WPFMultired.DataModel;
 using System.Globalization;
+using System.IO;
 
 namespace WPFMultired.Services
 {
@@ -325,12 +326,25 @@ namespace WPFMultired.Services
                             List<ItemList> entities = new List<ItemList>();
                             foreach (var item in response.O_LISTAREGISTROS.LIST)
                             {
-                                entities.Add(new ItemList
+                                var entity = new ItemList
                                 {
                                     Item1 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_CODINS, keyDesencript), 2),
                                     Item2 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NOMINS, keyDesencript), 2),
-                                    ImageSourse = string.Concat(Utilities.GetConfiguration("ResourcesUrl"), ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_LOGO, keyDesencript), 2), ".png")
-                                });
+                                };
+
+                                var pathImage = string.Concat(Utilities.GetConfiguration("ResourcesUrl"),
+                                                  ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_LOGO, keyDesencript), 2), ".png");
+                                if (File.Exists(pathImage))
+                                {
+                                    entity.ImageSourse = pathImage;
+                                }
+                                else
+                                {
+                                    entity.ImageSourse = string.Concat(Utilities.GetConfiguration("ResourcesUrl"), Utilities.GetConfiguration("ImageNotFound"));
+                                    entity.Item3 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_NOMINS, keyDesencript), 2);
+                                }
+
+                                entities.Add(entity);
                             }
                             return new Response { Data = entities };
                         }

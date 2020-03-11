@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Services.Object;
 using WPFMultired.UserControls;
@@ -35,6 +36,7 @@ namespace WPFMultired.Models
         {
             try
             {
+                //Mouse.Synchronize();
                 switch (newWindow)
                 {
                     case UserControlView.Main:

@@ -280,8 +280,8 @@ namespace WPFMultired.Keyboard
                 //_PreviousTextBoxBorderThickness = host.BorderThickness;
 
                 //host.Background = Brushes.Transparent;
-                //host.BorderBrush = Brushes.Transparent;
-                //host.BorderThickness = new Thickness(4);
+                host.BorderBrush = Brushes.Black;
+                host.BorderThickness = new Thickness(4);
 
                 _CurrentControl = host;
 

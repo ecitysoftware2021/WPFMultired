@@ -51,7 +51,7 @@
                     Foreground="#FF35679B"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
-                    Text="Ingrese la información requerida" />
+                    Text="Por favor ingresar su dentificación" />
         </Grid>
 
         <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">
@@ -76,7 +76,7 @@
                     Margin="0,31,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    HorizontalContentAlignment="Left"
+                    HorizontalContentAlignment="Center"
                     FontFamily="Arial"
                     FontWeight="Medium"
                     Width="630"
@@ -99,23 +99,7 @@
                     Foreground="#FF706F6F"
                     Text="{Binding Row2}" />
 
-                <TextBox Name="TbxIdentification"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontFamily="Arial"
-                       FontWeight="Medium"
-                       Margin="0,8,0,0"
-                       TextAlignment="Left"
-                       FontSize="48"
-                       Width="630"
-                       Foreground="#FF104B6D"
-                       TabIndex="0"
-                       k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
-                       TextWrapping="Wrap"
-                       Text="{Binding Value1}" />
-                <TextBox TabIndex="1" Height="0" Width="0" />
-
-                <!--<PasswordBox Name="PassBoxIdentification"
+                <PasswordBox Name="PassBoxIdentification"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontFamily="Arial"
@@ -124,6 +108,7 @@
                        HorizontalContentAlignment="Center"
                        FontSize="48"
                        Width="630"
+                       Visibility="{Binding VisibleId}"
                        Foreground="#FF104B6D"
                        TabIndex="0"
                        k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True" />
@@ -136,10 +121,24 @@
                        Margin="0,8,0,0"
                        HorizontalContentAlignment="Center"
                        FontSize="48"
+                       IsEnabled="False"
                        Width="630"
                        Foreground="#FF104B6D"
-                       TabIndex="1"
-                       Text="{Binding Value1}" />-->
+                       Visibility="{Binding VisibleInput}"
+                       TabIndex="2"
+                       Text="{Binding Value1}" />
+
+                <Image Source="/Images/Buttons/btn-show-id.png"
+                    x:Name="btn_show_id"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,150,0"                  
+                    Width="60"
+                    TouchEnter="Btn_show_id_TouchEnter"
+                    TouchLeave="Btn_show_id_TouchLeave"/>
+
+                <TextBox TabIndex="1" Height="0" Width="0" />
+
             </Grid>
 
             <Grid Grid.Row="5">
