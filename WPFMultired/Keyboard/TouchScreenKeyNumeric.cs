@@ -276,12 +276,14 @@ namespace WPFMultired.Keyboard
                 Control host = sender as Control;
 
                 //_PreviousTextBoxBackgroundBrush = host.Background;
-                //_PreviousTextBoxBorderBrush = host.BorderBrush;
-                //_PreviousTextBoxBorderThickness = host.BorderThickness;
+                
+               // _PreviousTextBoxBorderBrush = host.BorderBrush;
+               // _PreviousTextBoxBorderThickness = host.BorderThickness;
 
                 //host.Background = Brushes.Transparent;
-                host.BorderBrush = Brushes.Black;
-                host.BorderThickness = new Thickness(4);
+             //   host.BorderBrush = Brushes.Black;
+             //   host.BorderThickness = new Thickness(4);
+              ///  host.Width = 600;
 
                 _CurrentControl = host;
 
@@ -307,7 +309,7 @@ namespace WPFMultired.Keyboard
                     _InstanceObject.ShowInTaskbar = false;
                     _InstanceObject.ShowInTaskbar = false;
                     _InstanceObject.Topmost = true;
-                    host.LayoutUpdated += new EventHandler(tb_LayoutUpdated);
+                    syncchild();
                 }
             }
             catch (Exception ex)
@@ -336,43 +338,12 @@ namespace WPFMultired.Keyboard
             }
         }
 
-        static void TouchScreenKeyNumeric_Deactivated(object sender, EventArgs e)
-        {
-            if (_InstanceObject != null)
-            {
-                _InstanceObject.Topmost = false;
-            }
-        }
-
-        static void TouchScreenKeyNumeric_Activated(object sender, EventArgs e)
-        {
-            if (_InstanceObject != null)
-            {
-                _InstanceObject.Topmost = true;
-            }
-        }
-
-        static void TouchScreenKeyNumeric_LocationChanged(object sender, EventArgs e)
-        {
-            syncchild();
-        }
-
-        static void tb_LayoutUpdated(object sender, EventArgs e)
-        {
-            if (isRun)
-            {
-                syncchild();
-            }
-        }
-
         static void OnLostFocus(object sender, RoutedEventArgs e)
         {
-            isRun = false;
             Control host = sender as Control;
-            host.Background = _PreviousTextBoxBackgroundBrush;
-            host.BorderBrush = _PreviousTextBoxBorderBrush;
-            host.BorderThickness = _PreviousTextBoxBorderThickness;
-            host.LayoutUpdated -= new EventHandler(tb_LayoutUpdated);
+          //  host.Background = _PreviousTextBoxBackgroundBrush;
+          //  host.BorderBrush = _PreviousTextBoxBorderBrush;
+           // host.BorderThickness = _PreviousTextBoxBorderThickness;
 
             if (_InstanceObject != null)
             {

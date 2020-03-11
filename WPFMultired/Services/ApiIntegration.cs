@@ -334,7 +334,7 @@ namespace WPFMultired.Services
 
                                 var pathImage = string.Concat(Utilities.GetConfiguration("ResourcesUrl"),
                                                   ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_LOGO, keyDesencript), 2), ".png");
-                                if (File.Exists(pathImage))
+                                if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), string.Concat("../../",pathImage))))
                                 {
                                     entity.ImageSourse = pathImage;
                                 }

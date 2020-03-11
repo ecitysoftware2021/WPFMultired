@@ -37,7 +37,7 @@
                        HorizontalAlignment="Center" 
                        Width="160" 
                        Height="160"
-                       Margin="20,30,0,0"
+                       Margin="20,50,0,0"
                        Visibility="Hidden"/>
 
                 <TextBlock x:Name="LblTittle" 
