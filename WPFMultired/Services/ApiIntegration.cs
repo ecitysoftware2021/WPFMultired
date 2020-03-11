@@ -163,7 +163,7 @@ namespace WPFMultired.Services
 
                     case ETypeService.Report_Cash:
 
-                        return RepostCash((Transaction)data);
+                        return ReportCash((Transaction)data);
 
                     default:
                         break;
@@ -976,7 +976,7 @@ namespace WPFMultired.Services
             return null;
         }
 
-        private Response RepostCash(Transaction data)
+        private Response ReportCash(Transaction data)
         {
             try
             {
@@ -1006,7 +1006,8 @@ namespace WPFMultired.Services
                                     I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
                                     I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
-                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "MD") ? "Dispensador" : "Aceptador"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "MD") ? "Dispensador" : "Aceptador"), keyEncript),
                                 };
                                 index++;
                             }

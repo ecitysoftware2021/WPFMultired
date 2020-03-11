@@ -132,6 +132,7 @@ namespace WPFMultired.UserControls
 
                     AdminPayPlus.ControlPeripherals.callbackLog = log =>
                     {
+                        viewModel.SplitDenomination(log);
                         AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                     };
 
@@ -203,6 +204,8 @@ namespace WPFMultired.UserControls
                     else
                     {
                         transaction.StateNotification = 1;
+
+                        AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Cash, transaction);
 
                         AdminPayPlus.UpdateTransaction(transaction);
 

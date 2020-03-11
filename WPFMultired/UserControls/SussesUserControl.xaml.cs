@@ -51,6 +51,8 @@ namespace WPFMultired.UserControls
 
                 Task.Run(() =>
                 {
+                    AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Cash, transaction);
+
                     AdminPayPlus.UpdateTransaction(this.transaction);
 
                     Thread.Sleep(2000);

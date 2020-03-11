@@ -51,7 +51,7 @@
                     Foreground="#FF35679B"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
-                    Text="Por favor ingresar su dentificación" />
+                    Text="Por favor ingresar su identificación" />
         </Grid>
 
         <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">

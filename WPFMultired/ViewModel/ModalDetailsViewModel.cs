@@ -378,7 +378,7 @@ namespace WPFMultired.ViewModel
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.CodeOTP:
-                        Tittle = "Codigo OTP";
+                        Tittle = "Código OTP";
                         VisibilityInput = Visibility.Visible;
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Hidden;

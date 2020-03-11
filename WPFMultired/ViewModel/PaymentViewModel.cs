@@ -230,6 +230,32 @@ namespace WPFMultired.ViewModel
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "PaymentViewModel", ex);
             }
         }
+
+        public void SplitDenomination(string data)
+        {
+            try
+            {
+                string[] values = data.Split(':')[1].Split(';');
+                foreach (var value in values)
+                {
+                    int denomination = int.Parse(value.Split('-')[0]);
+                    int quantity = int.Parse(value.Split('-')[1]);
+                    string code = denomination < 1000 ? "MD" : "DP";
+
+                    this.Denominations.Add(new DenominationMoney
+                    {
+                        Denominacion = denomination,
+                        Quantity = quantity,
+                        Total = denomination * quantity,
+                        Code = code
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "PaymentViewModel", ex);
+            }
+        }
         #endregion
     }
 }
