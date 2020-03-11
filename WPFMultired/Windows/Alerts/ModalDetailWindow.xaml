@@ -9,6 +9,7 @@
         Title="ModalDetailWindow"         
         WindowStyle="None"
         AllowsTransparency="True"
+        Loaded="Window_Loaded"
         WindowState="Maximized"
         Height="2064.095" 
         Width="1250.599"
@@ -72,6 +73,7 @@
                              FontWeight="Bold"
                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
                              TabIndex="0" />
+                    
                     <TextBox TabIndex="1" Height="0" Width="0" />
 
                     <TextBlock Name="txtMessageError"
