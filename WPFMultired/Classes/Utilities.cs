@@ -186,7 +186,7 @@ namespace WPFMultired.Classes
                         y = y
                     });
 
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la comisión:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la Comisión:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Product.AmountCommission), x = x, y = y });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
