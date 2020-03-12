@@ -68,7 +68,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.Main);
+                Utilities.navigator.Navigate(UserControlView.Menu);
             }
             catch (Exception ex)
             {
