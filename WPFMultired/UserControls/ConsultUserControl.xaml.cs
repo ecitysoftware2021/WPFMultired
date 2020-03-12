@@ -208,7 +208,6 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
-
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }

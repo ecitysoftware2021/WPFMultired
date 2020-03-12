@@ -58,7 +58,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <TextBlock Text="Se leccione un producto"
+            <TextBlock Text="Seleccione un producto"
                        Foreground="#FF80BC4A"
                        Margin="0,0,0,0"
                        HorizontalAlignment="Center"

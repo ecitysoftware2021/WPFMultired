@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock 
-                Text="Ingrese el dinero indicado"
+                Text="Ingrese el dinero a depositar"
                 FontSize="60"
                 Width="500"
                 TextAlignment="Center"
@@ -36,7 +36,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <TextBlock 
-                Text="DENOMINACIÓN"
+                Text="Denominación"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="120,0,0,0"
@@ -47,7 +47,7 @@
                 HorizontalAlignment="Left" Grid.Row="6" />
 
             <TextBlock 
-                Text="CANTIDAD"
+                Text="Cantidad"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="120,0,0,0"
@@ -58,7 +58,7 @@
                 HorizontalAlignment="Center" />
 
             <TextBlock 
-                Text="TOTAL ($)"
+                Text="Total ($)"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="0,0,120,0"
