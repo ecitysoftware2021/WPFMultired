@@ -4,14 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFMultired.UserControls"
-        mc:Ignorable="d"
-        Height="1920" 
-        Width="1080" >
+           xmlns:gif="http://wpfanimatedgif.codeplex.com"
+         gif:ImageBehavior.AnimateInDesignMode="True"
+          mc:Ignorable="d"
+          Height="1920" 
+         Width="1080" >
     <Grid>
         <Grid.Background>
             <ImageBrush  ImageSource="/Images/Backgrounds/bg-succes-pay.png"
                         Stretch="Fill"/>
         </Grid.Background>
+
+        <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
+                       gif:ImageBehavior.AnimateInDesignMode="True"
+                       gif:ImageBehavior.AutoStart="True" 
+                       x:Name="GifLoadder"  
+                       Stretch="Fill"
+                       VerticalAlignment="Top" 
+                       HorizontalAlignment="Center" 
+                       Width="180" 
+                       Height="180"
+                       Margin="0,450,0,0"/>
     </Grid>
 </UserControl>
 
