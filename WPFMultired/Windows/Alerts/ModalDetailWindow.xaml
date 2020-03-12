@@ -23,7 +23,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="170,0,170,0">
+        <Grid Grid.Row="1" Margin="50,0,50,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/Backgrounds/bg-alert-details.png"/>
             </Grid.Background>
