@@ -161,7 +161,7 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Retiro", x = 115, y = y += 80 });
                     }
                     
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Concat("Multired cajero 1", " (", "", ")"), x = 90, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Multi-Red", x = 90, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "ASM", x = 25, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Tran", x = 85, y = y });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Fecha", x = 145, y = y });
@@ -188,30 +188,28 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la comisión:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Product.AmountCommission), x = x, y = y });
-
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total:", x = xKey, y = y += sum });
-                    
+                   
                     if (transaction.Type == ETransactionType.Pay)
                     {
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.PayValue), x = x, y = y });
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Ingresado:", x = xKey, y = y += sum });
+                        
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Depositado:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = x, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
                     }
                     else
                     {
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Amount), x = x, y = y });
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Solicitado:", x = xKey, y = y += sum });
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorSobrante), x = x, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Entregado:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
                     }
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "Su transacción se ha realizado exitosamente", x = 2, y = y += 50 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "E-city Software", x = 100, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "!Su transacción se ha realizado exitosamente¡", x = 2, y = y += 50 });
 
                     AdminPayPlus.PrintService.Start(data);
                 }

@@ -11,7 +11,6 @@ namespace WPFMultired.Keyboard
     class TouchScreenKeyNumeric : Window
     {
         #region Property & Variable & Constructorç
-        private static bool isRun = false;
 
         static object window;
 
@@ -31,7 +30,7 @@ namespace WPFMultired.Keyboard
             set { _positionY = value; }
         }
 
-        private static int _positionX = 0;
+        private static int _positionX = 150;
 
         static int PositionX
         {
@@ -65,11 +64,8 @@ namespace WPFMultired.Keyboard
 
         private static Window _InstanceObject;
 
-        private static Brush _PreviousTextBoxBackgroundBrush = null;
-        private static Brush _PreviousTextBoxBorderBrush = null;
-        private static Thickness _PreviousTextBoxBorderThickness;
-
         private static Control _CurrentControl;
+
         public static string TouchScreenText
         {
             get
@@ -221,7 +217,7 @@ namespace WPFMultired.Keyboard
                     System.Windows.Point virtualpoint = new Point(0, _CurrentControl.ActualHeight + 3);
                     Point Actualpoint = _CurrentControl.PointToScreen(virtualpoint);
 
-                    _InstanceObject.Left = Actualpoint.X - PositionX;
+                    _InstanceObject.Left = (Actualpoint.X + (_CurrentControl.ActualHeight / 2))- PositionX;
                     _InstanceObject.Top = Actualpoint.Y + PositionY;
                     if (!_InstanceObject.IsLoaded)
                     {
@@ -272,7 +268,6 @@ namespace WPFMultired.Keyboard
         {
             try
             {
-                isRun = true;
                 Control host = sender as Control;
 
                 //_PreviousTextBoxBackgroundBrush = host.Background;

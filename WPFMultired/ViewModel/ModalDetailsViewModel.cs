@@ -378,14 +378,14 @@ namespace WPFMultired.ViewModel
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.CodeOTP:
-                        Tittle = "Código otp";
+                        Tittle = "Código OTP";
                         VisibilityInput = Visibility.Visible;
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAmount = Visibility.Hidden;
                         VisibilityTxtImput = Visibility.Visible;
-                        LblInput = "Ingrese el código otp";
-                        Message = "Ingresa el código otp que llego a su correo, para continuar";
+                        LblInput = "Ingrese el código OTP";
+                        Message = "Ingresa el código OTP que llego a su correo, para continuar";
                         IsReadQr = true;
                         VisibilityAcept = Visibility.Visible;
                         VisibilityCancel = Visibility.Hidden;
