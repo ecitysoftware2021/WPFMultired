@@ -223,5 +223,13 @@ namespace WPFMultired.Windows.Alerts
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
+
+        private void Txt_amount_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (txt_amount.Text.Equals("$"))
+            {
+                txt_amount.Text = "0";
+            }
+        }
     }
 }

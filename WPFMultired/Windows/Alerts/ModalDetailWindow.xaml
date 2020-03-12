@@ -57,6 +57,7 @@
                              Margin="0,20,0,0"
                              TextAlignment="Center"                    
                              FontWeight="Bold"
+                             TextChanged="Txt_amount_TextChanged"
                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
                              TabIndex="0" />
 

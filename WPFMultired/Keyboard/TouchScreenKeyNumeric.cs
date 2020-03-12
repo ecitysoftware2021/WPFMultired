@@ -30,7 +30,7 @@ namespace WPFMultired.Keyboard
             set { _positionY = value; }
         }
 
-        private static int _positionX = 50;
+        private static int _positionX = 60;
 
         static int PositionX
         {
