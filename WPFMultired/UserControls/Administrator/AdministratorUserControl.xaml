@@ -57,7 +57,7 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock 
-                Text="Denominación / Casete"
+                Text="Denominación - Casete"
                 FontSize="35"
                 Width="300"
                 TextAlignment="Center"
@@ -71,7 +71,7 @@
                 Grid.Column="1"/>
 
             <TextBlock 
-                Text="Cant. Nueva / Cant. Anterior"
+                Text="Cant. Nueva - Cant. Anterior"
                 FontSize="35"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -129,8 +129,8 @@
                             <Image
                                Source="{Binding IMAGE}"
                                Stretch="Fill"
-                               Width="60"
-                               Height="50"
+                               Width="65"
+                               Height="65"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="0,0,0,0"
@@ -148,7 +148,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="1" >
-                                <Run Text=" / " FontWeight="Bold" />
+                                <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding CASSETTE}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             
@@ -163,7 +163,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                     Grid.Column="2">
-                                <Run Text=" / " FontWeight="Bold" />
+                                <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             <TextBlock 
