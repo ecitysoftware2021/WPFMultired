@@ -159,30 +159,35 @@ namespace WPFMultired.Windows.Alerts
 
                         if (this.transaction.IdTransactionAPi == 0)
                         {
-                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
-                            Utilities.navigator.Navigate(UserControlView.Main);
-                            Application.Current.Dispatcher.Invoke(delegate
-                            {
-                                DialogResult = false;
-                            });
+                                Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
+                                Utilities.navigator.Navigate(UserControlView.Main);
+                                Application.Current.Dispatcher.Invoke(delegate
+                                {
+                                    DialogResult = false;
+                                });
                         }
                         else
                         {
                             if (transaction.Type == ETransactionType.Withdrawal)
                             {
-                                Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
-                                Application.Current.Dispatcher.Invoke(delegate
+                                if (this.transaction.IsReturn)
                                 {
-
-                                    DialogResult = true;
-                                });
+                                    Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
+                                    Application.Current.Dispatcher.Invoke(delegate
+                                    {
+                                        DialogResult = true;
+                                    });
+                                }
+                                else
+                                {
+                                    Utilities.ShowModal("El dispositivo no cuenta con el dinero solicitado", EModalType.Error);
+                                }
                             }
                             else
                             {
                                 Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                                 Application.Current.Dispatcher.Invoke(delegate
                                 {
-
                                     DialogResult = true;
                                 });
                             }
