@@ -46,6 +46,7 @@ namespace WPFMultired.UserControls
                         ValorIngresado = 0,
                         ValorDispensado = 0,
                         StatePay = false,
+                        Denominations = new List<DenominationMoney>(),
                         Message = MessageResource.MessageReturnMony
                     };
 

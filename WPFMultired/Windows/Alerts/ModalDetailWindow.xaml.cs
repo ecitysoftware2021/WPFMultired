@@ -56,6 +56,10 @@ namespace WPFMultired.Windows.Alerts
             {
                 txt_qr.Focus();
             }
+            else if (viewModel.Type == ETypeDetailModel.CodeOTP)
+            {
+                txt_input.Focus();
+            }
         }
 
         private void Btn_cancel_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
@@ -99,6 +103,7 @@ namespace WPFMultired.Windows.Alerts
                             if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
                             {
                                 viewModel.Type = ETypeDetailModel.CodeOTP;
+                                SetFocus();
                             }
                         }
                         else

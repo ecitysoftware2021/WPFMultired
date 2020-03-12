@@ -378,14 +378,14 @@ namespace WPFMultired.ViewModel
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.CodeOTP:
-                        Tittle = "Código OTP";
+                        Tittle = "Código otp";
                         VisibilityInput = Visibility.Visible;
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAmount = Visibility.Hidden;
                         VisibilityTxtImput = Visibility.Visible;
-                        LblInput = "Ingrese el código OTP";
-                        Message = "Ingresa el código OTP que llego a su correo, para continuar";
+                        LblInput = "Ingrese el código otp";
+                        Message = "Ingresa el código otp que llego a su correo, para continuar";
                         IsReadQr = true;
                         VisibilityAcept = Visibility.Visible;
                         VisibilityCancel = Visibility.Hidden;
@@ -396,7 +396,7 @@ namespace WPFMultired.ViewModel
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Visible;
                         IsReadQr = false;
-                        Message = "Si tienes un código QR acérquelo al lector para iniciar la transacción, de lo contrario presiona cancelar";
+                        Message = "Si tienes un código qr acérquelo al lector para iniciar la transacción, de lo contrario presiona cancelar";
                         VisibilityAcept = Visibility.Hidden;
                         VisibilityCancel = Visibility.Visible;
                         break;

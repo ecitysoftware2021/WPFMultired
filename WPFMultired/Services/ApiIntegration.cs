@@ -635,8 +635,8 @@ namespace WPFMultired.Services
                             {
                                 denominations.LIST[index] = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROSLIST
                                 {
-                                    I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
-                                    I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
+                                    I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString())), keyEncript),
+                                    I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString())), keyEncript),
                                     I_MONEDA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
                                     I_TIPMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
                                 };
@@ -676,7 +676,7 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOAUTORI, keyDesencript), 2);
+                            transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOAUTORI, keyDesencript) ?? string.Empty, 2);
                             return new Response { Data = transaction };
                         }
                         else
@@ -1001,13 +1001,14 @@ namespace WPFMultired.Services
 
                             foreach (var denomination in data.Payment.Denominations)
                             {
+
                                 denominations.LIST[index] = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST
                                 {
                                     I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
                                     I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
-                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
-                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "MD") ? "Dispensador" : "Aceptador"), keyEncript),
-                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "MD") ? "Dispensador" : "Aceptador"), keyEncript),
+                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp("001"), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
                                 };
                                 index++;
                             }
@@ -1035,6 +1036,18 @@ namespace WPFMultired.Services
                             I_TRNTAYLOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.CodeTransactionAuditory), keyEncript),
 
                         };
+
+                        var response = client.mtrctlbllc(request);
+                        var Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            return new Response { Data = data };
+                        }
+                        else
+                        {
+                            return new Response { Data = null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
                     }
                 }
             }

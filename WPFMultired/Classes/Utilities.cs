@@ -192,10 +192,10 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total:", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.PayValue), x = x, y = y });
-
+                    
                     if (transaction.Type == ETransactionType.Pay)
                     {
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.PayValue), x = x, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Ingresado:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = x, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
@@ -203,6 +203,7 @@ namespace WPFMultired.Classes
                     }
                     else
                     {
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Amount), x = x, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Entregado:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
                     }

@@ -235,20 +235,22 @@ namespace WPFMultired.ViewModel
         {
             try
             {
-                string[] values = data.Split(':')[1].Split(';');
+                string[] values = data.Replace("!", "").Split(':')[1].Split(';');
                 foreach (var value in values)
                 {
                     int denomination = int.Parse(value.Split('-')[0]);
                     int quantity = int.Parse(value.Split('-')[1]);
                     string code = denomination < 1000 ? "MD" : "DP";
-
-                    this.Denominations.Add(new DenominationMoney
+                    if (quantity > 0)
                     {
-                        Denominacion = denomination,
-                        Quantity = quantity,
-                        Total = denomination * quantity,
-                        Code = code
-                    });
+                        this.Denominations.Add(new DenominationMoney
+                        {
+                            Denominacion = denomination,
+                            Quantity = quantity,
+                            Total = denomination * quantity,
+                            Code = code
+                        });
+                    }
                 }
             }
             catch (Exception ex)
