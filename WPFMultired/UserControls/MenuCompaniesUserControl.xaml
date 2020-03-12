@@ -49,7 +49,7 @@
                     Foreground="#FF35679B"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
-                    Text="Seleccione una Institución" />
+                    Text="Seleccione una Entidad" />
         </Grid>
 
         <Grid Grid.Row="2">
