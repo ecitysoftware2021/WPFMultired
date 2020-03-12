@@ -175,7 +175,7 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Usuario:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(transaction.payer.NAME, " ( *****", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")") ?? string.Empty, x = 90, y = y });
 
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Estado:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Estado Transacción:", x = xKey, y = y += sum });
                     data.Add(new DataPrinter
                     {
                         brush = color,
