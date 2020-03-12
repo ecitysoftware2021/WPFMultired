@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="350" />
-            <RowDefinition Height="900" />
+            <RowDefinition Height="950" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -104,7 +104,7 @@
                        VerticalAlignment="Center"
                        FontFamily="Arial"
                        FontWeight="Medium"
-                       Margin="0,8,0,0"
+                       Margin="0,0,0,0"
                        HorizontalContentAlignment="Center"
                        FontSize="48"
                        Width="630"
@@ -118,7 +118,7 @@
                        VerticalAlignment="Center"
                        FontFamily="Arial"
                        FontWeight="Medium"
-                       Margin="0,8,0,0"
+                       Margin="0,0,0,0"
                        HorizontalContentAlignment="Center"
                        FontSize="48"
                        IsEnabled="False"
