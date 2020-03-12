@@ -92,12 +92,12 @@
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Top" 
                            TextAlignment="Center"
-                           Margin="0,35,0,0"
+                           Margin="0,55,0,0"
                            Text="{Binding Tittle}" 
                            Name="LblTitle"
                            FontWeight="Bold"
                            Foreground="White" 
-                           FontSize="40" />
+                           FontSize="45" />
 
                     <TextBlock Name="lbl_message"
                            Text="{Binding Message}"
@@ -159,7 +159,7 @@
                     <Image Source="/Images/Buttons/btn-cancel.png"
                            Width="200"
                            Name="btn_cancel"
-                           Margin="50,0,0,60"
+                           Margin="170,0,0,80"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            Visibility="{Binding VisibilityAcept}"
@@ -170,14 +170,14 @@
                         HorizontalAlignment="Center"
                         Width="200"
                         Visibility="{Binding VisibilityCancel}"
-                        Margin="0,60,0,0"
+                        Margin="0,40,0,0"
                         TouchDown="Btn_cancel_TouchDown"
                         Source="/Images/Buttons/btn-cancel.png" />
 
                     <Image Source="/Images/Buttons/btn-acept.png"
                            Width="200"
                            Name="btn_finish"
-                           Margin="0,0,50,60"
+                           Margin="0,0,160,80"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"
                            TouchDown="Btn_finish_TouchDown"

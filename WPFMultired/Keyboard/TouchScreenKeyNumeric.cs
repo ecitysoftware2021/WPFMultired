@@ -30,7 +30,7 @@ namespace WPFMultired.Keyboard
             set { _positionY = value; }
         }
 
-        private static int _positionX = 150;
+        private static int _positionX = 50;
 
         static int PositionX
         {
@@ -217,7 +217,7 @@ namespace WPFMultired.Keyboard
                     System.Windows.Point virtualpoint = new Point(0, _CurrentControl.ActualHeight + 3);
                     Point Actualpoint = _CurrentControl.PointToScreen(virtualpoint);
 
-                    _InstanceObject.Left = (Actualpoint.X + (_CurrentControl.ActualHeight / 2))- PositionX;
+                    _InstanceObject.Left = Actualpoint.X + (_CurrentControl.ActualHeight / 2) + PositionX;
                     _InstanceObject.Top = Actualpoint.Y + PositionY;
                     if (!_InstanceObject.IsLoaded)
                     {
