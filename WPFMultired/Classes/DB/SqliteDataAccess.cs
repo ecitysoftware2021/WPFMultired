@@ -262,7 +262,6 @@ namespace WPFMultired.Classes.DB
             {
                 var query = "UPDATE 'TRANSACTION_DETAIL' SET STATE = " + transactionDetail.STATE + " WHERE TRANSACTION_DETAIL_ID = " + transactionDetail.TRANSACTION_ID;
                 this.Execute<TRANSACTION_DETAIL>(query, null);
-
             }
             catch (Exception ex)
             {
