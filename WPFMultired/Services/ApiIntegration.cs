@@ -1004,8 +1004,8 @@ namespace WPFMultired.Services
 
                                 denominations.LIST[index] = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST
                                 {
-                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString(), ".00")), keyEncript),
-                                    I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString(), ".00")), keyEncript),
+                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Quantity.ToString()).Replace("$","")), keyEncript),
+                                    I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp("001"), keyEncript),
                                     I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
                                     I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
