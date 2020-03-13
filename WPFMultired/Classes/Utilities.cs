@@ -286,7 +286,7 @@ namespace WPFMultired.Classes
 
                 if (dataControl.TYPE == ETypeAdministrator.ReUploat || dataControl.TYPE == ETypeAdministrator.Upload || dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "------ Detalle denominaciones dispensadores ------", x = 70, y = y += 20 });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "------ Detalle denominaciones dispensadores ------", x = 1, y = y += 20 });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Denominación", x = 1, y = y += 20 });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Cant / Casete", x = 100, y = y });

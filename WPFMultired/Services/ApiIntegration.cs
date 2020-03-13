@@ -1004,10 +1004,10 @@ namespace WPFMultired.Services
 
                                 denominations.LIST[index] = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST
                                 {
-                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Quantity.ToString()).Replace("$","")), keyEncript),
+                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Quantity.ToString()), keyEncript),
                                     I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
-                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp("001"), keyEncript),
-                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
+                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
                                     I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
                                 };
                                 index++;
@@ -1034,7 +1034,7 @@ namespace WPFMultired.Services
                             I_TRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.IdTransactionAPi.ToString()), keyEncript),
                             I_ESTADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.State == ETransactionState.Success ? "1" : "9"), keyEncript),
                             I_TRNTAYLOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.CodeTransactionAuditory), keyEncript),
-
+                            I_LISTAREGISTROS = denominations,
                         };
 
                         var response = client.mtrctlbllc(request);

@@ -143,7 +143,7 @@ namespace WPFMultired.Services.Object
                 {
                     if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
                     {
-                        if (type == ETypeAdministrator.Upload && (item.CODE == "MD" || item.CODE == "DP"))
+                        if (type == ETypeAdministrator.Upload)
                         {
                             dataListsNew.Add(new DenominationMoney
                             {
