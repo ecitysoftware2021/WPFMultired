@@ -95,6 +95,7 @@ namespace WPFMultired.UserControls
             {
                 if (Utilities.ShowModal("¿Desea realizar cashback?", EModalType.Information))
                 {
+                    transaction.IsCashBack = true;
                     this.transaction.Type = ETransactionType.Withdrawal;
                     transaction.CodeTypeTransaction = AdminPayPlus.DataPayPlus.ListTypeTransactions[1].Item3;
                     transaction.Payment = null;

@@ -131,6 +131,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                transaction.IsCashBack = false;
                 if (!Utilities.ShowModalDetails(transaction, 
                     (transaction.Type == ETransactionType.Pay ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
                 {

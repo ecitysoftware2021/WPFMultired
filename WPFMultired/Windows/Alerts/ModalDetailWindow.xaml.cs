@@ -99,11 +99,32 @@ namespace WPFMultired.Windows.Alerts
                     case ETypeDetailModel.Withdrawal:
                         if (viewModel.Amount >= transaction.Product.AmountMin && viewModel.Amount <= transaction.Product.AmountMax)
                         {
-                            transaction.Amount = viewModel.Amount;
-                            if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
+                            if (transaction.IsCashBack )
                             {
-                                viewModel.Type = ETypeDetailModel.CodeOTP;
-                                SetFocus();
+                                if (viewModel.Amount <= transaction.Amount)
+                                {
+
+                                    transaction.Amount = viewModel.Amount;
+                                    if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
+                                    {
+                                        viewModel.Type = ETypeDetailModel.CodeOTP;
+                                        SetFocus();
+                                    }
+                                }
+                                else
+                                {
+                                    Utilities.ShowModal("Ingrese un valor a retirar menor que el valor depositado", EModalType.Error);
+                                }
+                            }
+                            else
+                            {
+
+                                transaction.Amount = viewModel.Amount;
+                                if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
+                                {
+                                    viewModel.Type = ETypeDetailModel.CodeOTP;
+                                    SetFocus();
+                                }
                             }
                         }
                         else
@@ -126,6 +147,7 @@ namespace WPFMultired.Windows.Alerts
                         {
                             if (transaction.Type == ETransactionType.Withdrawal)
                             {
+                                transaction.IsCashBack = false;
                                 viewModel.Type = ETypeDetailModel.CodeOTP;
                             }
                             else

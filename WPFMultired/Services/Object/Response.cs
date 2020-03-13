@@ -143,7 +143,7 @@ namespace WPFMultired.Services.Object
                 {
                     if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
                     {
-                        if (type == ETypeAdministrator.Upload)
+                        if (type == ETypeAdministrator.Upload && (item.DEVICE_PAYPAD_ID == (int)ETypeDevice.DP || item.DEVICE_PAYPAD_ID == (int)ETypeDevice.MD))
                         {
                             dataListsNew.Add(new DenominationMoney
                             {
@@ -153,7 +153,7 @@ namespace WPFMultired.Services.Object
                                 Code = item.CASSETTE.ToString(),
                             });
                         }
-                        else if (type == ETypeAdministrator.Balancing && (item.CODE == "MA" || item.CODE == "AP"))
+                        else if (type == ETypeAdministrator.Balancing && (item.DEVICE_PAYPAD_ID == (int)ETypeDevice.AP || item.DEVICE_PAYPAD_ID == (int)ETypeDevice.MA))
                         {
                             dataListsNew.Add(new DenominationMoney
                             {
