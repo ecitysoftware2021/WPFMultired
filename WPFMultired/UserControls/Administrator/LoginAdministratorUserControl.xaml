@@ -176,7 +176,7 @@
                    TouchDown="BtnConsult_TouchDown" />
 
             <Image x:Name="btnCancell"
-                   Source="/Images/Buttons/btn-cancel.png"
+                   Source="/Images/Buttons/btn-exit.png"
                    Stretch="None"
                    Width="340"
                    Height="130"
