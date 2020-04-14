@@ -298,7 +298,7 @@
     <value>¡El dispositivo no cuenta con cargue suficiente!</value>
   </data>
   <data name="ValidatePeripherals" xml:space="preserve">
-    <value>Validando perifericos...</value>
+    <value>Validando periférico ...</value>
   </data>
   <data name="ValidatePeripheralsFail" xml:space="preserve">
     <value>¡No se lograrón iniciar los dispositivos!</value>
