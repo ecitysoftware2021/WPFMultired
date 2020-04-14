@@ -57,7 +57,12 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
-                if (AdminPayPlus.DataPayPlus.StateBalanece)
+                if (AdminPayPlus.DataPayPlus.StateUpdate)
+                {
+                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, false);
+                    Utilities.UpdateApp();
+                }
+                else if (AdminPayPlus.DataPayPlus.StateBalanece)
                 {
                     Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Balancing);
                 }

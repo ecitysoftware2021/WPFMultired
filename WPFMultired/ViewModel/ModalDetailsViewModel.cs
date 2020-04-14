@@ -121,6 +121,24 @@ namespace WPFMultired.ViewModel
             }
         }
 
+        private Visibility _visibilityPassInput;
+
+        public Visibility VisibilityPassInput
+        {
+            get
+            {
+                return _visibilityPassInput;
+            }
+            set
+            {
+                if (_visibilityPassInput != value)
+                {
+                    _visibilityPassInput = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityPassInput)));
+                }
+            }
+        }
+
         private Visibility _visibilityQr;
 
         public Visibility VisibilityQr

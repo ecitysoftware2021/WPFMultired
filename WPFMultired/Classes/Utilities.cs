@@ -134,6 +134,29 @@ namespace WPFMultired.Classes
             }
         }
 
+        public static void UpdateApp()
+        {
+            try
+            {
+                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+                {
+                    Process pc = new Process();
+                    Process pn = new Process();
+                    ProcessStartInfo si = new ProcessStartInfo();
+                    si.FileName = GetConfiguration("APLICATION_UPDATE");
+                    pn.StartInfo = si;
+                    pn.Start();
+                    pc = Process.GetCurrentProcess();
+                    pc.Kill();
+                }));
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex, MessageResource.StandarError);
+            }
+        }
+
         public static void PrintVoucher(Transaction transaction)
         {
             try
@@ -187,24 +210,45 @@ namespace WPFMultired.Classes
                     });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la Comisión:", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Product.AmountCommission), x = x, y = y });
+
+                    if (transaction.State == ETransactionState.Success)
+                    {
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Product.AmountCommission), x = x, y = y });
+                    }
+                    else
+                    {
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", 0), x = x, y = y });
+                    }
+                    
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
                    
                     if (transaction.Type == ETransactionType.Pay)
                     {
                         
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Depositado:", x = xKey, y = y += sum });
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Ingresado.:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = x, y = y });
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+                       // data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
+                      //  data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
                     }
                     else
                     {
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Solicitado:", x = xKey, y = y += sum });
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorSobrante), x = x, y = y });
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Entregado:", x = xKey, y = y += sum });
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+                        if (!transaction.IsCashBack)
+                        {
+                            data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor Solicitado:", x = xKey, y = y += sum });
+                            data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorSobrante), x = x, y = y });
+
+                            data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Entregado:", x = xKey, y = y += sum });
+                            data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+                        }
+                        else
+                        {
+                            data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor solicitado en Cashback:", x = xKey, y = y += sum });
+                            data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorSobrante), x = x, y = y });
+
+                            data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total entregado en Cashbak:", x = xKey, y = y += sum });
+                            data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+                        }
                     }
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });

@@ -161,7 +161,7 @@ namespace WPFMultired.UserControls
                     {
                         Task.Run(async () =>
                         {
-                            if (this.viewModel.ValorDispensado > 0)
+                            if (this.viewModel.ValorDispensado >= transaction.Payment.ValorSobrante)
                             {
                                 transaction.Amount = viewModel.ValorDispensado;
                                 var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);

@@ -88,7 +88,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a ¿Desea consignar el monto ingresado?.
+        ///   Busca una cadena traducida similar a ¿Desea  depositar la cantidad ingresada?.
         /// </summary>
         internal static string ConsignAmount {
             get {
@@ -313,7 +313,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se esta validando y almacenando la información, espere un momento por favor.
+        ///   Busca una cadena traducida similar a Transacción en proceso por favor espere..
         /// </summary>
         internal static string LoadInformation {
             get {
@@ -394,7 +394,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a .
+        ///   Busca una cadena traducida similar a No se puede continuar con la transacción. por favor intentarlo mas tarde.
         /// </summary>
         internal static string NoProccessInformation {
             get {
@@ -403,7 +403,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El cajero está fuera de servicio en este momento, por favor intente más tarde.
+        ///   Busca una cadena traducida similar a El ASM está temporalmente fuera de servicio, por favor intente más tarde.
         /// </summary>
         internal static string NoService {
             get {
@@ -606,6 +606,15 @@ namespace WPFMultired.Resources {
         internal static string TransactionFinishSucces {
             get {
                 return ResourceManager.GetString("TransactionFinishSucces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene una actualizacion pendiente por favor no manipule ni apague el PayPlus mientras termina la instalacion..
+        /// </summary>
+        internal static string UpdateAplication {
+            get {
+                return ResourceManager.GetString("UpdateAplication", resourceCulture);
             }
         }
         

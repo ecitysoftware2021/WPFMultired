@@ -50,6 +50,7 @@ namespace WPFMultired.Windows.Alerts
         {
             if (viewModel.Type == ETypeDetailModel.Withdrawal)
             {
+                Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
                 txt_amount.Focus();
             }
             else if (viewModel.Type == ETypeDetailModel.Qr)
@@ -113,7 +114,7 @@ namespace WPFMultired.Windows.Alerts
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal("Ingrese un valor a retirar menor que el valor depositado", EModalType.Error);
+                                    Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
                                 }
                             }
                             else
@@ -256,6 +257,37 @@ namespace WPFMultired.Windows.Alerts
             if (txt_amount.Text.Equals("$"))
             {
                 txt_amount.Text = "0";
+            }
+        }
+
+        private void Btn_show_id_TouchEnter(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txt_pass_input.Password))
+                {
+                    viewModel.TxtInput = txt_pass_input.Password;
+                    viewModel.VisibilityPassInput = System.Windows.Visibility.Hidden;
+                    viewModel.VisibilityInput = System.Windows.Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Btn_show_id_TouchLeave(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                viewModel.VisibilityPassInput = System.Windows.Visibility.Visible;
+                viewModel.VisibilityInput
+                    = System.Windows.Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
     }

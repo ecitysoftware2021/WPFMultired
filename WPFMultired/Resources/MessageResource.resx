@@ -121,7 +121,7 @@
     <value>¿Está seguro que desea cancelar la transacción?</value>
   </data>
   <data name="ConsignAmount" xml:space="preserve">
-    <value>¿Desea consignar el monto ingresado?</value>
+    <value>¿Desea  depositar la cantidad ingresada?</value>
   </data>
   <data name="EnterField" xml:space="preserve">
     <value>Debe ingresar {0}.</value>
@@ -154,7 +154,7 @@
     <value>El error se presentó al inicio del cajero</value>
   </data>
   <data name="LoadInformation" xml:space="preserve">
-    <value>Se esta validando y almacenando la información, espere un momento por favor</value>
+    <value>Transacción en proceso por favor espere.</value>
   </data>
   <data name="NoContinue" xml:space="preserve">
     <value>No se pudo continuar entregando el dineroç</value>
@@ -175,7 +175,7 @@
     <value>No se logro insertar la transacción</value>
   </data>
   <data name="NoService" xml:space="preserve">
-    <value>El cajero está fuera de servicio en este momento, por favor intente más tarde</value>
+    <value>El ASM está temporalmente fuera de servicio, por favor intente más tarde</value>
   </data>
   <data name="NoveltyTransation" xml:space="preserve">
     <value>La transacción finalizó con novedad</value>
@@ -307,6 +307,9 @@
     <value>El codigo QR ingresado es inválido</value>
   </data>
   <data name="NoProccessInformation" xml:space="preserve">
-    <value />
+    <value>No se puede continuar con la transacción. por favor intentarlo mas tarde</value>
+  </data>
+  <data name="UpdateAplication" xml:space="preserve">
+    <value>Tiene una actualizacion pendiente por favor no manipule ni apague el PayPlus mientras termina la instalacion.</value>
   </data>
 </root>

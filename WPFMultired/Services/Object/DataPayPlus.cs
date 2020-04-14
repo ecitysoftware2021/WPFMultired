@@ -21,6 +21,8 @@ namespace WPFMultired.Services.Object
 
         public bool StateUpload { get; set; }
 
+        public bool StateUpdate { get; set; }
+
         public bool StateDiminish { get; set; }
 
         public object ListImages { get; set; }

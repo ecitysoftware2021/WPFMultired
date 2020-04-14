@@ -32,7 +32,7 @@
                    PreviewStylusDown="BtnExit_PreviewStylusDown" />-->
         </Grid>
         <Grid Grid.Row="1">
-            <TextBlock Text="Administración"
+            <TextBlock Text="Modo Administrador"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Margin="0,50,0,0"
@@ -46,7 +46,7 @@
 
 
             <Grid Name="gd_qr" Visibility="{Binding VisibleGdQr}">
-                <TextBlock Text="Por favor acerque el código QR que fue enviado a su celular"
+                <TextBlock Text="Por favor acerque el código QR que fue enviado a su correo"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="0,0,0,410"

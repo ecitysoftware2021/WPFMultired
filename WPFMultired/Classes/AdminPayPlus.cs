@@ -201,6 +201,7 @@ namespace WPFMultired.Classes
                     _dataPayPlus.StateUpload = result.StateUpload;
                     _dataPayPlus.Message = result.Message;
                     _dataPayPlus.ListImages = result.ListImages;
+                    _dataPayPlus.StateUpdate = result.StateUpdate;
                     
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
                     var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);

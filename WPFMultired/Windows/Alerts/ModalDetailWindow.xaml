@@ -13,10 +13,11 @@
         WindowState="Maximized"
         Height="2064.095" 
         Width="1250.599"
-        Background="Transparent"
         WindowStartupLocation="CenterScreen" >
-
-    <Grid Background="#7FBFBEBE">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+    </Window.Background>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="880" />
@@ -61,6 +62,21 @@
                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
                              TabIndex="0" />
 
+                    <PasswordBox Name="txt_pass_input"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              FontFamily="Arial"
+                              FontWeight="Medium"
+                              Margin="0,20,0,0"
+                              HorizontalContentAlignment="Center"
+                              Width="400"
+                              Height="60"
+                              FontSize="35"
+                              Visibility="{Binding VisibilityPassInput}"
+                              Foreground="#FF104B6D"
+                              TabIndex="0"
+                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True" />
+
                     <TextBox Name="txt_input"
                              Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Center"
@@ -74,7 +90,16 @@
                              FontWeight="Bold"
                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
                              TabIndex="0" />
-                    
+
+                    <Image Source="/Images/Buttons/btn-show-id.png"
+                            x:Name="btn_show_id"
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            Margin="0,20,320,0"                  
+                            Width="50"
+                            TouchEnter="Btn_show_id_TouchEnter"
+                            TouchLeave="Btn_show_id_TouchLeave"/>
+
                     <TextBox TabIndex="1" Height="0" Width="0" />
 
                     <TextBlock Name="txtMessageError"
@@ -116,7 +141,7 @@
 
                 <Grid Grid.Row="1" Visibility="{Binding VisibilityComision}">
                     <TextBlock Name="txtValorComision"
-                            Text="Valor de la Comisión:"
+                            Text="Valor de la comisión:"
                             FontSize="35"
                             TextAlignment="Center"
                             Margin="0,20,0,0"
@@ -157,7 +182,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3">
-                    <Image Source="/Images/Buttons/btn-cancel.png"
+                    <Image Source="/Images/Buttons/btn-exit.png"
                            Width="200"
                            Name="btn_cancel"
                            Margin="170,0,0,80"
@@ -173,7 +198,7 @@
                         Visibility="{Binding VisibilityCancel}"
                         Margin="0,40,0,0"
                         TouchDown="Btn_cancel_TouchDown"
-                        Source="/Images/Buttons/btn-cancel.png" />
+                        Source="/Images/Buttons/btn-exit.png" />
 
                     <Image Source="/Images/Buttons/btn-acept.png"
                            Width="200"
