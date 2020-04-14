@@ -88,11 +88,6 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-<<<<<<< HEAD
-        ///   Busca una cadena traducida similar a ¿Desea  depositar la cantidad ingresada?.
-=======
-        ///   Looks up a localized string similar to ¿Desea consignar el monto ingresado?.
->>>>>>> e86d16f8b58940e2ae8e8882f5b7f7729da1097c
         /// </summary>
         internal static string ConsignAmount {
             get {
@@ -317,11 +312,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-<<<<<<< HEAD
-        ///   Busca una cadena traducida similar a Transacción en proceso por favor espere..
-=======
-        ///   Looks up a localized string similar to Se esta validando y almacenando la información, espere un momento por favor.
->>>>>>> e86d16f8b58940e2ae8e8882f5b7f7729da1097c
+
         /// </summary>
         internal static string LoadInformation {
             get {
@@ -402,11 +393,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-<<<<<<< HEAD
-        ///   Busca una cadena traducida similar a No se puede continuar con la transacción. por favor intentarlo mas tarde.
-=======
-        ///   Looks up a localized string similar to .
->>>>>>> e86d16f8b58940e2ae8e8882f5b7f7729da1097c
+
         /// </summary>
         internal static string NoProccessInformation {
             get {
@@ -415,11 +402,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-<<<<<<< HEAD
-        ///   Busca una cadena traducida similar a El ASM está temporalmente fuera de servicio, por favor intente más tarde.
-=======
-        ///   Looks up a localized string similar to El cajero está fuera de servicio en este momento, por favor intente más tarde.
->>>>>>> e86d16f8b58940e2ae8e8882f5b7f7729da1097c
+
         /// </summary>
         internal static string NoService {
             get {
@@ -626,9 +609,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-<<<<<<< HEAD
-        ///   Busca una cadena traducida similar a Tiene una actualizacion pendiente por favor no manipule ni apague el PayPlus mientras termina la instalacion..
-        /// </summary>
+  /// </summary>
         internal static string UpdateAplication {
             get {
                 return ResourceManager.GetString("UpdateAplication", resourceCulture);
@@ -636,10 +617,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Validando perifericos....
-=======
-        ///   Looks up a localized string similar to Validando periférico ....
->>>>>>> e86d16f8b58940e2ae8e8882f5b7f7729da1097c
+
         /// </summary>
         internal static string ValidatePeripherals {
             get {
