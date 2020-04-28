@@ -75,12 +75,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Top"
                     ItemsSource="{Binding}" >
-                <ListBox.Resources>
-                    <Style TargetType="ScrollViewer" >
-                        <Setter Property="Background" Value="#FF85BC30" />
-                        <Setter Property="Width"  Value="80"/>
-                    </Style>
-                </ListBox.Resources>
+                
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent" />
