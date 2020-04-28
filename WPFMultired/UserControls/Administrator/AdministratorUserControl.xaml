@@ -151,7 +151,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="1" >
-                                <Run Text="\n" FontWeight="Bold" />
+                                <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding CASSETTE}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             
@@ -166,7 +166,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                     Grid.Column="2">
-                                <Run Text="\n" FontWeight="Bold" />
+                                <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding AMOUNT}" Foreground="#FF0B4E92" />
                             </TextBlock>
                             <TextBlock 
