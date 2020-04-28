@@ -106,7 +106,7 @@
                                     TextWrapping="Wrap"
                                     Margin="0,0,0,0"
                                     Foreground="#606060"
-                                    Width="500"
+                                    Width="380"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="0"
@@ -243,7 +243,7 @@
                    StylusDown="BtnConsign_StylusDown" />
             
             <Image x:Name="btnCancell"
-                   Source="../Images/Buttons/btn-cancel.png"
+                   Source="../Images/Buttons/btn-exit.png"
                    Width="330"
                    Height="130"
                    Visibility="{Binding ImgCancel}"

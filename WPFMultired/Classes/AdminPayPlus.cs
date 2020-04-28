@@ -790,17 +790,25 @@ namespace WPFMultired.Classes
                             }
                         }
 
-                        var detailTeansactions = _db.GetDetailsTransaction();
-                        foreach (var detail in detailTeansactions)
-                        {
-                            var response = await api.CallApi("SaveTransactionDetail", detail);
-                            if (response != null)
-                            {
-                                detail.STATE = 1;
-                                _db.UpdateTransactionDetailState(detail);
-                            }
-                        }
                     }
+
+                    var detailTeansactions2 = _db.GetDetailsTransaction();
+                    foreach (var detail in detailTeansactions2)
+                    {
+                        var response = await api.CallApi("SaveTransactionDetail", new RequestTransactionDetails
+                        {
+                            Code = detail.CODE,
+                            Denomination = Convert.ToInt32(detail.DENOMINATION),
+                            Operation = (int)detail.OPERATION,
+                            Quantity = (int)detail.QUANTITY,
+                            TransactionId = (int)detail.TRANSACTION_ID,
+                            Description = detail.DESCRIPTION
+                        });
+
+                        detail.STATE = 1;
+                        _db.UpdateTransactionDetailState(detail);
+                    }
+
                 });
             }
             catch (Exception ex)

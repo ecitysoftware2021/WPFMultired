@@ -50,7 +50,11 @@ namespace WPFMultired.Windows.Alerts
         {
             if (viewModel.Type == ETypeDetailModel.Withdrawal)
             {
-                Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
+                if (this.transaction.IsCashBack) 
+                {
+                    Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
+                }
+                
                 txt_amount.Focus();
             }
             else if (viewModel.Type == ETypeDetailModel.Qr)
@@ -134,6 +138,7 @@ namespace WPFMultired.Windows.Alerts
                         }
                         break;
                     case ETypeDetailModel.CodeOTP:
+                        viewModel.TxtInput = txt_pass_input.Password;
                         if (!string.IsNullOrEmpty(viewModel.TxtInput))
                         {
                             transaction.CodeOTP = viewModel.TxtInput;

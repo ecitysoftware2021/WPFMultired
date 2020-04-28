@@ -381,6 +381,7 @@ namespace WPFMultired.ViewModel
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAcept = Visibility.Visible;
                         VisibilityCancel = Visibility.Hidden;
+                        VisibilityPassInput = Visibility.Hidden;
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.Withdrawal:
@@ -392,6 +393,7 @@ namespace WPFMultired.ViewModel
                         VisibilityCancel = Visibility.Hidden;
                         VisibilityAmount = Visibility.Visible;
                         VisibilityTxtImput = Visibility.Hidden;
+                        VisibilityPassInput = Visibility.Hidden;
                         LblInput = "Ingrese el valor a retirar";
                         IsReadQr = true;
                         break;
@@ -401,7 +403,8 @@ namespace WPFMultired.ViewModel
                         VisibilityComision = Visibility.Hidden;
                         VisibilityQr = Visibility.Hidden;
                         VisibilityAmount = Visibility.Hidden;
-                        VisibilityTxtImput = Visibility.Visible;
+                        VisibilityTxtImput = Visibility.Hidden;
+                        VisibilityPassInput = Visibility.Visible;
                         LblInput = "Ingrese el código OTP";
                         Message = "Ingresa el código OTP que llego a su correo, para continuar";
                         IsReadQr = true;
@@ -417,6 +420,7 @@ namespace WPFMultired.ViewModel
                         Message = "Si tiene un código QR acérquelo al lector para iniciar la transacción, de lo contrario presione cancelar";
                         VisibilityAcept = Visibility.Hidden;
                         VisibilityCancel = Visibility.Visible;
+                        VisibilityPassInput = Visibility.Hidden;
                         break;
                     default:
                         break;
