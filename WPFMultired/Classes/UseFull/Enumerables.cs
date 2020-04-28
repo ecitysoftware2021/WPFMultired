@@ -72,8 +72,8 @@ namespace WPFMultired.Classes
 
     public enum ETransactionType
     {
-        Withdrawal = 15,
-        Pay = 19
+        Withdrawal = 4,
+        Deposit = 2
     }
 
     public enum EProcedureType

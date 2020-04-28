@@ -177,7 +177,7 @@ namespace WPFMultired.Classes
                         {
                             new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 5, y= y },
                         };
-                    if (transaction.Type == ETransactionType.Pay)
+                    if (transaction.Type == ETransactionType.Deposit)
                     {
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Deposito", x = 100, y = y += 120 });
                     }
@@ -225,7 +225,7 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
 
                    
-                    if (transaction.Type == ETransactionType.Pay)
+                    if (transaction.Type == ETransactionType.Deposit)
                     {
                         
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total ingresado.:", x = xKey, y = y += 30 });

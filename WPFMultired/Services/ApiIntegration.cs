@@ -473,7 +473,7 @@ namespace WPFMultired.Services
                                 IDENTIFICATION = transaction.reference
                             };
 
-                            transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Pay;
+                            transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Deposit;
 
                             transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIATRANSACCION, keyDesencript), 2);
                             transaction.consecutive = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_TOKENTRANSACCION, keyDesencript), 2);
@@ -750,7 +750,7 @@ namespace WPFMultired.Services
                             transaction.reference = product.REFTRN;
                             transaction.Amount = decimal.Parse(product.VLRTRN);
                             transaction.consecutive = product.TOKTRN;
-                            transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Pay;
+                            transaction.Type = transaction.CodeTypeTransaction == "00003" ? ETransactionType.Withdrawal : ETransactionType.Deposit;
                             return new Response { Data = transaction };
                         }
                         else

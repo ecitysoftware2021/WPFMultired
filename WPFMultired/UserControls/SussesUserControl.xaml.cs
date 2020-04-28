@@ -63,13 +63,13 @@ namespace WPFMultired.UserControls
 
                     Dispatcher.BeginInvoke((Action)delegate
                     {
-                        if (transaction.State == ETransactionState.Error)
-                        {
-                            Utilities.RestartApp();
-                        }
-                        else
-                        {
-                            if (transaction.Type == ETransactionType.Pay)
+                    if (transaction.State == ETransactionState.Error)
+                    {
+                        Utilities.RestartApp();
+                    }
+                    else
+                    {
+                        if (transaction.Type == ETransactionType.Deposit)
                             {
                                 ShowModal();
                             }

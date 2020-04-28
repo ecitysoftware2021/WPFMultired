@@ -511,6 +511,8 @@ namespace WPFMultired.Classes
                                 STATE = 0,
                                 DESCRIPTION = "Transaccion iniciada",
                                 TRANSACTION_REFERENCE = transaction.reference
+
+
                             };
 
                             data.TRANSACTION_DESCRIPTION.Add(new TRANSACTION_DESCRIPTION

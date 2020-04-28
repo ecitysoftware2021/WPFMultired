@@ -177,7 +177,7 @@ namespace WPFMultired.Windows.Alerts
         {
             try
             {
-                if (transaction.Amount > 0 || transaction.Type == ETransactionType.Pay)
+                if (transaction.Amount > 0 || transaction.Type == ETransactionType.Deposit)
                 {
                     Task.Run(async () =>
                     {

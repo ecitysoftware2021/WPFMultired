@@ -133,7 +133,7 @@ namespace WPFMultired.UserControls
             {
                 transaction.IsCashBack = false;
                 if (!Utilities.ShowModalDetails(transaction, 
-                    (transaction.Type == ETransactionType.Pay ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
+                    (transaction.Type == ETransactionType.Deposit ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
                 {
                     //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
                 }

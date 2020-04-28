@@ -94,7 +94,7 @@
                             Width="950"
                             Height="50">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="400" />
+                                <ColumnDefinition Width="350" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
@@ -104,9 +104,9 @@
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,0,0"
+                                    Margin="0,0,30,0"
                                     Foreground="#606060"
-                                    Width="380"
+                                    Width="300"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Grid.Column="0"
@@ -115,8 +115,9 @@
                                     Text="{Binding Quantity}"
                                     FontSize="35"
                                     FontFamily="Arial"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
+                                    Width="200"
                                     Margin="0,0,0,0"
                                     Foreground="#FF104B6D"
                                     VerticalAlignment="Center"
@@ -130,7 +131,8 @@
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,0,0"
+                                    Margin="0,0,30,0"
+                                    Width="200"
                                     Foreground="#FF104B6D"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
