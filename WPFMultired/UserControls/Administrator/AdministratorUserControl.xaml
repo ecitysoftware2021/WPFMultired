@@ -52,12 +52,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <TextBlock 
-                Width="300"
                 TextAlignment="Center"
                 Margin="0,0,0,0"
                 FontFamily="Myriad Pro"
@@ -65,16 +65,27 @@
                 FontWeight="Bold"
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Grid.Column="1" >
-               <Run Text="Denominación" FontWeight="Bold" FontSize="38"/>
-               <Run Text="Casete" Foreground="#FF0B4E92" FontSize="35"/>
-            </TextBlock>
-        
+                FontSize="35"
+                HorizontalAlignment="Center" 
+                Text="Denominación"
+                Grid.Column="1"/>
+
             <TextBlock 
-                
                 TextAlignment="Center"
                 Margin="0,0,0,0"
+                FontSize="35"
+                FontFamily="Myriad Pro"
+                TextWrapping="WrapWithOverflow"
+                FontWeight="Bold"
+                Foreground="#FF606060"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Column="2" 
+                Text="Casete">
+            </TextBlock>
+
+            <TextBlock 
+                TextAlignment="Center"
                 Width="300"
                 TextWrapping="WrapWithOverflow"
                 FontFamily="Myriad Pro"
@@ -82,22 +93,21 @@
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Grid.Column="2" >
-                <Run Text="Cant. Anterior " FontWeight="Bold" FontSize="38"/>
-                <Run Text=" Cant. Nueva" Foreground="#FF0B4E92" FontSize="35"/>
+                Grid.Column="3">
+                <Run Text="Cant. Anterior " FontWeight="Bold" FontSize="35"/>
+                <Run Text=" Cant. Nueva" Foreground="#FF0B4E92" FontSize="32"/>
             </TextBlock>
-        
+
             <TextBlock 
                 Text="Total($)"
                 FontSize="38"
                 TextAlignment="Center"
-                Margin="0,0,0,0"
                 FontFamily="Myriad Pro"
                 FontWeight="Bold"
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Grid.Column="3"/>
+                Grid.Column="5"/>
         </Grid>
         <Grid Grid.Row="3">
             <ListView x:Name="lv_denominations" 
@@ -126,6 +136,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
@@ -143,43 +154,52 @@
                                     Text="{Binding VALUE, StringFormat={}{0:C2}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
+                                    TextWrapping="Wrap"
+                                    Margin="0,0,30,0"
+                                    Foreground="#FF2F302E"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Grid.Column="1" />
+
+                            <TextBlock 
+                                    Text="{Binding CASSETTE}"
+                                    FontSize="32"
+                                    FontFamily="Myriad Pro"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
                                     Margin="0,0,0,0"
                                     Foreground="#FF2F302E"
-                                    Width="500"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="1" >
-                                <Run Text=" - " FontWeight="Bold" />
-                                <Run Text="{Binding CASSETTE}" Foreground="#FF0B4E92" />
-                            </TextBlock>
-                            
+                                    Grid.Column="2" />
+
                             <TextBlock 
                                     Text="{Binding AMOUNT_NEW}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
-                                    TextAlignment="Center"
+                                    TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,60,0"
+                                    Margin="0,0,40,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
-                                    Grid.Column="2">
+                                    Grid.Column="3">
                                 <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding AMOUNT}" Foreground="#FF0B4E92" />
                             </TextBlock>
+                                
                             <TextBlock 
                                     Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,50,0"
+                                    Margin="0,0,15,0"
                                     Foreground="#FF2F302E"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
-                                    Grid.Column="3">
+                                    Grid.Column="4">
                             </TextBlock>
                         </Grid>
                     </DataTemplate>

@@ -674,7 +674,7 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                    var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
+                   // var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
                     //if (result != null)
                     //{
                         return (PaypadOperationControl)response.Data;
