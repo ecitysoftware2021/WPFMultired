@@ -102,16 +102,15 @@ namespace WPFMultired.Services.Object
 
         public List<List> DATALIST_FILTER(ETypeAdministrator type)
         {
-            List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
             try
             {
                 if (type == ETypeAdministrator.Upload)
                 {
-                    return this.DATALIST.Where(i => i.DEVICE_PAYPAD_ID == (int)ETypeDevice.DP || i.DEVICE_TYPE_ID == (int)ETypeDevice.MD).ToList();
+                    return this.DATALIST.Where(i => (i.DEVICE_TYPE_ID == (int)ETypeDevice.DP) || (i.DEVICE_TYPE_ID == (int)ETypeDevice.MD)).ToList();
                 }
                 else if (type == ETypeAdministrator.Balancing )
                 {
-                    return this.DATALIST.Where(i => i.DEVICE_TYPE_ID == (int)ETypeDevice.AP || i.DEVICE_TYPE_ID == (int)ETypeDevice.MA).ToList();
+                    return this.DATALIST.Where(i => (i.DEVICE_TYPE_ID == (int)ETypeDevice.AP) || (i.DEVICE_TYPE_ID == (int)ETypeDevice.MA)).ToList();
                 }
             }
             catch (Exception ex)
