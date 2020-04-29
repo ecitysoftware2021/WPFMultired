@@ -100,77 +100,25 @@ namespace WPFMultired.Services.Object
         }
         #endregion
 
-        //public List<DenominationMoney> DATALIST_FILTER()
-        //{
-        //    List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
-        //    try
-        //    {
-        //        foreach (var item in this.DATALIST)
-        //        {
-        //            if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
-        //            {
-        //                var itemUpdate = dataListsNew.Where(d => d.Denominacion == item.VALUE).FirstOrDefault();
-        //                if (itemUpdate != null)
-        //                {
-        //                    itemUpdate.Quantity += (decimal)item.AMOUNT;
-        //                    itemUpdate.Total = (int)itemUpdate.Quantity * (int)itemUpdate.Denominacion;
-        //                }
-        //                else
-        //                {
-        //                    dataListsNew.Add(new DenominationMoney
-        //                    {
-        //                        Denominacion = (decimal)item.VALUE,
-        //                        Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
-        //                        Total = item.TOTAL_AMOUNT
-        //                    });
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return dataListsNew;
-        //}
-
-        public List<DenominationMoney> DATALIST_FILTER(ETypeAdministrator type)
+        public List<List> DATALIST_FILTER(ETypeAdministrator type)
         {
             List<DenominationMoney> dataListsNew = new List<DenominationMoney>();
             try
             {
-                foreach (var item in this.DATALIST)
+                if (type == ETypeAdministrator.Upload)
                 {
-                    if (((decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT) > 0)
-                    {
-                        if (type == ETypeAdministrator.Upload && (item.DEVICE_TYPE_ID == (int)ETypeDevice.DP || item.DEVICE_TYPE_ID == (int)ETypeDevice.MD))
-                        {
-                            dataListsNew.Add(new DenominationMoney
-                            {
-                                Denominacion = (decimal)item.VALUE,
-                                Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
-                                Total = item.TOTAL_AMOUNT,
-                                Code = item.CASSETTE.ToString(),
-                            });
-                        }
-                        else if (type == ETypeAdministrator.Balancing && (item.DEVICE_TYPE_ID == (int)ETypeDevice.AP || item.DEVICE_TYPE_ID == (int)ETypeDevice.MA))
-                        {
-                            dataListsNew.Add(new DenominationMoney
-                            {
-                                Denominacion = (decimal)item.VALUE,
-                                Quantity = (decimal)item.AMOUNT_NEW + (decimal)item.AMOUNT,
-                                Total = item.TOTAL_AMOUNT,
-                                Code = item.CASSETTE.ToString(),
-                            });
-                        }
-                    }
+                    return this.DATALIST.Where(i => i.DEVICE_PAYPAD_ID == (int)ETypeDevice.DP || i.DEVICE_TYPE_ID == (int)ETypeDevice.MD).ToList();
+                }
+                else if (type == ETypeAdministrator.Balancing )
+                {
+                    return this.DATALIST.Where(i => i.DEVICE_TYPE_ID == (int)ETypeDevice.AP || i.DEVICE_TYPE_ID == (int)ETypeDevice.MA).ToList();
                 }
             }
             catch (Exception ex)
             {
 
             }
-            return dataListsNew;
+            return null;
         }
     }
 
