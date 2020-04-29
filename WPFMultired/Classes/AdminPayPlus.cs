@@ -65,8 +65,6 @@ namespace WPFMultired.Classes
             get { return _apiIntegration; }
         }
 
-        private static SqliteDataAccess _db;
-
         private string _descriptionStatusPayPlus;
 
         public string DescriptionStatusPayPlus
@@ -92,11 +90,6 @@ namespace WPFMultired.Classes
             if (api == null)
             {
                 api = new Api();
-            }
-
-            if (_db == null)
-            {
-                _db = new SqliteDataAccess();
             }
 
             if (_apiIntegration == null)
@@ -166,7 +159,7 @@ namespace WPFMultired.Classes
                         config.ID_SESSION = Convert.ToInt32(result.Session);
                         config.TOKEN_API = result.Token;
 
-                        if (_db.UpdateConfiguration(config))
+                        if (SqliteDataAccess.UpdateConfiguration(config))
                         {
                             _dataConfiguration = config;
                             return true;
@@ -378,7 +371,7 @@ namespace WPFMultired.Classes
             {
                 Task.Run(async () =>
                 {
-                    var saveResult = _db.SaveLog(log, type);
+                    var saveResult = SqliteDataAccess.SaveLog(log, type);
                     object result = "false";
 
                     if (log != null && saveResult != null)
@@ -436,7 +429,7 @@ namespace WPFMultired.Classes
                             ERROR_LEVEL_ID = (int)level
                         };
 
-                        _db.InsetConsoleError(consoleError);
+                        SqliteDataAccess.InsetConsoleError(consoleError);
                     }
                 });
             }
@@ -564,7 +557,7 @@ namespace WPFMultired.Classes
                                         }, ELogType.General);
                                     }
                                 }
-                                transaction.TransactionId = _db.SaveTransaction(data);
+                                transaction.TransactionId = SqliteDataAccess.SaveTransaction(data);
                             }
                         }
                         else
@@ -602,11 +595,11 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                    _db.SaveTransactionDetail(details, 1);
+                    SqliteDataAccess.SaveTransactionDetail(details, 1);
                 }
                 else
                 {
-                    _db.SaveTransactionDetail(details, 0);
+                    SqliteDataAccess.SaveTransactionDetail(details, 0);
                 }
             }
             catch (Exception ex)
@@ -621,7 +614,7 @@ namespace WPFMultired.Classes
             {
                 if (transaction != null)
                 {
-                    TRANSACTION tRANSACTION = _db.UpdateTransaction(transaction);
+                    TRANSACTION tRANSACTION = SqliteDataAccess.UpdateTransaction(transaction);
 
                     if (tRANSACTION != null)
                     {
@@ -629,7 +622,7 @@ namespace WPFMultired.Classes
                         if (responseTransaction != null)
                         {
                             tRANSACTION.STATE = 1;
-                            _db.UpdateTransactionState(tRANSACTION, 2);
+                            SqliteDataAccess.UpdateTransactionState(tRANSACTION, 2);
                         }
                     }
                 }
@@ -656,7 +649,7 @@ namespace WPFMultired.Classes
                     if (responseTransaction != null)
                     {
                         tRANSACTION.STATE = 1;
-                        _db.UpdateTransactionState(tRANSACTION, 2);
+                        SqliteDataAccess.UpdateTransactionState(tRANSACTION, 2);
                     }
                 }
             }
@@ -779,7 +772,7 @@ namespace WPFMultired.Classes
             {
                 Task.Run(async () =>
                 {
-                    var transactions = _db.GetTransactionPending();
+                    var transactions = SqliteDataAccess.GetTransactionPending();
                     if (transactions.Count > 0)
                     {
                         foreach (var transaction in transactions)
@@ -788,13 +781,13 @@ namespace WPFMultired.Classes
                             if (responseTransaction != null)
                             {
                                 transaction.STATE = 1;
-                                _db.UpdateTransactionState(transaction, 2);
+                                SqliteDataAccess.UpdateTransactionState(transaction, 2);
                             }
                         }
 
                     }
 
-                    var detailTeansactions2 = _db.GetDetailsTransaction();
+                    var detailTeansactions2 = SqliteDataAccess.GetDetailsTransaction();
                     foreach (var detail in detailTeansactions2)
                     {
                         var response = await api.CallApi("SaveTransactionDetail", new RequestTransactionDetails
@@ -808,7 +801,7 @@ namespace WPFMultired.Classes
                         });
 
                         detail.STATE = 1;
-                        _db.UpdateTransactionDetailState(detail);
+                        SqliteDataAccess.UpdateTransactionDetailState(detail);
                     }
 
                 });

@@ -11,18 +11,15 @@ using WPFMultired.Services.Object;
 
 namespace WPFMultired.Classes.DB
 {
-    class SqliteDataAccess
+    static class SqliteDataAccess
     {
-        public SqliteDataAccess()
-        {
-        }
 
-        public TRANSACTION GetTRANSACTION(int idTransaction)
+        public static TRANSACTION GetTRANSACTION(int idTransaction)
         {
             try
             {
                 var query = string.Concat("SELECT * FROM 'TRANSACTION' WHERE TRANSACTION_ID = ", idTransaction);
-                return this.Select<TRANSACTION>(query).FirstOrDefault();
+                return Select<TRANSACTION>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -30,12 +27,12 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public List<TRANSACTION> GetTransactionNotNotific()
+        public static List<TRANSACTION> GetTransactionNotNotific()
         {
             try
             {
                 var query = "SELECT * FROM 'TRANSACTION' WHERE STATE_NOTIFICATION = 0";
-                return this.Select<TRANSACTION>(query);
+                return Select<TRANSACTION>(query);
             }
             catch (Exception ex)
             {
@@ -43,12 +40,12 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public List<TRANSACTION> GetTransactionPending()
+        public static List<TRANSACTION> GetTransactionPending()
         {
             try
             {
                 var query = "SELECT * FROM 'TRANSACTION' WHERE STATE = 0 AND STATE_TRANSACTION_ID != " + (int)ETransactionState.Initial;
-                return this.Select<TRANSACTION>(query);
+                return Select<TRANSACTION>(query);
             }
             catch (Exception ex)
             {
@@ -56,12 +53,12 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public List<TRANSACTION_DETAIL> GetDetailsTransaction()
+        public static List<TRANSACTION_DETAIL> GetDetailsTransaction()
         {
             try
             {
                 var query = "SELECT * FROM 'TRANSACTION_DETAIL' WHERE STATE = 0";
-                return this.Select<TRANSACTION_DETAIL>(query);
+                return Select<TRANSACTION_DETAIL>(query);
             }
             catch (Exception ex)
             {
@@ -69,12 +66,12 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public bool UpdateConfiguration(CONFIGURATION_PAYDAD config)
+        public static bool UpdateConfiguration(CONFIGURATION_PAYDAD config)
         {
             try
             {
                 var query = "DELETE FROM CONFIGURATION_PAYDAD";
-                var configuration = this.Execute<object>(query, null);
+                var configuration = Execute<object>(query, null);
 
                 query = "INSERT INTO CONFIGURATION_PAYDAD (" +
                         "USER_API, " +
@@ -93,7 +90,7 @@ namespace WPFMultired.Classes.DB
                         "@ID_PAYPAD, " +
                         "@ID_SESSION, " +
                         "@TOKEN_API)";
-                this.Execute<CONFIGURATION_PAYDAD>(query, config);
+                Execute<CONFIGURATION_PAYDAD>(query, config);
                 return true;
             }
             catch (Exception ex)
@@ -102,7 +99,7 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public int SaveTransaction(TRANSACTION transaction)
+        public static int SaveTransaction(TRANSACTION transaction)
         {
             try
             {
@@ -153,7 +150,7 @@ namespace WPFMultired.Classes.DB
                             "@STATE " +
                             "TRANSACTION_REFERENCE) ";
 
-                var idTransaccion = this.Execute<ITRANSACTION>(query, data);
+                var idTransaccion = Execute<ITRANSACTION>(query, data);
 
                 query = "INSERT INTO TRANSACTION_DESCRIPTION (" +
                             "TRANSACTION_ID, " +
@@ -170,10 +167,10 @@ namespace WPFMultired.Classes.DB
                 foreach (var description in transaction.TRANSACTION_DESCRIPTION)
                 {
                     description.TRANSACTION_ID = idTransaccion;
-                    this.Execute<TRANSACTION_DESCRIPTION>(query, description);
+                    Execute<TRANSACTION_DESCRIPTION>(query, description);
                 }
 
-                return this.GetTRANSACTION((int)transaction.TRANSACTION_ID).ID;
+                return GetTRANSACTION((int)transaction.TRANSACTION_ID).ID;
             }
             catch (Exception ex)
             {
@@ -181,7 +178,7 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public TRANSACTION UpdateTransaction(Transaction transaction)
+        public static TRANSACTION UpdateTransaction(Transaction transaction)
         {
             try
             {
@@ -213,7 +210,7 @@ namespace WPFMultired.Classes.DB
                                 "STATE_NOTIFICATION = @STATE_NOTIFICATION" +
                                 "WHERE TRANSACTION_ID = " + transaction.IdTransactionAPi;
 
-                    this.Execute<TRANSACTION>(query, data);
+                    Execute<TRANSACTION>(query, data);
 
                     return data;
                 }
@@ -225,7 +222,7 @@ namespace WPFMultired.Classes.DB
             return null;
         }
 
-        public void UpdateTransactionState(TRANSACTION transaction, int type)
+        public static void UpdateTransactionState(TRANSACTION transaction, int type)
         {
             try
             {
@@ -248,7 +245,7 @@ namespace WPFMultired.Classes.DB
 
                 }
 
-                this.Execute<TRANSACTION>(query, null);
+                Execute<TRANSACTION>(query, null);
             }
             catch (Exception ex)
             {
@@ -256,12 +253,12 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public void UpdateTransactionDetailState(TRANSACTION_DETAIL transactionDetail)
+        public static void UpdateTransactionDetailState(TRANSACTION_DETAIL transactionDetail)
         {
             try
             {
                 var query = "UPDATE 'TRANSACTION_DETAIL' SET STATE = " + transactionDetail.STATE + " WHERE TRANSACTION_DETAIL_ID = " + transactionDetail.TRANSACTION_ID;
-                this.Execute<TRANSACTION_DETAIL>(query, null);
+                Execute<TRANSACTION_DETAIL>(query, null);
             }
             catch (Exception ex)
             {
@@ -269,7 +266,7 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public object SaveLog(object log, ELogType type)
+        public static object SaveLog(object log, ELogType type)
         {
             try
             {
@@ -336,7 +333,7 @@ namespace WPFMultired.Classes.DB
                 }
                 if (!string.IsNullOrEmpty(query) && data != null)
                 {
-                    return this.Execute<object>(query, data);
+                    return Execute<object>(query, data);
                 }
             }
             catch (Exception ex)
@@ -345,7 +342,7 @@ namespace WPFMultired.Classes.DB
             return null;
         }
 
-        public int SaveTransactionDetail(RequestTransactionDetails detail, int state)
+        public static int SaveTransactionDetail(RequestTransactionDetails detail, int state)
         {
             try
             {
@@ -376,7 +373,7 @@ namespace WPFMultired.Classes.DB
                        "@DESCRIPTION, " +
                        "@STATE)";
 
-                return this.Execute<TRANSACTION_DETAIL>(query, tRANSACTION_DETAIL);
+                return Execute<TRANSACTION_DETAIL>(query, tRANSACTION_DETAIL);
             }
             catch (Exception ex)
             {
@@ -384,7 +381,7 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public bool InsetConsoleError(PAYPAD_CONSOLE_ERROR error)
+        public static bool InsetConsoleError(PAYPAD_CONSOLE_ERROR error)
         {
             try
             {
@@ -405,7 +402,7 @@ namespace WPFMultired.Classes.DB
                         "@DATE, " +
                         "@OBSERVATION, " +
                         "@STATE)";
-                this.Execute<PAYPAD_CONSOLE_ERROR>(query, error);
+                Execute<PAYPAD_CONSOLE_ERROR>(query, error);
                 return true;
             }
             catch (Exception ex)
@@ -414,18 +411,17 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        private static string LoadConnectionString(string id = "Default")
+        private static IDbConnection LoadConnectionString(string id = "ConnectionString")
         {
-            string conect = ConfigurationManager.ConnectionStrings[id].ConnectionString;
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+            return new SQLiteConnection(@"" + Utilities.GetConfiguration(id, false).ToString());
         }
 
-        public List<T> Select<T>(string query)
+        public static List<T> Select<T>(string query)
         {
             List<T> result = default(List<T>);
             try
             {
-                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", false).ToString()))
+                using (IDbConnection connection = LoadConnectionString())
                 {
                     try
                     {
@@ -444,12 +440,12 @@ namespace WPFMultired.Classes.DB
             return result;
         }
 
-        public int Execute<T>(string query, T data)
+        public static int Execute<T>(string query, T data)
         {
             object result = 0;
             try
             {
-                using (IDbConnection connection = new SQLiteConnection(@"" + Utilities.GetConfiguration("ConnectionString", false).ToString()))
+                using (IDbConnection connection = LoadConnectionString())
                 {
                     try
                     {
