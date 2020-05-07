@@ -82,7 +82,7 @@ namespace WPFMultired.UserControls.Administrator
             }
             catch (Exception ex)
             {
-                Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
+                Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, false);
                 Initial();
             }
         }
@@ -98,7 +98,7 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    Utilities.ShowModal(MessageResource.NoService, EModalType.Error, false);
+                    Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, false);
                     Initial();
                 } 
             });

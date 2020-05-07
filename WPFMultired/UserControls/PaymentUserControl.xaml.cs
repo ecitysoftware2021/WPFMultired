@@ -347,7 +347,7 @@ namespace WPFMultired.UserControls
 
             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-            if (Utilities.ShowModal("¿Desea consignar el monto ingresado?", EModalType.Information))
+            if (Utilities.ShowModal("¿Desea depositar el monto ingresado?", EModalType.Information))
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 

@@ -169,7 +169,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Señor usuario, no se encontraron coincidencias, vuelva a intentarlo.
+        ///   Busca una cadena traducida similar a No se encontraron coincidencias en la validación de la identificación, vuelva a intentarlo.
         /// </summary>
         internal static string ErrorCoincidences {
             get {
@@ -223,7 +223,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se puede continuar con la transacción. Se consignara el valor ingresado.
+        ///   Busca una cadena traducida similar a No se puede continuar con la transacción. Se depositara el valor ingresado.
         /// </summary>
         internal static string ErrorPayment {
             get {

@@ -185,53 +185,22 @@ namespace WPFMultired.Classes
                 var response = await api.CallApi("InitPaypad");
                 if (response != null)
                 {
-                    var result = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
+                    _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
 
-                    _dataPayPlus.State = result.State;
-                    _dataPayPlus.StateAceptance = result.StateAceptance;
-                    _dataPayPlus.StateDispenser = result.StateDispenser;
-                    _dataPayPlus.StateBalanece = result.StateBalanece;
-                    _dataPayPlus.StateUpload = result.StateUpload;
-                    _dataPayPlus.Message = result.Message;
-                    _dataPayPlus.ListImages = result.ListImages;
-                    _dataPayPlus.StateUpdate = result.StateUpdate;
-                    
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
-                    var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
-
-                    if (validateStatus != null && ((int)validateStatus.Data) > 0)
-                    {
-                        if ((int)validateStatus.Data == (int)ETypeAdministrator.Balancing)
-                        {
-                            _dataPayPlus.StateBalanece = true;
-                        }
-                        else if ((int)validateStatus.Data == (int)ETypeAdministrator.Upload)
-                        {
-                            _dataPayPlus.StateUpload = true;
-                        }
-                        else
-                        {
-                            _dataPayPlus.StateDiminish = true;
-                        }
-                    }
-
                     if (_dataPayPlus.StateBalanece || _dataPayPlus.StateUpload)
                     {
                         SaveLog(new RequestLog
                         {
                             Reference = response.ToString(),
-                            Description = MessageResource.PaypadGoAdmin
+                            Description = MessageResource.PaypadGoAdmin,
+                            State = 4,
+                            Date = DateTime.Now
                         }, ELogType.General);
                         return true;
                     }
-
-                    if(_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
+                    if (_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
                     {
-                        SaveLog(new RequestLog
-                        {
-                            Reference = response.ToString(),
-                            Description = MessageResource.PaypadStarSusses
-                        }, ELogType.General);
                         return true;
                     }
                     else
@@ -239,7 +208,9 @@ namespace WPFMultired.Classes
                         SaveLog(new RequestLog
                         {
                             Reference = response.ToString(),
-                            Description = MessageResource.NoGoInitial + _dataPayPlus.Message
+                            Description = MessageResource.NoGoInitial + _dataPayPlus.Message,
+                            State = 6,
+                            Date = DateTime.Now
                         }, ELogType.General);
 
                         SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
@@ -332,7 +303,18 @@ namespace WPFMultired.Classes
         private void Finish(bool isSucces)
         {
             _controlPeripherals.callbackToken = null;
+            _controlPeripherals.callbackError = null;
 
+            if (isSucces)
+            {
+                SaveLog(new RequestLog
+                {
+                    Reference = "",
+                    Description = MessageResource.PaypadStarSusses,
+                    State = 1,
+                    Date = DateTime.Now
+                }, ELogType.General);
+            }
 
             callbackResult?.Invoke(isSucces);
         }
@@ -494,12 +476,12 @@ namespace WPFMultired.Classes
                                 PAYER_ID = transaction.payer.PAYER_ID,
                                 STATE_TRANSACTION_ID = Convert.ToInt32(transaction.State),
                                 TOTAL_AMOUNT = transaction.Amount,
-                                DATE_END = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                                DATE_END = DateTime.Now,
                                 TRANSACTION_ID = 0,
                                 RETURN_AMOUNT = 0,
                                 INCOME_AMOUNT = 0,
                                 PAYPAD_ID = 0,
-                                DATE_BEGIN = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                                DATE_BEGIN = DateTime.Now,
                                 STATE_NOTIFICATION = 0,
                                 STATE = 0,
                                 DESCRIPTION = "Transaccion iniciada",
@@ -622,7 +604,7 @@ namespace WPFMultired.Classes
                         if (responseTransaction != null)
                         {
                             tRANSACTION.STATE = 1;
-                            SqliteDataAccess.UpdateTransactionState(tRANSACTION, 2);
+                            SqliteDataAccess.UpdateTransactionState(tRANSACTION);
                         }
                     }
                 }
@@ -637,19 +619,22 @@ namespace WPFMultired.Classes
             }
         }
 
-        public async static void UpdateTransaction(TRANSACTION tRANSACTION)
+        public async static void UpdateTransaction(Transaction transaction)
         {
             try
             {
-                if (tRANSACTION != null)
+                if (transaction != null)
                 {
-                    tRANSACTION.TRANSACTION_DESCRIPTION = null;
+                    TRANSACTION tRANSACTION = SqliteDataAccess.UpdateTransaction(transaction);
 
-                    var responseTransaction = await api.CallApi("UpdateTransaction", tRANSACTION);
-                    if (responseTransaction != null)
+                    if (tRANSACTION != null)
                     {
-                        tRANSACTION.STATE = 1;
-                        SqliteDataAccess.UpdateTransactionState(tRANSACTION, 2);
+                        var responseTransaction = await api.CallApi("UpdateTransaction", tRANSACTION);
+                        if (responseTransaction != null)
+                        {
+                            tRANSACTION.STATE = 1;
+                            SqliteDataAccess.UpdateTransactionState(tRANSACTION);
+                        }
                     }
                 }
             }
@@ -742,7 +727,7 @@ namespace WPFMultired.Classes
                 //    action = "GetBalance";
                 //}
                 //else
-                //{
+                //{43726943
                 //    action = "GetUpload";
                 //}
 
@@ -772,7 +757,7 @@ namespace WPFMultired.Classes
             {
                 Task.Run(async () =>
                 {
-                    var transactions = SqliteDataAccess.GetTransactionPending();
+                    var transactions = SqliteDataAccess.GetTransactionNotific();
                     if (transactions.Count > 0)
                     {
                         foreach (var transaction in transactions)
@@ -781,10 +766,9 @@ namespace WPFMultired.Classes
                             if (responseTransaction != null)
                             {
                                 transaction.STATE = 1;
-                                SqliteDataAccess.UpdateTransactionState(transaction, 2);
+                                SqliteDataAccess.UpdateTransactionState(transaction);
                             }
                         }
-
                     }
 
                     var detailTeansactions2 = SqliteDataAccess.GetDetailsTransaction();
@@ -803,7 +787,6 @@ namespace WPFMultired.Classes
                         detail.STATE = 1;
                         SqliteDataAccess.UpdateTransactionDetailState(detail);
                     }
-
                 });
             }
             catch (Exception ex)

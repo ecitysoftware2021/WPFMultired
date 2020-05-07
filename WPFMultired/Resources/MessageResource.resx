@@ -136,7 +136,7 @@
     <value>Usuario y/o contraseña incorrectos</value>
   </data>
   <data name="ErrorPayment" xml:space="preserve">
-    <value>No se puede continuar con la transacción. Se consignara el valor ingresado</value>
+    <value>No se puede continuar con la transacción. Se depositara el valor ingresado</value>
   </data>
   <data name="ErrorServiceLogin" xml:space="preserve">
     <value>Error con el servicio de Login</value>
@@ -259,7 +259,7 @@
     <value>Estamos consultando las coincidencias. Regálenos unos segundos</value>
   </data>
   <data name="ErrorCoincidences" xml:space="preserve">
-    <value>Señor usuario, no se encontraron coincidencias, vuelva a intentarlo</value>
+    <value>No se encontraron coincidencias en la validación de la identificación, vuelva a intentarlo</value>
   </data>
   <data name="ErrorFoundFiles" xml:space="preserve">
     <value>En el momento no hay certificados para generar, vuelva pronto.</value>

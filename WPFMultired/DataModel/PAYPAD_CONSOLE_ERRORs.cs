@@ -17,5 +17,6 @@ namespace WPFMultired.DataModel
         public System.DateTime DATE { get; set; }
         public string OBSERVATION { get; set; }
         public int STATE { get; set; }
+        public int REFERENCE { get; set; }
     }
 }
