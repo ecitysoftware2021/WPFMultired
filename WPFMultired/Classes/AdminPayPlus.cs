@@ -185,9 +185,61 @@ namespace WPFMultired.Classes
                 var response = await api.CallApi("InitPaypad");
                 if (response != null)
                 {
-                    _dataPayPlus = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
+                    var result = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
 
+                    _dataPayPlus.State = result.State;
+                    _dataPayPlus.StateAceptance = result.StateAceptance;
+                    _dataPayPlus.StateDispenser = result.StateDispenser;
+                    _dataPayPlus.StateBalanece = result.StateBalanece;
+                    _dataPayPlus.StateUpload = result.StateUpload;
+                    _dataPayPlus.Message = result.Message;
+                    _dataPayPlus.ListImages = result.ListImages;
+                    _dataPayPlus.StateUpdate = result.StateUpdate;
+                    
                     //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
+                    var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+
+                    if (validateStatus != null && ((int)validateStatus.Data) > 0)
+                    {
+                        if ((int)validateStatus.Data == (int)ETypeAdministrator.Balancing)
+                        {
+                            _dataPayPlus.StateBalanece = true;
+
+                            SaveLog(new RequestLog
+                            {
+                                Reference = response.ToString(),
+                                Description = MessageResource.PaypadGoAdmin,
+                                State = 4,
+                                Date = DateTime.Now
+                            }, ELogType.General);
+                        }
+                        else if ((int)validateStatus.Data == (int)ETypeAdministrator.Upload)
+                        {
+                            _dataPayPlus.StateUpload = true;
+
+                            SaveLog(new RequestLog
+                            {
+                                Reference = response.ToString(),
+                                Description = MessageResource.PaypadGoAdmin,
+                                State = 4,
+                                Date = DateTime.Now
+                            }, ELogType.General);
+                        }
+                        else
+                        {
+                            _dataPayPlus.StateDiminish = true;
+
+                            SaveLog(new RequestLog
+                            {
+                                Reference = response.ToString(),
+                                Description = MessageResource.PaypadGoAdmin,
+                                State = 4,
+                                Date = DateTime.Now
+                            }, ELogType.General);
+
+                        }
+                    }
+
                     if (_dataPayPlus.StateBalanece || _dataPayPlus.StateUpload)
                     {
                         SaveLog(new RequestLog
@@ -199,7 +251,8 @@ namespace WPFMultired.Classes
                         }, ELogType.General);
                         return true;
                     }
-                    if (_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
+
+                    if(_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
                     {
                         return true;
                     }
@@ -323,7 +376,7 @@ namespace WPFMultired.Classes
         {
             try
             {
-                string[] keys = Utilities.ReadFile(@""+ConstantsResource.PathKeys);
+                string[] keys = Utilities.ReadFile(@"" + ConstantsResource.PathKeys);
 
                 if (keys.Length > 0)
                 {
@@ -582,35 +635,6 @@ namespace WPFMultired.Classes
                 else
                 {
                     SqliteDataAccess.SaveTransactionDetail(details, 0);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
-            }
-        }
-
-        public async static void UpdateTransaction(Transaction transaction, bool validatePaypad = false)
-        {
-            try
-            {
-                if (transaction != null)
-                {
-                    TRANSACTION tRANSACTION = SqliteDataAccess.UpdateTransaction(transaction);
-
-                    if (tRANSACTION != null)
-                    {
-                        var responseTransaction = await api.CallApi("UpdateTransaction", tRANSACTION);
-                        if (responseTransaction != null)
-                        {
-                            tRANSACTION.STATE = 1;
-                            SqliteDataAccess.UpdateTransactionState(tRANSACTION);
-                        }
-                    }
-                }
-                if (validatePaypad)
-                {
-                    ValidatePaypad();
                 }
             }
             catch (Exception ex)
