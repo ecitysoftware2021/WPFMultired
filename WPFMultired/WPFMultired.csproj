@@ -106,6 +106,9 @@
     <Reference Include="WpfAnimatedGif, Version=1.4.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WpfAnimatedGif.1.4.18\lib\net\WpfAnimatedGif.dll</HintPath>
     </Reference>
+    <Reference Include="WPKeyboard">
+      <HintPath>..\..\WPFCCPereira\WPFCCPereira\WPFCCPereira\bin\Debug\WPKeyboard.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -205,8 +208,6 @@
     <Compile Include="DataModel\TRANSACTIONs.cs" />
     <Compile Include="DataModel\TRANSACTION_DESCRIPTIONs.cs" />
     <Compile Include="DataModel\TRANSACTION_DETAILs.cs" />
-    <Compile Include="Keyboard\TouchScreenKeyboard.cs" />
-    <Compile Include="Keyboard\TouchScreenKeyNumeric.cs" />
     <Compile Include="Models\DenominationMoney.cs" />
     <Compile Include="Models\ItemList.cs" />
     <Compile Include="Models\ModalModel.cs" />
@@ -496,10 +497,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\Administrator\AdministratorUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

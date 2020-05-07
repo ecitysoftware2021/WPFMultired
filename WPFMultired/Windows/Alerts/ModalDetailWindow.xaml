@@ -59,7 +59,7 @@
                              TextAlignment="Center"                    
                              FontWeight="Bold"
                              TextChanged="Txt_amount_TextChanged"
-                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                            TouchDown="txt_amount_TouchDown"
                              TabIndex="0" />
 
                     <PasswordBox Name="txt_pass_input"
@@ -75,7 +75,7 @@
                               Visibility="{Binding VisibilityPassInput}"
                               Foreground="#FF104B6D"
                               TabIndex="0"
-                              k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True" />
+                              TouchDown="txt_amount_TouchDown"/>
 
                     <TextBox Name="txt_input"
                              Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"
@@ -88,7 +88,7 @@
                              Margin="0,20,0,0"
                              TextAlignment="Center"                    
                              FontWeight="Bold"
-                             k:TouchScreenKeyNumeric.TouchScreenKeyNumeric="True"
+                             TouchDown="txt_amount_TouchDown"
                              TabIndex="0" />
 
                     <Image Source="/Images/Buttons/btn-show-id.png"

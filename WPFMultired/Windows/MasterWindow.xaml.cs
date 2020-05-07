@@ -29,6 +29,7 @@ namespace WPFMultired.Windows
                     Utilities.navigator = new Navigation();
                 }
 
+                WPKeyboard.Keyboard.ConsttrucKeyyboard(WPKeyboard.Keyboard.EStyle.style_1);
                 Utilities.navigator.Navigate(UserControlView.Config);
 
                 DataContext = Utilities.navigator;
