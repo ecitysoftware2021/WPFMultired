@@ -274,7 +274,7 @@ namespace WPFMultired.Windows.Alerts
                 {
                     viewModel.TxtInput = txt_pass_input.Password;
                     viewModel.VisibilityPassInput = System.Windows.Visibility.Hidden;
-                    viewModel.VisibilityInput = System.Windows.Visibility.Visible;
+                    viewModel.VisibilityTxtImput = System.Windows.Visibility.Visible;
                 }
             }
             catch (Exception ex)
@@ -288,7 +288,7 @@ namespace WPFMultired.Windows.Alerts
             try
             {
                 viewModel.VisibilityPassInput = System.Windows.Visibility.Visible;
-                viewModel.VisibilityInput
+                viewModel.VisibilityTxtImput
                     = System.Windows.Visibility.Hidden;
             }
             catch (Exception ex)

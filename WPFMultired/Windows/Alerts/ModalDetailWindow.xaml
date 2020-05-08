@@ -96,6 +96,7 @@
                             VerticalAlignment="Center" 
                             Margin="0,20,320,0"                  
                             Width="50"
+                            Visibility="{Binding VisibilityShowId}"
                             TouchEnter="Btn_show_id_TouchEnter"
                             TouchLeave="Btn_show_id_TouchLeave"/>
 

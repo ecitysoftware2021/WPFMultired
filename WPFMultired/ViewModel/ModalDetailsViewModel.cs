@@ -229,6 +229,24 @@ namespace WPFMultired.ViewModel
             }
         }
 
+        private Visibility _visibilityShowId;
+
+        public Visibility VisibilityShowId
+        {
+            get
+            {
+                return _visibilityShowId;
+            }
+            set
+            {
+                if (_visibilityShowId != value)
+                {
+                    _visibilityShowId = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityShowId)));
+                }
+            }
+        }
+
         private string _txtInput;
 
         public string TxtInput
@@ -382,6 +400,7 @@ namespace WPFMultired.ViewModel
                         VisibilityAcept = Visibility.Visible;
                         VisibilityCancel = Visibility.Hidden;
                         VisibilityPassInput = Visibility.Hidden;
+                        VisibilityShowId = Visibility.Hidden;
                         IsReadQr = true;
                         break;
                     case ETypeDetailModel.Withdrawal:
@@ -394,6 +413,7 @@ namespace WPFMultired.ViewModel
                         VisibilityAmount = Visibility.Visible;
                         VisibilityTxtImput = Visibility.Hidden;
                         VisibilityPassInput = Visibility.Hidden;
+                        VisibilityShowId = Visibility.Hidden;
                         LblInput = "Ingrese el valor a retirar";
                         IsReadQr = true;
                         break;
@@ -405,6 +425,7 @@ namespace WPFMultired.ViewModel
                         VisibilityAmount = Visibility.Hidden;
                         VisibilityTxtImput = Visibility.Hidden;
                         VisibilityPassInput = Visibility.Visible;
+                        VisibilityShowId = Visibility.Visible;
                         LblInput = "Ingrese el código OTP";
                         Message = "Ingresa el código OTP que llego a su correo, para continuar";
                         IsReadQr = true;
@@ -421,6 +442,7 @@ namespace WPFMultired.ViewModel
                         VisibilityAcept = Visibility.Hidden;
                         VisibilityCancel = Visibility.Visible;
                         VisibilityPassInput = Visibility.Hidden;
+                        VisibilityShowId = Visibility.Hidden;
                         break;
                     default:
                         break;
