@@ -227,7 +227,7 @@ namespace WPFMultired.UserControls
 
         private void PassBoxIdentification_TouchDown(object sender, TouchEventArgs e)
         {
-            Utilities.OpenKeyboard(true, sender as TextBox, this, 500);
+            Utilities.OpenKeyboard(true, sender, this, 450);
         }
     }
 }

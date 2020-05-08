@@ -299,7 +299,12 @@ namespace WPFMultired.Windows.Alerts
 
         private void txt_amount_TouchDown(object sender, TouchEventArgs e)
         {
-            Utilities.OpenKeyboard(true, sender as TextBox, this, 500);
+            Utilities.OpenKeyboard(true, sender as TextBox, this, 450);
+        }
+
+        private void Txt_pass_input_TouchDown(object sender, TouchEventArgs e)
+        {
+            Utilities.OpenKeyboard(true, sender as PasswordBox, this, 450);
         }
     }
 }

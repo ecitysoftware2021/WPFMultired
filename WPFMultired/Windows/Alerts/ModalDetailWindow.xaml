@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        xmlns:k="clr-namespace:WPFMultired.Keyboard" 
         mc:Ignorable="d"
         Title="ModalDetailWindow"         
         WindowStyle="None"
@@ -75,7 +74,7 @@
                               Visibility="{Binding VisibilityPassInput}"
                               Foreground="#FF104B6D"
                               TabIndex="0"
-                              TouchDown="txt_amount_TouchDown"/>
+                              TouchDown="Txt_pass_input_TouchDown"/>
 
                     <TextBox Name="txt_input"
                              Text="{Binding TxtInput, UpdateSourceTrigger=PropertyChanged}"

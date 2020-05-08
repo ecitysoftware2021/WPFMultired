@@ -106,8 +106,9 @@
     <Reference Include="WpfAnimatedGif, Version=1.4.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WpfAnimatedGif.1.4.18\lib\net\WpfAnimatedGif.dll</HintPath>
     </Reference>
-    <Reference Include="WPKeyboard">
-      <HintPath>..\..\WPFCCPereira\WPFCCPereira\WPFCCPereira\bin\Debug\WPKeyboard.dll</HintPath>
+    <Reference Include="WPKeyboard, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TecladoEcity\WPKeyboard\WPKeyboard\bin\Debug\WPKeyboard.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +257,6 @@
     </Compile>
     <Compile Include="UserControls\Modals\SelectIdiomUserControl.xaml.cs">
       <DependentUpon>SelectIdiomUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\PayerUserControl.xaml.cs">
-      <DependentUpon>PayerUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ReturnMonyUserControl.xaml.cs">
       <DependentUpon>ReturnMonyUserControl.xaml</DependentUpon>
@@ -526,10 +524,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Modals\SelectIdiomUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\PayerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
