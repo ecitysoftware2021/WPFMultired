@@ -175,7 +175,7 @@
                                     Grid.Column="2" />
 
                             <TextBlock 
-                                    Text="{Binding AMOUNT_NEW}"
+                                    Text="{Binding AMOUNT}"
                                     FontSize="32"
                                     FontFamily="Myriad Pro"
                                     TextAlignment="Right"
@@ -186,7 +186,7 @@
                                     HorizontalAlignment="Right"
                                     Grid.Column="3">
                                 <Run Text=" - " FontWeight="Bold" />
-                                <Run Text="{Binding AMOUNT}" Foreground="#FF0B4E92" />
+                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF0B4E92" />
                             </TextBlock>
                                 
                             <TextBlock 
