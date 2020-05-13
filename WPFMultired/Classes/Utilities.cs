@@ -365,7 +365,7 @@ namespace WPFMultired.Classes
 
                     foreach (var item in dataControl.DATALIST_FILTER(ETypeAdministrator.Balancing))
                     {
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = item.CODE == "MA" ? "M" : "B", x = 15, y = y += 25 });
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = item.CODE, x = 15, y = y += 25 });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.VALUE), x = (xLengthDeno - (string.Format("{0:C0}", item.VALUE).Length * multiplier)), y = y });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = item.AMOUNT.ToString(), x = (xLengthQua - (string.Format("{0:C0}", item.AMOUNT).Length * 3)), y = y });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.TOTAL_AMOUNT), x = (xMax - (string.Format("{0:C0}", item.TOTAL_AMOUNT).Length * multiplier)), y = y });
