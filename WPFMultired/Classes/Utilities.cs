@@ -334,7 +334,7 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = item.CODE, x = 10, y = y += 25 });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = item.CASSETTE.ToString(), x = 48, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.VALUE), x = (xLengthDeno - (string.Format("{0:C0}", item.VALUE).Length * multiplier)), y = y });
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(item.AMOUNT_NEW.ToString(), " / ", item.AMOUNT_NEW.ToString()), x = 145, y = y });
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(item.AMOUNT.ToString(), " / ", item.AMOUNT_NEW.ToString()), x = 145, y = y });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", item.TOTAL_AMOUNT), x = (xMax - (string.Format("{0:C0}", item.TOTAL_AMOUNT).Length * multiplier)), y = y });
 
                         totaldispenser += item.TOTAL_AMOUNT;
@@ -393,17 +393,17 @@ namespace WPFMultired.Classes
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL_NEW), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL_NEW).Length * multiplier)), y = y });
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor actual : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
                 }
                 else if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor total arqueo : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
                 }
                 else
                 {
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor disminuido : ", x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL + dataControl.TOTAL_CURRENT).Length * multiplier)), y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", dataControl.TOTAL), x = (xMax - (string.Format("{0:C0}", dataControl.TOTAL).Length * multiplier)), y = y });
                 }
 
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "----------------------------------------------------------------------", x = 2, y = y += 30 });
