@@ -863,13 +863,14 @@ namespace WPFMultired.Services
                                     : (int)ETypeDevice.MD,
                                 });
 
-                                result.TOTAL += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)) *
+                                result.TOTAL_NEW += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
                                     decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"));
 
-                                result.TOTAL_CURRENT += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *
+                                result.TOTAL_CURRENT += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)) *
                                     decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"));
+
                             }
-
+                            result.TOTAL = result.TOTAL_CURRENT + result.TOTAL_NEW;
                             return new Response { Data = result };
                         }
                     }

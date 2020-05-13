@@ -51,6 +51,8 @@ namespace WPFMultired.Services.Object
 
         public decimal TOTAL_CURRENT;
 
+        public decimal TOTAL_NEW;
+
         private decimal _TOTAL;
 
         private string _DESCRIPTION;
