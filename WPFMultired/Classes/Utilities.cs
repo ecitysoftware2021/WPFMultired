@@ -50,7 +50,7 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static bool ShowModal(string message, EModalType type, bool stopTimer = true, bool restarApp = false)
+        public static bool ShowModal(string message, EModalType type, bool timer = false)
         {
             bool response = false;
             try
@@ -65,6 +65,7 @@ namespace WPFMultired.Classes
 
                 if (type == EModalType.Error)
                 {
+                    timer = true;
                     model.ImageModal = ImagesUrlResource.AlertError;
                 }
                 else if (type == EModalType.Information)
@@ -74,6 +75,18 @@ namespace WPFMultired.Classes
                 else if (type == EModalType.NoPaper)
                 {
                     model.ImageModal = ImagesUrlResource.AlertInfo;
+                }
+
+                TimerService.Close();
+
+                if (timer)
+                {
+                    TimerService.CallBackTimerOut = result =>
+                    {
+                        CloseModal();
+                    };
+
+                    TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationAlert")));
                 }
 
                 Application.Current.Dispatcher.Invoke(delegate
@@ -89,7 +102,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                // Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "Utilities", ex);
             }
             GC.Collect();
             return response;

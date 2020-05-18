@@ -74,14 +74,16 @@ namespace WPFMultired.Models
                         break;
                 }
 
+                TimerService.Close();
+
                 if (initTimer)
                 {
-                    //TimerService.CallBackTimerOut = response =>
-                    //{
-                    //    View = new MainUserControl();
-                    //};
+                    TimerService.CallBackTimerOut = response =>
+                    {
+                        View = new MainUserControl();
+                    };
 
-                    //TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationAlert")));
+                    TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationView")));
                 }
             }
             catch (Exception ex)

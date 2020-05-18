@@ -62,9 +62,28 @@ namespace WPFMultired.UserControls
                     {
                         AdminPayPlus.ValidatePaypad();
 
+                        ValidateVersion();
+
                         Thread.Sleep(int.Parse(Utilities.GetConfiguration("DurationAlert")));
                     }
                 });
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void ValidateVersion()
+        {
+            try
+            {
+                if (AdminPayPlus.DataPayPlus.StateUpdate)
+                {
+                    _validatePaypad = false;
+                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, true);
+                    Utilities.UpdateApp();
+                }
             }
             catch (Exception ex)
             {
