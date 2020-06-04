@@ -34,12 +34,16 @@ namespace WPFMultired.Windows
                 {
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
+                    this.BtnFinish.Visibility = Visibility.Hidden;
+                    this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     this.LblMessageTouch.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Visible;
                 }
                 else if (this.modal.TypeModal == EModalType.NotExistAccount)
                 {
+                    this.BtnFinish.Visibility = Visibility.Hidden;
+                    this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnOk.Visibility = Visibility.Visible;
                     this.BtnYes.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
@@ -47,14 +51,27 @@ namespace WPFMultired.Windows
                     GifLoadder.Visibility = Visibility.Hidden;
                     //InitTimer();
                 }
-                else if (this.modal.TypeModal == EModalType.MaxAmount || this.modal.TypeModal == EModalType.Error)
+                else if (this.modal.TypeModal == EModalType.Error)
                 {
+                    this.BtnFinish.Visibility = Visibility.Hidden;
+                    this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     this.LblMessageTouch.Visibility = Visibility.Visible;
                     GifLoadder.Visibility = Visibility.Hidden;
                     //InitTimer();
+                }
+                else if(this.modal.TypeModal == EModalType.MaxAmount)
+                {
+                    this.BtnFinish.Visibility = Visibility.Visible;
+                    this.BtnEnterMony.Visibility = Visibility.Visible;
+
+                    this.BtnOk.Visibility = Visibility.Hidden;
+                    this.BtnYes.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
+                    this.BtnNo.Visibility = Visibility.Hidden;
+                    GifLoadder.Visibility = Visibility.Hidden;
                 }
                 else if (this.modal.TypeModal == EModalType.Information || this.modal.TypeModal == EModalType.NoPaper)
                 {

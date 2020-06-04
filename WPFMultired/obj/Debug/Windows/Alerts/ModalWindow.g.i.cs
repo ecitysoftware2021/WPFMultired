@@ -97,6 +97,22 @@ namespace WPFMultired.Windows {
         #line default
         #line hidden
         
+        
+        #line 109 "..\..\..\..\Windows\Alerts\ModalWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Image BtnFinish;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 118 "..\..\..\..\Windows\Alerts\ModalWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Image BtnEnterMony;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -170,6 +186,24 @@ namespace WPFMultired.Windows {
             
             #line 106 "..\..\..\..\Windows\Alerts\ModalWindow.xaml"
             this.BtnYes.TouchDown += new System.EventHandler<System.Windows.Input.TouchEventArgs>(this.BtnYes_TouchDown);
+            
+            #line default
+            #line hidden
+            return;
+            case 9:
+            this.BtnFinish = ((System.Windows.Controls.Image)(target));
+            
+            #line 115 "..\..\..\..\Windows\Alerts\ModalWindow.xaml"
+            this.BtnFinish.TouchDown += new System.EventHandler<System.Windows.Input.TouchEventArgs>(this.BtnNo_TouchDown);
+            
+            #line default
+            #line hidden
+            return;
+            case 10:
+            this.BtnEnterMony = ((System.Windows.Controls.Image)(target));
+            
+            #line 124 "..\..\..\..\Windows\Alerts\ModalWindow.xaml"
+            this.BtnEnterMony.TouchDown += new System.EventHandler<System.Windows.Input.TouchEventArgs>(this.BtnYes_TouchDown);
             
             #line default
             #line hidden

@@ -68,7 +68,7 @@ namespace WPFMultired.Classes
                     timer = true;
                     model.ImageModal = ImagesUrlResource.AlertError;
                 }
-                else if (type == EModalType.Information)
+                else if (type == EModalType.Information || type == EModalType.MaxAmount)
                 {
                     model.ImageModal = ImagesUrlResource.AlertInfo;
                 }

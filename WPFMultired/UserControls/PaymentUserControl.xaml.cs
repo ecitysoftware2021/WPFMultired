@@ -147,27 +147,39 @@ namespace WPFMultired.UserControls
 
                     AdminPayPlus.ControlPeripherals.callbackError = error =>
                     {
-                        AdminPayPlus.SaveLog(new RequestLogDevice
+                        var log = new RequestLogDevice
                         {
                             Code = error.Item1,
                             Date = DateTime.Now,
                             Description = error.Item2,
                             Level = ELevelError.Medium,
                             TransactionId = transaction.IdTransactionAPi
-                        }, ELogType.Device);
+                        };
+
+                        if (error.Item1.Equals("Info"))
+                        {
+                            log.Level = ELevelError.Mild;
+                            log.Code = "";
+                            AdminPayPlus.SaveLog(log, ELogType.Device);
+                        }
+                        else
+                        {
+                            AdminPayPlus.SaveLog(log, ELogType.Device);
+                        }
 
                         if (error.Item2.Contains("FATAL"))
                         {
-                            Utilities.ShowModal(MessageResource.ErrorPayment, EModalType.Error);
-
-                            this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
-
-                            AdminPayPlus.ControlPeripherals.StopAceptance();
-
                             transaction.Observation += MessageResource.NoContinue;
-                            if (!this.paymentViewModel.StatePay)
+                            transaction.State = ETransactionState.Error;
+                            if (error.Item1.Equals("AP"))
                             {
-                                SavePay(ETransactionState.Error);
+                                Utilities.ShowModal(MessageResource.ErrorPayment, EModalType.Error);
+                                AdminPayPlus.ControlPeripherals.StopAceptance();
+                                if (paymentViewModel.ValorIngresado > 0)
+                                {
+                                    transaction.Payment = paymentViewModel;
+                                    Utilities.navigator.Navigate(UserControlView.ReturnMony, false, this.transaction);
+                                }
                             }
                         }
                     };
@@ -347,7 +359,7 @@ namespace WPFMultired.UserControls
 
             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-            if (Utilities.ShowModal("¿Desea depositar la cantidad ingresada?", EModalType.Information))
+            if (Utilities.ShowModal("Para continuar escoja cualquiera de estas opciones:", EModalType.MaxAmount))
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 
