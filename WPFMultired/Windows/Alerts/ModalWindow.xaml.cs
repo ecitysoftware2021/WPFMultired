@@ -75,6 +75,9 @@ namespace WPFMultired.Windows
                 }
                 else if (this.modal.TypeModal == EModalType.Information || this.modal.TypeModal == EModalType.NoPaper)
                 {
+
+                    this.BtnFinish.Visibility = Visibility.Hidden;
+                    this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Visible;
                     this.LblMessageTouch.Visibility = Visibility.Hidden;
