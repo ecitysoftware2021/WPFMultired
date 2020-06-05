@@ -66,14 +66,14 @@
                             Background="Transparent"
                             Margin="0,0,0,0"
                             Width="550"
-                            Height="250"
+                            Height="450"
                             Tag="{Binding Item3}"
                             TouchDown="Grid_list_TouchDown">
 
                             <Image Source="{Binding ImageSourse}"
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center" 
-                                   Height="250" 
+                                   Height="450" 
                                    Stretch="Uniform" />
                         </Grid>
                     </DataTemplate>

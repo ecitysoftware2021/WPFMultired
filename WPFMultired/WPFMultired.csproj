@@ -481,7 +481,6 @@
     <Resource Include="Images\Buttons\btn-wait-mony.png" />
     <Resource Include="Images\Buttons\btn-cancel.png" />
     <Resource Include="Images\Buttons\btn-back.png" />
-    <Resource Include="Images\Buttons\btn-pay.png" />
     <Resource Include="Images\Buttons\btn-continue.png" />
     <Resource Include="Images\Backgrounds\bg-detail.png" />
     <Resource Include="Images\Buttons\btn-exit.png" />
@@ -692,7 +691,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-consign.png" />
-    <Resource Include="Images\Buttons\btn-withdraw.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-qr.png" />
