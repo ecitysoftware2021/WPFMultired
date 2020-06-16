@@ -15,8 +15,8 @@
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="350" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="450" />
             <RowDefinition Height="950" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -27,7 +27,7 @@
                HorizontalAlignment="Right"
                VerticalAlignment="Top"
                Width="250"
-               Margin="0,20,20,0"
+               Margin="0,20,50,0"
                TouchDown="Btn_exit_TouchDown" />
 
             <Image x:Name="btn_back"
@@ -36,21 +36,22 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="250"
-                Margin="20,20,0,0"
+                Margin="50,20,0,0"
                 TouchDown="Btn_back_TouchDown" />
         </Grid>
 
         <Grid Grid.Row="1">
             <TextBlock Name="txt_title"
-                    FontSize="60"
+                    FontSize="50"
+                    Width="1000"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,80"
                     FontWeight="SemiBold" 
-                    Foreground="#FF35679B"
+                    Foreground="#FF1B69A8"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
-                    Text="Por favor ingresar su identificación" />
+                    Text="Acerque el código de barras al lector de la máquina o Ingresar el número de identificación del asociado a Coomeva" />
         </Grid>
 
         <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">

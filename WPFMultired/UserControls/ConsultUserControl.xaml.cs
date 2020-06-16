@@ -6,10 +6,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using WPFMultired.Classes;
+using WPFMultired.Classes.Peripherals;
 using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.ViewModel;
 
+//     @
+//    <))>
+//    _/\_
 namespace WPFMultired.UserControls
 {
     /// <summary>
@@ -20,6 +24,8 @@ namespace WPFMultired.UserControls
         private DetailViewModel viewModel;
 
         private Transaction transaction;
+
+        private ReaderBarCode readerBarCode;
 
         public ConsultUserControl(string company, string typeTransaction)
         {
@@ -33,6 +39,11 @@ namespace WPFMultired.UserControls
                     CodeTypeTransaction = typeTransaction,
                     State = ETransactionState.Initial
                 };
+            }
+
+            if (readerBarCode == null)
+            {
+                readerBarCode = new ReaderBarCode();
             }
         }
 
@@ -56,6 +67,30 @@ namespace WPFMultired.UserControls
                 cmb_type_id.SelectedIndex = 0;
 
                 this.DataContext = viewModel;
+
+                InicielizeBarcodeReader();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void InicielizeBarcodeReader()
+        {
+            try
+            {
+                readerBarCode.callbackOut = data =>
+                {
+
+                };
+
+                readerBarCode.callbackError = error =>
+                {
+
+                };
+
+                readerBarCode.Start(Utilities.GetConfiguration("BarcodePort"), int.Parse(Utilities.GetConfiguration("BarcodeBaudRate")));
             }
             catch (Exception ex)
             {

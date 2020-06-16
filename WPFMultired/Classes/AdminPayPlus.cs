@@ -13,6 +13,9 @@ using WPFMultired.Resources;
 using WPFMultired.Services;
 using WPFMultired.Services.Object;
 
+//     @
+//    <))>
+//    _/\_
 namespace WPFMultired.Classes
 {
     public class AdminPayPlus : INotifyPropertyChanged
@@ -124,7 +127,7 @@ namespace WPFMultired.Classes
 
                 if (await ValidatePaypad())
                 {
-                    await DownloadInformation();
+                    //await DownloadInformation();
 
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 

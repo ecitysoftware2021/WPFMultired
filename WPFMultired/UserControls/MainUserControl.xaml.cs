@@ -8,6 +8,9 @@ using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Resources;
 
+//     @
+//    <))>
+//    _/\_
 namespace WPFMultired.UserControls
 {
     /// <summary>
@@ -42,7 +45,7 @@ namespace WPFMultired.UserControls
             try
             {
                 ConfiguratePublish();
-               AdminPayPlus.NotificateInformation();
+                AdminPayPlus.NotificateInformation();
                 //AdminPayPlus.VerifyTransaction();
                 InitValidation();
             }
@@ -199,7 +202,7 @@ namespace WPFMultired.UserControls
                 {
                     _validatePaypad = false;
                     _imageSleader.Stop();
-                    Utilities.navigator.Navigate(UserControlView.Menu, true);
+                    Utilities.navigator.Navigate(UserControlView.Consult, true);
                 }
             }
             catch (Exception ex)

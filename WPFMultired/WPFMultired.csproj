@@ -119,7 +119,7 @@
     <Compile Include="Classes\AdminPayPlus.cs" />
     <Compile Include="Classes\DB\SqliteDataAccess.cs" />
     <Compile Include="Classes\Peripherals\ControlPeripherals.cs" />
-    <Compile Include="Classes\UseFull\ReaderBarCode.cs" />
+    <Compile Include="Classes\Peripherals\ReaderBarCode.cs" />
     <Compile Include="Classes\UseFull\TimerService.cs" />
     <Compile Include="Classes\UseFull\Encryptor.cs" />
     <Compile Include="Classes\UseFull\Enumerables.cs" />
@@ -245,6 +245,9 @@
     </Compile>
     <Compile Include="UserControls\DataListUserControl.xaml.cs">
       <DependentUpon>DataListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DetailAcountUserControl.xaml.cs">
+      <DependentUpon>DetailAcountUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MenuCompaniesUserControl.xaml.cs">
       <DependentUpon>MenuCompaniesUserControl.xaml</DependentUpon>
@@ -507,6 +510,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DataListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DetailAcountUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

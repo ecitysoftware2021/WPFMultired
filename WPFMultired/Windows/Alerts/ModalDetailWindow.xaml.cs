@@ -20,7 +20,6 @@ namespace WPFMultired.Windows.Alerts
 
         private Transaction transaction;
 
-
         public ModalDetailWindow(Transaction transaction, ETypeDetailModel type)
         {
             InitializeComponent();
