@@ -20,8 +20,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <Image x:Name="btnCancell"
+                   Source="../Images/Buttons/btn-exit.png"
+                   Width="330"
+                   Height="130"
+                   Visibility="{Binding ImgCancel}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="50,50,0,0"
+                   TouchDown="BtnCancell_TouchDown" />
+
             <TextBlock 
-                Text="Ingrese el dinero a depositar"
+                Text="Ingrese el Dinero"
                 FontSize="60"
                 Width="500"
                 TextAlignment="Center"
@@ -233,6 +243,15 @@
         </Grid>
         <Grid Grid.Row="4">
 
+            <Image Source="../Images/Buttons/btn-wait-mony.png" 
+                   Stretch="Fill"
+                   Width="450"
+                   Height="130"
+                   Visibility="{Binding ImgCambio}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="0,50,50,0" />
+
             <Image x:Name="btnConsign"
                    Source="../Images/Buttons/btn-continue-pay.png"
                    Stretch="Fill"
@@ -243,26 +262,6 @@
                    VerticalAlignment="Top"
                    Margin="0,50,50,0" 
                    StylusDown="BtnConsign_StylusDown" />
-            
-            <Image x:Name="btnCancell"
-                   Source="../Images/Buttons/btn-exit.png"
-                   Width="330"
-                   Height="130"
-                   Visibility="{Binding ImgCancel}"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Margin="100,50,0,0"
-                   TouchDown="BtnCancell_TouchDown" />
-
-
-            <Image Source="../Images/Buttons/btn-wait-mony.png" 
-                   Stretch="Fill"
-                   Width="450"
-                   Height="130"
-                   Visibility="{Binding ImgCambio}"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Margin="0,50,50,0" />
         </Grid>
     </Grid>
 </UserControl>

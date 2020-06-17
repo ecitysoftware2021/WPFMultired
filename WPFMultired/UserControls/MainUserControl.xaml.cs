@@ -202,7 +202,7 @@ namespace WPFMultired.UserControls
                 {
                     _validatePaypad = false;
                     _imageSleader.Stop();
-                    Utilities.navigator.Navigate(UserControlView.Consult, true);
+                    Utilities.navigator.Navigate(UserControlView.Menu, true);
                 }
             }
             catch (Exception ex)

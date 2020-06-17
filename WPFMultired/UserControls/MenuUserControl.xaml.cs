@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
@@ -96,7 +97,12 @@ namespace WPFMultired.UserControls
             {
                 if (((Grid)sender).Tag != null)
                 {
-                    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
+                    if (AdminPayPlus.DataPayPlus.ListCompanies.Count == 1)
+                    {
+                        Utilities.navigator.Navigate(UserControlView.Consult, true, AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault().Item1, ((Grid)sender).Tag);
+                    } else if(AdminPayPlus.DataPayPlus.ListCompanies.Count > 1) {
+                        Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
+                    }
                 }
             }
             catch (Exception ex)

@@ -23,9 +23,9 @@
             <Image Source="/Images/Buttons/btn-back.png"
                    Name="btn_back"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
+                   VerticalAlignment="Center"
                    Width="200"
-                   Margin="20,0,0,0"
+                   Margin="50,0,0,0"
                    TouchDown="Btn_back_TouchDown" />
 
             <TextBlock x:Name="tbTimer"
@@ -39,26 +39,37 @@
             <Image Source="/Images/Buttons/btn-exit.png"
                    Name="btn_exit"
                    HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
+                   VerticalAlignment="Center"
                    Grid.Column="4"
                    Width="200"
-                   Margin="0,0,20,0"
+                   Margin="0,0,50,0"
                    TouchDown="Btn_exit_TouchDown" />
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBlock Text="{Binding Tittle}"
+
+            <TextBlock Text="{Binding Colum1}"
                        Foreground="#FF0D679A"
-                       Margin="0,70,0,0"
+                       Margin="0,0,0,50"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Name="lbl_tittle"
+                       Name="lbl_user"
                        FontWeight="Bold"
                        FontSize="50" />
+
+            <TextBlock Text="{Binding Colum2}"
+                       Foreground="#FF0D679A"
+                       Margin="0,50,0,0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Name="lbl_id"
+                       FontWeight="Bold"
+                       FontSize="50" />
+            
         </Grid>
 
         <Grid Grid.Row="2">
-            <TextBlock Text="Seleccione un producto"
+            <TextBlock Text="{Binding Tittle}"
                        Foreground="#FF80BC4A"
                        Margin="0,0,0,0"
                        HorizontalAlignment="Center"

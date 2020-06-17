@@ -111,7 +111,6 @@ namespace WPFMultired.UserControls
                         {
                             Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
                             Utilities.navigator.Navigate(UserControlView.Main);
-  
                         }
                         else
                         {

@@ -35,7 +35,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                //InitTimer();
+                InitTimer();
 
                 this.paymentViewModel = new PaymentViewModel
                 {
@@ -70,19 +70,21 @@ namespace WPFMultired.UserControls
                 TimerService.Close();
                 TimerService.CallBackTimerOut = response =>
                 {
-                    AdminPayPlus.ControlPeripherals.StopAceptance();
-                    AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    if (!this.paymentViewModel.StatePay)
+                    if (Utilities.ShowModal("Expiro el tiempo de la transaccion. ¿Desea ingresar dinero adicional?", EModalType.Information))
                     {
-                        if (paymentViewModel.ValorIngresado > 0)
-                        {
-                            transaction.Payment = paymentViewModel;
-                            Utilities.navigator.Navigate(UserControlView.ReturnMony, false, this.transaction);
-                        }
-                        else
-                        {
-                            Utilities.navigator.Navigate(UserControlView.Main);
-                        }
+                        TimerService.Reset();
+                    }
+                    else
+                    {
+                        AdminPayPlus.ControlPeripherals.StopAceptance();
+
+                        AdminPayPlus.ControlPeripherals.callbackLog = null;
+
+                        this.paymentViewModel.ImgContinue = Visibility.Hidden;
+
+                        this.paymentViewModel.ImgCancel = Visibility.Hidden;
+
+                        SavePay();
                     }
                 };
 
@@ -134,9 +136,16 @@ namespace WPFMultired.UserControls
 
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
-                                this.paymentViewModel.ImgCambio = Visibility.Visible;
+                                if (Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el exedente al siguiente pago o desea que el cajero le devuelva el exedente?", EModalType.MaxAmount))
+                                {
+                                    this.paymentViewModel.ImgCambio = Visibility.Visible;
 
-                                ReturnMoney(paymentViewModel.ValorSobrante, true);
+                                    ReturnMoney(paymentViewModel.ValorSobrante, true);
+                                }
+                                else
+                                {
+                                    SavePay();
+                                }
                             }
                             else
                             {
