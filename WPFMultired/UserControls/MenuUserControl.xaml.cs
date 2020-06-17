@@ -23,7 +23,7 @@ namespace WPFMultired.UserControls
         public MenuUserControl()
         {
             InitializeComponent();
-            ShowModal();
+            //ShowModal();
         }
 
         private void ConfigurateView()

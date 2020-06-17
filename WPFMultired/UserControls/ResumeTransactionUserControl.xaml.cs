@@ -24,5 +24,10 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
         }
+
+        private void Btn_acept_TouchDown(object sender, TouchEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,8 +5,8 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using WPFMultired.Classes.DB;
+using WPFMultired.Classes.Peripherals;
 using WPFMultired.Classes.Printer;
-using WPFMultired.Classes.UseFull;
 using WPFMultired.DataModel;
 using WPFMultired.Models;
 using WPFMultired.Resources;
@@ -127,7 +127,7 @@ namespace WPFMultired.Classes
 
                 if (await ValidatePaypad())
                 {
-                    //await DownloadInformation();
+                    await DownloadInformation();
 
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 

@@ -1,4 +1,6 @@
-﻿<UserControl x:Class="WPFMultired.UserControls.DetailAcountUserControl"
+﻿
+    
+    <UserControl x:Class="WPFMultired.UserControls.DetailAcountUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -121,8 +123,7 @@
                             VerticalAlignment="Top"
                             Margin="0,0,0,0"
                             Width="1030"
-                            Height="50"
-                            TouchDown="Grid_TouchDown">
+                            Height="50">
 
                             <TextBlock Text="{Binding Item1}"
                                        FontSize="45"
