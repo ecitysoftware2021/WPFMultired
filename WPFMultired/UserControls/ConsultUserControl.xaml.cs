@@ -82,7 +82,9 @@ namespace WPFMultired.UserControls
             {
                 readerBarCode.callbackOut = data =>
                 {
-
+                    transaction.reference = data;
+                    transaction.TypeDocument = "0";
+                    Consult();
                 };
 
                 readerBarCode.callbackError = error =>
