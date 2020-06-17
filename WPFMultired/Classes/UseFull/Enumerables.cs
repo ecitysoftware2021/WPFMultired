@@ -57,7 +57,8 @@ namespace WPFMultired.Classes
         Admin,
         Certificates,
         PrintFile,
-        DataList
+        DataList,
+        ResumeTransaction
     }
 
     public enum ETransactionState
@@ -126,7 +127,8 @@ namespace WPFMultired.Classes
         Operation_Admin = 13,
         Procces_Admin = 14,
         Validate_Admin_QR = 15,
-        Report_Cash = 16
+        Report_Cash = 16,
+        Consult_Invoice = 17
     }
 
     public enum ETypeDetailModel

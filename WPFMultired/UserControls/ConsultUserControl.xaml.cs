@@ -124,7 +124,7 @@ namespace WPFMultired.UserControls
                 {
                     try
                     {
-                        var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Products_Client, this.transaction);
+                        var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
 
                         if (response != null)
                         {

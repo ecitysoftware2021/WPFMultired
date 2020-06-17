@@ -20,6 +20,7 @@ using WPFMultired.MR_OperationAdmin;
 using WPFMultired.MR_ProcessAdmin;
 using WPFMultired.MR_ValidateAdminQR;
 using WPFMultired.MR_ControllCash;
+using WPFMultired.MR_ConsultInvoice;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
@@ -164,6 +165,10 @@ namespace WPFMultired.Services
                     case ETypeService.Report_Cash:
 
                         return ReportCash((Transaction)data);
+
+                    case ETypeService.Consult_Invoice:
+
+                        return ConsultInvoice((Transaction)data);
 
                     default:
                         break;
@@ -1048,6 +1053,86 @@ namespace WPFMultired.Services
                         else
                         {
                             return new Response { Data = null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// #NN Método para validar el QR
+        /// </summary>
+        /// <returns></returns>
+        private Response ConsultInvoice(Transaction transaction)
+        {
+            try
+            {
+                 ConsultarFacturasServicesClient client = new ConsultarFacturasServicesClient();
+
+                using (var factory = new WebChannelFactory<ConsultarFacturasServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrconfaccInput request = new mtrconfaccInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
+                            I_LECTURA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument == "0" ? "1" : "0"), keyEncript),
+                            I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument), keyEncript),
+                            I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
+                        };
+
+                        var response = client.mtrconfacc(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
+                            response.LISTAREGISTROS.O_RTNCON > 0)
+                        {
+                            transaction.Products = new List<Product>();
+                            foreach (var item in response.LISTAREGISTROS.LIST)
+                            {
+                                transaction.Products.Add(new Product
+                                {
+                                    Code = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_REFCLI, keyDesencript), 2),
+                                    CodeSystem = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_REFRED, keyDesencript), 2),
+                                    AcountNumberMasc = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_FLGDET, keyDesencript), 2),
+                                    AmountMax = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMAX, keyDesencript), 2), new CultureInfo("en-US")),
+                                    AmountMin = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2), new CultureInfo("en-US")),
+                                    Description = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DESCRI, keyDesencript), 2),
+                                    AcountNumber = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_FLGMOD, keyDesencript), 2),
+                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Length - 2)), new CultureInfo("en-US")),
+                                    Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Length - 2)), new CultureInfo("en-US")),
+                                    AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRTOT, keyDesencript), 2).Length - 2)), new CultureInfo("en-US"))
+                                });
+                            }
+
+                            transaction.payer = new PAYER
+                            {
+                                NAME = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRE, keyDesencript), 2),
+                                IDENTIFICATION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NUMERODOCUMENTO, keyDesencript), 2)
+                            };
+
+                            transaction.Type = ETransactionType.Deposit;
+                            transaction.Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORGLOBAL, keyDesencript), 2), new CultureInfo("en-US"));
+                            transaction.Observation = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DESOPERACION, keyDesencript), 2);
+
+                            return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }

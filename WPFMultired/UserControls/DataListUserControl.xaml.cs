@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -37,7 +38,9 @@ namespace WPFMultired.UserControls
                 {
                     viewModel = new DataListViewModel
                     {
-                        Tittle = string.Concat(transaction.payer.NAME, " ( *****", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")" ),
+                        Colum1 = transaction.payer.NAME,
+                        Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
+                        Tittle = transaction.Observation,
                         DataList = new List<ItemList>(),
                         ViewList = new CollectionViewSource()
                     };
@@ -126,15 +129,29 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void ShowModal()
+        private async void SendData()
         {
             try
             {
-                transaction.IsCashBack = false;
-                if (!Utilities.ShowModalDetails(transaction, 
-                    (transaction.Type == ETransactionType.Deposit ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
+                if (transaction.Amount > 0)
                 {
-                    //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
+                    Task.Run(async () =>
+                    {
+                        await AdminPayPlus.SaveTransactions(this.transaction, false);
+
+                        Utilities.CloseModal();
+
+                        if (this.transaction.IdTransactionAPi == 0)
+                        {
+                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
+                            Utilities.navigator.Navigate(UserControlView.Main);
+                        }
+                        else
+                        {
+                            Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
+                        }
+                    });
+                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
                 }
             }
             catch (Exception ex)
@@ -142,6 +159,23 @@ namespace WPFMultired.UserControls
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
+
+        /* private void ShowModal()
+         {
+             try
+             {
+                 transaction.IsCashBack = false;
+                 if (!Utilities.ShowModalDetails(transaction, 
+                     (transaction.Type == ETransactionType.Deposit ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
+                 {
+                     //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
+                 }
+             }
+             catch (Exception ex)
+             {
+                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+             }
+         }*/
 
         private void Grid_TouchDown(object sender, TouchEventArgs e)
         {
@@ -151,7 +185,8 @@ namespace WPFMultired.UserControls
                 {
                     transaction.Product = (Product)((Grid)sender).Tag;
                     lv_data_list.SelectedItem = null;
-                    ShowModal();
+                    SendData();
+                    //ShowModal();
                 }
             }
             catch (Exception ex)

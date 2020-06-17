@@ -294,7 +294,7 @@ namespace WPFMultired.UserControls
                             {
                                 transaction.State = ETransactionState.ErrorService;
                             }
-                            Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
+                            Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
                         });
                     }
                     else

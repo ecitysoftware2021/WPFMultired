@@ -72,6 +72,9 @@ namespace WPFMultired.Models
                     case UserControlView.DataList:
                         View = new DataListUserControl((Transaction)data);
                         break;
+                    case UserControlView.ResumeTransaction:
+                        View = new ResumeTransactionUserControl((Transaction)data);
+                        break;
                 }
 
                 TimerService.Close();

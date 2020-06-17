@@ -23,7 +23,7 @@
 
         <Grid Grid.Row="1">
             <TextBlock 
-                Text=""
+                Name="tb_name_company"
                 FontSize="32"
                 TextAlignment="Left"
                 Margin="0,0,150,0"
@@ -33,7 +33,7 @@
                 HorizontalAlignment="Right" />
             
             <TextBlock 
-                Text=""
+                Name="tb_name_client"
                 FontSize="32"
                 TextAlignment="Left"
                 Margin="0,110,150,0"
@@ -43,17 +43,155 @@
                 HorizontalAlignment="Right" />
 
             <TextBlock 
-                Text=""
+                Name="tb_amount_pay"
                 FontSize="32"
                 TextAlignment="Left"
-                Margin="0,250,150,0"
+                Margin="0,230,150,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
+                Name="tb_extra_amount_pay"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,350,150,0"
                 FontFamily="Arial"
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right" />
         </Grid>
 
+        <Grid Grid.Row="2">
+            <ListView x:Name="lv_denominations" 
+                    Margin="0,0,0,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding}">
 
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"
+                                 HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Center"
+                            VerticalAlignment="Top" Background="Transparent"
+                            Margin="0,0,0,0"
+                            Width="950"
+                            Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                    Text="{Binding Denominacion, StringFormat={}{0:C0}}"
+                                    FontSize="35"
+                                    FontFamily="Arial"
+                                    TextAlignment="Right"
+                                    TextWrapping="Wrap"
+                                    Margin="0,0,30,0"
+                                    Foreground="#606060"
+                                    Width="300"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="0"
+                           />
+                            <TextBlock 
+                                    Text="{Binding Quantity}"
+                                    FontSize="35"
+                                    FontFamily="Arial"
+                                    TextAlignment="Right"
+                                    TextWrapping="Wrap"
+                                    Width="200"
+                                    Margin="0,0,0,0"
+                                    Foreground="#FF104B6D"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Grid.Column="1"
+                           />
+                            <TextBlock 
+                                    Text="{Binding Total, StringFormat={}{0:C0}}"
+                                    FontSize="35"
+                                    FontFamily="Arial"
+                                    TextAlignment="Right"
+                                    TextWrapping="Wrap"
+                                    Margin="0,0,30,0"
+                                    Width="200"
+                                    Foreground="#FF104B6D"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Grid.Column="2" 
+                           />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <TextBlock 
+                Name="tb_amount_return"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,82,150,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
+                Name="tb_amount_tip"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,145,150,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
+                Name="tb_email"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,50,150,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
+                Name="tb_id_transaction"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,165,150,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
+                Name="tb_date"
+                FontSize="32"
+                TextAlignment="Left"
+                Margin="0,0,150,38"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right" />
+        </Grid>
         <Grid Grid.Row="4">
             <Image Source="/Images/Buttons/btn-acept.png"
                     x:Name="btn_acept"
