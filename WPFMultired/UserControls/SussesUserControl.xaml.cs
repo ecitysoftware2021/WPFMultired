@@ -71,10 +71,10 @@ namespace WPFMultired.UserControls
                     {
                         if (transaction.Type == ETransactionType.Deposit)
                             {
-                                ShowModal();
-                            }
-                            else
-                            {
+                            //    ShowModal();
+                           // }
+                           // else
+                           // {
                                 Utilities.navigator.Navigate(UserControlView.Main);
                             }
                         }

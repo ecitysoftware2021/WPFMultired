@@ -93,7 +93,7 @@ namespace WPFMultired.Windows
 
         private void Grid_TouchDown(object sender, TouchEventArgs e)
         {
-            if (this.modal.TypeModal == EModalType.MaxAmount || this.modal.TypeModal == EModalType.Error)
+            if (this.modal.TypeModal == EModalType.Error)
             {
                 this.DialogResult = true;
             }

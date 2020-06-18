@@ -15,7 +15,7 @@
             <RowDefinition Height="150" />
             <RowDefinition Height="250" />
             <RowDefinition Height="80" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="1000" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -134,34 +134,25 @@
                                        Grid.Column="0" />
 
                             <TextBlock Text="{Binding Item2}"
-                                       FontSize="35"
+                                       FontSize="32"
                                        FontFamily="Arial"
                                        TextAlignment="Justify"
                                        TextWrapping="Wrap"
                                        Margin="50,10,0,0"
-                                       Foreground="#FF104B6D"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left" />
-
-                            <TextBlock Text="{Binding Item2}"
-                                       FontSize="35"
-                                       FontFamily="Arial"
-                                       TextAlignment="Justify"
-                                       TextWrapping="Wrap"
-                                       Margin="50,10,0,0"
-                                       Foreground="#FF104B6D"
+                                       Foreground="Gray"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left" />
 
                             <TextBlock Text="{Binding Item5, StringFormat={}{0:C0}}"
-                                       FontSize="45"
+                                       FontSize="42"
                                        FontFamily="Arial"
                                        TextAlignment="Justify"
                                        TextWrapping="Wrap"
-                                       Margin="0,30,0,0"
-                                       Foreground="#FF104B6D"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center" />
+                                       Margin="50,30,0,0"
+                                       Foreground="#FF0D4F92"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Left" />
 
                             <Image  Source="/Images/Others/img-icon-select.png"
                                     Width="70"
@@ -192,8 +183,8 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left" />
 
-            <TextBlock Text="{Binding ValorIngresado, StringFormat={}{0:C0}}"
-                                FontSize="52"
+            <TextBlock Text="{Binding Amount, StringFormat={}{0:C0}}"
+                                FontSize="50"
                                 TextAlignment="Center"
                                 Margin="0,0,100,0"
                                 FontFamily="Arial"

@@ -39,6 +39,7 @@ namespace WPFMultired.UserControls
                     viewModel = new DataListViewModel
                     {
                         Colum1 = transaction.payer.NAME,
+                        Amount = transaction.Amount,
                         Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
                         Tittle = transaction.Observation,
                         DataList = new List<ItemList>(),
