@@ -1117,9 +1117,9 @@ namespace WPFMultired.Services
                                     AmountMin = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2), new CultureInfo("en-US")),
                                     Description = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DESCRI, keyDesencript), 2),
                                     AcountNumber = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_FLGMOD, keyDesencript), 2),
-                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Length - 2)), new CultureInfo("en-US")),
-                                    Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2).Length - 2)), new CultureInfo("en-US")),
-                                    AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2).Substring(0, (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRTOT, keyDesencript), 2).Length - 2)), new CultureInfo("en-US"))
+                                    AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
+                                    Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
+                                    AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US"))
                                 });
                             }
 
