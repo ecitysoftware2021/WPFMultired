@@ -370,7 +370,7 @@ namespace WPFMultired.UserControls
 
             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-            if (!Utilities.ShowModal("¿Desea ingresar dinero adicional?", EModalType.MaxAmount))
+            if (!Utilities.ShowModal("¿Desea ingresar dinero adicional?", EModalType.Information))
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 
