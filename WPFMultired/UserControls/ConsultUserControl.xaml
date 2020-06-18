@@ -51,7 +51,7 @@
                     Foreground="#FF1B69A8"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
-                    Text="Acerque el código de barras al lector de la máquina o Ingresar el número de identificación del asociado a Coomeva" />
+                    Text="Acerque el código de barras al lector de la máquina o Ingrese el número de identificación del asociado a Coomeva" />
         </Grid>
 
         <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">
