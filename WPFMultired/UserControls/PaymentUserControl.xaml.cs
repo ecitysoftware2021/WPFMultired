@@ -284,7 +284,7 @@ namespace WPFMultired.UserControls
                         Task.Run(() =>
                         {
                             this.transaction.Amount = paymentViewModel.ValorIngresado;
-                            var response = 0;//AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
+                            var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
                             Utilities.CloseModal();
                             if (response != null)
                             {
@@ -323,6 +323,8 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                TimerService.Stop();
+
                 this.paymentViewModel.ImgContinue = Visibility.Hidden;
 
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
@@ -362,13 +364,13 @@ namespace WPFMultired.UserControls
 
         private void BtnConsign_StylusDown(object sender, System.Windows.Input.StylusDownEventArgs e)
         {
-            //StopTimer();
+            TimerService.Stop();
 
             this.paymentViewModel.ImgContinue = Visibility.Hidden;
 
             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-            if (Utilities.ShowModal("Para continuar escoja cualquiera de estas opciones:", EModalType.MaxAmount))
+            if (!Utilities.ShowModal("¿Desea ingresar dinero adicional?", EModalType.MaxAmount))
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 
@@ -379,7 +381,7 @@ namespace WPFMultired.UserControls
             }
             else
             {
-               // InitTimer();
+                TimerService.Reset();
 
                 this.paymentViewModel.ImgContinue = Visibility.Visible;
 

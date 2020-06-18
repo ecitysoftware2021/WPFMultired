@@ -109,20 +109,20 @@
                 <Image x:Name="BtnFinish" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                        Width="360"
-                        Height="100"
+                        Width="280"
+                        Height="80"
                         Margin="150,80,0,0"
                         TouchDown="BtnYes_TouchDown"
-                        Source="/Images/Buttons/btn-finish-transaction.png" Stretch="Fill" />
+                        Source="/Images/Buttons/btn-parment.png" Stretch="Fill" />
 
                 <Image x:Name="BtnEnterMony" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Width="360"
-                        Height="100"
+                        Width="280"
+                        Height="80"
                         Margin="0,80,150,0"
                         TouchDown="BtnNo_TouchDown"
-                        Source="/Images/Buttons/btn-enter-mony.png" Stretch="Fill" />
+                        Source="/Images/Buttons/btn-return.png" Stretch="Fill" />
             </Grid>
         </Grid>
     </Grid>

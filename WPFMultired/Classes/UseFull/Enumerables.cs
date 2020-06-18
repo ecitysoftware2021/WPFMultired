@@ -128,7 +128,8 @@ namespace WPFMultired.Classes
         Procces_Admin = 14,
         Validate_Admin_QR = 15,
         Report_Cash = 16,
-        Consult_Invoice = 17
+        Consult_Invoice = 17,
+        Report_Invoice = 18
     }
 
     public enum ETypeDetailModel

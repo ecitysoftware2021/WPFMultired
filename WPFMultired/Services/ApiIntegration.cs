@@ -21,6 +21,7 @@ using WPFMultired.MR_ProcessAdmin;
 using WPFMultired.MR_ValidateAdminQR;
 using WPFMultired.MR_ControllCash;
 using WPFMultired.MR_ConsultInvoice;
+using WPFMultired.MR_NotificInvoice;
 using WPFMultired.Resources;
 using WPFMultired.Services.Object;
 using System.Collections.Generic;
@@ -169,6 +170,10 @@ namespace WPFMultired.Services
                     case ETypeService.Consult_Invoice:
 
                         return ConsultInvoice((Transaction)data);
+
+                    case ETypeService.Report_Invoice:
+
+                        return ReportInvoice((Transaction)data);
 
                     default:
                         break;
@@ -1128,6 +1133,95 @@ namespace WPFMultired.Services
                             transaction.Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORGLOBAL, keyDesencript), 2), new CultureInfo("en-US"));
                             transaction.Observation = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DESOPERACION, keyDesencript), 2);
 
+                            return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// #8 Método para reportar la transacción
+        /// </summary>
+        /// <returns></returns>
+        private Response ReportInvoice(Transaction transaction)
+        {
+            try
+            {
+                RecaudoFacturasServicesClient client = new RecaudoFacturasServicesClient();
+
+                using (var factory = new WebChannelFactory<RecaudoFacturasServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+                        WPFMultired.MR_NotificInvoice.iLISTAREGISTROS denominations = null;
+
+                        if (transaction.Payment.Denominations != null)
+                        {
+                            denominations = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROS
+                            {
+                                I_RTNCON = transaction.Payment.Denominations.Count,
+                                LIST = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
+                            };
+                            var index = 0;
+
+                            foreach (var denomination in transaction.Payment.Denominations)
+                            {
+                                denominations.LIST[index] = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROSLIST
+                                {
+                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Quantity.ToString()), keyEncript),
+                                    I_DENOMI = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
+                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
+                                };
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            denominations = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROS
+                            {
+                                I_RTNCON = 0,
+                                LIST = { }
+                            };
+                        }
+
+                        mtrrecfaccInput request = new mtrrecfaccInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
+                            I_KEYASM = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.IdTransactionAPi.ToString()), keyEncript),
+                            I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Product.CodeSystem), keyEncript),
+                            I_VALORDEVUELTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", transaction.Payment.ValorDispensado.ToString()).Replace("$", "")), keyEncript),
+                            I_VALORRECAUDADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", transaction.Payment.ValorIngresado.ToString()).Replace("$", "")), keyEncript),
+                            I_LISTAREGISTROS = denominations
+                        };
+
+                        var response = client.mtrrecfacc(request);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            transaction.consecutive = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_LLAVEMULTIRED, keyDesencript), 2);
+                            transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIA, keyDesencript), 2);
+                            transaction.nameentity = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREENTIDAD, keyDesencript), 2);
+                            transaction.AmountComission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORCOMISION, keyDesencript), 2), new CultureInfo("en-US"));
                             return new Response { Data = transaction };
                         }
                         else

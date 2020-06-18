@@ -17,6 +17,8 @@ namespace WPFMultired.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
 
+        public string nameentity { get; set; }
+
         public string consecutive { get; set; }
 
         public string reference { get; set; }
@@ -54,6 +56,8 @@ namespace WPFMultired.Models
         public List<Product> Products { get; set; }
 
         public Product Product { get; set; }
+
+        public decimal AmountComission { get; set; }
 
         private decimal _Amount;
 
