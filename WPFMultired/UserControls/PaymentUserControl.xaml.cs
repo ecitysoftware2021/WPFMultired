@@ -296,6 +296,8 @@ namespace WPFMultired.UserControls
                             }
                             Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
                         });
+
+                        Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
                     }
                     else
                     {
