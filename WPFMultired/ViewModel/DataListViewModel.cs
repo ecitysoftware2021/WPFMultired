@@ -331,7 +331,8 @@ namespace WPFMultired.ViewModel
                     _dataList.Add(new ItemList
                     {
                         Item1 = product.Description,
-                        Item2 = string.Concat("********", product.AcountNumberMasc.Substring(product.Code.Length -4)),
+                        Item2 = product.Code,
+                        Item5 = product.Amount,
                         Index = ((List<Product>)data).IndexOf(product),
                         Data = product,
                         ImageSourse = ImagesUrlResource.ImageOnSelectOption

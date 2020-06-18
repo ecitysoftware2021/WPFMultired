@@ -142,6 +142,16 @@
         
         <Grid Grid.Row="3">
             <TextBlock 
+                Name="tb_total"
+                FontSize="35"
+                TextAlignment="Left"
+                Margin="0,0,180,0"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" />
+
+            <TextBlock 
                 Name="tb_amount_return"
                 FontSize="32"
                 TextAlignment="Left"
@@ -162,7 +172,7 @@
                 HorizontalAlignment="Right" />
 
             <TextBlock 
-                Name="tb_email"
+                Name="tb_reference"
                 FontSize="32"
                 TextAlignment="Left"
                 Margin="0,50,150,0"

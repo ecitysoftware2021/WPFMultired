@@ -17,7 +17,7 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
 
-            if (transaction == null)
+            if (transaction != null)
             {
                 this.transaction = transaction;
             }
@@ -35,7 +35,10 @@ namespace WPFMultired.UserControls
                 tb_extra_amount_pay.Text = string.Format("{0:C0}", transaction.Payment.ValorSobrante);
                 tb_amount_return.Text = string.Format("{0:C0}", transaction.Payment.ValorDispensado);
                 tb_id_transaction.Text = transaction.IdTransactionAPi.ToString();
-                tb_date.Text = transaction.DateTransaction.ToString();
+                tb_date.Text = DateTime.Now.ToString();
+                tb_amount_tip.Text = string.Format("{0:C0}", transaction.Product.AmountCommission);
+                tb_reference.Text = transaction.payer.IDENTIFICATION;
+                tb_total.Text = string.Format("{0:C0}", transaction.Payment.ValorIngresado);
                 ConfigurateList();
             }
             catch (Exception ex)

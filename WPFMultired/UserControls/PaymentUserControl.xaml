@@ -47,34 +47,34 @@
         <Grid Grid.Row="1">
             <TextBlock 
                 Text="Denominación"
-                FontSize="40"
+                FontSize="50"
                 TextAlignment="Center"
-                Margin="120,0,0,0"
+                Margin="100,0,0,0"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                Foreground="#FF104B6D"
+                Foreground="#FF0D4F92"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left" Grid.Row="6" />
 
             <TextBlock 
                 Text="Cantidad"
-                FontSize="40"
+                FontSize="50"
                 TextAlignment="Center"
-                Margin="120,0,0,0"
+                Margin="150,0,0,0"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                Foreground="#FF104B6D"
+                Foreground="#FF0D4F92"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center" />
 
             <TextBlock 
                 Text="Total ($)"
-                FontSize="40"
+                FontSize="50"
                 TextAlignment="Center"
-                Margin="0,0,120,0"
+                Margin="0,0,100,0"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                Foreground="#FF104B6D"
+                Foreground="#FF0D4F92"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right" />
         </Grid>
@@ -102,7 +102,7 @@
                             VerticalAlignment="Top" Background="Transparent"
                             Margin="0,0,0,0"
                             Width="950"
-                            Height="50">
+                            Height="55">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="350" />
                                 <ColumnDefinition Width="*" />
@@ -110,7 +110,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock 
                                     Text="{Binding Denominacion, StringFormat={}{0:C0}}"
-                                    FontSize="35"
+                                    FontSize="45"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
@@ -119,11 +119,11 @@
                                     Width="300"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Grid.Column="0"
-                           />
+                                    Grid.Column="0" />
+                            
                             <TextBlock 
                                     Text="{Binding Quantity}"
-                                    FontSize="35"
+                                    FontSize="45"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
@@ -133,11 +133,11 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     FontWeight="Bold"
-                                    Grid.Column="1"
-                           />
+                                    Grid.Column="1" />
+                            
                             <TextBlock 
                                     Text="{Binding Total, StringFormat={}{0:C0}}"
-                                    FontSize="35"
+                                    FontSize="45"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
@@ -147,8 +147,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     FontWeight="Bold"
-                                    Grid.Column="2" 
-                           />
+                                    Grid.Column="2" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -156,22 +155,23 @@
         </Grid>
         <Grid Grid.Row="3">
             <TextBlock 
-                Text="Valor ingresado"
-                FontSize="45"
+                Text="Valor ingresado:"
+                FontSize="52"
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
-                Foreground="#FF606060"
+                Foreground="#FF0D4F92"
+                FontWeight="Bold"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
              />
             <TextBlock 
                 Text="{Binding ValorIngresado, StringFormat={}{0:C0}}"
-                FontSize="50"
+                FontSize="52"
                 TextAlignment="Center"
                 Margin="0,0,100,0"
                 FontFamily="Arial"
-                Foreground="#FF606060"
+                Foreground="#FF0D4F92"
                 FontWeight="Bold"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
@@ -250,7 +250,7 @@
                    Visibility="{Binding ImgCambio}"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
-                   Margin="0,50,50,0" />
+                   Margin="0,0,50,0" />
 
             <Image x:Name="btnConsign"
                    Source="../Images/Buttons/btn-continue-pay.png"
@@ -260,7 +260,7 @@
                    Visibility="{Binding ImgContinue}"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
-                   Margin="0,50,50,0" 
+                   Margin="0,0,100,0" 
                    StylusDown="BtnConsign_StylusDown" />
         </Grid>
     </Grid>
