@@ -32,7 +32,7 @@ namespace WPFMultired.UserControls
                 tb_name_company.Text = AdminPayPlus.DataPayPlus.ListCompanies.Where(c => c.Item1 == transaction.CodeCompany).FirstOrDefault().Item2;
                 tb_name_client.Text = transaction.payer.NAME;
                 tb_amount_pay.Text = string.Format("{0:C0}", transaction.Amount);
-                tb_extra_amount_pay.Text = string.Format("{0:C0}", transaction.Payment.ValorSobrante);
+                tb_extra_amount_pay.Text = string.Format("{0:C0}", transaction.Payment.ValorSobrante - transaction.Payment.ValorDispensado);
                 tb_amount_return.Text = string.Format("{0:C0}", transaction.Payment.ValorDispensado);
                 tb_id_transaction.Text = transaction.consecutive.ToString();
                 tb_date.Text = DateTime.Now.ToString();
