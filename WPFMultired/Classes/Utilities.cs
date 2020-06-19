@@ -270,6 +270,16 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "¡ Transacción exitosa !", x = 80, y = y += 50 });
 
+                    data.Add(new DataPrinter
+                    {
+                        brush = color,
+                        font = fontValue,
+                        value = "Powered by Multi - Red ©",
+                        x = 68,
+                        y = y += 80
+                    });
+
+
                     AdminPayPlus.PrintService.Start(data);
                 }
             }
