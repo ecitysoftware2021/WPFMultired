@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -127,7 +128,7 @@ namespace WPFMultired.UserControls
                     try
                     {
                         var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
-
+                        Thread.Sleep(3000);
                         if (response.Data != null)
                         {
                             transaction = (Transaction)response.Data;

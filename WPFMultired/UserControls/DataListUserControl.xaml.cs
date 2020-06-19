@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -139,6 +140,8 @@ namespace WPFMultired.UserControls
                     Task.Run(async () =>
                     {
                         await AdminPayPlus.SaveTransactions(this.transaction, false);
+
+                        Thread.Sleep(3000);
 
                         Utilities.CloseModal();
 
