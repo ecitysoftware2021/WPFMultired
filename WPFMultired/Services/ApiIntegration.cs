@@ -1219,6 +1219,8 @@ namespace WPFMultired.Services
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
                             transaction.consecutive = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_APROBACION, keyDesencript), 2);
+                            transaction.Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORRECAUDADO, keyDesencript), 2), new CultureInfo("en-US"));
+                            transaction.Payment.ValorSobrante = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALOREXCESO, keyDesencript), 2), new CultureInfo("en-US"));
                             transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIA, keyDesencript), 2);
                             transaction.nameentity = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREENTIDAD, keyDesencript), 2);
                             transaction.AmountComission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORCOMISION, keyDesencript), 2), new CultureInfo("en-US"));
