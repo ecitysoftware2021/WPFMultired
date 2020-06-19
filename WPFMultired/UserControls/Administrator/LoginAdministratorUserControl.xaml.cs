@@ -34,13 +34,12 @@ namespace WPFMultired.UserControls.Administrator
         {
             InitializeComponent();
 
-            
-            InitView(typeOperation);
-
             if (readerBarCode == null)
             {
                 readerBarCode = new ReaderBarCode();
             }
+
+            InitView(typeOperation);
 
             // Search();
         }
