@@ -74,15 +74,6 @@
                    Width="300"
                    Height="80"
                    TouchDown="Btn_no_qr_TouchDown"/>
-
-                <TextBox Name="txt_qr"
-                   Tag="0"
-                   Text="{Binding Qr , UpdateSourceTrigger=PropertyChanged}"
-                   FontSize="1"
-                   Foreground="Black"
-                   Width="0.1" 
-                   TabIndex="0"
-                   KeyDown="Txt_qr_KeyDown" />
             </Grid>
 
             <Grid Name="gd_login" Visibility="{Binding VisibleGdLogin}">

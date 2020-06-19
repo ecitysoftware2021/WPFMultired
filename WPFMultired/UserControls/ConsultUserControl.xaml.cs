@@ -133,6 +133,7 @@ namespace WPFMultired.UserControls
                         {
                             transaction = (Transaction)response.Data;
                             Utilities.CloseModal();
+                            readerBarCode.Stop();
                             Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
                         }
                         else
@@ -201,6 +202,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                readerBarCode.Stop();
                 Utilities.navigator.Navigate(UserControlView.Main);
             }
             catch (Exception ex)
@@ -213,6 +215,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                readerBarCode.Stop();
                 Utilities.navigator.Navigate(UserControlView.Main);
             }
             catch (Exception ex)

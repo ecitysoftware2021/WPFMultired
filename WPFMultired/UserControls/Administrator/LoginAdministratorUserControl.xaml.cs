@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WPFMultired.Classes;
+using WPFMultired.Classes.Peripherals;
 using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.ViewModel;
@@ -21,6 +22,8 @@ namespace WPFMultired.UserControls.Administrator
 
         private LoginViewModel viewModel;
 
+        private ReaderBarCode readerBarCode;
+
         // ReSharper disable once UnassignedGetOnlyAutoProperty
 
         #endregion
@@ -34,7 +37,12 @@ namespace WPFMultired.UserControls.Administrator
             
             InitView(typeOperation);
 
-           // Search();
+            if (readerBarCode == null)
+            {
+                readerBarCode = new ReaderBarCode();
+            }
+
+            // Search();
         }
 
         private void InitView(ETypeAdministrator typeOperation)
@@ -53,7 +61,38 @@ namespace WPFMultired.UserControls.Administrator
             };
 
             this.DataContext = viewModel;
-            txt_qr.Focus();
+
+            InicielizeBarcodeReader();
+        }
+
+        private void InicielizeBarcodeReader()
+        {
+            try
+            {
+                readerBarCode.callbackOut = data =>
+                {
+                    if (!viewModel.IsReadQr)
+                    {
+                        viewModel.IsReadQr = true;
+                        viewModel.TypeLogin = 1;
+                        viewModel.User = string.Empty;
+                        viewModel.Pass = string.Empty;
+                        viewModel.Qr = data;
+                        Search();
+                    }
+                };
+
+                readerBarCode.callbackError = error =>
+                {
+
+                };
+
+                readerBarCode.Start(Utilities.GetConfiguration("BarcodePort"), int.Parse(Utilities.GetConfiguration("BarcodeBaudRate")));
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
 
         #endregion
@@ -84,6 +123,7 @@ namespace WPFMultired.UserControls.Administrator
         {
             try
             {
+                readerBarCode.Stop();
                 Utilities.navigator.Navigate(UserControlView.Config);
             }
             catch (Exception ex)
@@ -141,7 +181,8 @@ namespace WPFMultired.UserControls.Administrator
                             {
                                 Utilities.CloseModal();
                                 data.USER_ADMIN_ID = response.Item1;
-                                Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
+                                readerBarCode.Stop();
+                               Utilities.navigator.Navigate(UserControlView.Admin, false, data, viewModel.TypeOperation);
                             }
                             else
                             {
@@ -212,18 +253,6 @@ namespace WPFMultired.UserControls.Administrator
             viewModel.User = string.Empty;
             viewModel.Pass = string.Empty;
             viewModel.Qr = string.Empty;
-        }
-
-        private void Txt_qr_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter && !viewModel.IsReadQr)
-            { 
-                viewModel.IsReadQr = true;
-                viewModel.TypeLogin = 1;
-                viewModel.User = string.Empty;
-                viewModel.Pass = string.Empty;
-                Search();
-            }
         }
     }
 }
