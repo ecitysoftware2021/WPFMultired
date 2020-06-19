@@ -506,7 +506,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-cancel-alert.png" />
-    <Resource Include="Images\Backgrounds\bg-succes-pay.png" />
     <Resource Include="Images\Gif\gif-preload.gif" />
     <Resource Include="Images\Buttons\btn-wait-mony.png" />
     <Resource Include="Images\Buttons\btn-cancel.png" />
@@ -887,6 +886,9 @@
     <Resource Include="Images\Buttons\btn-deposit.png" />
     <Resource Include="Images\Buttons\btn-parment.png" />
     <Resource Include="Images\Buttons\btn-return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bg-succes-pay.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
