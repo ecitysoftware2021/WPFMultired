@@ -145,6 +145,7 @@ namespace WPFMultired.UserControls
 
                         Utilities.CloseModal();
 
+
                         if (this.transaction.IdTransactionAPi == 0)
                         {
                             Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
@@ -152,6 +153,7 @@ namespace WPFMultired.UserControls
                         }
                         else
                         {
+                            AdminPayPlus.Recorder.Grabar(transaction.IdTransactionAPi, 0);
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                         }
                     });

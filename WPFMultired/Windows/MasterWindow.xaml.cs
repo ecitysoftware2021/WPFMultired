@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -30,6 +31,7 @@ namespace WPFMultired.Windows
                 }
 
                 WPKeyboard.Keyboard.ConsttrucKeyyboard(WPKeyboard.Keyboard.EStyle.style_2);
+                 
                 Utilities.navigator.Navigate(UserControlView.Config);
 
                 DataContext = Utilities.navigator;

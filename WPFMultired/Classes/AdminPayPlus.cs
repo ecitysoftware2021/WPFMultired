@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Grabador.Transaccion;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,13 @@ namespace WPFMultired.Classes
             get { return _controlPeripherals; }
         }
 
+        private static CLSGrabador _recorder;
+
+        public static CLSGrabador Recorder
+        {
+            get { return _recorder; }
+        }
+
         private static ApiIntegration _apiIntegration;
 
         public static ApiIntegration ApiIntegration
@@ -113,6 +121,11 @@ namespace WPFMultired.Classes
             if (_readerBarCode == null)
             {
                 _readerBarCode = new ReaderBarCode();
+            }
+
+            if (_recorder == null)
+            {
+                _recorder = new CLSGrabador();
             }
         }
         #endregion

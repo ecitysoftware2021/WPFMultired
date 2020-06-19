@@ -301,7 +301,7 @@
     <value>Validando periférico ...</value>
   </data>
   <data name="ValidatePeripheralsFail" xml:space="preserve">
-    <value>¡No se lograrón iniciar los dispositivos!</value>
+    <value>¡No se lograron iniciar los dispositivos!</value>
   </data>
   <data name="ErrorValidaQr" xml:space="preserve">
     <value>El codigo QR ingresado es inválido</value>

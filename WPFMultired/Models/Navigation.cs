@@ -77,6 +77,7 @@ namespace WPFMultired.Models
                         break;
                 }
 
+                
                 TimerService.Close();
 
                 if (initTimer)
@@ -85,6 +86,7 @@ namespace WPFMultired.Models
                     {
                         Application.Current.Dispatcher.Invoke((Action)delegate
                         {
+                            WPKeyboard.Keyboard.CloseKeyboard(View);
                             View = new MainUserControl();
                         });
                         GC.Collect();

@@ -628,7 +628,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a ¡No se lograrón iniciar los dispositivos!.
+        ///   Busca una cadena traducida similar a ¡No se lograron iniciar los dispositivos!.
         /// </summary>
         internal static string ValidatePeripheralsFail {
             get {

@@ -49,6 +49,8 @@ namespace WPFMultired.UserControls
 
                 GC.Collect();
 
+                AdminPayPlus.Recorder.FinalizarGrabacion();
+
                 Task.Run(() =>
                 {
                     AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Cash, transaction);

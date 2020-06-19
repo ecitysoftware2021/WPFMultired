@@ -137,7 +137,7 @@ namespace WPFMultired.UserControls
 
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
-                                if (Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el exedente al siguiente pago o desea que el cajero le devuelva el exedente?", EModalType.MaxAmount))
+                                if (!Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el excedente al siguiente pago o desea que el cajero le devuelva el exedente?", EModalType.MaxAmount))
                                 {
                                     this.paymentViewModel.ImgCambio = Visibility.Visible;
 
@@ -337,6 +337,7 @@ namespace WPFMultired.UserControls
                 {
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
+                    AdminPayPlus.Recorder.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
                         if (paymentViewModel.ValorIngresado > 0)

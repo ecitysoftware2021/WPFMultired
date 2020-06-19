@@ -43,7 +43,7 @@
                 <TextBlock x:Name="LblTittle" 
                            Text="{Binding Tittle}"
                            HorizontalAlignment="Center"
-                           Margin="0,260,0,0" 
+                           Margin="0,280,0,0" 
                            FontSize="55" 
                            Width="500"
                            FontFamily="Myriad Pro"
@@ -109,18 +109,18 @@
                 <Image x:Name="BtnFinish" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                        Width="280"
-                        Height="80"
-                        Margin="150,80,0,0"
+                        Width="350"
+                        Height="100"
+                        Margin="180,80,0,0"
                         TouchDown="BtnYes_TouchDown"
                         Source="/Images/Buttons/btn-parment.png" Stretch="Fill" />
 
                 <Image x:Name="BtnEnterMony" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Width="280"
-                        Height="80"
-                        Margin="0,80,150,0"
+                        Width="350"
+                        Height="100"
+                        Margin="0,80,180,0"
                         TouchDown="BtnNo_TouchDown"
                         Source="/Images/Buttons/btn-return.png" Stretch="Fill" />
             </Grid>
