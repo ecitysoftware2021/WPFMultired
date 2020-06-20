@@ -188,7 +188,7 @@ namespace WPFMultired.Classes
 
                     var data = new List<DataPrinter>()
                         {
-                            new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 5, y= y },
+                            new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 30, y= y },
                         };
                     if (transaction.Type == ETransactionType.Deposit)
                     {
@@ -270,6 +270,8 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "¡ Transacción exitosa !", x = 80, y = y += 50 });
 
+                    data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 50, y = y + 30 });
+
                     data.Add(new DataPrinter
                     {
                         brush = color,
@@ -307,7 +309,7 @@ namespace WPFMultired.Classes
 
                 var data = new List<DataPrinter>()
                 {
-                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 50, y= y },
+                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 30, y= y },
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
