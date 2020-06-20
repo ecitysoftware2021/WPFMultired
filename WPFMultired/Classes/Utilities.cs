@@ -307,7 +307,7 @@ namespace WPFMultired.Classes
 
                 var data = new List<DataPrinter>()
                 {
-                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 5, y= y },
+                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 25, y= y },
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
