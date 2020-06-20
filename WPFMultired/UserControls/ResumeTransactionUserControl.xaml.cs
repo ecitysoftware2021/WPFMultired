@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Models;
+using WPFMultired.Resources;
 
 namespace WPFMultired.UserControls
 {
@@ -43,7 +45,7 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
-
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -54,10 +56,29 @@ namespace WPFMultired.UserControls
                 transaction.Payment.viewList.Source = transaction.Payment.Denominations.Where(d => d.Code == "MA" || d.Code == "AP").ToList();
                 lv_denominations.DataContext = transaction.Payment.viewList;
                 lv_denominations.Items.Refresh();
+                InitTimer();
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
 
+        private void InitTimer()
+        {
+            try
+            {
+                TimerService.Close();
+                TimerService.CallBackTimerOut = response =>
+                {
+                    Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
+                };
+
+                TimerService.Start(45000);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -65,11 +86,13 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                TimerService.Stop();
+                TimerService.Close();
                 Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
             }
             catch (Exception ex)
             {
-
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
     }

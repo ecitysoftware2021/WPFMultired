@@ -270,7 +270,7 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "¡ Transacción exitosa !", x = 80, y = y += 50 });
 
-                    data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 50, y = y + 30 });
+                    data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 110, y = y + 30 });
 
                     data.Add(new DataPrinter
                     {
