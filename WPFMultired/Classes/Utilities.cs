@@ -188,7 +188,7 @@ namespace WPFMultired.Classes
 
                     var data = new List<DataPrinter>()
                         {
-                            new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 30, y= y },
+                            new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 35, y= y },
                         };
                     if (transaction.Type == ETransactionType.Deposit)
                     {
