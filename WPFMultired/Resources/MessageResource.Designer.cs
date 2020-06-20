@@ -331,7 +331,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo continuar entregando el dineroç.
+        ///   Busca una cadena traducida similar a No se pudo continuar entregando el dinero.
         /// </summary>
         internal static string NoContinue {
             get {

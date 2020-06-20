@@ -307,7 +307,7 @@ namespace WPFMultired.Classes
 
                 var data = new List<DataPrinter>()
                 {
-                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 25, y= y },
+                    new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 50, y= y },
                 };
                 if (dataControl.TYPE == ETypeAdministrator.Balancing)
                 {
@@ -435,7 +435,7 @@ namespace WPFMultired.Classes
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "______________________", x = 140, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 140, y = y });
-
+                data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 80, y = y });
                 data.Add(new DataPrinter { image = DownloadImage(dataControl.SAFKEY) ?? Image.FromFile(GetConfiguration("ImageBoucher")), x = 30, y = y +=30 });
 
                 AdminPayPlus.PrintService.Start(data);

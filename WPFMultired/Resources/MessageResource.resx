@@ -157,7 +157,7 @@
     <value>Transacción en proceso por favor espere.</value>
   </data>
   <data name="NoContinue" xml:space="preserve">
-    <value>No se pudo continuar entregando el dineroç</value>
+    <value>No se pudo continuar entregando el dinero</value>
   </data>
   <data name="NoContinueTransaction" xml:space="preserve">
     <value>No se puede continuar con la transacción. Intentelo más tarde</value>
