@@ -82,8 +82,8 @@
                 <Image x:Name="BtnOk" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"
-                        Width="180"
-                        Height="80"
+                        Width="250"
+                        Height="100"
                         Margin="0,80,0,0"
                         TouchDown="BtnOk_TouchDown"
                         Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
@@ -91,18 +91,18 @@
                 <Image x:Name="BtnNo" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                        Width="200"
-                        Height="80"
-                        Margin="180,80,0,0"
+                        Width="250"
+                        Height="100"
+                        Margin="200,80,0,0"
                         TouchDown="BtnNo_TouchDown"
                         Source="/Images/Buttons/btn-cancel-alert.png" Stretch="Fill" />
 
                 <Image x:Name="BtnYes" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Width="180"
-                        Height="80"
-                        Margin="0,80,180,0"
+                        Width="250"
+                        Height="100"
+                        Margin="0,80,200,0"
                         TouchDown="BtnYes_TouchDown"
                         Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
 
