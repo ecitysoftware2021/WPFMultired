@@ -223,8 +223,11 @@ namespace WPFMultired.Classes
                         x = x,
                         y = y
                     });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Número de aprobación:", x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.consecutive, x = x, y = y });
 
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la comisión:", x = xKey, y = y += sum });
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor de la comisión:", x = xKey, y = y += 30 });
 
                     if (transaction.State == ETransactionState.Success)
                     {
@@ -235,16 +238,20 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", 0), x = (xMax - string.Format("{0:C0}", 0).Length * multiplier), y = y });
                     }
                     
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = "-------------------------------------------------------------------", x = 2, y = y += 30 });
-
-                   
                     if (transaction.Type == ETransactionType.Deposit)
                     {
-                        
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Monto abonado:", x = xKey, y = y += sum });
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Amount), x = (xMax - string.Format("{0:C0}", transaction.Amount).Length * multiplier), y = y });
+
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Excedente abonado:", x = xKey, y = y += sum });
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorSobrante), x = (xMax - string.Format("{0:C0}", transaction.Payment.ValorSobrante).Length * multiplier), y = y });
+
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Dinero entregado:", x = xKey, y = y += sum });
+                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = (xMax - string.Format("{0:C0}", transaction.Payment.ValorDispensado).Length * multiplier), y = y });
+
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total ingresado.:", x = xKey, y = y += 30 });
-                        data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = (xMax - string.Format("{0:C0}", transaction.Payment.ValorIngresado).Length * multiplier), y = y });
-                       // data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total Devuelto:", x = xKey, y = y += sum });
-                      //  data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorDispensado), x = x, y = y });
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = (xMax - string.Format("{0:C0}", transaction.Payment.ValorIngresado).Length * multiplier), y = y });
+
                     }
                     else
                     {
@@ -270,7 +277,7 @@ namespace WPFMultired.Classes
 
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = "¡ Transacción exitosa !", x = 80, y = y += 50 });
 
-                    data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 110, y = y + 30 });
+                    data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 120, y = y + 30 });
 
                     data.Add(new DataPrinter
                     {
@@ -437,7 +444,7 @@ namespace WPFMultired.Classes
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "______________________", x = 140, y = y });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = xKey, y = y += sum });
                 data.Add(new DataPrinter { brush = color, font = fontValue, value = "Firma", x = 140, y = y });
-                data.Add(new DataPrinter { image = Image.FromFile(GetConfiguration("logotipo")), x = 80, y = y });
+                
                 data.Add(new DataPrinter { image = DownloadImage(dataControl.SAFKEY) ?? Image.FromFile(GetConfiguration("ImageBoucher")), x = 30, y = y +=30 });
 
                 AdminPayPlus.PrintService.Start(data);

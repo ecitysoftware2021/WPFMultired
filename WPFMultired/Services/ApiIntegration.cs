@@ -490,6 +490,10 @@ namespace WPFMultired.Services
 
                             return new Response { Data = transaction };
                         }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
                     }
                 }
             }

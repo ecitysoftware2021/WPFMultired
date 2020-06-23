@@ -74,7 +74,7 @@ namespace WPFMultired.UserControls
                     Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
                 };
 
-                TimerService.Start(45000);
+                TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationView")));
             }
             catch (Exception ex)
             {

@@ -136,11 +136,12 @@ namespace WPFMultired.UserControls
                             readerBarCode.Stop();
                             Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
                         }
-                        else
+                        else 
                         {
                             Utilities.CloseModal();
-                            Utilities.ShowModal(MessageResource.ErrorCoincidences, EModalType.Error);
+                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
                             viewModel.Value1 = string.Empty;
+
                             //Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
@@ -150,6 +151,7 @@ namespace WPFMultired.UserControls
                         Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
                     }
                 });
+                PassBoxIdentification.Password = string.Empty;
                 Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
             }
             catch (Exception ex)
