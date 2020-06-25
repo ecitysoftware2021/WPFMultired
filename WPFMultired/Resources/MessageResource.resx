@@ -148,7 +148,7 @@
     <value>Señor usuario estamos Finalizando la transacción. Espere un momento.</value>
   </data>
   <data name="IncompleteMony" xml:space="preserve">
-    <value>No se entregó completamente el dinero, el dinero restante se abonára a la factura</value>
+    <value>No hemos podido darle su cambio completo. El dinero restante se abonará a su próxima factura.</value>
   </data>
   <data name="InformationError" xml:space="preserve">
     <value>El error se presentó al inicio del cajero</value>

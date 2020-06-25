@@ -286,7 +286,7 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se entregó completamente el dinero, el dinero restante se abonára a la factura.
+        ///   Busca una cadena traducida similar a No hemos podido darle su cambio completo. El dinero restante se abonará a su próxima factura..
         /// </summary>
         internal static string IncompleteMony {
             get {
