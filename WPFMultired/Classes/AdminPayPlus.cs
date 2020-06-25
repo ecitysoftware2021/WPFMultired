@@ -571,11 +571,12 @@ namespace WPFMultired.Classes
                             {
                                 AMOUNT = transaction.Amount,
                                 TRANSACTION_ID = data.ID,
-                                REFERENCE = string.Concat("Matricula: ", transaction.reference ?? string.Empty),
-                                OBSERVATION = string.Concat("Numero de recuperacion: ", transaction.reference),
+                                TRANSACTION_PRODUCT_ID = 1,
+                                DESCRIPTION = string.Concat("Matricula: ", transaction.reference ?? string.Empty),
+                                EXTRA_DATA = string.Concat("Numero de recuperacion: ", transaction.reference),
                                 TRANSACTION_DESCRIPTION_ID = 0,
                                 STATE = true
-                            });
+                            }) ;
 
                             if (data != null)
                             {
