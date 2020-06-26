@@ -343,6 +343,7 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csp
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe.config
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.pdb
@@ -368,7 +369,6 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQL
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.xml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
-C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.g.cs
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.g.cs
@@ -420,4 +420,3 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csp
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
