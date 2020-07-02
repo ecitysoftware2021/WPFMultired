@@ -141,7 +141,15 @@ namespace WPFMultired.UserControls
                                 {
                                     this.paymentViewModel.ImgCambio = Visibility.Visible;
 
-                                    ReturnMoney(paymentViewModel.ValorSobrante, true);
+                                    if (paymentViewModel.ValorSobrante >= 100)
+                                    {
+                                        ReturnMoney(paymentViewModel.ValorSobrante, true);
+                                    }
+                                    else
+                                    {
+                                        Utilities.ShowModal("No se puede devolver el valor restante, se abonar el excedente al siguiente pago.", EModalType.Error);
+                                        SavePay();
+                                    }
                                 }
                                 else
                                 {
