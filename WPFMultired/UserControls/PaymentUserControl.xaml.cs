@@ -147,7 +147,7 @@ namespace WPFMultired.UserControls
                                     }
                                     else
                                     {
-                                        Utilities.ShowModal("No se puede devolver el valor restante, se abonar el excedente al siguiente pago.", EModalType.Error);
+                                        Utilities.ShowModal("No se puede devolver el valor restante, se abonará el excedente al siguiente pago.", EModalType.Error);
                                         SavePay();
                                     }
                                 }
