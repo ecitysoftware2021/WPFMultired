@@ -701,11 +701,11 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                   // var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
-                    //if (result != null)
-                   // {
-                        return (PaypadOperationControl)response.Data;
-                   // }
+                    var result = await api.CallApi("SaveUpdateAdminOperation", dataProcess);
+                    if (result != null)
+                    {
+                        return (PaypadOperationControl)dataProcess;
+                    }
                 }
             }
             catch (Exception ex)

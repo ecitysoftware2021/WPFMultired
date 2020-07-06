@@ -855,7 +855,8 @@ namespace WPFMultired.Services
                             PaypadOperationControl result = new PaypadOperationControl()
                             {
                                 DATALIST = new List<List>(),
-                                TYPE = typeAdministrator
+                                TYPE = typeAdministrator,
+                                ID = 0
                             };
                             foreach (var denomination in response.LISTAREGISTROS.LIST)
                             {
@@ -863,7 +864,7 @@ namespace WPFMultired.Services
                                 { 
                                     AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)),
                                     AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
-                                    VALUE = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US")),
+                                    VALUE = Decimal.ToInt32(decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"))),
                                     DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
                                     TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) + 
                                     int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) * 
@@ -875,6 +876,9 @@ namespace WPFMultired.Services
                                     : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 2 ? (int)ETypeDevice.DP 
                                     : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 3 ? (int)ETypeDevice.MA
                                     : (int)ETypeDevice.MD,
+                                    ID = 0,
+                                    CURRENCY_DENOMINATION_ID = 0,
+                                    DEVICE_PAYPAD_ID = 0
                                 });
 
                                 result.TOTAL_NEW += int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) *

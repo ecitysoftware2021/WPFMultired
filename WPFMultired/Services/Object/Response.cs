@@ -141,7 +141,7 @@ namespace WPFMultired.Services.Object
 
         private string _IMAGE;
 
-        private decimal? _VALUE;
+        private int? _VALUE;
 
         public int? CURRENCY_DENOMINATION_ID { get; set; }
 
@@ -196,7 +196,7 @@ namespace WPFMultired.Services.Object
             }
         }
 
-        public decimal? VALUE
+        public int? VALUE
         {
             get { return _VALUE; }
             set
