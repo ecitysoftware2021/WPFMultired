@@ -43,7 +43,7 @@
                 <TextBlock x:Name="LblTittle" 
                            Text="{Binding Tittle}"
                            HorizontalAlignment="Center"
-                           Margin="0,20,0,0" 
+                           Margin="0,30,0,0" 
                            FontSize="48" 
                            Width="500"
                            FontFamily="Myriad Pro"
