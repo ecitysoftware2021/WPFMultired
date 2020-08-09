@@ -258,6 +258,41 @@ namespace WPFMultired.ViewModel
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "PaymentViewModel", ex);
             }
         }
+
+        public void VerificRx(string data)
+        {
+            try
+            {
+                string[] values = data.Replace("!", "").Split(':')[1].Split(';');
+                foreach (var value in values)
+                {
+                    int denomination = int.Parse(value.Split('-')[0]);
+                    int quantity = int.Parse(value.Split('-')[1]);
+                    string code = denomination < 1000 ? "MD" : "DP";
+
+                    DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination && d.Code == "DP").FirstOrDefault();
+
+
+                    if (denominationMoney != null && quantity < denominationMoney.Quantity)
+                    {
+                        this.Denominations.Add(new DenominationMoney
+                        {
+                            Denominacion = denomination,
+                            Quantity = denominationMoney.Quantity - quantity,
+                            Total = denomination * (denominationMoney.Quantity - quantity),
+                            Code = code,
+                            Rx = 1
+                        });
+
+                        denominationMoney.Quantity = quantity;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "PaymentViewModel", ex);
+            }
+        }
         #endregion
     }
 }

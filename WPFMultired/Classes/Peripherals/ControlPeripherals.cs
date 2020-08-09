@@ -55,6 +55,8 @@ namespace WPFMultired.Classes
 
         public Action<string> callbackLog;//Calback de error
 
+        public Action<string> callbackResutOut;//Calback de error
+
         public Action<string> callbackMessage;//Calback de mensaje
 
         public Action<bool> callbackToken;//Calback de mensaje
@@ -690,6 +692,7 @@ namespace WPFMultired.Classes
                     {
                         if (typeDispend == 0)
                         {
+                            callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
                             callbackTotalOut?.Invoke(deliveryValue);
                         }
                     }
@@ -698,6 +701,7 @@ namespace WPFMultired.Classes
                 {
                     if (typeDispend == 0)
                     {
+                        callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
                         callbackOut?.Invoke(deliveryValue);
                     }
                 }

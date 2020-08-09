@@ -22,6 +22,8 @@ namespace WPFMultired.Models
 
         private string _Code;
 
+        public int Rx { get; set; }
+
         #endregion
 
         #region Properties

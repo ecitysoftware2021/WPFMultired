@@ -230,6 +230,11 @@ namespace WPFMultired.UserControls
                     AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                 };
 
+                AdminPayPlus.ControlPeripherals.callbackResutOut = outLog =>
+                {
+                    paymentViewModel.VerificRx(outLog);
+                };
+
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
