@@ -686,13 +686,17 @@ namespace WPFMultired.Classes
                     typeDispend--;
                 }
 
+                if (isBX == 1)
+                {
+                    callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
+                }
+
                 if (!stateError)
                 {
                     if (dispenserValue == deliveryValue)
                     {
                         if (typeDispend == 0)
                         {
-                            callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
                             callbackTotalOut?.Invoke(deliveryValue);
                         }
                     }
@@ -701,7 +705,6 @@ namespace WPFMultired.Classes
                 {
                     if (typeDispend == 0)
                     {
-                        callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
                         callbackOut?.Invoke(deliveryValue);
                     }
                 }
