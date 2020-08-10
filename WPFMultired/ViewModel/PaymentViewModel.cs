@@ -272,18 +272,16 @@ namespace WPFMultired.ViewModel
 
                     DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination && d.Code == "DP").FirstOrDefault();
 
-                    if (denominationMoney != null && quantity < denominationMoney.Quantity)
+                    if (denominationMoney != null && quantity > denominationMoney.Quantity)
                     {
                         this.Denominations.Add(new DenominationMoney
                         {
                             Denominacion = denomination,
-                            Quantity = denominationMoney.Quantity - quantity,
-                            Total = denomination * (denominationMoney.Quantity - quantity),
+                            Quantity = quantity - denominationMoney.Quantity,
+                            Total = denomination * (quantity - denominationMoney.Quantity),
                             Code = code,
                             Rx = 1
                         });
-
-                        denominationMoney.Quantity = quantity;
                     }
                 }
             }

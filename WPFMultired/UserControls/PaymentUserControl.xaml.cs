@@ -226,7 +226,7 @@ namespace WPFMultired.UserControls
 
                 AdminPayPlus.ControlPeripherals.callbackLog = log =>
                 {
-                    paymentViewModel.SplitDenomination(log);
+                    paymentViewModel.VerificRx(log);
                     AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                 };
 
@@ -238,6 +238,7 @@ namespace WPFMultired.UserControls
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
+                    AdminPayPlus.ControlPeripherals.callbackResutOut = null;
                     if (state)
                     {
                         paymentViewModel.ValorDispensado = valueOut;
