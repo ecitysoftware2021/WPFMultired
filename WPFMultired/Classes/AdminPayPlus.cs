@@ -807,7 +807,7 @@ namespace WPFMultired.Classes
                 Task.Run(async () =>
                 {
                     var transactions = SqliteDataAccess.GetTransactionNotific();
-                    if (transactions.Count > 0)
+                    if (transactions!= null && transactions.Count > 0)
                     {
                         foreach (var transaction in transactions)
                         {
@@ -821,20 +821,23 @@ namespace WPFMultired.Classes
                     }
 
                     var detailTeansactions2 = SqliteDataAccess.GetDetailsTransaction();
-                    foreach (var detail in detailTeansactions2)
+                    if (detailTeansactions2 != null && detailTeansactions2.Count > 0)
                     {
-                        var response = await api.CallApi("SaveTransactionDetail", new RequestTransactionDetails
+                        foreach (var detail in detailTeansactions2)
                         {
-                            Code = detail.CODE,
-                            Denomination = Convert.ToInt32(detail.DENOMINATION),
-                            Operation = (int)detail.OPERATION,
-                            Quantity = (int)detail.QUANTITY,
-                            TransactionId = (int)detail.TRANSACTION_ID,
-                            Description = detail.DESCRIPTION
-                        });
+                            var response = await api.CallApi("SaveTransactionDetail", new RequestTransactionDetails
+                            {
+                                Code = detail.CODE,
+                                Denomination = Convert.ToInt32(detail.DENOMINATION),
+                                Operation = (int)detail.OPERATION,
+                                Quantity = (int)detail.QUANTITY,
+                                TransactionId = (int)detail.TRANSACTION_ID,
+                                Description = detail.DESCRIPTION
+                            });
 
-                        detail.STATE = 1;
-                        SqliteDataAccess.UpdateTransactionDetailState(detail);
+                            detail.STATE = 1;
+                            SqliteDataAccess.UpdateTransactionDetailState(detail);
+                        }
                     }
                 });
             }

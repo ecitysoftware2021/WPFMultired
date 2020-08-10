@@ -225,7 +225,6 @@ D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserContro
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.g.cs
-D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PayerUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ReturnMonyUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ConsultUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.g.cs
@@ -235,11 +234,9 @@ D:\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.c
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\MasterWindow.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalWindow.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\App.g.cs
-D:\GitHub\WPFMultired\WPFMultired\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired_MarkupCompile.cache
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired_MarkupCompile.lref
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\App.baml
-D:\GitHub\WPFMultired\WPFMultired\obj\Debug\Themes\Generic.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\LoginAdministratorUserControl.baml
@@ -248,7 +245,6 @@ D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserContro
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.baml
-D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PayerUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ReturnMonyUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ConsultUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.baml
@@ -421,3 +417,9 @@ C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csp
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\DLLO\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
+D:\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
+D:\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
+D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl.g.cs
+D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.g.cs
+D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl.baml
+D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.baml

@@ -232,7 +232,7 @@ namespace WPFMultired.UserControls
 
                 AdminPayPlus.ControlPeripherals.callbackResutOut = outLog =>
                 {
-                    paymentViewModel.VerificRx(outLog);
+                    paymentViewModel.SplitDenomination(outLog);
                 };
 
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
