@@ -63,7 +63,12 @@ namespace WPFMultired.UserControls
                     VisibleInput = System.Windows.Visibility.Hidden
                 };
 
-                viewModel.LoadListDocuments(transaction.CodeCompany);
+                Task.Run(() => {
+                    viewModel.LoadListDocuments(transaction.CodeCompany);
+                    Utilities.CloseModal();
+                });
+
+                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
 
                 cmb_type_id.SelectedIndex = 0;
 

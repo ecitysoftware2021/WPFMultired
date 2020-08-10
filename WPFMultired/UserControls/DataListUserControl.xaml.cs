@@ -159,6 +159,10 @@ namespace WPFMultired.UserControls
                     });
                     Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
                 }
+                else
+                {
+
+                }
             }
             catch (Exception ex)
             {
