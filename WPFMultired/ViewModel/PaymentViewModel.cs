@@ -241,15 +241,35 @@ namespace WPFMultired.ViewModel
                     int denomination = int.Parse(value.Split('-')[0]);
                     int quantity = int.Parse(value.Split('-')[1]);
                     string code = denomination < 1000 ? "MD" : "DP";
+
+
                     if (quantity > 0)
                     {
-                        this.Denominations.Add(new DenominationMoney
+                        DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination).FirstOrDefault();
+                        if (denominationMoney == null)
                         {
-                            Denominacion = denomination,
-                            Quantity = quantity,
-                            Total = denomination * quantity,
-                            Code = code
-                        });
+                            this.Denominations.Add(new DenominationMoney
+                            {
+                                Denominacion = denomination,
+                                Quantity = quantity,
+                                Total = denomination * quantity,
+                                Code = code
+                            });
+                        }
+                        else
+                        {
+                            if (quantity > denominationMoney.Quantity && denominationMoney.Code == "DP")
+                            {
+                                this.Denominations.Add(new DenominationMoney
+                                {
+                                    Denominacion = denomination,
+                                    Quantity = quantity - denominationMoney.Quantity,
+                                    Total = denomination * (quantity - denominationMoney.Quantity),
+                                    Code = code,
+                                    Rx = 1
+                                });
+                            }
+                        }
                     }
                 }
             }
@@ -259,37 +279,6 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        public void VerificRx(string data)
-        {
-            try
-            {
-                string[] values = data.Replace("!", "").Split(':')[1].Split(';');
-                foreach (var value in values)
-                {
-                    int denomination = int.Parse(value.Split('-')[0]);
-                    int quantity = int.Parse(value.Split('-')[1]);
-                    string code = denomination < 1000 ? "MD" : "DP";
-
-                    DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination && d.Code == "DP").FirstOrDefault();
-
-                    if (denominationMoney != null && quantity > denominationMoney.Quantity)
-                    {
-                        this.Denominations.Add(new DenominationMoney
-                        {
-                            Denominacion = denomination,
-                            Quantity = quantity - denominationMoney.Quantity,
-                            Total = denomination * (quantity - denominationMoney.Quantity),
-                            Code = code,
-                            Rx = 1
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "PaymentViewModel", ex);
-            }
-        }
         #endregion
     }
 }

@@ -226,7 +226,7 @@ namespace WPFMultired.UserControls
 
                 AdminPayPlus.ControlPeripherals.callbackLog = log =>
                 {
-                    paymentViewModel.VerificRx(log);
+                    paymentViewModel.SplitDenomination(log);
                     AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                 };
 
