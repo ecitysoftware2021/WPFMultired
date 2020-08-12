@@ -1027,7 +1027,7 @@ namespace WPFMultired.Services
                                     I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
                                     I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
-                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1 ? "5":denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
                                 };
                                 index++;
                             }
@@ -1191,7 +1191,7 @@ namespace WPFMultired.Services
                                     I_DENOMI = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
                                     I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
-                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript)
                                 };
                                 index++;
                             }
