@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Collections.Generic;
 using WPFMultired.Resources;
 using System.Threading;
+using System.Globalization;
 
 namespace WPFMultired.UserControls
 {
@@ -143,7 +144,13 @@ namespace WPFMultired.UserControls
 
                                     if (paymentViewModel.ValorSobrante >= 100)
                                     {
-                                        ReturnMoney(paymentViewModel.ValorSobrante, true);
+                                        var decimas = paymentViewModel.ValorSobrante % 100;
+                                        if (decimas > 0)
+                                        {
+                                            Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
+                                        }
+
+                                        ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
                                     }
                                     else
                                     {

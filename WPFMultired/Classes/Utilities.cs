@@ -635,6 +635,8 @@ namespace WPFMultired.Classes
             return null;
         }
 
+        
+
         public static void OpenKeyboard(bool keyBoard_Numeric,object sender, object thisView, int x = 0, int y = 0)
         {
             try
