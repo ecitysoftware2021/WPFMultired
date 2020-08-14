@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -88,6 +89,12 @@ namespace WPFMultired.UserControls
             {
                 readerBarCode.callbackOut = data =>
                 {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        WPKeyboard.Keyboard.CloseKeyboard(this);
+                    });
+                    GC.Collect();
+
                     transaction.reference = data;
                     transaction.TypeDocument = "0";
                     Consult();
@@ -133,7 +140,6 @@ namespace WPFMultired.UserControls
                     try
                     {
                         var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
-                        Thread.Sleep(3000);
                         if (response.Data != null)
                         {
                             transaction = (Transaction)response.Data;

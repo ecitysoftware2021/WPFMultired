@@ -307,7 +307,7 @@ namespace WPFMultired.UserControls
                         {
                             this.transaction.Amount = paymentViewModel.ValorIngresado;
                             var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
-                            Thread.Sleep(3000);
+
                             Utilities.CloseModal();
                             if (response != null)
                             {

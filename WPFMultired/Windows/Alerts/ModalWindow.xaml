@@ -37,13 +37,13 @@
                        HorizontalAlignment="Center" 
                        Width="180" 
                        Height="180"
-                       Margin="20,80,0,0"
+                       Margin="20,120,0,0"
                        Visibility="Hidden"/>
 
                 <TextBlock x:Name="LblTittle" 
                            Text="{Binding Tittle}"
                            HorizontalAlignment="Center"
-                           Margin="0,30,0,0" 
+                           Margin="0,50,0,0" 
                            FontSize="48" 
                            Width="500"
                            FontFamily="Myriad Pro"

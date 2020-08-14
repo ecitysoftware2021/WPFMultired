@@ -57,11 +57,11 @@ namespace WPFMultired.UserControls
 
                     AdminPayPlus.UpdateTransaction(this.transaction);
 
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
 
                     Utilities.PrintVoucher(this.transaction);
 
-                    Thread.Sleep(6000);
+                    Thread.Sleep(4000);
 
                     Dispatcher.BeginInvoke((Action)delegate
                     {

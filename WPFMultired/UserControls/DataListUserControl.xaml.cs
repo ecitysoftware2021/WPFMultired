@@ -141,8 +141,6 @@ namespace WPFMultired.UserControls
                     {
                         await AdminPayPlus.SaveTransactions(this.transaction, false);
 
-                        Thread.Sleep(3000);
-
                         Utilities.CloseModal();
 
 
