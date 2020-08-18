@@ -124,7 +124,7 @@ namespace WPFMultired.Services
                     return null;
                 }
 
-                var result = await response.Content.ReadAsStringAsync();
+                //var result = await response.Content.ReadAsStringAsync();
                 var responseApi = JsonConvert.DeserializeObject<ResponseApi>(result);
 
                 if (responseApi.CodeError == 200)
