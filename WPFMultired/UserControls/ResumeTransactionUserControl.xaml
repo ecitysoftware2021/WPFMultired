@@ -126,7 +126,7 @@
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
-                                    Margin="0,0,30,0"
+                                    Margin="0,0,10,0"
                                     Width="140"
                                     Foreground="#FF104B6D"
                                     VerticalAlignment="Center"

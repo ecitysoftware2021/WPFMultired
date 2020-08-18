@@ -110,7 +110,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock 
                                     Text="{Binding Denominacion, StringFormat={}{0:C0}}"
-                                    FontSize="45"
+                                    FontSize="40"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
@@ -123,7 +123,7 @@
                             
                             <TextBlock 
                                     Text="{Binding Quantity}"
-                                    FontSize="45"
+                                    FontSize="40"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
@@ -137,12 +137,12 @@
                             
                             <TextBlock 
                                     Text="{Binding Total, StringFormat={}{0:C0}}"
-                                    FontSize="45"
+                                    FontSize="40"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
                                     TextWrapping="Wrap"
                                     Margin="0,0,30,0"
-                                    Width="200"
+                                    Width="230"
                                     Foreground="#FF104B6D"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
