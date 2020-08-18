@@ -136,7 +136,7 @@
                                     Grid.Column="1" />
                             
                             <TextBlock 
-                                    Text="$20.000.000"
+                                    Text="{Binding Total, StringFormat={}{0:C0}}"
                                     FontSize="40"
                                     FontFamily="Arial"
                                     TextAlignment="Right"
