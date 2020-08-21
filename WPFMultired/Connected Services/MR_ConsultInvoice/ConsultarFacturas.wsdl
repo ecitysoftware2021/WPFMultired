@@ -21,6 +21,7 @@
           <xs:element name="I_LECTURA" type="xs:string" />
           <xs:element name="I_TIPODOCUMENTO" type="xs:string" />
           <xs:element name="I_REFERENCIA" type="xs:string" />
+          <xs:element name="I_TIPOTRANSACCION" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="mtrconfaccResponse">
@@ -62,11 +63,11 @@
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrconfaccResponse">
-    <part name="parameters" element="tns:mtrconfaccResponse" />
-  </message>
   <message name="mtrconfacc">
     <part name="parameters" element="tns:mtrconfacc" />
+  </message>
+  <message name="mtrconfaccResponse">
+    <part name="parameters" element="tns:mtrconfaccResponse" />
   </message>
   <portType name="ConsultarFacturasServices">
     <operation name="mtrconfacc">

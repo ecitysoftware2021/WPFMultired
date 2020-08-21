@@ -1105,6 +1105,7 @@ namespace WPFMultired.Services
                             I_LECTURA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument == "0" ? "1" : "0"), keyEncript),
                             I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument), keyEncript),
                             I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
+                            I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
                         };
 
                         var response = client.mtrconfacc(request);
