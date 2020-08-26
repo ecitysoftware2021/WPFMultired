@@ -873,9 +873,9 @@ namespace WPFMultired.Services
                                     CODE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2),
                                     IMAGE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2) == "B" ? ImagesUrlResource.ImgBill : ImagesUrlResource.ImgCoin,
                                     DEVICE_TYPE_ID = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 1 ? (int)ETypeDevice.AP 
-                                    : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 2 ? (int)ETypeDevice.DP 
+                                    : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 4 ? (int)ETypeDevice.MD 
                                     : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 3 ? (int)ETypeDevice.MA
-                                    : (int)ETypeDevice.MD,
+                                    : (int)ETypeDevice.DP,
                                     ID = 0,
                                     CURRENCY_DENOMINATION_ID = 0,
                                     DEVICE_PAYPAD_ID = 0
