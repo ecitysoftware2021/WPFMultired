@@ -58,7 +58,8 @@ namespace WPFMultired.Classes
         Certificates,
         PrintFile,
         DataList,
-        ResumeTransaction
+        ResumeTransaction,
+        Detail
     }
 
     public enum ETransactionState

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -97,12 +98,17 @@ namespace WPFMultired.UserControls
             {
                 if (((Grid)sender).Tag != null)
                 {
-                    if (AdminPayPlus.DataPayPlus.ListCompanies.Count == 1)
-                    {
-                        Utilities.navigator.Navigate(UserControlView.Consult, true, AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault().Item1, ((Grid)sender).Tag);
-                    } else if(AdminPayPlus.DataPayPlus.ListCompanies.Count > 1) {
-                        Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
-                    }
+                    //if (AdminPayPlus.DataPayPlus.ListCompanies.Count == 1)
+                    //{
+                    //TODO: poner en el congig 188
+                    var company = AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault(x => x.Item1 == "00188").Item1;
+
+                        Utilities.navigator.Navigate(UserControlView.Consult, true, company, ((Grid)sender).Tag);
+                    //}
+                    //else
+                    //if(AdminPayPlus.DataPayPlus.ListCompanies.Count > 1) {
+                    //    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
+                    //}
                 }
             }
             catch (Exception ex)

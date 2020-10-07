@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -296,6 +297,7 @@ namespace WPFMultired.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ViewList)));
             }
         }
+       
 
         private List<ItemList> _dataList;
 
@@ -332,6 +334,8 @@ namespace WPFMultired.ViewModel
                     {
                         Item1 = product.Description,
                         Item2 = product.Code,
+                        Item3 = product.img,
+                        Item4 = product.AmountCommission,
                         Item5 = product.Amount,
                         Index = ((List<Product>)data).IndexOf(product),
                         Data = product,

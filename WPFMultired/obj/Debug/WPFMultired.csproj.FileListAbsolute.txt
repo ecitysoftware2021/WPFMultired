@@ -423,3 +423,6 @@ D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.g.cs
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl.baml
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.baml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailUserControl.g.cs
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailUserControl.baml

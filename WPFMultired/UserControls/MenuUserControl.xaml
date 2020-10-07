@@ -65,16 +65,22 @@
                             VerticalAlignment="Top"
                             Background="Transparent"
                             Margin="0,0,0,0"
-                            Width="550"
-                            Height="450"
+                            Height="180"
+                              Width="700"
                             Tag="{Binding Item3}"
                             TouchDown="Grid_list_TouchDown">
 
-                            <Image Source="{Binding ImageSourse}"
-                                   HorizontalAlignment="Center" 
+                            <Image Source="/Images/Resources/00011.png"
+                                   HorizontalAlignment="Left" 
                                    VerticalAlignment="Center" 
-                                   Height="450" 
+                                   Height="50" 
                                    Stretch="Uniform" />
+                            <TextBlock Text="{Binding Item1}"
+                                       FontSize="50"
+                                       Margin="100,0,0,0"
+                                       TextAlignment="Left"
+                                        HorizontalAlignment="Left"   
+                                   VerticalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

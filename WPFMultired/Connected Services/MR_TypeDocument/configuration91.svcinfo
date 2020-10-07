@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Pay2PFYcQzlflFExjwwgOJGk4+g=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Z67LXPMHddOB2nbgv9LI9Ci0djv+9FxGO3ClCboeS0c=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="ConsultarTiposDeDocumentoServicesPortBinding">
+    <bindingConfiguration bindingType="basicHttpBinding" name="TiposDocumentosServicesPortBinding">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ConsultarTiposDeDocumentoServicesPortBinding</serializedValue>
+          <serializedValue>TiposDocumentosServicesPortBinding</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -94,7 +94,7 @@
           <serializedValue>TransportSelected</serializedValue>
         </property>
         <property path="/security/transport/extendedProtectionPolicy/customServiceNames" isComplexType="true" isExplicitlyDefined="false" clrType="System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>(Colección)</serializedValue>
+          <serializedValue>(Collection)</serializedValue>
         </property>
         <property path="/security/transport/realm" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="ConsultarTiposDeDocumentoServicesPort" contract="MR_TypeDocument.ConsultarTiposDeDocumentoServices" bindingType="basicHttpBinding" address="http://181.57.139.181:10035/web/services/consultarTiposDeDocumentoService/consultarTiposDeDocumento" bindingConfiguration="ConsultarTiposDeDocumentoServicesPortBinding">
+    <endpoint name="TiposDocumentosServicesPort" contract="MR_TypeDocument.TiposDocumentosServices" bindingType="basicHttpBinding" address="http://181.57.139.181:10035/web/services/TiposDocumentosService/TiposDocumentos" bindingConfiguration="TiposDocumentosServicesPortBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://181.57.139.181:10035/web/services/consultarTiposDeDocumentoService/consultarTiposDeDocumento</serializedValue>
+          <serializedValue>http://181.57.139.181:10035/web/services/TiposDocumentosService/TiposDocumentos</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -124,10 +124,10 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ConsultarTiposDeDocumentoServicesPortBinding</serializedValue>
+          <serializedValue>TiposDocumentosServicesPortBinding</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>MR_TypeDocument.ConsultarTiposDeDocumentoServices</serializedValue>
+          <serializedValue>MR_TypeDocument.TiposDocumentosServices</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ConsultarTiposDeDocumentoServicesPort</serializedValue>
+          <serializedValue>TiposDocumentosServicesPort</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

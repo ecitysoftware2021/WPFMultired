@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://consultarfacturas.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ConsultarFacturas" targetNamespace="http://consultarfacturas.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://consultasred.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ConsultasRed" targetNamespace="http://consultasred.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://consultarfacturas.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="mtrconfacc" type="tns:mtrconfacc" />
-      <xs:element name="mtrconfaccResponse" type="tns:mtrconfaccResponse" />
-      <xs:complexType name="mtrconfacc">
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://consultasred.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrhalleyc" type="tns:mtrhalleyc" />
+      <xs:element name="mtrhalleycResponse" type="tns:mtrhalleycResponse" />
+      <xs:complexType name="mtrhalleyc">
         <xs:sequence>
-          <xs:element name="arg0" type="tns:mtrconfaccInput" />
+          <xs:element name="arg0" type="tns:mtrhalleycInput" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="mtrconfaccInput">
+      <xs:complexType name="mtrhalleycInput">
         <xs:sequence>
           <xs:element name="I_TERMINAL" type="xs:string" />
           <xs:element name="I_DIRECCIONIP" type="xs:string" />
@@ -24,12 +24,12 @@
           <xs:element name="I_TIPOTRANSACCION" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="mtrconfaccResponse">
+      <xs:complexType name="mtrhalleycResponse">
         <xs:sequence>
-          <xs:element name="return" type="tns:mtrconfaccResult" />
+          <xs:element name="return" type="tns:mtrhalleycResult" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="mtrconfaccResult">
+      <xs:complexType name="mtrhalleycResult">
         <xs:sequence>
           <xs:element name="O_CODIGOERROR" type="xs:string" />
           <xs:element name="O_MENSAJEERROR" type="xs:string" />
@@ -59,25 +59,26 @@
           <xs:element name="O_VLRCOM" type="xs:string" />
           <xs:element name="O_MONMIN" type="xs:string" />
           <xs:element name="O_MONMAX" type="xs:string" />
+          <xs:element name="O_DATADI" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrconfacc">
-    <part name="parameters" element="tns:mtrconfacc" />
+  <message name="mtrhalleycResponse">
+    <part name="parameters" element="tns:mtrhalleycResponse" />
   </message>
-  <message name="mtrconfaccResponse">
-    <part name="parameters" element="tns:mtrconfaccResponse" />
+  <message name="mtrhalleyc">
+    <part name="parameters" element="tns:mtrhalleyc" />
   </message>
-  <portType name="ConsultarFacturasServices">
-    <operation name="mtrconfacc">
-      <input wsam:Action="http://consultarfacturas.wsbeans.iseries/ConsultarFacturasServices/mtrconfaccRequest" message="tns:mtrconfacc" />
-      <output wsam:Action="http://consultarfacturas.wsbeans.iseries/ConsultarFacturasServices/mtrconfaccResponse" message="tns:mtrconfaccResponse" />
+  <portType name="ConsultasRedServices">
+    <operation name="mtrhalleyc">
+      <input wsam:Action="http://consultasred.wsbeans.iseries/ConsultasRedServices/mtrhalleycRequest" message="tns:mtrhalleyc" />
+      <output wsam:Action="http://consultasred.wsbeans.iseries/ConsultasRedServices/mtrhalleycResponse" message="tns:mtrhalleycResponse" />
     </operation>
   </portType>
-  <binding name="ConsultarFacturasServicesPortBinding" type="tns:ConsultarFacturasServices">
+  <binding name="ConsultasRedServicesPortBinding" type="tns:ConsultasRedServices">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="mtrconfacc">
+    <operation name="mtrhalleyc">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -87,9 +88,9 @@
       </output>
     </operation>
   </binding>
-  <service name="ConsultarFacturas">
-    <port name="ConsultarFacturasServicesPort" binding="tns:ConsultarFacturasServicesPortBinding">
-      <soap:address location="http://181.57.139.181:10035/web/services/ConsultarFacturasService/ConsultarFacturas" />
+  <service name="ConsultasRed">
+    <port name="ConsultasRedServicesPort" binding="tns:ConsultasRedServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/ConsultasRedService/ConsultasRed" />
     </port>
   </service>
 </definitions>

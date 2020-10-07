@@ -62,9 +62,9 @@ namespace WPFMultired.Models
             }
         }
 
-        private string _item4;
+        private decimal _item4;
 
-        public string Item4
+        public decimal Item4
         {
             get
             {

@@ -232,6 +232,7 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeDocument.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ValueModel.cs" />
     <Compile Include="Resources\ConstantsResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -262,6 +263,9 @@
     </Compile>
     <Compile Include="UserControls\DetailAcountUserControl.xaml.cs">
       <DependentUpon>DetailAcountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DetailUserControl.xaml.cs">
+      <DependentUpon>DetailUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MenuCompaniesUserControl.xaml.cs">
       <DependentUpon>MenuCompaniesUserControl.xaml</DependentUpon>
@@ -372,11 +376,11 @@
     <None Include="Connected Services\MR_CodeQR\WPFMultired.MR_CodeQR.mtrctlaqrcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_ConsultInvoice\ConsultarFacturas.wsdl" />
-    <None Include="Connected Services\MR_ConsultInvoice\WPFMultired.MR_ConsultInvoice.mtrconfaccResponse.datasource">
+    <None Include="Connected Services\MR_ConsultInvoice\ConsultasRed.wsdl" />
+    <None Include="Connected Services\MR_ConsultInvoice\WPFMultired.MR_ConsultInvoice.mtrhalleycResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_ConsultInvoice\WPFMultired.MR_ConsultInvoice.mtrconfaccResult.datasource">
+    <None Include="Connected Services\MR_ConsultInvoice\WPFMultired.MR_ConsultInvoice.mtrhalleycResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ControllCash\ASMController.wsdl" />
@@ -435,18 +439,18 @@
     <None Include="Connected Services\MR_ReportTransaction\WPFMultired.MR_ReportTransaction.mtrprotrnResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_TypeDocument\consultarTiposDeDocumento.wsdl" />
-    <None Include="Connected Services\MR_TypeDocument\WPFMultired.MR_TypeDocument.mtrtipdoccResponse.datasource">
+    <None Include="Connected Services\MR_TypeDocument\TiposDocumentos.wsdl" />
+    <None Include="Connected Services\MR_TypeDocument\WPFMultired.MR_TypeDocument.mtrdoctrncResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_TypeDocument\WPFMultired.MR_TypeDocument.mtrtipdoccResult.datasource">
+    <None Include="Connected Services\MR_TypeDocument\WPFMultired.MR_TypeDocument.mtrdoctrncResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_TypeTransaction\consultarTiposDeTransaccion.wsdl" />
-    <None Include="Connected Services\MR_TypeTransaction\WPFMultired.MR_TypeTransaction.mtrtiptrnResponse.datasource">
+    <None Include="Connected Services\MR_TypeTransaction\TiposTransacciones.wsdl" />
+    <None Include="Connected Services\MR_TypeTransaction\WPFMultired.MR_TypeTransaction.mtrtiptrncResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_TypeTransaction\WPFMultired.MR_TypeTransaction.mtrtiptrnResult.datasource">
+    <None Include="Connected Services\MR_TypeTransaction\WPFMultired.MR_TypeTransaction.mtrtiptrncResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ValidateAdminQR\QRValidateAdmin.wsdl" />
@@ -543,6 +547,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DetailAcountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DetailUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -898,6 +906,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Backgrounds\bg-alert-blanck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Resources\00011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\lupa.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\alert.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

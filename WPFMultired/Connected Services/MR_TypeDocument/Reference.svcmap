@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://181.57.139.181:10035/web/services/consultarTiposDeDocumentoService/consultarTiposDeDocumento?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://181.57.139.181:10035/web/services/TiposDocumentosService/TiposDocumentos?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="consultarTiposDeDocumento.wsdl" MetadataType="Wsdl" ID="348288cd-dd12-434b-91ca-aab2078dc65a" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/consultarTiposDeDocumentoService/consultarTiposDeDocumento?wsdl" />
+    <MetadataFile FileName="TiposDocumentos.wsdl" MetadataType="Wsdl" ID="c530a318-4878-487f-bb9d-937499bb1fe7" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/TiposDocumentosService/TiposDocumentos?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

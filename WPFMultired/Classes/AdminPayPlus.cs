@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -144,7 +145,8 @@ namespace WPFMultired.Classes
 
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 
-                    ValidatePeripherals();
+                    //ValidatePeripherals();
+                    callbackResult?.Invoke(true);
                 }
                 else
                 {

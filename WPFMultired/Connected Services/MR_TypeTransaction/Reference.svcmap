@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://181.57.139.181:10035/web/services/consultarTiposDeTransaccionService/consultarTiposDeTransaccion?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://181.57.139.181:10035/web/services/TiposTransaccionesService/TiposTransacciones?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="consultarTiposDeTransaccion.wsdl" MetadataType="Wsdl" ID="352a5058-62d3-4975-9367-1b232a188720" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/consultarTiposDeTransaccionService/consultarTiposDeTransaccion?wsdl" />
+    <MetadataFile FileName="TiposTransacciones.wsdl" MetadataType="Wsdl" ID="32917f9b-7b95-4c35-8359-3bd94f292e25" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/TiposTransaccionesService/TiposTransacciones?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

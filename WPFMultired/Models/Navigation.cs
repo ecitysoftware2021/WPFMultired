@@ -72,6 +72,9 @@ namespace WPFMultired.Models
                     case UserControlView.DataList:
                         View = new DataListUserControl((Transaction)data);
                         break;
+                    case UserControlView.Detail:
+                        View = new DetailUserControl((Transaction)data);
+                        break;
                     case UserControlView.ResumeTransaction:
                         View = new ResumeTransactionUserControl((Transaction)data);
                         break;
@@ -85,7 +88,7 @@ namespace WPFMultired.Models
                     TimerService.CallBackTimerOut = response =>
                     {
                         Application.Current.Dispatcher.Invoke((Action)delegate
-                        {
+                       {
                             WPKeyboard.Keyboard.CloseKeyboard(View);
                             View = new MainUserControl();
                         });

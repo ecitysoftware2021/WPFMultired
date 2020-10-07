@@ -65,7 +65,7 @@ namespace WPFMultired.UserControls
                 };
 
                 Task.Run(() => {
-                    viewModel.LoadListDocuments(transaction.CodeCompany);
+                    viewModel.LoadListDocuments(transaction);
                     Utilities.CloseModal();
                 });
 

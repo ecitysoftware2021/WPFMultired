@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://181.57.139.181:10035/web/services/ConsultarFacturasService/ConsultarFacturas?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://181.57.139.181:10035/web/services/ConsultasRedService/ConsultasRed?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ConsultarFacturas.wsdl" MetadataType="Wsdl" ID="7ce31804-1210-4b01-ad29-72c753e00a5d" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/ConsultarFacturasService/ConsultarFacturas?wsdl" />
+    <MetadataFile FileName="ConsultasRed.wsdl" MetadataType="Wsdl" ID="00d48295-dd0c-4ace-970e-a50f1f1869d8" SourceId="1" SourceUrl="http://181.57.139.181:10035/web/services/ConsultasRedService/ConsultasRed?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -125,7 +125,7 @@ namespace WPFMultired.Services
 
                     case ETypeService.Type_Document:
 
-                        return GetTypeDocument((string)data);
+                        return GetTypeDocument((Transaction)data);
 
                     case ETypeService.Products_Client:
 
@@ -251,35 +251,37 @@ namespace WPFMultired.Services
         {
             try
             {
-                ConsultarTiposDeTransaccionServicesClient client = new ConsultarTiposDeTransaccionServicesClient();
+                TiposTransaccionesServicesClient client = new TiposTransaccionesServicesClient();
 
-                using (var factory = new WebChannelFactory<ConsultarTiposDeTransaccionServicesChannel>())
+                using (var factory = new WebChannelFactory<TiposTransaccionesServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrtiptrnInput request = new mtrtiptrnInput
+                        mtrtiptrncInput request = new mtrtiptrncInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
+                            //I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp("SERRATO"), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
-                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript)
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript)
                         };
 
-                        var response = client.mtrtiptrn(request);
+                        var response = client.mtrtiptrnc(request);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
-                            response.O_LISTAREGISTROS.O_RTNCON > 0)
+                            response.LISTAREGISTROS.O_RTNCON > 0)
                         {
                             List<ItemList> transaction = new List<ItemList>();
-                            foreach (var item in response.O_LISTAREGISTROS.LIST)
+                            foreach (var item in response.LISTAREGISTROS.LIST)
                             {
-                                if (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2)) < 10)
-                                {
+                                //if (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2)) < 10)
+                                //{
                                     transaction.Add(new ItemList
                                     {
                                         Item1 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DSCTRN, keyDesencript), 2),
@@ -287,7 +289,7 @@ namespace WPFMultired.Services
                                         Item3 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2),
                                         ImageSourse = string.Concat(Utilities.GetConfiguration("ResourcesUrl"), ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2), ".png")
                                     });
-                                }
+                                //}
                             }
                             return new Response { Data = transaction };
                         }
@@ -344,7 +346,7 @@ namespace WPFMultired.Services
 
                                 var pathImage = string.Concat(Utilities.GetConfiguration("ResourcesUrl"),
                                                   ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_LOGO, keyDesencript), 2), ".png");
-                                if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), string.Concat("../../",pathImage))))
+                                if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), string.Concat("../../", pathImage))))
                                 {
                                     entity.ImageSourse = pathImage;
                                 }
@@ -372,31 +374,31 @@ namespace WPFMultired.Services
         /// #4 Método para buscar los tipos de documentos disponibles para esa institucion
         /// </summary>
         /// <returns></returns>
-        private Response GetTypeDocument(string codeEntity)
+        private Response GetTypeDocument(Transaction transaction)
         {
             try
             {
-                ConsultarTiposDeDocumentoServicesClient client = new ConsultarTiposDeDocumentoServicesClient();
+                TiposDocumentosServicesClient client = new TiposDocumentosServicesClient();
 
-                using (var factory = new WebChannelFactory<ConsultarTiposDeDocumentoServicesChannel>())
+                using (var factory = new WebChannelFactory<TiposDocumentosServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrtipdoccInput request = new mtrtipdoccInput
+                        mtrdoctrncInput request = new mtrdoctrncInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeEntity), keyEncript),
-                              
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
+                            I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
                         };
 
-                        var response = client.mtrtipdocc(request);
+                        var response = client.mtrdoctrnc(request);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -407,14 +409,16 @@ namespace WPFMultired.Services
                             {
                                 typeDocument.Add(new TypeDocument
                                 {
-                                    Key = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_CODTIP, keyDesencript), 2),
-                                    Value = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DESTIP, keyDesencript), 2),
+                                    Key = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPDOC, keyDesencript), 2),
+                                    Value = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DSCDOC, keyDesencript), 2),
                                     Type = 2,
                                 });
                             }
                             return new Response { Data = typeDocument };
                         }
                     }
+
+                    string a = Encryptor.Decrypt("Dsg4yqMdIsEEPagbylb81ymes//M9mCezr0jpfnTJCckp4w8jACB6Dmj37ezPJ8P", keyDesencript);
                 }
             }
             catch (Exception ex)
@@ -477,7 +481,7 @@ namespace WPFMultired.Services
                                 });
                             }
 
-                            transaction.payer = new PAYER 
+                            transaction.payer = new PAYER
                             {
                                 NAME = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRECLIENTE, keyDesencript), 2),
                                 IDENTIFICATION = transaction.reference
@@ -540,7 +544,7 @@ namespace WPFMultired.Services
                         };
 
                         var response = client.mtrgenotp(request);
-                        
+
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -662,7 +666,7 @@ namespace WPFMultired.Services
                             denominations = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROS
                             {
                                 I_RTNCON = 0,
-                                LIST = {}
+                                LIST = { }
                             };
                         }
 
@@ -681,7 +685,8 @@ namespace WPFMultired.Services
                             I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
                             I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), "00")), keyEncript),                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
+                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), "00")), keyEncript),
+                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
                             I_LISTAREGISTROS = denominations
                         };
 
@@ -756,7 +761,7 @@ namespace WPFMultired.Services
 
                             transaction.payer = new PAYER
                             {
-                                NAME =product.NOMCLI,
+                                NAME = product.NOMCLI,
                                 IDENTIFICATION = product.NRONIT
                             };
 
@@ -800,11 +805,11 @@ namespace WPFMultired.Services
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript)
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript)
                         };
 
                         var response = client.mtrvalarqc(request);
@@ -861,19 +866,19 @@ namespace WPFMultired.Services
                             foreach (var denomination in response.LISTAREGISTROS.LIST)
                             {
                                 result.DATALIST.Add(new List
-                                { 
+                                {
                                     AMOUNT = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2)),
                                     AMOUNT_NEW = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)),
                                     VALUE = Decimal.ToInt32(decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US"))),
                                     DESCRIPTION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_DESDON, keyDesencript), 2),
-                                    TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) + 
-                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) * 
+                                    TOTAL_AMOUNT = (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANDEN, keyDesencript), 2)) +
+                                    int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CANACT, keyDesencript), 2))) *
                                     decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CODDEN, keyDesencript), 2), new CultureInfo("en-US")),
                                     CASSETTE = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_CASSET, keyDesencript), 2)),
                                     CODE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2),
                                     IMAGE = ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPMON, keyDesencript), 2) == "B" ? ImagesUrlResource.ImgBill : ImagesUrlResource.ImgCoin,
-                                    DEVICE_TYPE_ID = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 1 ? (int)ETypeDevice.AP 
-                                    : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 4 ? (int)ETypeDevice.MD 
+                                    DEVICE_TYPE_ID = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 1 ? (int)ETypeDevice.AP
+                                    : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 4 ? (int)ETypeDevice.MD
                                     : int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(denomination.O_TIPDEV, keyDesencript), 2)) == 3 ? (int)ETypeDevice.MA
                                     : (int)ETypeDevice.DP,
                                     ID = 0,
@@ -983,7 +988,7 @@ namespace WPFMultired.Services
                         }
                         else
                         {
-                            return new Response { Data =  null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                            return new Response { Data = null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
                 }
@@ -1024,10 +1029,10 @@ namespace WPFMultired.Services
                                 denominations.LIST[index] = new WPFMultired.MR_ControllCash.iLISTAREGISTROSLIST
                                 {
                                     I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Quantity.ToString()), keyEncript),
-                                    I_DENOMI= Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
+                                    I_DENOMI = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
                                     I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
-                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1 ? "5":denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1 ? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript),
                                 };
                                 index++;
                             }
@@ -1085,15 +1090,15 @@ namespace WPFMultired.Services
         {
             try
             {
-                 ConsultarFacturasServicesClient client = new ConsultarFacturasServicesClient();
+                ConsultasRedServicesClient client = new ConsultasRedServicesClient();
 
-                using (var factory = new WebChannelFactory<ConsultarFacturasServicesChannel>())
+                using (var factory = new WebChannelFactory<ConsultasRedServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrconfaccInput request = new mtrconfaccInput
+                        mtrhalleycInput request = new mtrhalleycInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
@@ -1108,7 +1113,7 @@ namespace WPFMultired.Services
                             I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
                         };
 
-                        var response = client.mtrconfacc(request);
+                        var response = client.mtrhalleyc(request);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -1128,7 +1133,8 @@ namespace WPFMultired.Services
                                     AcountNumber = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_FLGMOD, keyDesencript), 2),
                                     AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
                                     Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
-                                    AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US"))
+                                    AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
+                                    img = "/Images/Others/circle.png"
                                 });
                             }
 
@@ -1192,7 +1198,7 @@ namespace WPFMultired.Services
                                     I_DENOMI = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
                                     I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
                                     I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
-                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript)
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1 ? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript)
                                 };
                                 index++;
                             }
@@ -1259,7 +1265,7 @@ namespace WPFMultired.Services
                 WebOperationContext.Current.OutgoingRequest.Headers.Add("USERTOKEN", Encryptor.Encrypt(ConcatOrSplitTimeStamp(token), keyEncript));
                 WebOperationContext.Current.OutgoingRequest.Headers.Add("MESSAGEID", Encryptor.Encrypt(ConcatOrSplitTimeStamp((new Random()).Next(1000, 9999).ToString()), keyEncript));
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }

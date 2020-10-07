@@ -424,12 +424,12 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        public async void LoadListDocuments(string codeEntity)
+        public async void LoadListDocuments(Transaction transaction)
         {
             try
             {
 
-                var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Type_Document, codeEntity);
+                var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Type_Document, transaction);
                 if (response != null && response.Data != null &&  ((List<TypeDocument>)response.Data).Count > 0)
                 {
                     OptionsList.Clear();
