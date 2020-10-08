@@ -78,10 +78,11 @@ namespace WPFMultired.Classes
         Deposit = 3
     }
 
-    public enum EProcedureType
+    public enum ETypeServiceSelect
     {
-        Withdrawal = 3,
-        Pay = 1
+        Deposito = 00011,
+        TarjetaCredito = 00014,
+        EstadoCuenta = 00013,
     }
 
     public enum ETypeDevice

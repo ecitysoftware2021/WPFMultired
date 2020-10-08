@@ -55,9 +55,7 @@ namespace WPFMultired.UserControls
 
                 this.DataContext = this.paymentViewModel;
 
-                ActivateWallet();
-
-                //SavePay();
+                //ActivateWallet();
             }
             catch (Exception ex)
             {

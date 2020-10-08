@@ -263,12 +263,11 @@ namespace WPFMultired.Services
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
-                            //I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp("SERRATO"), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript)
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)
                         };
 
                         var response = client.mtrtiptrnc(request);
@@ -390,7 +389,7 @@ namespace WPFMultired.Services
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
@@ -805,11 +804,11 @@ namespace WPFMultired.Services
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
-                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp("188"), keyEncript)
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)
                         };
 
                         var response = client.mtrvalarqc(request);
@@ -1134,7 +1133,8 @@ namespace WPFMultired.Services
                                     AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
                                     Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
                                     AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
-                                    img = "/Images/Others/circle.png"
+                                    img = "/Images/Others/circle.png",
+                                    TypeTransaction = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DATADI, keyDesencript), 2),
                                 });
                             }
 

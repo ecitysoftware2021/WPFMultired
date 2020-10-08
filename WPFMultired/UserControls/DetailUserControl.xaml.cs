@@ -61,8 +61,43 @@ namespace WPFMultired.UserControls
 
         private void btn_Accept_TouchDown(object sender, TouchEventArgs e)
         {
-            AdminPayPlus.Recorder.Grabar(transaction.IdTransactionAPi, 0);
-            Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
+            SendData();
+        }
+
+        private async void SendData()
+        {
+            try
+            {
+                if (transaction.Amount > 0)
+                {
+                    Task.Run(async () =>
+                    {
+                        await AdminPayPlus.SaveTransactions(this.transaction, false);
+
+                        Utilities.CloseModal();
+
+                        if (this.transaction.IdTransactionAPi == 0)
+                        {
+                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
+                            Utilities.navigator.Navigate(UserControlView.Main);
+                        }
+                        else
+                        {
+                            //AdminPayPlus.Recorder.Grabar(transaction.IdTransactionAPi, 0);
+                            Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
+                        }
+                    });
+                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

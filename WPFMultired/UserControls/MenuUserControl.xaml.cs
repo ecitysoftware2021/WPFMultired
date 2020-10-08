@@ -100,10 +100,9 @@ namespace WPFMultired.UserControls
                 {
                     //if (AdminPayPlus.DataPayPlus.ListCompanies.Count == 1)
                     //{
-                    //TODO: poner en el congig 188
-                    var company = AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault(x => x.Item1 == "00188").Item1;
+                    var company = AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault(x => x.Item1.Contains(Utilities.GetConfiguration("SourceEntity"))).Item1;
 
-                        Utilities.navigator.Navigate(UserControlView.Consult, true, company, ((Grid)sender).Tag);
+                    Utilities.navigator.Navigate(UserControlView.Consult, true, company, ((Grid)sender).Tag);
                     //}
                     //else
                     //if(AdminPayPlus.DataPayPlus.ListCompanies.Count > 1) {

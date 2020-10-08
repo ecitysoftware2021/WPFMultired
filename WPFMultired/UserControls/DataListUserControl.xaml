@@ -14,11 +14,11 @@
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="150" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="270" />
             <RowDefinition Height="80" />
             <RowDefinition Height="250" />
-            <RowDefinition Height="500" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="450" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -158,7 +158,7 @@
                 FontSize="30" />
         </Grid>
         <Grid Grid.Row="4">
-            <ListView x:Name="lv_data_list" 
+            <ListView x:Name="lv_depositos" 
                     Margin="0,80,0,0"
                     Background="Red"
                     BorderBrush="Transparent"
@@ -195,13 +195,15 @@
                             VerticalAlignment="Stretch" 
                             HorizontalAlignment="Stretch">
 
-                            <Grid HorizontalAlignment="Center"
-                            VerticalAlignment="Top"
-                            Margin="0,0,0,0"
-                            Width="1030"
-                            Height="60"
-                            Tag="{Binding Data}"
-                                  TouchDown="Grid_TouchDown">
+                            <Grid
+                                Name="grvDepositos"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Margin="0,0,0,0"
+                                Width="1030"
+                                Height="60"
+                                Tag="{Binding Data}"
+                                TouchDown="Grid_TouchDown">
 
                             <TextBlock Text="{Binding Item1}"
                                        FontSize="40"
@@ -261,7 +263,7 @@
                 Foreground="#FF104B6D"
                 Margin="100,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 FontSize="40"
             />
             <TextBlock 
@@ -269,7 +271,7 @@
                 Foreground="#FF104B6D"
                 Margin="0,0,100,0"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 FontSize="40"
             />
             <TextBlock 
@@ -277,24 +279,36 @@
                 Foreground="#FF104B6D"
                 Margin="100,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 FontSize="40"
             />
             <TextBox  
                 x:Name="txtValor" 
+                md:HintAssist.Hint="  Digite el valor"
+                md:HintAssist.IsFloating="True"
+                md:HintAssist.FloatingScale="0.3"
                 Text="{Binding Val, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
                 Height="70" 
                 Margin="0,0,100,0" 
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 HorizontalAlignment="Right"
-                Width="250"
+                Width="300"
                 TextAlignment="Right"
                 Foreground="#FF104B6D"
-                FontSize="50"
+                FontSize="40"
                 FontFamily="Arial" 
                 TouchDown="txtValor_TouchDown"
                 TextChanged="txtValor_TextChanged"
-            />
+            >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0.6"/>
+                </TextBox.Background>
+            </TextBox>
             <TextBlock 
                 x:Name="txtErrorValor"
                 Margin="0,0,0,0"

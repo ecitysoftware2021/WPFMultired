@@ -25,6 +25,8 @@ namespace WPFMultired.Models
 
         public string Enrollment { get; set; }
 
+        public ETypeServiceSelect eTypeService { get; set; }
+
         public bool IsCashBack { get; set; }
 
         public string CodeCompany { get; set; }

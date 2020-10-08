@@ -32,11 +32,11 @@
 
         <Grid Grid.Row="2">
             <ListView x:Name="lv_type_transactions" 
-                    Margin="0,0,0,0"
+                    Margin="0,200,0,0"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     ItemsSource="{Binding}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
@@ -65,8 +65,8 @@
                             VerticalAlignment="Top"
                             Background="Transparent"
                             Margin="0,0,0,0"
-                            Height="180"
-                              Width="700"
+                            Height="120"
+                              Width="850"
                             Tag="{Binding Item3}"
                             TouchDown="Grid_list_TouchDown">
 
@@ -75,12 +75,15 @@
                                    VerticalAlignment="Center" 
                                    Height="50" 
                                    Stretch="Uniform" />
-                            <TextBlock Text="{Binding Item1}"
-                                       FontSize="50"
-                                       Margin="100,0,0,0"
-                                       TextAlignment="Left"
-                                        HorizontalAlignment="Left"   
-                                   VerticalAlignment="Center" />
+                            <TextBlock 
+                                Text="{Binding Item1}"
+                                FontSize="60"
+                                Foreground="#FF1B69A8"
+                                Margin="100,0,0,0"
+                                TextAlignment="Left"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Left"   
+                                VerticalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

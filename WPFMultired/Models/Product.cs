@@ -15,7 +15,7 @@ namespace WPFMultired.Models
         public decimal AmountMin { get; set; }
         public decimal Amount { get; set; }
         public decimal AmountUser { get; set; }
-
+        public string TypeTransaction { get; set; }
         public decimal AmountTotal { get; set; }
         public decimal AmountCommission { get; set; }
         public string Description { get; set; }

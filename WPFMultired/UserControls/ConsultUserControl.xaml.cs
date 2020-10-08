@@ -49,6 +49,33 @@ namespace WPFMultired.UserControls
             }
         }
 
+        private void Init()
+        {
+            try
+            {//TODO:config
+                switch (transaction.CodeTypeTransaction)
+                {
+                    case "00011":
+                        transaction.eTypeService = ETypeServiceSelect.Deposito;
+                        break;
+                    case "00013":
+                        transaction.eTypeService = ETypeServiceSelect.EstadoCuenta;
+                        break;
+                    case "00014":
+                        transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
+                        break;
+                    //default:
+                    //    transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
+                    //    break;
+                }
+
+                ConfigView();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         private void ConfigView()
         {
             try
@@ -241,7 +268,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                ConfigView();
+                Init();
             }
             catch (Exception ex)
             {

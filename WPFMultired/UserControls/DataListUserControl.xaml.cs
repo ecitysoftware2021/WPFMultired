@@ -67,7 +67,15 @@ namespace WPFMultired.UserControls
 
                     viewModel.ConfigurateDataList(transaction.Products);
                     RefreshView();
-                    //lv_data_list.Visibility = Visibility.Hidden;
+
+                    Dispatcher.BeginInvoke((Action)delegate
+                    {
+                        if (transaction.TypeDocument != "0")
+                        {
+                            lv_depositos.Visibility = Visibility.Hidden;
+                        }
+                    });
+                    GC.Collect();
                 }
 
                 this.DataContext = viewModel;
@@ -78,29 +86,29 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void RefreshView(bool search = false, ItemList item = null)
+        private void RefreshView(ItemList item = null)
         {
             try
             {
                 Dispatcher.BeginInvoke((Action)delegate
                 {
-                    viewModel.ViewList.Source = viewModel.DataList;
-                    lv_data_list.DataContext = viewModel.ViewList;
-                    lv_data_list.Items.Refresh();
+                    viewModel.ViewList.Source = item == null ? viewModel.DataList : viewModel.DataList.Where(x => x.Item2 == item.Item2);
+
+                    switch (transaction.eTypeService)
+                    {
+                        case ETypeServiceSelect.Deposito:
+                            ProductSelect.Item3 = GetImage(false);
+                            lv_depositos.Visibility = Visibility.Visible;
+                            lv_depositos.DataContext = viewModel.ViewList;
+                            lv_depositos.Items.Refresh();
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            break;
+                    }
                 });
                 GC.Collect();
-
-                if (search && item != null)
-                {
-                    Dispatcher.BeginInvoke((Action)delegate
-                    {
-                        viewModel.ViewList.Source = viewModel.DataList.Where(x => x.Item2 == item.Item2);
-                        lv_data_list.Visibility = Visibility.Visible;
-                        lv_data_list.DataContext = viewModel.ViewList;
-                        lv_data_list.Items.Refresh();
-                    });
-                    GC.Collect();
-                }
             }
             catch (Exception ex)
             {
@@ -177,41 +185,6 @@ namespace WPFMultired.UserControls
             {
             }
             return string.Empty;
-        }
-
-        private async void SendData()
-        {
-            try
-            {
-                if (transaction.Amount > 0)
-                {
-                    Task.Run(async () =>
-                    {
-                        await AdminPayPlus.SaveTransactions(this.transaction, false);
-
-                        Utilities.CloseModal();
-
-                        if (this.transaction.IdTransactionAPi == 0)
-                        {
-                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
-                            Utilities.navigator.Navigate(UserControlView.Main);
-                        }
-                        else
-                        {
-                            Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
-                        }
-                    });
-                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
-                }
-                else
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
         }
 
         /* private void ShowModal()
@@ -319,13 +292,13 @@ namespace WPFMultired.UserControls
 
         private void txtCountNumber_TouchDown(object sender, TouchEventArgs e)
         {
-            Utilities.OpenKeyboard(true, sender as TextBox, this,450);
+            Utilities.OpenKeyboard(true, sender as TextBox, this, 450);
         }
 
         private void txtCountNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
-            { 
+            {
                 if (txtCountNumber.Text.Length > 4)
                 {
                     txtCountNumber.Text = txtCountNumber.Text.Remove(4, 1);
@@ -343,18 +316,18 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                var product = viewModel.DataList.FirstOrDefault(x => x.Item2.Substring(x.Item2.Length-4,4) == txtCountNumber.Text);
+                var product = viewModel.DataList.FirstOrDefault(x => x.Item2.Substring(x.Item2.Length - 4, 4) == txtCountNumber.Text);
 
                 if (product == null)
                 {
+                    lv_depositos.Visibility = Visibility.Hidden;
                     txtErrorSearch.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     txtValor.IsEnabled = false;
                     txtValor.Text = "0";
-
-                    RefreshView(true, product);
+                    RefreshView(product);
                 }
             }
             catch (Exception ex)
@@ -371,7 +344,7 @@ namespace WPFMultired.UserControls
                     transaction.Amount = valueModel.Val;
                     transaction.Product.AmountUser = valueModel.Val;
 
-                    SendData();
+                    Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
                 }
             }
             catch (Exception ex)

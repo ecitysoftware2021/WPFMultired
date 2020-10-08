@@ -80,19 +80,26 @@ namespace WPFMultired.Models
                         break;
                 }
 
-                
+
                 TimerService.Close();
 
                 if (initTimer)
                 {
                     TimerService.CallBackTimerOut = response =>
                     {
-                        Application.Current.Dispatcher.Invoke((Action)delegate
-                       {
-                            WPKeyboard.Keyboard.CloseKeyboard(View);
-                            View = new MainUserControl();
-                        });
-                        GC.Collect();
+                        try
+                        {
+                            //TODO:corregir
+                            Application.Current.Dispatcher.Invoke((Action)delegate
+                            {
+                                WPKeyboard.Keyboard.CloseKeyboard(View);
+                                View = new MainUserControl();
+                            });
+                            GC.Collect();
+                        }
+                        catch (Exception ex)
+                        {
+                        }
                     };
 
                     TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationView")));
