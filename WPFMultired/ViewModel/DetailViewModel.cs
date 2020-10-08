@@ -409,20 +409,20 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        private CollectionViewSource _optionsEntries;
+        //private CollectionViewSource _optionsEntries;
 
-        public CollectionViewSource OptionsEntries
-        {
-            get
-            {
-                return _optionsEntries;
-            }
-            set
-            {
-                _optionsEntries = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OptionsEntries)));
-            }
-        }
+        //public CollectionViewSource OptionsEntries
+        //{
+        //    get
+        //    {
+        //        return _optionsEntries;
+        //    }
+        //    set
+        //    {
+        //        _optionsEntries = value;
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OptionsEntries)));
+        //    }
+        //}
 
         public async void LoadListDocuments(Transaction transaction)
         {
@@ -434,7 +434,7 @@ namespace WPFMultired.ViewModel
                 {
                     OptionsList.Clear();
                     OptionsList = (List<TypeDocument>)response.Data;
-                    OptionsEntries.Source = OptionsList;
+                    //OptionsEntries.Source = OptionsList;
                 }
             }
             catch (Exception ex)

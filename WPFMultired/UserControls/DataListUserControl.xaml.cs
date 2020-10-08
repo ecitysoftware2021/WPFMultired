@@ -73,6 +73,21 @@ namespace WPFMultired.UserControls
                         if (transaction.TypeDocument != "0")
                         {
                             lv_depositos.Visibility = Visibility.Hidden;
+                            lv_tarjetaC.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            switch (transaction.eTypeService)
+                            {
+                                case ETypeServiceSelect.Deposito:
+                                    lv_depositos.Visibility = Visibility.Visible;
+                                    break;
+                                case ETypeServiceSelect.TarjetaCredito:
+                                    lv_tarjetaC.Visibility = Visibility.Visible;
+                                    break;
+                                case ETypeServiceSelect.EstadoCuenta:
+                                    break;
+                            }
                         }
                     });
                     GC.Collect();
@@ -94,15 +109,22 @@ namespace WPFMultired.UserControls
                 {
                     viewModel.ViewList.Source = item == null ? viewModel.DataList : viewModel.DataList.Where(x => x.Item2 == item.Item2);
 
+                    if (ProductSelect != null)
+                    {
+                        ProductSelect.Item3 = GetImage(false);
+                    }
+
                     switch (transaction.eTypeService)
                     {
                         case ETypeServiceSelect.Deposito:
-                            ProductSelect.Item3 = GetImage(false);
                             lv_depositos.Visibility = Visibility.Visible;
                             lv_depositos.DataContext = viewModel.ViewList;
                             lv_depositos.Items.Refresh();
                             break;
                         case ETypeServiceSelect.TarjetaCredito:
+                            lv_tarjetaC.Visibility = Visibility.Visible;
+                            lv_tarjetaC.DataContext = viewModel.ViewList;
+                            lv_tarjetaC.Items.Refresh();
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
                             break;

@@ -52,7 +52,7 @@ namespace WPFMultired.UserControls
         private void Init()
         {
             try
-            {//TODO:config
+            {//TODO:config|
                 switch (transaction.CodeTypeTransaction)
                 {
                     case "00011":
@@ -84,7 +84,7 @@ namespace WPFMultired.UserControls
                 {
                     Row1 = "Tipo de Identificación",
                     Row2 = "Número de Identificación",
-                    OptionsEntries = new CollectionViewSource(),
+                    //OptionsEntries = new CollectionViewSource(),
                     OptionsList = new List<TypeDocument>(),
                     TypePayer = ETypePayer.Person,
                     VisibleId = System.Windows.Visibility.Visible,
