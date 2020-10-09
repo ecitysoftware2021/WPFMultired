@@ -1119,6 +1119,9 @@ namespace WPFMultired.Services
                             response.LISTAREGISTROS.O_RTNCON > 0)
                         {
                             transaction.Products = new List<Product>();
+
+                            int count = 0;
+
                             foreach (var item in response.LISTAREGISTROS.LIST)
                             {
                                 transaction.Products.Add(new Product
@@ -1136,6 +1139,18 @@ namespace WPFMultired.Services
                                     img = "/Images/Others/circle.png",
                                     TypeTransaction = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DATADI, keyDesencript), 2),
                                 });
+
+                                switch (transaction.eTypeService)
+                                {
+                                    case ETypeServiceSelect.Deposito:
+                                        break;
+                                    case ETypeServiceSelect.TarjetaCredito:
+                                        break;
+                                    case ETypeServiceSelect.EstadoCuenta:
+                                        transaction.Products[count].AccountStateProduct = JsonConvert.DeserializeObject<AccountStateProduct>(transaction.Products[count].TypeTransaction);
+                                        break;
+                                }
+                                count++;
                             }
 
                             transaction.payer = new PAYER

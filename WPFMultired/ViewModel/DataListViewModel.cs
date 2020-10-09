@@ -324,23 +324,60 @@ namespace WPFMultired.ViewModel
         }
         #endregion
 
-        internal void ConfigurateDataList(object data)
+        internal void ConfigurateDataList(Transaction transaction)
         {
             try
             {
-                foreach (var product in (List<Product>)data)
+                foreach (var product in transaction.Products)
                 {
-                    _dataList.Add(new ItemList
+                    switch (transaction.eTypeService)
                     {
-                        Item1 = product.Description,
-                        Item2 = product.Code,
-                        Item3 = product.img,
-                        Item4 = product.AmountCommission,
-                        Item5 = product.Amount,
-                        Index = ((List<Product>)data).IndexOf(product),
-                        Data = product,
-                        ImageSourse = ImagesUrlResource.ImageOnSelectOption
-                    });
+                        case ETypeServiceSelect.Deposito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Item7 = product.AccountStateProduct.DESAPO ?? "NA",
+                                Item8 = product.AccountStateProduct.DESCRE ?? "NA",
+                                Item9 = product.AccountStateProduct.DESPAP ?? "NA",
+                                Item10 = product.AccountStateProduct.VLRAPO,
+                                Item11 = product.AccountStateProduct.VLRCRE,
+                                Item12 = product.AccountStateProduct.VLRPAP,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                    }
                 }
             }
             catch (Exception ex)

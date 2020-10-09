@@ -21,5 +21,25 @@ namespace WPFMultired.Models
         public string Description { get; set; }
         public string AcountNumberMasc { get; set; }
         public string img { get; set; }
+        public AccountStateProduct AccountStateProduct { get; set; }
+    }
+
+    public class AccountStateProduct
+    {
+        public string ICONOS { get; set; }
+        public string CTACRE { get; set; }
+        public decimal VLRCRE { get; set; }
+        public int NROSEG { get; set; }
+        public string DESCRE { get; set; }
+        public int FLGAPO { get; set; }
+        public string CTAAPO { get; set; }
+        public string SEGAPO { get; set; }
+        public decimal VLRAPO { get; set; }
+        public string DESAPO { get; set; }
+        public int FLGPAP { get; set; }
+        public string CTAPAP { get; set; }
+        public string SEGPAP { get; set; }
+        public decimal VLRPAP { get; set; }
+        public string DESPAP { get; set; }
     }
 }

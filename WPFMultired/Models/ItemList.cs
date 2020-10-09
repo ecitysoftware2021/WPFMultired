@@ -116,6 +116,114 @@ namespace WPFMultired.Models
             }
         }
 
+        private string _item7;
+
+        public string Item7
+        {
+            get
+            {
+                return _item7;
+            }
+            set
+            {
+                if (_item7 != value)
+                {
+                    _item7 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item7)));
+                }
+            }
+        }
+        
+        private string _item8;
+
+        public string Item8
+        {
+            get
+            {
+                return _item8;
+            }
+            set
+            {
+                if (_item8 != value)
+                {
+                    _item8 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item8)));
+                }
+            }
+        }
+        
+        private string _item9;
+
+        public string Item9
+        {
+            get
+            {
+                return _item9;
+            }
+            set
+            {
+                if (_item9 != value)
+                {
+                    _item9 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item9)));
+                }
+            }
+        }
+
+        private decimal _item10;
+
+        public decimal Item10
+        {
+            get
+            {
+                return _item10;
+            }
+            set
+            {
+                if (_item10 != value)
+                {
+                    _item10 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item10)));
+                }
+            }
+        }
+
+        private decimal _item11;
+
+        public decimal Item11
+        {
+            get
+            {
+                return _item11;
+            }
+            set
+            {
+                if (_item11 != value)
+                {
+                    _item11 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item11)));
+                }
+            }
+        }
+
+        private decimal _item12;
+
+        public decimal Item12
+        {
+            get
+            {
+                return _item12;
+            }
+            set
+            {
+                if (_item12 != value)
+                {
+                    _item12 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item12)));
+                }
+            }
+        }
+
         private int _index;
 
         public int Index

@@ -167,7 +167,7 @@ namespace WPFMultired.UserControls
                     try
                     {
                         var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
-                        if (response.Data != null)
+                        if (response != null && response.Data != null)
                         {
                             transaction = (Transaction)response.Data;
                             Utilities.CloseModal();

@@ -65,29 +65,31 @@ namespace WPFMultired.UserControls
                         ViewList = new CollectionViewSource(),
                     };
 
-                    viewModel.ConfigurateDataList(transaction.Products);
+                    viewModel.ConfigurateDataList(transaction);
                     RefreshView();
 
                     Dispatcher.BeginInvoke((Action)delegate
                     {
+                        switch (transaction.eTypeService)
+                        {
+                            case ETypeServiceSelect.Deposito:
+                                lv_depositos.Visibility = Visibility.Visible;
+                                break;
+                            case ETypeServiceSelect.TarjetaCredito:
+                                txtMsInfo.Text = "Estimado asociado, de no cancelar el valor completo sugerido, su tarjeta quedará en mora.";
+                                lv_tarjetaC.Visibility = Visibility.Visible;
+                                break;
+                            case ETypeServiceSelect.EstadoCuenta:
+                                txtMsInfo.Text = "Estimado asociado, de no cancelar el valor completo sugerido, su crédito quedará en mora.";
+                                lv_estadoC.Visibility = Visibility.Visible;
+                                break;
+                        }
+
                         if (transaction.TypeDocument != "0")
                         {
                             lv_depositos.Visibility = Visibility.Hidden;
                             lv_tarjetaC.Visibility = Visibility.Hidden;
-                        }
-                        else
-                        {
-                            switch (transaction.eTypeService)
-                            {
-                                case ETypeServiceSelect.Deposito:
-                                    lv_depositos.Visibility = Visibility.Visible;
-                                    break;
-                                case ETypeServiceSelect.TarjetaCredito:
-                                    lv_tarjetaC.Visibility = Visibility.Visible;
-                                    break;
-                                case ETypeServiceSelect.EstadoCuenta:
-                                    break;
-                            }
+                            lv_estadoC.Visibility = Visibility.Hidden;
                         }
                     });
                     GC.Collect();
@@ -127,6 +129,9 @@ namespace WPFMultired.UserControls
                             lv_tarjetaC.Items.Refresh();
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
+                            lv_estadoC.Visibility = Visibility.Visible;
+                            lv_estadoC.DataContext = viewModel.ViewList;
+                            lv_estadoC.Items.Refresh();
                             break;
                     }
                 });
@@ -236,12 +241,12 @@ namespace WPFMultired.UserControls
                     return false;
                 }
 
-                if (valueModel.Val % 100 != 0)
-                {
-                    txtErrorValor.Text = string.Concat("Esta máquina sólo recibe multiplos de 100",
-                    Environment.NewLine, "Ejemplo: $100, $1.000, $10.000... etc.");
-                    return false;
-                }
+                //if (valueModel.Val % 100 != 0)
+                //{
+                //    txtErrorValor.Text = string.Concat("Esta máquina sólo recibe multiplos de $100",
+                //    Environment.NewLine, "Ejemplo: $100, $1.000, $10.000... etc.");
+                //    return false;
+                //}
 
                 if (valueModel.Val < min || valueModel.Val > max)
                 {
@@ -277,6 +282,8 @@ namespace WPFMultired.UserControls
                     transaction.Product = (Product)((Grid)sender).Tag;
 
                     txtValor.IsEnabled = true;
+
+                    valueModel.Val = transaction.Product.Amount;
                 }
             }
             catch (Exception ex)
@@ -296,9 +303,9 @@ namespace WPFMultired.UserControls
             {
                 txtErrorValor.Text = string.Empty;
 
-                if (txtValor.Text.Length > 8)
+                if (txtValor.Text.Length > 14)
                 {
-                    txtValor.Text = txtValor.Text.Remove(8, 1);
+                    txtValor.Text = txtValor.Text.Remove(14, 1);
                     return;
                 }
 
@@ -338,17 +345,20 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                txtValor.IsEnabled = false;
+                txtValor.Text = "0";
+
                 var product = viewModel.DataList.FirstOrDefault(x => x.Item2.Substring(x.Item2.Length - 4, 4) == txtCountNumber.Text);
 
                 if (product == null)
                 {
                     lv_depositos.Visibility = Visibility.Hidden;
+                    lv_tarjetaC.Visibility = Visibility.Hidden;
+                    lv_estadoC.Visibility = Visibility.Hidden;
                     txtErrorSearch.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    txtValor.IsEnabled = false;
-                    txtValor.Text = "0";
                     RefreshView(product);
                 }
             }
