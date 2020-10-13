@@ -145,8 +145,8 @@ namespace WPFMultired.Classes
 
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 
-                    //ValidatePeripherals();
-                    callbackResult?.Invoke(true);
+                    ValidatePeripherals();
+                    //callbackResult?.Invoke(true);
                 }
                 else
                 {
@@ -336,31 +336,23 @@ namespace WPFMultired.Classes
             {
                 if (_controlPeripherals == null)
                 {
-                    _controlPeripherals = new ControlPeripherals(Utilities.GetConfiguration("PortBills"),
-                        Utilities.GetConfiguration("PortCoins"), Utilities.GetConfiguration("ValuesDispenser"));
+                    _controlPeripherals = new ControlPeripherals(Utilities.GetConfiguration("Port"),
+                        Utilities.GetConfiguration("ValuesDispenser"));
                 }
 
                 _controlPeripherals.callbackError = error =>
                 {
-                    var log = new RequestLogDevice
+                    SaveLog(new RequestLogDevice
                     {
                         Code = "",
                         Date = DateTime.Now,
                         Description = error.Item2,
                         Level = ELevelError.Strong
-                    };
+                    }, ELogType.Device);
 
-                    if (!error.Item1.Equals("Info"))
-                    {
-                        SaveLog(log, ELogType.Device);
-                        DescriptionStatusPayPlus = MessageResource.ValidatePeripheralsFail;
-                        Finish(false);
-                    }
-                    else
-                    {
-                        log.Level = ELevelError.Mild;
-                        SaveLog(log, ELogType.Device);
-                    }
+                    DescriptionStatusPayPlus = MessageResource.ValidatePeripheralsFail;
+
+                    Finish(false);
                 };
 
                 _controlPeripherals.callbackToken = isSucces =>
@@ -474,7 +466,7 @@ namespace WPFMultired.Classes
                             idPaypad = int.Parse(Utilities.GetConfiguration("idPaypad"));
                         }
 
-                        if (desciption.Contains("FATAL"))
+                        if (desciption.Contains("FATAL"))   
                         {
                             level = ELevelError.Strong;
                         }
@@ -491,6 +483,23 @@ namespace WPFMultired.Classes
                         };
 
                         SqliteDataAccess.InsetConsoleError(consoleError);
+
+
+                        List<PAYPAD_ERROR_CONSOLE> consoleErro = new List<PAYPAD_ERROR_CONSOLE>()
+                        {
+                            new PAYPAD_ERROR_CONSOLE
+                            {
+                                PAYPAD_ID = (int)idPaypad,
+                                DATE = DateTime.Now,
+                                STATE = 1,
+                                DESCRIPTION = desciption,
+                                OBSERVATION = observation,
+                                ERROR_ID = (int)error,
+                                ERROR_LEVEL_ID = (int)level
+                            }
+                        };
+
+                        api.CallApi("SaveErrorConsole", consoleErro);
                     }
                 });
             }

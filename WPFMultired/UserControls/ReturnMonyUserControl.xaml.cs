@@ -166,7 +166,7 @@ namespace WPFMultired.UserControls
                     this.viewModel.StatePay = true;
                     transaction.Payment = viewModel;
 
-                    AdminPayPlus.ControlPeripherals.ResetValues();
+                    AdminPayPlus.ControlPeripherals.ClearValues();
 
                     if (transaction.Type == ETransactionType.Withdrawal)
                     {

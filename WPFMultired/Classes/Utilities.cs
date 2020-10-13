@@ -72,7 +72,7 @@ namespace WPFMultired.Classes
                 {
                     model.ImageModal = ImagesUrlResource.AlertInfo;
                 }
-                else if (type == EModalType.NoPaper)
+                else if (type == EModalType.NoPaper || type == EModalType.ReturnMoney)
                 {
                     model.ImageModal = ImagesUrlResource.AlertInfo;
                 }
@@ -635,7 +635,17 @@ namespace WPFMultired.Classes
             return null;
         }
 
-        
+        public static string[] ErrorVector = new string[]
+        {
+            "STACKER_OPEN",
+            "JAM_IN_ACCEPTOR",
+            "PAUSE",
+            "ER:MD",
+            "thickness",
+            "Scan",
+            "FATAL",
+            "Printer"
+        };
 
         public static void OpenKeyboard(bool keyBoard_Numeric,object sender, object thisView, int x = 0, int y = 0)
         {

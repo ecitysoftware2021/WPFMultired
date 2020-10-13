@@ -1112,7 +1112,11 @@ namespace WPFMultired.Services
                             I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
                         };
 
+                        AdminPayPlus.SaveErrorControl($"Request Consulta: {JsonConvert.SerializeObject(request)}", "", EError.Aplication, ELevelError.Mild);
+
                         var response = client.mtrhalleyc(request);
+
+                        AdminPayPlus.SaveErrorControl("Response Consulta: " + response +" LLave: "+ keyDesencript, "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&

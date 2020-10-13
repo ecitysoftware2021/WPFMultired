@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
+using WPFMultired.Services.Object;
 
 namespace WPFMultired.Classes
 {
@@ -9,17 +10,18 @@ namespace WPFMultired.Classes
     {
         #region References
 
+        #region "Timer"
+        //private TimerGeneric timer;
+        #endregion
+
+
         #region SerialPorts
-
-        private SerialPort _serialPortBills;//Puerto billeteros
-
-        private SerialPort _serialPortCoins;//Puerto Monederos
+        private SerialPort _serialPort;//Puerto billeteros
 
         #endregion
 
         #region CommandsPorts
-
-        private string _StartBills = "OR:START";//Iniciar los billeteros
+        private string _StartPeripherals = "OR:START";//Iniciar los billeteros
 
         private string _AceptanceBillOn = "OR:ON:AP";//Operar billetero Aceptance
 
@@ -34,11 +36,9 @@ namespace WPFMultired.Classes
         private string _DispenserCoinOn = "OR:ON:MD:";//Operar Monedero Dispenser
 
         private string _AceptanceCoinOff = "OR:OFF:MA";//Cerrar Monedero Aceptance
-
         #endregion
 
         #region Callbacks
-
         public Action<Tuple<decimal, string>> callbackValueIn;//Calback para cuando ingresan un billete
 
         public Action<Tuple<decimal, string>> callbackValueOut;//Calback para cuando sale un billete
@@ -55,22 +55,17 @@ namespace WPFMultired.Classes
 
         public Action<string> callbackLog;//Calback de error
 
-        public Action<string> callbackResutOut;//Calback de error
-
         public Action<string> callbackMessage;//Calback de mensaje
 
         public Action<bool> callbackToken;//Calback de mensaje
         #endregion
 
         #region EvaluationValues
-
         private int _dividerBills;
         private int _dividerCoins;
-
         #endregion
 
         #region Variables
-
         private decimal payValue;//Valor a pagar
 
         private List<Tuple<string, int>> denominationsDispenser;
@@ -91,25 +86,18 @@ namespace WPFMultired.Classes
         #endregion
 
         #region LoadMethods
-
         /// <summary>
         /// Constructor de la clase
         /// </summary>
-        public ControlPeripherals(string portNameBills, string porNameCoins,
-            string denominatios, int dividerBills = 1000, int dividerCoins = 100)
+        public ControlPeripherals(string portNameBills,
+            string denominatios, int dividerBills = 1, int dividerCoins = 100)
         {
             try
             {
-                if (_serialPortBills == null && !string.IsNullOrEmpty(portNameBills))
+                if (_serialPort == null && !string.IsNullOrEmpty(portNameBills))
                 {
-                    _serialPortBills = new SerialPort();
+                    _serialPort = new SerialPort();
                     InitPortBills(portNameBills);
-                }
-
-                if (_serialPortCoins == null && !string.IsNullOrEmpty(porNameCoins))
-                {
-                    _serialPortCoins = new SerialPort();
-                    InitPortPurses(porNameCoins);
                 }
 
                 if (!string.IsNullOrEmpty(denominatios))
@@ -122,7 +110,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("", string.Concat("Error, Iniciando los perifericos", ex)));
+                callbackError?.Invoke(Tuple.Create("", string.Concat("Error (ControlPeripherals), Iniciando los perifericos", ex)));
             }
         }
 
@@ -133,39 +121,17 @@ namespace WPFMultired.Classes
         {
             try
             {
-                if (!SendMessageBills(_StartBills))
+                if (!SendMessageBills(_StartPeripherals))
                 {
-                    callbackError?.Invoke(Tuple.Create("", string.Concat("Error, Iniciando los perifericos", "No se pudo iniciar")));
+                    callbackError?.Invoke(Tuple.Create("", string.Concat("Error (Start), Iniciando los perifericos", "No se pudo iniciar")));
                 }
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("", string.Concat("Error, Iniciando aceptacion", ex)));
+                callbackError?.Invoke(Tuple.Create("", string.Concat("Error (Start), Iniciando aceptacion", ex)));
             }
         }
 
-        public void ResetValues()
-        {
-            this.payValue = 0;//Valor a pagar
-
-            this.enterValue = 0;//Valor ingresado
-
-            this.deliveryValue = 0;//Valor entregado
-
-            this.dispenserValue = 0;//Valor a dispensar
-
-            this.stateError = false;
-
-            this.callbackTotalIn = null;
-
-            this.callbackTotalOut = null;
-
-            this.callbackValueIn = null;
-
-            this.callbackValueOut = null;
-
-            this.callbackOut = null;
-        }
 
         /// <summary>
         /// Método para inciar el puerto de los billeteros
@@ -174,55 +140,27 @@ namespace WPFMultired.Classes
         {
             try
             {
-                if (!_serialPortBills.IsOpen)
+                if (!_serialPort.IsOpen)
                 {
-                    _serialPortBills.PortName = portName;
-                    _serialPortBills.ReadTimeout = 3000;
-                    _serialPortBills.WriteTimeout = 500;
-                    _serialPortBills.BaudRate = 57600;
-                    _serialPortBills.DtrEnable = true;
-                    _serialPortBills.RtsEnable = true;
-                    _serialPortBills.Open();
+                    _serialPort.PortName = portName;
+                    _serialPort.ReadTimeout = 3000;
+                    _serialPort.WriteTimeout = 500;
+                    _serialPort.BaudRate = 57600;
+                    _serialPort.DtrEnable = true;
+                    _serialPort.RtsEnable = true;
+                    _serialPort.Open();
                 }
 
-                _serialPortBills.DataReceived += new SerialDataReceivedEventHandler(_serialPortBillsDataReceived);
+                _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPortBillsDataReceived);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-        /// <summary>
-        ///  Método para inciar el puerto de los monederos
-        /// </summary>
-        private void InitPortPurses(string portName)
-        {
-            try
-            {
-                if (!_serialPortCoins.IsOpen)
-                {
-                    _serialPortCoins.PortName = portName;
-                    _serialPortCoins.ReadTimeout = 3000;
-                    _serialPortCoins.WriteTimeout = 500;
-                    _serialPortCoins.BaudRate = 57600;
-                    _serialPortCoins.DtrEnable = true;
-                    _serialPortCoins.RtsEnable = true;
-                    _serialPortCoins.Open();
-                }
-
-                _serialPortCoins.DataReceived += new SerialDataReceivedEventHandler(_serialPortCoinsDataReceived);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         #endregion
 
         #region SendMessage
-
         /// <summary>
         /// Método para enviar orden al puerto de los billeteros
         /// </summary>
@@ -231,47 +169,32 @@ namespace WPFMultired.Classes
         {
             try
             {
-                if (_serialPortBills.IsOpen)
+                if (_serialPort.IsOpen)
                 {
                     Thread.Sleep(2000);
-                    callbackError?.Invoke(Tuple.Create("Info", string.Concat("Info, Se envio mensaje al billetero:  ", message)));
-                    _serialPortBills.Write(message);
+                    _serialPort.Write(message);
+
+                    AdminPayPlus.SaveLog(new RequestLog
+                    {
+                        Reference = "",
+                        Description = "Mensaje al billetero " + message,
+                        State = 1,
+                        Date = DateTime.Now
+                    }, ELogType.General);
+
                     return true;
                 }
 
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("AP", "Error (SendMessageBills), ha ocurrido una exepcion " + ex));
             }
             return false;
         }
-
-        /// <summary>
-        /// Método para enviar orden al puerto de los monederos
-        /// </summary>
-        /// <param name="message">mensaje a enviar</param>
-        private void SendMessageCoins(string message)
-        {
-            try
-            {
-                if (_serialPortCoins.IsOpen)
-                {
-                    Thread.Sleep(2000);
-                    callbackError?.Invoke(Tuple.Create("Info", string.Concat("Info, Se envio mensaje al monedero:  ", message)));
-                    _serialPortCoins.Write(message);
-                }
-            }
-            catch (Exception ex)
-            {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
-            }
-        }
-
         #endregion
 
         #region Listeners
-
         /// <summary>
         /// Método que escucha la respuesta del puerto del billetero
         /// </summary>
@@ -281,45 +204,20 @@ namespace WPFMultired.Classes
         {
             try
             {
-                string response = _serialPortBills.ReadLine();
+                string response = _serialPort.ReadLine();
                 if (!string.IsNullOrEmpty(response))
                 {
-                    callbackError?.Invoke(Tuple.Create("Info", string.Concat("Info, Respondio el billetero:  ", response)));
                     ProcessResponseBills(response.Replace("\r", string.Empty));
                 }
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("AP", "Error (_serialPortBillsDataReceived), ha ocurrido una exepcion " + ex));
             }
         }
-
-        /// <summary>
-        /// Método que escucha la respuesta del puerto del billetero
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _serialPortCoinsDataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                string response = _serialPortCoins.ReadLine();
-                if (!string.IsNullOrEmpty(response))
-                {
-                    callbackError?.Invoke(Tuple.Create("Info", string.Concat("Info, Respondio el monedero:  ", response)));
-                    ProcessResponseCoins(response.Replace("\r", string.Empty));
-                }
-            }
-            catch (Exception ex)
-            {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
-            }
-        }
-
         #endregion
 
         #region ProcessResponse
-
         /// <summary>
         /// Método que procesa la respuesta del puerto de los billeteros
         /// </summary>
@@ -333,6 +231,21 @@ namespace WPFMultired.Classes
                     ProcessRC(response);
                     break;
                 case "ER":
+
+                    foreach (var item in Utilities.ErrorVector)
+                    {
+                        if (message.ToLower().Contains(item.ToLower()))
+                        {
+                            AdminPayPlus.SaveLog(new RequestLog
+                            {
+                                Reference = "",
+                                Description = "Respuesta del billetero " + message,
+                                State = 1,
+                                Date = DateTime.Now
+                            }, ELogType.General);
+                        }
+                    }
+
                     ProcessER(response);
                     break;
                 case "UN":
@@ -345,37 +258,9 @@ namespace WPFMultired.Classes
                     break;
             }
         }
-
-        /// <summary>
-        /// Método que procesa la respuesta del puerto de los monederos
-        /// </summary>
-        /// <param name="message">respuesta del puerto de los monederos</param>
-        private void ProcessResponseCoins(string message)
-        {
-            string[] response = message.Split(':');
-            switch (response[0])
-            {
-                case "RC":
-                    ProcessRC(response);
-                    break;
-                case "ER":
-                    ProcessER(response);
-                    break;
-                case "UN":
-                    ProcessUN(response);
-                    break;
-                case "TO":
-                    ProcessTO(response);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         #endregion
 
         #region ProcessResponseCases
-
         /// <summary>
         /// Respuesta para el caso de Recepción de un mensaje enviado
         /// </summary>
@@ -396,6 +281,8 @@ namespace WPFMultired.Classes
                             callbackToken?.Invoke(true);
                         }
                         break;
+                    case "MD":
+                        break;
                     default:
                         break;
                 }
@@ -408,24 +295,31 @@ namespace WPFMultired.Classes
         /// <param name="response">respuesta</param>
         private void ProcessER(string[] response)
         {
-            if (response[2] == "FATAL")
+            if (response[1] == "DP" || response[1] == "MD")
+            {
+                if (response[2] == "Abnormal Near End sensor of the cassette\r")
+                {
+                    try
+                    {
+                        stateError = false;
+                        callbackError?.Invoke(Tuple.Create(response[1], string.Concat("Error, ", response[2])));
+                    }
+                    catch { }
+                }
+                else
+                {
+                    stateError = true;
+                    callbackError?.Invoke(Tuple.Create(response[1], string.Concat("Error, se alcanzó a entregar:", deliveryVal, " Error: ", response[2])));
+                }
+            }
+            if (response[1] == "AP")
             {
                 stateError = true;
-                callbackError?.Invoke(Tuple.Create(response[1], "Error, FATAL" + response[3]));
-            }
-            else if (response[1] == "DP" || response[1] == "MD")
-            {
-                stateError = true;
-                callbackError?.Invoke(Tuple.Create(response[1], string.Concat("Error, se alcanzó a entregar: ", deliveryValue, " Error: ", response[2])));
-
-                //if (response[1] == "MD")
-                //{
-                //    ConfigDataDispenser(string.Concat(response[1], ":", response[2]));
-                //}
-            }
-            else if (response[1] == "AP")
-            {
                 callbackError?.Invoke(Tuple.Create("AP", "Error, en el billetero Aceptador: " + response[2]));
+            }
+            else if (response[1] == "FATAL")
+            {
+                callbackError?.Invoke(Tuple.Create("FATAL", "Error, FATAL" + response[2]));
             }
         }
 
@@ -461,6 +355,19 @@ namespace WPFMultired.Classes
             }
         }
 
+        public void ClearValues()
+        {
+            deliveryValue = 0;
+            enterValue = 0;
+            deliveryVal = 0;
+
+            this.callbackTotalIn = null;
+            this.callbackTotalOut = null;
+            this.callbackValueIn = null;
+            this.callbackValueOut = null;
+            this.callbackOut = null;
+        }
+
         /// <summary>
         /// Respuesta para el caso de total cuando responde el billetero/monedero dispenser
         /// </summary>
@@ -490,11 +397,9 @@ namespace WPFMultired.Classes
                 }
             }
         }
-
         #endregion
 
         #region Dispenser
-
         /// <summary>
         /// Inicia el proceso paara el billetero dispenser
         /// </summary>
@@ -505,11 +410,12 @@ namespace WPFMultired.Classes
             {
                 stateError = false;
                 dispenserValue = valueDispenser;
+                //ActivateTimer();
                 ValidateValueDispenser();
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("DP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("DP", "Error (StartDispenser), ha ocurrido una exepcion " + ex));
             }
         }
 
@@ -543,20 +449,21 @@ namespace WPFMultired.Classes
                         typeDispend = 1;
                     }
 
-                    if (amountBills > 0)
-                    {
-                        DispenserMoney(((int)(amountBills / _dividerBills)).ToString());
-                    }
+                    //if (amountBills > 0)
+                    //{
+                    //DispenserMoney(((int)(amountBills / _dividerBills)).ToString());
+                    DispenserMoney(dispenserValue.ToString());
+                    //}
 
-                    if (amountCoins > 0)
-                    {
-                        SendMessageCoins(_DispenserCoinOn + ((int)(amountCoins / _dividerCoins)).ToString());
-                    }
+                    //if (amountCoins > 0)
+                    //{
+                    //    SendMessageCoins(_DispenserCoinOn + ((int)(amountCoins / _dividerCoins)).ToString());
+                    //}
                 }
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("DP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("DP", "Error (ValidateValueDispenser), ha ocurrido una exepcion " + ex));
             }
         }
 
@@ -587,7 +494,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("DP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("DP", "Error (ConfigurateDispenser), ha ocurrido una exepcion " + ex));
             }
         }
 
@@ -607,14 +514,12 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("DP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("DP", "Error (DispenserMoney), ha ocurrido una exepcion " + ex));
             }
         }
-
         #endregion
 
         #region Aceptance
-
         /// <summary>
         /// Inicia la operación de billetero aceptance
         /// </summary>
@@ -625,11 +530,10 @@ namespace WPFMultired.Classes
             {
                 this.payValue = payValue;
                 SendMessageBills(_AceptanceBillOn);
-                SendMessageCoins(_AceptanceCoinOn);
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("AP", "Error (StartAceptance), ha ocurrido una exepcion " + ex));
             }
         }
 
@@ -653,13 +557,11 @@ namespace WPFMultired.Classes
         public void StopAceptance()
         {
             SendMessageBills(_AceptanceBillOFF);
-            SendMessageCoins(_AceptanceCoinOff);
         }
-
         #endregion
 
         #region Responses
-
+        public decimal deliveryVal;
         /// <summary>
         /// Procesa la respuesta de los dispenser M y B
         /// </summary>
@@ -676,7 +578,7 @@ namespace WPFMultired.Classes
                     {
                         int denominacion = int.Parse(value.Split('-')[0]);
                         int cantidad = int.Parse(value.Split('-')[1]);
-                        deliveryValue += denominacion * cantidad;
+                        deliveryVal += denominacion * cantidad;
                     }
                 }
 
@@ -686,18 +588,15 @@ namespace WPFMultired.Classes
                     typeDispend--;
                 }
 
-                if (isBX == 1)
-                {
-                    callbackResutOut?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
-                }
-
                 if (!stateError)
                 {
-                    if (dispenserValue == deliveryValue)
+                    if (dispenserValue == deliveryVal)
                     {
                         if (typeDispend == 0)
                         {
-                            callbackTotalOut?.Invoke(deliveryValue);
+                            //timer.CallBackClose = null;
+                            //timer.CallBackStop?.Invoke(1);
+                            callbackTotalOut?.Invoke(deliveryVal);
                         }
                     }
                 }
@@ -705,43 +604,44 @@ namespace WPFMultired.Classes
                 {
                     if (typeDispend == 0)
                     {
-                        callbackOut?.Invoke(deliveryValue);
+                        //timer.CallBackClose = null;
+                        //timer.CallBackStop?.Invoke(1);
+                        callbackOut?.Invoke(deliveryVal);
                     }
                 }
             }
             catch (Exception ex)
             {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
+                callbackError?.Invoke(Tuple.Create("AP", "Error (ConfigDataDispenser), ha ocurrido una exepcion " + ex));
             }
         }
-
         #endregion
 
-        #region Finish
-
-        /// <summary>
-        /// Cierra los puertos
-        /// </summary>
-        public void ClosePorts()
-        {
-            try
-            {
-                if (_serialPortBills.IsOpen)
-                {
-                    _serialPortBills.Close();
-                }
-
-                if (_serialPortCoins.IsOpen)
-                {
-                    _serialPortCoins.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                callbackError?.Invoke(Tuple.Create("AP", "Error, ha ocurrido una exepcion " + ex));
-            }
-        }
-
+        #region "TimerInactividad"
+        //private void ActivateTimer()
+        //{
+        //    try
+        //    {
+        //        string timerInactividad = Utilities.GetConfiguration("TimerInactividad");
+        //        timer = new TimerGeneric(timerInactividad);
+        //        timer.CallBackClose = response =>
+        //        {
+        //            try
+        //            {
+        //                timer.CallBackClose = null;
+        //                callbackOut?.Invoke(deliveryVal);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                callbackError?.Invoke(Tuple.Create("ActivateTimer", ex.ToString()));
+        //            }
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        callbackError?.Invoke(Tuple.Create("DP", "Error (ActivateTimer), ha ocurrido una exepcion en ActivateTimer " + ex));
+        //    }
+        //}
         #endregion
     }
 }

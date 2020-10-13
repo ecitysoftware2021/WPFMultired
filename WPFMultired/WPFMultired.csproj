@@ -228,6 +228,7 @@
     <Compile Include="Models\ModalModel.cs" />
     <Compile Include="Models\Navigation.cs" />
     <Compile Include="Models\Payer.cs" />
+    <Compile Include="Models\PAYPAD_ERROR_CONSOLE.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeDocument.cs" />
@@ -488,7 +489,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\Keyboard\" />
     <Folder Include="Images\Publish\" />
   </ItemGroup>
   <ItemGroup>
@@ -927,6 +927,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\credit-card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\btn-continuar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Keyboard\Amarillo.png" />
+    <Resource Include="Images\Keyboard\Azul.png" />
+    <Resource Include="Images\Keyboard\BACKSPACE.png" />
+    <Resource Include="Images\Keyboard\DELETE.png" />
+    <Resource Include="Images\Keyboard\Gris.png" />
+    <Resource Include="Images\Keyboard\Gris2.png" />
+    <Resource Include="Images\Keyboard\OK.png" />
+    <Resource Include="Images\Keyboard\Rojo.png" />
+    <Resource Include="Images\Keyboard\Style1\BACKSPACE.png" />
+    <Resource Include="Images\Keyboard\Style1\Button.png" />
+    <Resource Include="Images\Keyboard\Style1\ButtonColor.png" />
+    <Resource Include="Images\Keyboard\Style1\DELETE.png" />
+    <Resource Include="Images\Keyboard\Style1\OK.png" />
+    <Resource Include="Images\Keyboard\Style2\BACKSPACE.png" />
+    <Resource Include="Images\Keyboard\Style2\Button.png" />
+    <Resource Include="Images\Keyboard\Style2\ButtonColor.png" />
+    <Resource Include="Images\Keyboard\Style2\DELETE.png" />
+    <Resource Include="Images\Keyboard\Style2\OK.png" />
+    <Resource Include="Images\Keyboard\Verde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\img-boucher.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

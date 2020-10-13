@@ -218,14 +218,34 @@
                 FontWeight="Bold"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
-             />
+             />-->
             <TextBlock 
-                Text="Valor total transacción"
+                Text="Valor de comisión:"
                 FontSize="40"
                 TextAlignment="Center"
                 Margin="100,180,0,0"
                 FontFamily="Arial"
-                Foreground="#FF606060"
+                Foreground="#FF0D4F92"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+             />
+            <TextBlock 
+                Text="{Binding ValorComision, StringFormat={}{0:C0}}"
+                FontSize="45"
+                TextAlignment="Center"
+                Margin="0,180,100,0"
+                FontFamily="Arial"
+                Foreground="#FF0D4F92"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+             />
+            <TextBlock 
+                Text="Valor a pagar:"
+                FontSize="40"
+                TextAlignment="Center"
+                Margin="100,100,0,0"
+                FontFamily="Arial"
+                Foreground="#FF0D4F92"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
              />
@@ -233,13 +253,12 @@
                 Text="{Binding PayValue, StringFormat={}{0:C0}}"
                 FontSize="45"
                 TextAlignment="Center"
-                Margin="0,180,100,0"
+                Margin="0,100,100,0"
                 FontFamily="Arial"
-                Foreground="#FF606060"
-                FontWeight="Bold"
+                Foreground="#FF0D4F92"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
-             />-->
+             />
         </Grid>
         <Grid Grid.Row="4">
 
@@ -253,7 +272,7 @@
                    Margin="0,0,50,0" />
 
             <Image x:Name="btnConsign"
-                   Source="../Images/Buttons/btn-deposit.png"
+                   Source="../Images/Buttons/btn-continuar.png"
                    Stretch="Fill"
                    Width="450"
                    Height="130"

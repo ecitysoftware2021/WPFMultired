@@ -84,6 +84,18 @@ namespace WPFMultired.Windows
                     this.BtnNo.Visibility = Visibility.Visible;
                     GifLoadder.Visibility = Visibility.Hidden;
                 }
+                else if (this.modal.TypeModal == EModalType.ReturnMoney)
+                {
+
+                    this.BtnFinish.Visibility = Visibility.Hidden;
+                    this.BtnEnterMony.Visibility = Visibility.Hidden;
+                    this.BtnOk.Visibility = Visibility.Hidden;
+                    this.BtnYes.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Visible;
+                    this.LblMessageReturn.Visibility = Visibility.Visible;
+                    this.BtnNo.Visibility = Visibility.Hidden;
+                    GifLoadder.Visibility = Visibility.Hidden;
+                }
             }
             catch (Exception ex)
             {

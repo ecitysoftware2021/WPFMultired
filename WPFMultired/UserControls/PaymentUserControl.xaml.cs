@@ -50,12 +50,13 @@ namespace WPFMultired.UserControls
                     ValorIngresado = 0,
                     viewList = new CollectionViewSource(),
                     Denominations = new List<DenominationMoney>(),
-                    ValorDispensado = 0
+                    ValorDispensado = 0,
+                    ValorComision = transaction.Product.AmountCommission
                 };
 
                 this.DataContext = this.paymentViewModel;
 
-                //ActivateWallet();
+                ActivateWallet();
             }
             catch (Exception ex)
             {
@@ -143,10 +144,12 @@ namespace WPFMultired.UserControls
                                     if (paymentViewModel.ValorSobrante >= 100)
                                     {
                                         var decimas = paymentViewModel.ValorSobrante % 100;
-                                        if (decimas > 0)
-                                        {
-                                            Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
-                                        }
+                                        //if (decimas > 0)
+                                        //{
+                                        //    Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
+                                        //}
+
+                                        Utilities.ShowModal(string.Concat("Su transacción tiene una devolución de saldo de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US"))), EModalType.ReturnMoney);
 
                                         ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
                                     }
@@ -235,15 +238,10 @@ namespace WPFMultired.UserControls
                     AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                 };
 
-                AdminPayPlus.ControlPeripherals.callbackResutOut = outLog =>
-                {
-                    paymentViewModel.SplitDenomination(outLog);
-                };
-
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
-                    AdminPayPlus.ControlPeripherals.callbackResutOut = null;
+                    //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
                     if (state)
                     {
                         paymentViewModel.ValorDispensado = valueOut;
@@ -297,7 +295,7 @@ namespace WPFMultired.UserControls
                     transaction.Payment = paymentViewModel;
                     transaction.State = statePay;
 
-                    AdminPayPlus.ControlPeripherals.ResetValues();
+                    AdminPayPlus.ControlPeripherals.ClearValues();
                     
                     if (transaction.IdTransactionAPi > 0)
                     {

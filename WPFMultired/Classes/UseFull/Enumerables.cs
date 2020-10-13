@@ -21,7 +21,8 @@ namespace WPFMultired.Classes
         MaxAmount = 3,
         Information = 4,
         Preload = 5,
-        NoPaper = 6
+        NoPaper = 6,
+        ReturnMoney = 7
     }
 
     public enum EError

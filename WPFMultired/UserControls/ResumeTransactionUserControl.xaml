@@ -24,7 +24,7 @@
         <Grid Grid.Row="1">
             <TextBlock 
                 Name="tb_name_company"
-                FontSize="30"
+                FontSize="25"
                 TextAlignment="Left"
                 Margin="0,0,200,0"
                 FontFamily="Arial"
@@ -34,7 +34,7 @@
             
             <TextBlock 
                 Name="tb_name_client"
-                FontSize="30"
+                FontSize="25"
                 TextAlignment="Left"
                 Margin="0,160,200,0"
                 FontFamily="Arial"

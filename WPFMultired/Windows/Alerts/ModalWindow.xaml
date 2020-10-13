@@ -79,6 +79,18 @@
             </Grid>
 
             <Grid Grid.Row ="2">
+                <TextBlock x:Name="LblMessageReturn" 
+                           Text="Si su saldo presenta valores inferiores a $100 este excedente se abonará automáticamente a su cuenta"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,30" 
+                           FontSize="30" 
+                           Width="690"
+                           Visibility="Hidden"
+                           FontFamily="Myriad Pro"
+                           Foreground="#FF606060"
+                           TextWrapping="WrapWithOverflow"
+                           VerticalAlignment="Top"
+                           TextAlignment="Center" />
                 <Image x:Name="BtnOk" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"

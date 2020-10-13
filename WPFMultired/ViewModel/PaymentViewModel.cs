@@ -17,6 +17,8 @@ namespace WPFMultired.ViewModel
         #endregion
 
         #region Attributes
+        public decimal ValorComision { get; set; }
+
         private decimal _payValue;
 
         private decimal _valorIngresado;
