@@ -52,21 +52,24 @@ namespace WPFMultired.UserControls
         private void Init()
         {
             try
-            {//TODO:config|
-                switch (transaction.CodeTypeTransaction)
+            {
+                string codDepositos = Utilities.GetConfiguration("CodDepositos");
+                string codEstadoCnt = Utilities.GetConfiguration("CodEstadoCuenta");
+                string codTarjetaCrd = Utilities.GetConfiguration("CodTarjetaCredito");
+
+                if (transaction.CodeTypeTransaction == codDepositos)
                 {
-                    case "00011":
-                        transaction.eTypeService = ETypeServiceSelect.Deposito;
-                        break;
-                    case "00013":
-                        transaction.eTypeService = ETypeServiceSelect.EstadoCuenta;
-                        break;
-                    case "00014":
-                        transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
-                        break;
-                    //default:
-                    //    transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
-                    //    break;
+                    transaction.eTypeService = ETypeServiceSelect.Deposito;
+                }
+                else
+                if (transaction.CodeTypeTransaction == codEstadoCnt)
+                {
+                    transaction.eTypeService = ETypeServiceSelect.EstadoCuenta;
+                }
+                else
+                if (transaction.CodeTypeTransaction == codTarjetaCrd)
+                {
+                    transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
                 }
 
                 ConfigView();

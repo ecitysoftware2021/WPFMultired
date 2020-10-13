@@ -59,7 +59,7 @@
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
                     <TextBlock  
-                           Text="Usted va a depositar dinero en la cuenta corriente regular"
+                           Text="Usted va a depositar dinero en la cuenta"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,0" 
                            FontSize="48" 
