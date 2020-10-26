@@ -65,22 +65,21 @@ namespace WPFMultired.UserControls
 
                     Dispatcher.BeginInvoke((Action)delegate
                     {
-                    if (transaction.State == ETransactionState.Error)
-                    {
-                        Utilities.RestartApp();
-                    }
-                    else
-                    {
-                        if (transaction.Type == ETransactionType.Deposit)
+                        if (transaction.State == ETransactionState.Error)
+                        {
+                            Utilities.RestartApp();
+                        }
+                        else
+                        {
+                            if (transaction.Type == ETransactionType.Deposit)
                             {
-                            //    ShowModal();
-                           // }
-                           // else
-                           // {
-                                Utilities.navigator.Navigate(UserControlView.Main);
+                                //    ShowModal();
+                               // }
+                               // else
+                               // {
+                                    Utilities.navigator.Navigate(UserControlView.Main);
                             }
                         }
-
                     });
                     GC.Collect();
                 });

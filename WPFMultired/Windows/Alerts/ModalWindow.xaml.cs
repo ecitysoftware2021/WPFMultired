@@ -87,11 +87,11 @@ namespace WPFMultired.Windows
                 else if (this.modal.TypeModal == EModalType.ReturnMoney)
                 {
 
-                    this.BtnFinish.Visibility = Visibility.Hidden;
-                    this.BtnEnterMony.Visibility = Visibility.Hidden;
+                    this.BtnFinish.Visibility = Visibility.Visible;
+                    this.BtnEnterMony.Visibility = Visibility.Visible;
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
-                    this.LblMessageTouch.Visibility = Visibility.Visible;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     this.LblMessageReturn.Visibility = Visibility.Visible;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Hidden;

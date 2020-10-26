@@ -137,32 +137,37 @@ namespace WPFMultired.UserControls
 
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
-                                if (!Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el excedente al siguiente pago o desea que el cajero le devuelva el excedente?", EModalType.MaxAmount))
+                                //if (!Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el excedente al siguiente pago o desea que el cajero le devuelva el excedente?", EModalType.MaxAmount))
+                                //{
+                                this.paymentViewModel.ImgCambio = Visibility.Visible;
+
+                                if (paymentViewModel.ValorSobrante >= 100)
                                 {
-                                    this.paymentViewModel.ImgCambio = Visibility.Visible;
+                                    var decimas = paymentViewModel.ValorSobrante % 100;
+                                    //if (decimas > 0)
+                                    //{
+                                    //    Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
+                                    //}
 
-                                    if (paymentViewModel.ValorSobrante >= 100)
+                                    if (!Utilities.ShowModal(string.Concat("Su transacción tiene una devolución de saldo de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US"))), EModalType.ReturnMoney))
                                     {
-                                        var decimas = paymentViewModel.ValorSobrante % 100;
-                                        //if (decimas > 0)
-                                        //{
-                                        //    Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
-                                        //}
-
-                                        Utilities.ShowModal(string.Concat("Su transacción tiene una devolución de saldo de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US"))), EModalType.ReturnMoney);
-
                                         ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
                                     }
                                     else
                                     {
-                                        Utilities.ShowModal("No se puede devolver el valor restante, se abonará el excedente al siguiente pago.", EModalType.Error);
                                         SavePay();
                                     }
                                 }
                                 else
                                 {
+                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {paymentViewModel.ValorSobrante.ToString("C")} al siguiente pago.", EModalType.Error);
                                     SavePay();
                                 }
+                                //}
+                                //else
+                                //{
+                                //    SavePay();
+                                //}
                             }
                             else
                             {
@@ -296,7 +301,7 @@ namespace WPFMultired.UserControls
                     transaction.State = statePay;
 
                     AdminPayPlus.ControlPeripherals.ClearValues();
-                    
+
                     if (transaction.IdTransactionAPi > 0)
                     {
                         Task.Run(() =>

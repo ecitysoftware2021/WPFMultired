@@ -34,7 +34,7 @@
             
             <TextBlock 
                 Name="tb_name_client"
-                FontSize="25"
+                FontSize="20"
                 TextAlignment="Left"
                 Margin="0,160,200,0"
                 FontFamily="Arial"

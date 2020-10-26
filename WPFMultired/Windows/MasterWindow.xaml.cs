@@ -31,7 +31,12 @@ namespace WPFMultired.Windows
                 }
 
                 WPKeyboard.Keyboard.ConsttrucKeyyboard(WPKeyboard.Keyboard.EStyle.style_2);
-                 
+
+                string a = Encryptor.Encrypt("usrapli");
+                string b = Encryptor.Encrypt("1Cero12019$/*");
+                string c = Encryptor.Encrypt("Ecity.Software");
+                string d = Encryptor.Encrypt("Ecitysoftware2019#");
+
                 Utilities.navigator.Navigate(UserControlView.Config);
 
                 DataContext = Utilities.navigator;
