@@ -77,7 +77,7 @@
                                    Stretch="Uniform" />
                             <TextBlock 
                                 Text="{Binding Item1}"
-                                FontSize="60"
+                                FontSize="45"
                                 Foreground="#FF1B69A8"
                                 Margin="100,0,0,0"
                                 TextAlignment="Left"

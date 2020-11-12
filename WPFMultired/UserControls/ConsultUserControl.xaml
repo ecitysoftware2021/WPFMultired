@@ -105,7 +105,6 @@
                        FontFamily="Arial"
                        FontWeight="Medium"
                        Margin="0,0,0,0"
-                       Password="28177238"
                        HorizontalContentAlignment="Center"
                        FontSize="48"
                        Width="630"
@@ -127,7 +126,8 @@
                        Foreground="#FF104B6D"
                        Visibility="{Binding VisibleInput}"
                        TabIndex="2"
-                       Text="{Binding Value1}" BorderBrush="#FF1D1B1B" />
+                       Text="{Binding Value1}" 
+                       BorderBrush="#FF1D1B1B" />
 
                 <Image Source="/Images/Buttons/btn-show-id.png"
                     x:Name="btn_show_id"

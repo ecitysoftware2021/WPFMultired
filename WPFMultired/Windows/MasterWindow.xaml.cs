@@ -36,6 +36,8 @@ namespace WPFMultired.Windows
                 string b = Encryptor.Encrypt("1Cero12019$/*");
                 string c = Encryptor.Encrypt("Ecity.Software");
                 string d = Encryptor.Encrypt("Ecitysoftware2019#");
+                string cA = Encryptor.Encrypt("Pay+ Comultrasan");
+                string dA = Encryptor.Encrypt("Comultrasan2020/");
 
                 Utilities.navigator.Navigate(UserControlView.Config);
 
