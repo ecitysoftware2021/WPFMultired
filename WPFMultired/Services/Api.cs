@@ -108,7 +108,11 @@ namespace WPFMultired.Services
                 client = new HttpClient();
                 client.BaseAddress = new Uri(basseAddress);
 
-                requestApi.Data = Encryptor.Encrypt(data.ToString(), string.Concat(token, "|", DateTime.Today.ToString("ddMMyy")));
+                //if (data != null)
+                //{
+                    //requestApi.Data = Encryptor.Encrypt(JsonConvert.SerializeObject(data), string.Concat(requestApi.Session, "|", DateTime.Today.ToString("ddMMyy")));
+                    requestApi.Data = data;
+                //}
 
                 var request = JsonConvert.SerializeObject(requestApi);
                 var content = new StringContent(request, Encoding.UTF8, "Application/json");
