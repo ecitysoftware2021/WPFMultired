@@ -124,6 +124,7 @@
     <Compile Include="Classes\DB\SqliteDataAccess.cs" />
     <Compile Include="Classes\Peripherals\ControlPeripherals.cs" />
     <Compile Include="Classes\Peripherals\ReaderBarCode.cs" />
+    <Compile Include="Classes\UseFull\TimerGeneric.cs" />
     <Compile Include="Classes\UseFull\TimerService.cs" />
     <Compile Include="Classes\UseFull\Encryptor.cs" />
     <Compile Include="Classes\UseFull\Enumerables.cs" />
