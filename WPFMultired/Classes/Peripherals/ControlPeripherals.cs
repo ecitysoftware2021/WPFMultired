@@ -11,7 +11,7 @@ namespace WPFMultired.Classes
         #region References
 
         #region "Timer"
-        //private TimerGeneric timer;
+        private TimerGeneric timer;
         #endregion
 
 
@@ -410,7 +410,7 @@ namespace WPFMultired.Classes
             {
                 stateError = false;
                 dispenserValue = valueDispenser;
-                //ActivateTimer();
+                ActivateTimer();
                 ValidateValueDispenser();
             }
             catch (Exception ex)
@@ -594,8 +594,8 @@ namespace WPFMultired.Classes
                     {
                         if (typeDispend == 0)
                         {
-                            //timer.CallBackClose = null;
-                            //timer.CallBackStop?.Invoke(1);
+                            timer.CallBackClose = null;
+                            timer.CallBackStop?.Invoke(1);
                             callbackTotalOut?.Invoke(deliveryVal);
                         }
                     }
@@ -604,8 +604,8 @@ namespace WPFMultired.Classes
                 {
                     if (typeDispend == 0)
                     {
-                        //timer.CallBackClose = null;
-                        //timer.CallBackStop?.Invoke(1);
+                        timer.CallBackClose = null;
+                        timer.CallBackStop?.Invoke(1);
                         callbackOut?.Invoke(deliveryVal);
                     }
                 }
@@ -618,30 +618,30 @@ namespace WPFMultired.Classes
         #endregion
 
         #region "TimerInactividad"
-        //private void ActivateTimer()
-        //{
-        //    try
-        //    {
-        //        string timerInactividad = Utilities.GetConfiguration("TimerInactividad");
-        //        timer = new TimerGeneric(timerInactividad);
-        //        timer.CallBackClose = response =>
-        //        {
-        //            try
-        //            {
-        //                timer.CallBackClose = null;
-        //                callbackOut?.Invoke(deliveryVal);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                callbackError?.Invoke(Tuple.Create("ActivateTimer", ex.ToString()));
-        //            }
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        callbackError?.Invoke(Tuple.Create("DP", "Error (ActivateTimer), ha ocurrido una exepcion en ActivateTimer " + ex));
-        //    }
-        //}
+        private void ActivateTimer()
+        {
+            try
+            {
+                string timerInactividad = Utilities.GetConfiguration("TimerInactividad");
+                timer = new TimerGeneric(timerInactividad);
+                timer.CallBackClose = response =>
+                {
+                    try
+                    {
+                        timer.CallBackClose = null;
+                        callbackOut?.Invoke(deliveryVal);
+                    }
+                    catch (Exception ex)
+                    {
+                        callbackError?.Invoke(Tuple.Create("ActivateTimer", ex.ToString()));
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                callbackError?.Invoke(Tuple.Create("DP", "Error (ActivateTimer), ha ocurrido una exepcion en ActivateTimer " + ex));
+            }
+        }
         #endregion
     }
 }

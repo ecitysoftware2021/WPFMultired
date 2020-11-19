@@ -84,7 +84,7 @@ namespace WPFMultired.UserControls
                         else
                         {
                             //TODO:descomentar
-                            //AdminPayPlus.Recorder.Grabar(transaction.IdTransactionAPi, 0);
+                            AdminPayPlus.Recorder.Grabar(transaction.IdTransactionAPi, 0);
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                         }
                     });
