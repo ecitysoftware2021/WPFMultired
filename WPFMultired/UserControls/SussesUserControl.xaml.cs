@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,7 +50,7 @@ namespace WPFMultired.UserControls
 
                 GC.Collect();
 
-                AdminPayPlus.Recorder.FinalizarGrabacion();
+                CLSGrabador.FinalizarGrabacion();
 
                 Task.Run(() =>
                 {

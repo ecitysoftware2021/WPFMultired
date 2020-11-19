@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using WPFMultired.Resources;
 using System.Threading;
 using System.Globalization;
+using Grabador.Transaccion;
 
 namespace WPFMultired.UserControls
 {
@@ -359,7 +360,7 @@ namespace WPFMultired.UserControls
                 {
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    AdminPayPlus.Recorder.FinalizarGrabacion();
+                    CLSGrabador.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
                         if (paymentViewModel.ValorIngresado > 0)

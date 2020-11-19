@@ -63,12 +63,12 @@ namespace WPFMultired.Classes
             get { return _controlPeripherals; }
         }
 
-        private static CLSGrabador _recorder;
+        //private static CLSGrabador _recorder;
 
-        public static CLSGrabador Recorder
-        {
-            get { return _recorder; }
-        }
+        //public static CLSGrabador Recorder
+        //{
+        //    get { return _recorder; }
+        //}
 
         private static ApiIntegration _apiIntegration;
 
@@ -124,10 +124,10 @@ namespace WPFMultired.Classes
                 _readerBarCode = new ReaderBarCode();
             }
 
-            if (_recorder == null)
-            {
-                _recorder = new CLSGrabador();
-            }
+            //if (_recorder == null)
+            //{
+            //    _recorder = new CLSGrabador();
+            //}
         }
         #endregion
 

@@ -511,3 +511,4 @@ C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Deb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
+C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Grabador.Transaccion.dll
