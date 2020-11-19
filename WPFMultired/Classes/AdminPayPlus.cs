@@ -145,8 +145,8 @@ namespace WPFMultired.Classes
 
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
 
-                    //ValidatePeripherals();
-                    callbackResult?.Invoke(true);
+                    ValidatePeripherals();
+                    //callbackResult?.Invoke(true);
                 }
                 else
                 {
