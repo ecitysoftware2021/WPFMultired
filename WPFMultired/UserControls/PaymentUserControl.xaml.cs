@@ -362,7 +362,8 @@ namespace WPFMultired.UserControls
                 {
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    CLSGrabador.FinalizarGrabacion();
+                    //TODO:descomentar
+                    //CLSGrabador.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
                         if (paymentViewModel.ValorIngresado > 0)

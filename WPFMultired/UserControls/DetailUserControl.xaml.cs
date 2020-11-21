@@ -88,15 +88,16 @@ namespace WPFMultired.UserControls
                         {
                             Task.Run(() =>
                             {
-                                CLSGrabador.IniciarGrabacion(new DataVidio
-                                {
-                                    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
-                                    mailAlert = "'ecitysoftware@gmail.com'",
-                                    transactionID = transaction.IdTransactionAPi,
-                                    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
-                                    selectedCamera = 0,
-                                    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
-                                });
+                                //TODO:descomentar
+                                //CLSGrabador.IniciarGrabacion(new DataVidio
+                                //{
+                                //    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                //    mailAlert = "'ecitysoftware@gmail.com'",
+                                //    transactionID = transaction.IdTransactionAPi,
+                                //    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                //    selectedCamera = 0,
+                                //    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                //});
                             });
 
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);

@@ -102,7 +102,7 @@ namespace WPFMultired.UserControls.Administrator
                 {
                     Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, false);
                     Initial();
-                } 
+                }
             });
         }
     }

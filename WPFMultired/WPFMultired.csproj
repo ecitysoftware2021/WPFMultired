@@ -112,7 +112,7 @@
     </Reference>
     <Reference Include="WPKeyboard, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TecladoEcity\WPKeyboard\WPKeyboard\bin\Debug\WPKeyboard.dll</HintPath>
+      <HintPath>..\..\WPProcinal\WPProcinal\bin\Debug\WPKeyboard.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

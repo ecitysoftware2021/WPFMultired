@@ -15,24 +15,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="380" />
             <RowDefinition Height="220" />
-            <RowDefinition Height="270" />
-            <RowDefinition Height="250" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="110" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="250" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="160" />
-            <RowDefinition Height="280"/>
+            <RowDefinition Height="280" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="1">
             <Image 
-                Source="/Images/Buttons/btn-back.png"
-                Name="btn_back"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Width="200"
-                Margin="50,0,0,0"
+                Source="../Images/Buttons/NewAtras.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,300,0"
                 TouchDown="Btn_back_TouchDown" 
             />
             <TextBlock 
@@ -45,51 +44,47 @@
                 Margin="0,0,80,0"
             />
             <Image 
-                Source="/Images/Buttons/btn-exit.png"
-                Name="btn_exit"
+                Source="../Images/Buttons/NewSalir.png"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Grid.Column="4"
-                Width="200"
-                Margin="0,0,50,0"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,50,0"
                 TouchDown="Btn_exit_TouchDown" 
             />
         </Grid>
         <Grid Grid.Row="2">
             <TextBlock
                 Text="{Binding Colum1}"
-                Foreground="#FF0D679A"
-                Margin="0,0,0,50"
+                Foreground="Gray"
+                Margin="0,0,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Name="lbl_user"
-                FontWeight="Bold"
-                FontSize="50" 
+                FontSize="30" 
             />
             <TextBlock 
                 Text="{Binding Colum2}"
-                Foreground="#FF0D679A"
-                Margin="0,50,0,0"
+                Foreground="Gray"
+                Margin="0,0,0,10"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Name="lbl_id"
-                FontWeight="Bold"
-                FontSize="50" 
+                FontSize="30" 
             />
         </Grid>
         <Grid Grid.Row="3">
             <TextBox 
                 x:Name="txtCountNumber"
-                md:HintAssist.Hint="   Digite los últimos (4) dígitos de la cuenta"
+                md:HintAssist.Hint="                   Digite los últimos (4) dígitos de la cuenta"
                 md:HintAssist.IsFloating="True"
                 md:HintAssist.FloatingScale="0.3"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom"
                 TextAlignment="Center"
-                Height="110" 
+                Height="70" 
                 Width="900"
-                Margin="0,0,0,60"
-                FontSize="35"
+                Margin="0,0,0,0"
+                FontSize="30"
                 Foreground="Gray" 
                 FontFamily="Montserrat"
                 VerticalContentAlignment="Center"
@@ -109,10 +104,10 @@
                 Source="/Images/Buttons/lupa.png"
                 Name="btn_Search"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 Width="60"
                 Opacity="0.3"
-                Margin="0,0,130,70" 
+                Margin="0,50,130,0" 
                 TouchDown="btn_Search_TouchDown"
             />
             <TextBlock 
@@ -120,7 +115,7 @@
                 Text="No se encontrarón coincidencias"
                 Margin="0,0,0,0"
                 Foreground="Red"
-                Visibility="Hidden"
+                Visibility="Visible"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
@@ -176,12 +171,12 @@
                                 TouchDown="Grid_TouchDown">
                                 <TextBlock 
                                     Text="{Binding Item1}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
                                     TextAlignment="Justify"
                                     TextWrapping="Wrap"
                                     Margin="150,0,0,0"
-                                    Foreground="#FF104B6D"
+                                    Foreground="Gray"
                                     Height="60"
                                     Width="700"
                                     VerticalAlignment="Center"
@@ -190,12 +185,12 @@
                                 />
                                 <TextBlock
                                     Text="{Binding Item2}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
                                     TextAlignment="Justify"
                                     TextWrapping="Wrap"
                                     Margin="0,0,100,0"
-                                    Foreground="#FF104B6D"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                 />
@@ -203,7 +198,7 @@
                                     Source="{Binding Item3}"
                                     Height="40"
                                     Stretch="Uniform"
-                                    Margin="80,0,0,10"
+                                    Margin="80,0,0,20"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center" 
                                 />
@@ -456,27 +451,27 @@
         <Grid Name="grvDetalle" Grid.Row="5">
             <TextBlock 
                 Text="Valor de comisión"
-                Foreground="#FF104B6D"
-                Margin="100,0,0,80"
+                Foreground="Gray"
+                Margin="100,0,0,70"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="40"
+                VerticalAlignment="Bottom"
+                FontSize="30"
             />
             <TextBlock 
                 Name="txtValorComision"
-                Foreground="#FF104B6D"
-                Margin="0,0,100,80"
+                Foreground="Gray"
+                Margin="0,0,100,70"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                FontSize="40"
+                VerticalAlignment="Bottom"
+                FontSize="30"
             />
             <TextBlock 
                 Text="Valor a pagar"
-                Foreground="#FF104B6D"
-                Margin="100,0,0,0"
+                Foreground="Gray"
+                Margin="100,0,0,80"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontSize="40"
+                VerticalAlignment="Center"
+                FontSize="30"
             />
             <TextBox  
                 x:Name="txtValor" 
@@ -484,14 +479,14 @@
                 md:HintAssist.IsFloating="True"
                 md:HintAssist.FloatingScale="0.3"
                 Text="{Binding Val, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
-                Height="70" 
-                Margin="0,0,100,0" 
-                VerticalAlignment="Top"
+                Height="60" 
+                Margin="0,0,100,80" 
+                VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                Width="320"
+                Width="250"
                 TextAlignment="Right"
-                Foreground="#FF104B6D"
-                FontSize="40"
+                Foreground="Gray"
+                FontSize="30"
                 FontFamily="Arial" 
                 TouchDown="txtValor_TouchDown"
                 TextChanged="txtValor_TextChanged"
@@ -507,7 +502,7 @@
             </TextBox>
             <TextBlock 
                 x:Name="txtMsInfo"
-                Margin="0,0,0,30"
+                Margin="0,0,0,0"
                 Width="560"
                 TextAlignment="Center"
                 TextWrapping="Wrap"
@@ -519,7 +514,7 @@
             />
             <TextBlock 
                 x:Name="txtErrorValor"
-                Margin="0,0,100,100"
+                Margin="0,0,100,0"
                 Width="520"
                 TextAlignment="Center"
                 TextWrapping="Wrap"
@@ -536,7 +531,7 @@
                 Name="btn_Accept"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Height="130"
+                Height="120"
                 Stretch="Uniform"
                 Margin="0,0,0,0"
                 TouchDown="btn_Accept_TouchDown"

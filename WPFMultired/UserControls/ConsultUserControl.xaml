@@ -46,8 +46,8 @@
         <Grid Grid.Row="2">
             <TextBlock 
                 Name="txt_title"
-                FontSize="40"
-                Width="900"
+                FontSize="30"
+                Width="670"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,0"
@@ -68,11 +68,11 @@
                 <TextBlock 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Margin="0,30,0,0"
+                    Margin="0,50,0,0"
                     TextAlignment="Center"
                     TextWrapping="Wrap"
                     FontFamily="Arial"
-                    FontSize="48"
+                    FontSize="40"
                     Foreground="#FF706F6F"
                     Text="{Binding Row1}" 
                 />
@@ -85,12 +85,22 @@
                     FontFamily="Arial"
                     FontWeight="Medium"
                     Width="630"
-                    Foreground="#FF104B6D"
-                    FontSize="52"
+                    Foreground="Gray"
+                    FontSize="30"
                     ItemsSource="{Binding OptionsList}"
                     SelectedValuePath="Key"
                     DisplayMemberPath="Value"
                     SelectionChanged="Cmb_type_id_SelectionChanged"
+                />
+                <TextBlock  
+                    Text="________________________________________________________________________________________________________________________________________________________"
+                    HorizontalAlignment="Center"
+                    Margin="0,70,0,0" 
+                    FontSize="10" 
+                    Foreground="#FFA3BD36"
+                    FontFamily="Myriad Pro"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
                 />
             </Grid>
 
@@ -102,7 +112,7 @@
                     FontFamily="Arial"
                     TextAlignment="Center"
                     TextWrapping="Wrap"
-                    FontSize="48"
+                    FontSize="40"
                     Foreground="#FF706F6F"
                     Text="{Binding Row2}" 
                 />
@@ -114,10 +124,10 @@
                     FontWeight="Medium"
                     Margin="0,0,0,0"
                     HorizontalContentAlignment="Center"
-                    FontSize="48"
+                    FontSize="30"
                     Width="630"
                     Visibility="{Binding VisibleId}"
-                    Foreground="#FF104B6D"
+                    Foreground="Gray"
                     TabIndex="0"
                     TouchDown="PassBoxIdentification_TouchDown"
                 />
@@ -129,21 +139,31 @@
                     FontWeight="Medium"
                     Margin="0,0,0,0"
                     HorizontalContentAlignment="Center"
-                    FontSize="48"
+                    FontSize="30"
                     IsEnabled="False"
                     Width="630"
-                    Foreground="#FF104B6D"
+                    Foreground="Gray"
                     Visibility="{Binding VisibleInput}"
                     TabIndex="2"
                     Text="{Binding Value1}" 
                     BorderBrush="#FF1D1B1B"
+                />
+                <TextBlock  
+                    Text="________________________________________________________________________________________________________________________________________________________"
+                    HorizontalAlignment="Center"
+                    Margin="0,35,0,0" 
+                    FontSize="10" 
+                    Foreground="#FFA3BD36"
+                    FontFamily="Myriad Pro"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
                 />
                 <Image 
                     Source="/Images/Buttons/Newbtn-show-id.png"
                     x:Name="btn_show_id"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
-                    Margin="0,0,150,0"                  
+                    Margin="0,0,150,10"                  
                     Width="60"
                     TouchEnter="Btn_show_id_TouchEnter"
                     TouchLeave="Btn_show_id_TouchLeave"
