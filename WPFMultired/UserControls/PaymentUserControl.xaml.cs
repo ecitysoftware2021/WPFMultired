@@ -31,6 +31,8 @@ namespace WPFMultired.UserControls
 
             this.transaction = transaction;
 
+            grvPublicity.Content = Utilities.UCPublicityBanner;
+
             OrganizeValues();
         }
 

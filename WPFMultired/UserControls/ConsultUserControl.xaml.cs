@@ -33,6 +33,8 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
 
+            grvPublicity.Content = Utilities.UCPublicityBanner;
+
             if (transaction == null)
             {
                 transaction = new Transaction

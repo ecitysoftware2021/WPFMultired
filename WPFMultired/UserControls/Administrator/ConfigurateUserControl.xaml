@@ -12,66 +12,67 @@
         Width="1080">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg" Stretch="Uniform"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="400" />
-            <RowDefinition Height="1200" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="380" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-
+        <Grid Grid.Row="0">
+            <ContentControl x:Name="grvPublicity"></ContentControl>
+        </Grid>
         <Grid Grid.Row="1">
             <TextBlock
-                FontSize="75"
-                VerticalAlignment="Bottom"
+                FontSize="65"
+                VerticalAlignment="Top"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,0"
-                Foreground="#FF80BC4A" 
+                Margin="0,300,0,0"
+                Foreground="#FFA3BD36" 
                 TextAlignment="Center"
                 TextWrapping="Wrap"
-                Width="800"
+                Width="600"
                 FontFamily="Arial" 
                 Text="Configuración del dispositivo"
-                FontWeight="Bold" />
-        </Grid>
-
-        <Grid Grid.Row="2">
+                FontWeight="Bold" 
+            />
             <TextBlock 
                 Text="Espere mientras se configura el dispositivo para iniciar"
                 FontFamily="Arial"
-                FontSize="60"
-                VerticalAlignment="Top"
+                FontSize="50"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Margin="90,200,90,0"
-                Foreground="#FF0D679A"
+                Margin="0,0,0,120" 
+                Width="800"
+                Foreground="Gray"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                FontWeight="Bold" />
-            
+                FontWeight="Bold" 
+            />
             <Image 
                 gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                 gif:ImageBehavior.AnimateInDesignMode="True"
                 gif:ImageBehavior.AutoStart="True"
                 x:Name="GifLoadder" 
-                Stretch="Fill"
-                Margin="30,180,0,0" 
+                Stretch="Uniform"
+                Margin="0,550,0,0" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Width="450" 
-                Height="450" />
-            
-            <TextBlock x:Name="txtMs"
+                Height="300" 
+            />
+            <TextBlock 
+                x:Name="txtMs"
                 Text="{Binding DescriptionStatusPayPlus}"
                 FontFamily="Arial"
                 FontSize="40"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,200"
-                Foreground="#FF0D679A"
+                Margin="0,0,0,100"
+                Foreground="Gray"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                FontWeight="Bold"  />
+                FontWeight="Bold"  
+            />
         </Grid>
     </Grid>
 </UserControl>

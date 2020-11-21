@@ -263,23 +263,14 @@
     <Compile Include="UserControls\DataListUserControl.xaml.cs">
       <DependentUpon>DataListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DetailAcountUserControl.xaml.cs">
-      <DependentUpon>DetailAcountUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\DetailUserControl.xaml.cs">
       <DependentUpon>DetailUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\MenuCompaniesUserControl.xaml.cs">
-      <DependentUpon>MenuCompaniesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MenuUserControl.xaml.cs">
       <DependentUpon>MenuUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Modals\ReadQRUserControl.xaml.cs">
-      <DependentUpon>ReadQRUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Modals\SelectIdiomUserControl.xaml.cs">
-      <DependentUpon>SelectIdiomUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\PublicityUserControl.xaml.cs">
+      <DependentUpon>PublicityUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ResumeTransactionUserControl.xaml.cs">
       <DependentUpon>ResumeTransactionUserControl.xaml</DependentUpon>
@@ -490,7 +481,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\Publish\" />
+    <Resource Include="Images\Buttons\Newbtn-show-id.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\backspace.png" />
@@ -547,15 +538,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\DetailAcountUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\DetailUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\MenuCompaniesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -563,11 +546,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Modals\ReadQRUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\Modals\SelectIdiomUserControl.xaml">
+    <Page Include="UserControls\PublicityUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -955,6 +934,52 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\img-boucher.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bgNewVacio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bgNewVacio2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\bgNewVacio3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewAceptar.png" />
+    <Resource Include="Images\Buttons\NewSalir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NoQR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewContinuar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewDevolver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Resources\New00011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Publish\Publicity1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewConsultar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewAtras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewAceptar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewCancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\NewInfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

@@ -31,6 +31,8 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
 
+            grvPublicity.Content = Utilities.UCPublicityBanner;
+
             this.transaction = transaction;
 
             this.DataContext = transaction.Product;
@@ -111,6 +113,11 @@ namespace WPFMultired.UserControls
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
+        }
+
+        private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
+        {
+            Utilities.navigator.Navigate(UserControlView.Main);
         }
     }
 }

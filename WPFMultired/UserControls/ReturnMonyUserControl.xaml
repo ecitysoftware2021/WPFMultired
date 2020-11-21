@@ -11,52 +11,54 @@
         Width="1080" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="../Images/Backgrounds/bg-blanck.jpg" Stretch="Fill"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="400" />
-            <RowDefinition Height="1000" />
-            <RowDefinition Height="550"/>
+            <RowDefinition Height="380" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" >
+        <Grid Grid.Row="0">
+            <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-
         <Grid Grid.Row="1" >
-            <TextBlock Text="Transacción en Proceso"
-                       TextWrapping="Wrap"
-                       TextAlignment="Center"
-                       FontSize="60"
-                       FontWeight="UltraBlack"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       Foreground="#FF80BC4A" 
-                       Margin="0,0,0,0"
-                       FontFamily="Myriad Pro" />
-
-            <Image  gif:ImageBehavior.AnimatedSource="/images/Gif/gif-preload.gif" 
-                    gif:ImageBehavior.AnimateInDesignMode="True"
-                    gif:ImageBehavior.AutoStart="True"
-                    x:Name="GifLoadder" 
-                    Stretch="Fill"
-                    Margin="0,300,0,0" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" 
-                    Width="300" 
-                    Height="300"/>
-
-            <TextBlock Text="Por favor espere, estamos contando su dinero"
-                       TextWrapping="Wrap"
-                       TextAlignment="Center"
-                       FontSize="55"
-                       Width="800"
-                       FontWeight="UltraBlack"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       Foreground="#FF0D679A" 
-                       Margin="0,200,0,0"
-                       FontFamily="Myriad Pro" />
+            <TextBlock 
+                Text="Transacción en Proceso"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                FontSize="60"
+                FontWeight="UltraBlack"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#FFA3BD36" 
+                Margin="0,0,0,200"
+                FontFamily="Myriad Pro" 
+            />
+            <Image  
+                gif:ImageBehavior.AnimatedSource="/images/Gif/gif-preload.gif" 
+                gif:ImageBehavior.AnimateInDesignMode="True"
+                gif:ImageBehavior.AutoStart="True"
+                x:Name="GifLoadder" 
+                Stretch="Fill"
+                Margin="0,0,0,100" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Center" 
+                Width="300" 
+                Height="300"
+            />
+            <TextBlock 
+                Text="Por favor espere, estamos contando su dinero"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                FontSize="55"
+                Width="800"
+                FontWeight="UltraBlack"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="Gray" 
+                Margin="0,200,0,0"
+                FontFamily="Myriad Pro"
+            />
         </Grid>
     </Grid>
 </UserControl>

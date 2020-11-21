@@ -48,7 +48,6 @@ namespace WPFMultired.Classes
         Main,
         Consult,
         Menu,
-        MenuCompaniesUserControl,
         PaySuccess,
         Pay,
         Payer,

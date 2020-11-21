@@ -10,34 +10,47 @@
              Width="1080" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-menu.jpg"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="280" />
+            <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
-            <Image x:Name="btn_exit"
-               Source="/Images/Buttons/btn-exit.png"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               Width="250"
-               Margin="0,20,20,0"
-               TouchDown="Btn_back_TouchDown" />
+            <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-
-        <Grid Grid.Row="2">
-            <ListView x:Name="lv_type_transactions" 
-                    Margin="0,200,0,0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top"
-                    ItemsSource="{Binding}">
+        <Grid Grid.Row="1">
+            <Image 
+                x:Name="btn_exit"
+                Source="/Images/Buttons/NewSalir.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,50,0"
+                TouchDown="Btn_back_TouchDown" 
+            />
+            <TextBlock 
+                Text="Selecciona la transacción que quieres realizar:"
+                FontFamily="Arial"
+                FontSize="50"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,400" 
+                Width="800"
+                Foreground="Gray"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                FontWeight="Bold" 
+            />
+            <ListView 
+                x:Name="lv_type_transactions" 
+                Margin="0,700,0,0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                ItemsSource="{Binding}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent" />
@@ -53,28 +66,32 @@
                 </ListView.ItemContainerStyle>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="1"
-                                 HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"/>
+                        <UniformGrid 
+                            Columns="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                        />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="grid_list"
+                        <Grid 
+                            x:Name="grid_list"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Background="Transparent"
                             Margin="0,0,0,0"
                             Height="120"
-                              Width="850"
+                            Width="850"
                             Tag="{Binding Item3}"
                             TouchDown="Grid_list_TouchDown">
-
-                            <Image Source="/Images/Resources/00011.png"
-                                   HorizontalAlignment="Left" 
-                                   VerticalAlignment="Center" 
-                                   Height="50" 
-                                   Stretch="Uniform" />
+                            <Image 
+                                Source="/Images/Resources/New00011.png"
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Center" 
+                                Height="50" 
+                                Stretch="Uniform" 
+                            />
                             <TextBlock 
                                 Text="{Binding Item1}"
                                 FontSize="45"
@@ -83,7 +100,8 @@
                                 TextAlignment="Left"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Left"   
-                                VerticalAlignment="Center" />
+                                VerticalAlignment="Center" 
+                            />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

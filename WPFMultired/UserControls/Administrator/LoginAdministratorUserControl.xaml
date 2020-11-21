@@ -10,171 +10,154 @@
         Width="1080" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"
-                        Stretch="Fill"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio3.jpg" Stretch="Fill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="420" />
             <RowDefinition Height="*" />
             <RowDefinition Height="500" />
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <!--<Image x:Name="BtnExit"
-                   Source="/Images/Buttons/b-salir.png"
-                   Grid.Column="0"
-                   HorizontalAlignment="Right" 
-                   VerticalAlignment="Top" 
-                   Width="150"
-                   Height="60" 
-                   Margin="0,80,0,0"
-                   Stretch="Uniform"
-                   PreviewStylusDown="BtnExit_PreviewStylusDown" />-->
-        </Grid>
         <Grid Grid.Row="1">
-            <TextBlock Text="Modo Administrador"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       Margin="0,50,0,0"
-                       FontSize="65"
-                       TextWrapping="WrapWithOverflow"
-                       Width="700" 
-                       Foreground="#FF0D4F90" 
-                       TextAlignment="Center"
-                       FontFamily="Myriad Pro Cond" 
-                       FontWeight="Bold" />
-
-
+            <TextBlock 
+                Text="Modo Administrador"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,50,0,0"
+                FontSize="65"
+                Width="700" 
+                Foreground="#FFA3BD36" 
+                TextAlignment="Center"
+                FontFamily="Myriad Pro Cond" 
+                FontWeight="Bold" 
+            />
             <Grid Name="gd_qr" Visibility="{Binding VisibleGdQr}">
-                <TextBlock Text="Por favor acerque el código QR que fue enviado a su correo"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="0,0,0,410"
-                       FontSize="45"
-                       TextWrapping="WrapWithOverflow"
-                       Width="700" 
-                       Foreground="#FF86BC30" 
-                       TextAlignment="Center"
-                       FontFamily="Myriad Pro Cond" 
-                       FontWeight="Bold" />
-
-                <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-qr-scan.gif"
-                   Name="qr_gif"
-                   HorizontalAlignment="Center"
-                   Height="280" 
-                   Margin="0,50,0,0"
-                   VerticalAlignment="Center"
-                   Width="280" />
-
-                <Image Name="btn_no_qr" 
-                   HorizontalAlignment="Center"
-                   Margin="0,500,0,0" 
-                   Source="/Images/Buttons/btn-no-qr.png"
-                   VerticalAlignment="Center" 
-                   Width="300"
-                   Height="80"
-                   TouchDown="Btn_no_qr_TouchDown"/>
+                <TextBlock 
+                    Text="Por favor acerque el código QR que fue enviado a su correo"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,410"
+                    FontSize="45"
+                    TextWrapping="WrapWithOverflow"
+                    Width="700" 
+                    Foreground="Gray" 
+                    TextAlignment="Center"
+                    FontFamily="Myriad Pro Cond" 
+                    FontWeight="Bold" 
+                />
+                <Image 
+                    gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-qr-scan.gif"
+                    Name="qr_gif"
+                    HorizontalAlignment="Center"
+                    Height="280" 
+                    Margin="0,50,0,0"
+                    VerticalAlignment="Center"
+                    Width="280" 
+                />
+                <Image 
+                    Name="btn_no_qr" 
+                    HorizontalAlignment="Center"
+                    Margin="0,500,0,0" 
+                    Source="/Images/Buttons/noqr.png"
+                    VerticalAlignment="Center" 
+                    Height="100"
+                    Stretch="Uniform"
+                    TouchDown="Btn_no_qr_TouchDown"
+                />
             </Grid>
-
             <Grid Name="gd_login" Visibility="{Binding VisibleGdLogin}">
-                <TextBlock HorizontalAlignment="Center"
-                   Text="Usuario"
-                   Margin="0,0,0,460" 
-                   TextAlignment="Center"
-                   VerticalAlignment="Center" 
-                   Width="300"
-                   FontSize="40"
-                   Height="56"
-                   Foreground="#FF144982" 
-                   FontFamily="Myriad Pro Cond" />
-                
-                <TextBox HorizontalAlignment="Center" 
-                     TextAlignment="Center"
-                     Height="60" 
-                     Margin="0,0,0,270" 
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Center" 
-                     Width="415"
-                     TabIndex="0"
-                     Text="{Binding User , UpdateSourceTrigger=PropertyChanged}"
-                     x:Name="TxtUser" 
-                     FontSize="35" 
-                     Foreground="#FF2F302E" 
-                     FontWeight="Bold" 
-                     FontFamily="Myriad Pro Cond"
-                     CaretBrush="#FFB2B0B8"
-                     Background="White" 
-                     SelectionBrush="#FF545555" />
-                
-                <TextBlock HorizontalAlignment="Center"
-                   Text="Contraseña"
-                   Margin="0,0,0,10" 
-                   VerticalAlignment="Center" 
-                   Width="300"
-                   FontSize="40"
-                   Height="56"
-                   TextAlignment="Center"
-                   Foreground="#FF15508C" 
-                   FontFamily="Myriad Pro Cond" />
-                
-                <PasswordBox HorizontalAlignment="Center" 
-                     Height="60" 
-                     Margin="0,150,0,0"
-                     TabIndex="1"
-                     HorizontalContentAlignment="Center"
-                     VerticalAlignment="Center" 
-                     Width="415"
-                     x:Name="TxtPassword" 
-                     FontSize="35" 
-                     Foreground="#FF2F302E" 
-                     FontWeight="Bold" 
-                     FontFamily="Myriad Pro Cond" 
-                     CaretBrush="#FFB2B0B8" 
-                     Background="White" />
+                <TextBlock 
+                    HorizontalAlignment="Center"
+                    Text="Usuario"
+                    Margin="0,0,0,460" 
+                    TextAlignment="Center"
+                    VerticalAlignment="Center" 
+                    Width="300"
+                    FontSize="40"
+                    Height="56"
+                    Foreground="#FFA3BD36" 
+                    FontFamily="Myriad Pro Cond" 
+                />
+                <TextBox 
+                    HorizontalAlignment="Center" 
+                    TextAlignment="Center"
+                    Height="60" 
+                    Margin="0,0,0,270" 
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center" 
+                    Width="415"
+                    TabIndex="0"
+                    Text="{Binding User , UpdateSourceTrigger=PropertyChanged}"
+                    x:Name="TxtUser" 
+                    FontSize="35" 
+                    Foreground="#FF2F302E" 
+                    FontWeight="Bold" 
+                    FontFamily="Myriad Pro Cond"
+                    CaretBrush="#FFB2B0B8"
+                    Background="White" 
+                    SelectionBrush="#FF545555"
+                />
+                <TextBlock 
+                    HorizontalAlignment="Center"
+                    Text="Contraseña"
+                    Margin="0,0,0,10" 
+                    VerticalAlignment="Center" 
+                    Width="300"
+                    FontSize="40"
+                    Height="56"
+                    TextAlignment="Center"
+                    Foreground="#FFA3BD36" 
+                    FontFamily="Myriad Pro Cond" 
+                />
+                <PasswordBox 
+                    HorizontalAlignment="Center" 
+                    Height="60" 
+                    Margin="0,150,0,0"
+                    TabIndex="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center" 
+                    Width="415"
+                    x:Name="TxtPassword" 
+                    FontSize="35" 
+                    Foreground="#FF2F302E" 
+                    FontWeight="Bold" 
+                    FontFamily="Myriad Pro Cond" 
+                    CaretBrush="#FFB2B0B8" 
+                    Background="White" 
+                />
             </Grid>
-           
-            <!--Text="Davivienda2019$"-->
-
-            <!--<Image x:Name="btnSearch"
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Bottom" 
-                Margin="0,0,0,150" 
-                Width="415"
-                Height="90"
-                Source="/Images/Buttons/b-continue.png" Stretch="Fill"
-                PreviewStylusDown="btnSearch_PreviewStylusDown" />-->
-
-            <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif"
-                   Name="load_gif"
-                   HorizontalAlignment="Center"
-                   Height="300" 
-                   Margin="0,0,0,0"
-                   VerticalAlignment="Bottom"
-                   Visibility="Hidden" 
-                   Width="300" />
+            <Image 
+                gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif"
+                Name="load_gif"
+                HorizontalAlignment="Center"
+                Height="300" 
+                Margin="0,0,0,0"
+                VerticalAlignment="Bottom"
+                Visibility="Hidden" 
+                Width="300" 
+            />
         </Grid>
-
         <Grid Grid.Row="3" >
-            <Image x:Name="btnConsult"
-                   Source="/Images/Buttons/btn-acept.png"
-                   Stretch="None"
-                   Width="320"
-                   Height="130"
-                   Visibility="{Binding VisibleBtnAcept}"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Margin="0,0,100,0"
-                   TouchDown="BtnConsult_TouchDown" />
-
-            <Image x:Name="btnCancell"
-                   Source="/Images/Buttons/btn-exit.png"
-                   Stretch="None"
-                   Width="340"
-                   Height="130"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Margin="100,0,0,0"
-                   TouchDown="BtnCancell_TouchDown" />
+            <Image 
+                x:Name="btnConsult"
+                Source="/Images/Buttons/NewAceptar2.png"
+                Stretch="Uniform"
+                Height="130"
+                Visibility="{Binding VisibleBtnAcept}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,0,100,0"
+                TouchDown="BtnConsult_TouchDown"
+            />
+            <Image 
+                x:Name="btnCancell"
+                Source="/Images/Buttons/NewCancelar.png"
+                Stretch="Uniform"
+                Height="130"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="100,0,0,0"
+                TouchDown="BtnCancell_TouchDown" 
+            />
         </Grid>
     </Grid>
 </UserControl>

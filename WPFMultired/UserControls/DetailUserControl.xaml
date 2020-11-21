@@ -9,140 +9,176 @@
              Width="1080" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="200" />
-            <RowDefinition Height="900" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="280" />
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
-            <Image x:Name="btn_exit"
-               Source="/Images/Buttons/btn-exit.png"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               Width="250"
-               Margin="0,20,50,0"
-               TouchDown="Btn_exit_TouchDown" />
-
-            <Image x:Name="btn_back"
-                Source="/Images/Buttons/btn-back.png"
-                Grid.Column="0"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="250"
-                Margin="50,20,0,0"
-                TouchDown="Btn_back_TouchDown" />
+            <ContentControl x:Name="grvPublicity"></ContentControl>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Image 
+                x:Name="btn_exit"
+                Source="../Images/Buttons/NewSalir.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,50,0"
+                TouchDown="Btn_exit_TouchDown" 
+            />
+            <Image 
+                x:Name="btn_back"
+                Source="../Images/Buttons/NewAtras.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,300,0"
+                TouchDown="Btn_back_TouchDown" 
+            />
         </Grid>
         <Grid Grid.Row="2">
-            <Border BorderThickness="10,10,10,10"   CornerRadius="60,60,60,60" Margin="50,0,50,0" Background="White">
-                <Grid>
-                    <Image 
-                        Source="/Images/Others/alert.png"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Height="200"
-                        Stretch="Uniform"
-                        Margin="0,50,0,0"
-                        TouchDown="btn_Accept_TouchDown"
-                    />
-                    <TextBlock x:Name="LblTittle" 
-                           Text="Estimado Cliente"
-                           HorizontalAlignment="Center"
-                           Margin="0,280,0,0" 
-                           FontSize="55" 
-                           Foreground="#FF1B69A8"
-                           FontFamily="Myriad Pro"
-                           FontWeight="Bold"
-                           VerticalAlignment="Top"
-                           TextAlignment="Center" />
-                    <TextBlock  
-                           Text="Usted va a depositar dinero en la cuenta"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,0" 
-                           FontSize="48" 
-                           Width="700"
-                           Foreground="#FF1B69A8"
-                           FontFamily="Myriad Pro"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-
-                    <TextBlock  
-                           Text="{Binding Code}"
-                           HorizontalAlignment="Center"
-                           Margin="0,150,0,0" 
-                           FontSize="35" 
-                           Width="700"
-                           FontFamily="Myriad Pro"
-                           Foreground="Gray"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-                    <TextBlock  
-                           Text="Valor de comisión"
-                           HorizontalAlignment="Center"
-                           Margin="0,300,0,0" 
-                           FontSize="40" 
-                           Width="700"
-                           Foreground="#FF1B69A8"
-                           FontFamily="Myriad Pro"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-                    <TextBlock  
-                           Text="{Binding AmountCommission, StringFormat={}{0:C0}}"
-                           HorizontalAlignment="Center"
-                           Margin="0,390,0,0" 
-                           FontSize="35" 
-                           Width="700"
-                           FontFamily="Myriad Pro"
-                           Foreground="Gray"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-                    <TextBlock  
-                           Text="Valor a pagar"
-                           HorizontalAlignment="Center"
-                           Margin="0,500,0,0" 
-                           FontSize="40" 
-                           Width="700"
-                           Foreground="#FF1B69A8"
-                           FontFamily="Myriad Pro"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-                    <TextBlock  
-                           Text="{Binding AmountUser, StringFormat={}{0:C0}}"
-                           HorizontalAlignment="Center"
-                           Margin="0,590,0,0" 
-                           FontSize="35" 
-                           Width="700"
-                           FontFamily="Myriad Pro"
-                           Foreground="Gray"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-                </Grid>
-                <Border.Effect>
-                    <DropShadowEffect
-                        ShadowDepth="20"
-                        Direction="225"
-                        Color="Gray"
-                        Opacity="0.6"
-                        BlurRadius="30.0"/>
-                </Border.Effect>
-            </Border>
+            <Grid>
+                <Image 
+                    Source="/Images/Others/alert.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Height="150"
+                    Stretch="Uniform"
+                    Margin="0,150,0,0"
+                    TouchDown="btn_Accept_TouchDown"
+                />
+                <TextBlock 
+                    Text="Confirma la transacción"
+                    HorizontalAlignment="Center"
+                    Margin="0,320,0,0" 
+                    FontSize="50" 
+                    Foreground="Gray"
+                    FontFamily="Myriad Pro"
+                    VerticalAlignment="Top"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="Usted va a depositar dinero en la cuenta"
+                    HorizontalAlignment="Center"
+                    Margin="0,100,0,0" 
+                    FontSize="45" 
+                    Foreground="Gray"
+                    FontFamily="Myriad Pro"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="{Binding Code}"
+                    HorizontalAlignment="Center"
+                    Margin="0,220,0,0" 
+                    FontSize="35" 
+                    Width="700"
+                    FontFamily="Myriad Pro"
+                    Foreground="Gray"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="Valor de comisión"
+                    HorizontalAlignment="Left"
+                    Margin="150,400,0,0" 
+                    FontSize="40" 
+                    Foreground="Gray"
+                    FontFamily="Myriad Pro"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="___________________"
+                    HorizontalAlignment="Left"
+                    Margin="150,420,0,0" 
+                    FontSize="40" 
+                    Foreground="#FFA3BD36"
+                    FontFamily="Myriad Pro"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="{Binding AmountCommission, StringFormat={}{0:C0}}"
+                    HorizontalAlignment="Right"
+                    Margin="0,400,150,0" 
+                    FontSize="40" 
+                    FontFamily="Myriad Pro"
+                    Foreground="Gray"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="Valor a pagar"
+                    HorizontalAlignment="Left"
+                    Margin="150,600,0,0" 
+                    FontSize="40" 
+                    Foreground="Gray"
+                    FontFamily="Myriad Pro"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBlock  
+                    Text="___________________"
+                    HorizontalAlignment="Left"
+                    Margin="150,620,0,0" 
+                    FontSize="40" 
+                    Foreground="#FFA3BD36"
+                    FontFamily="Myriad Pro"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                />
+                <TextBox  
+                    Text="{Binding AmountUser, StringFormat={}{0:C0}}"
+                    HorizontalAlignment="Right"
+                    Margin="0,600,150,0" 
+                    FontSize="40" 
+                    FontFamily="Myriad Pro"
+                    Foreground="Gray"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center" 
+                >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Background>
+                        <SolidColorBrush Color="Gray" Opacity="0.6"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
         </Grid>
         <Grid Grid.Row="3">
             <Image 
-                Source="/Images/Buttons/btn-acept.png"
                 Name="btn_Accept"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Height="130"
+                Source="/Images/Buttons/NewAceptar2.png"
                 Stretch="Uniform"
-                Margin="0,50,0,0"
-                TouchDown="btn_Accept_TouchDown"
+                Height="130"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,0,100,0"
+                TouchDown="btn_Accept_TouchDown" 
+            />
+            <Image 
+                x:Name="btnCancell"
+                Source="/Images/Buttons/NewCancelar.png"
+                Stretch="Uniform"
+                Height="130"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="100,0,0,0"
+                TouchDown="BtnCancell_TouchDown" 
             />
         </Grid>
     </Grid>

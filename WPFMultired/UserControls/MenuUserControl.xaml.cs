@@ -24,6 +24,8 @@ namespace WPFMultired.UserControls
         public MenuUserControl()
         {
             InitializeComponent();
+
+            grvPublicity.Content = Utilities.UCPublicityBanner;
             //ShowModal();
         }
 

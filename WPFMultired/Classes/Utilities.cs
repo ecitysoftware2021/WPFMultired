@@ -28,6 +28,8 @@ namespace WPFMultired.Classes
 
         private static SpeechSynthesizer speechSynthesizer;
 
+        public static System.Windows.Controls.UserControl UCPublicityBanner;
+
         private static ModalWindow modal { get; set; }
         #endregion
         public static string GetConfiguration(string key, bool decodeString = false)

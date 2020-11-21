@@ -6,6 +6,7 @@ using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
+using WPFMultired.UserControls;
 
 namespace WPFMultired.Windows
 {
@@ -28,6 +29,11 @@ namespace WPFMultired.Windows
                 if (Utilities.navigator == null)
                 {
                     Utilities.navigator = new Navigation();
+                }
+
+                if (Utilities.UCPublicityBanner == null)
+                {
+                    Utilities.UCPublicityBanner = new PublicityUserControl();
                 }
 
                 WPKeyboard.Keyboard.ConsttrucKeyyboard(WPKeyboard.Keyboard.EStyle.style_2);

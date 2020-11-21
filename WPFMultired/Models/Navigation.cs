@@ -63,9 +63,6 @@ namespace WPFMultired.Models
                     case UserControlView.Admin:
                         View = new AdministratorUserControl((PaypadOperationControl)data, (ETypeAdministrator)complement);
                         break;
-                    case UserControlView.MenuCompaniesUserControl:
-                        View = new MenuCompaniesUserControl((string)data);
-                        break;
                     case UserControlView.Menu:
                         View = new MenuUserControl();
                         break;

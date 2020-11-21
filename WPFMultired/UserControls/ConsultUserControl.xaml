@@ -11,68 +11,73 @@
              Width="1080" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="450" />
-            <RowDefinition Height="950" />
+            <RowDefinition Height="380" />
+            <RowDefinition Height="230" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="280" />
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
-            <Image x:Name="btn_exit"
-               Source="/Images/Buttons/btn-exit.png"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               Width="250"
-               Margin="0,20,50,0"
-               TouchDown="Btn_exit_TouchDown" />
-
-            <Image x:Name="btn_back"
-                Source="/Images/Buttons/btn-back.png"
-                Grid.Column="0"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="250"
-                Margin="50,20,0,0"
-                TouchDown="Btn_back_TouchDown" />
+            <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-
         <Grid Grid.Row="1">
-            <TextBlock Name="txt_title"
-                    FontSize="50"
-                    Width="1000"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,0,80"
-                    FontWeight="SemiBold" 
-                    Foreground="#FF1B69A8"
-                    TextWrapping="Wrap"
-                    TextAlignment="Center"
-                    Text="Acerque el código de barras al lector de la máquina o Ingrese el número de identificación del asociado a Comultrasan" />
+            <Image 
+                x:Name="btn_exit"
+                Source="../Images/Buttons/NewSalir.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,50,0"
+                TouchDown="Btn_exit_TouchDown" 
+            />
+            <Image 
+                x:Name="btn_back"
+                Source="../Images/Buttons/NewAtras.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,300,0"
+                TouchDown="Btn_back_TouchDown"
+            />
         </Grid>
-
-        <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">
+        <Grid Grid.Row="2">
+            <TextBlock 
+                Name="txt_title"
+                FontSize="40"
+                Width="900"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,0"
+                FontWeight="SemiBold" 
+                Foreground="Gray"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                Text="Para iniciar, ingresa el número de identificación de la persona a la cual le realizarás la transacción" 
+             />
+        </Grid>
+        <Grid Grid.Row="3" Name="gd_payer" Margin="50,0,50,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
             <Grid Grid.Row="0">
-                <TextBlock  HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Margin="0,30,0,0"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap"
-                   FontFamily="Arial"
-                   FontSize="48"
-                   Foreground="#FF706F6F"
-                   Text="{Binding Row1}" />
-
-                <ComboBox Name="cmb_type_id"
+                <TextBlock 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,30,0,0"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    FontFamily="Arial"
+                    FontSize="48"
+                    Foreground="#FF706F6F"
+                    Text="{Binding Row1}" 
+                />
+                <ComboBox
+                    Name="cmb_type_id"
                     Margin="0,31,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -85,11 +90,13 @@
                     ItemsSource="{Binding OptionsList}"
                     SelectedValuePath="Key"
                     DisplayMemberPath="Value"
-                    SelectionChanged="Cmb_type_id_SelectionChanged"/>
+                    SelectionChanged="Cmb_type_id_SelectionChanged"
+                />
             </Grid>
 
             <Grid Grid.Row="1">
-                <TextBlock HorizontalAlignment="Center"
+                <TextBlock
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0,30,0,0"
                     FontFamily="Arial"
@@ -97,59 +104,63 @@
                     TextWrapping="Wrap"
                     FontSize="48"
                     Foreground="#FF706F6F"
-                    Text="{Binding Row2}" />
-
-                <PasswordBox Name="PassBoxIdentification"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontFamily="Arial"
-                       FontWeight="Medium"
-                       Margin="0,0,0,0"
-                       HorizontalContentAlignment="Center"
-                       FontSize="48"
-                       Width="630"
-                       Visibility="{Binding VisibleId}"
-                       Foreground="#FF104B6D"
-                       TabIndex="0"
-                       TouchDown="PassBoxIdentification_TouchDown"/>
-
-                <TextBox Name="TbxIdentification"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontFamily="Arial"
-                       FontWeight="Medium"
-                       Margin="0,0,0,0"
-                       HorizontalContentAlignment="Center"
-                       FontSize="48"
-                       IsEnabled="False"
-                       Width="630"
-                       Foreground="#FF104B6D"
-                       Visibility="{Binding VisibleInput}"
-                       TabIndex="2"
-                       Text="{Binding Value1}" 
-                       BorderBrush="#FF1D1B1B" />
-
-                <Image Source="/Images/Buttons/btn-show-id.png"
+                    Text="{Binding Row2}" 
+                />
+                <PasswordBox 
+                    Name="PassBoxIdentification"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Margin="0,0,0,0"
+                    HorizontalContentAlignment="Center"
+                    FontSize="48"
+                    Width="630"
+                    Visibility="{Binding VisibleId}"
+                    Foreground="#FF104B6D"
+                    TabIndex="0"
+                    TouchDown="PassBoxIdentification_TouchDown"
+                />
+                <TextBox 
+                    Name="TbxIdentification"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Margin="0,0,0,0"
+                    HorizontalContentAlignment="Center"
+                    FontSize="48"
+                    IsEnabled="False"
+                    Width="630"
+                    Foreground="#FF104B6D"
+                    Visibility="{Binding VisibleInput}"
+                    TabIndex="2"
+                    Text="{Binding Value1}" 
+                    BorderBrush="#FF1D1B1B"
+                />
+                <Image 
+                    Source="/Images/Buttons/Newbtn-show-id.png"
                     x:Name="btn_show_id"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
                     Margin="0,0,150,0"                  
                     Width="60"
                     TouchEnter="Btn_show_id_TouchEnter"
-                    TouchLeave="Btn_show_id_TouchLeave"/>
-
+                    TouchLeave="Btn_show_id_TouchLeave"
+                />
                 <TextBox TabIndex="1" Height="0" Width="0" />
-
             </Grid>
 
             <Grid Grid.Row="3">
-                <Image Source="/Images/Buttons/btn-consult.png"
+                <Image
+                    Source="/Images/Buttons/NewConsultar.png"
                     x:Name="btn_consult"
                     HorizontalAlignment="Center" 
-                    VerticalAlignment="Bottom" 
+                    VerticalAlignment="Center" 
                     Margin="0,0,0,0"                  
                     Width="350"
-                    TouchDown="Btn_consult_TouchDown"/>
+                    TouchDown="Btn_consult_TouchDown"
+                />
             </Grid>
         </Grid>
     </Grid>

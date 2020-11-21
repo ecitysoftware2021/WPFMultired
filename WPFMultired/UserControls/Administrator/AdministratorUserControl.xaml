@@ -8,22 +8,19 @@
         Height="1920" 
         Width="1080">
     <UserControl.Background>
-        <ImageBrush ImageSource="/Images/Backgrounds/bg-blanck.jpg"/>
+        <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio3.jpg"/>
     </UserControl.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="260" />
             <RowDefinition Height="420" />
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
             <RowDefinition Height="600" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-
-        </Grid>
-
         <Grid Grid.Row="1">
-            <TextBlock x:Name="txtTittle"
+            <TextBlock 
+                x:Name="txtTittle"
                 Text="Modo Administrador"
                 FontSize="50"
                 TextAlignment="Center"
@@ -31,11 +28,12 @@
                 FontFamily="Myriad Pro"
                 TextWrapping="WrapWithOverflow"
                 FontWeight="Bold"
-                Foreground="#FF0B4E92"
+                Foreground="#FFA3BD36" 
                 VerticalAlignment="Top"
-                HorizontalAlignment="center" />
-
-            <TextBlock x:Name="txtDescription"
+                HorizontalAlignment="center" 
+            />
+            <TextBlock 
+                x:Name="txtDescription"
                 Text=""
                 FontSize="40"
                 TextAlignment="Center"
@@ -44,9 +42,10 @@
                 TextWrapping="WrapWithOverflow"
                 FontFamily="Myriad Pro"
                 FontWeight="Bold"
-                Foreground="#FF144C87"
+                Foreground="Gray"
                 VerticalAlignment="Center"
-                HorizontalAlignment="center" />
+                HorizontalAlignment="center" 
+            />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -56,7 +55,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <TextBlock 
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -68,8 +66,8 @@
                 FontSize="35"
                 HorizontalAlignment="Center" 
                 Text="Denominación"
-                Grid.Column="1"/>
-
+                Grid.Column="1"
+            />
             <TextBlock 
                 TextAlignment="Center"
                 Margin="0,0,0,0"
@@ -81,9 +79,8 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Grid.Column="2" 
-                Text="Casete">
-            </TextBlock>
-
+                Text="Casete"
+            />
             <TextBlock 
                 TextAlignment="Center"
                 Width="300"
@@ -95,9 +92,8 @@
                 HorizontalAlignment="Center"
                 Grid.Column="3">
                 <Run Text="Cant. Anterior " FontWeight="Bold" FontSize="35"/>
-                <Run Text=" Cant. Nueva" Foreground="#FF0B4E92" FontSize="32"/>
+                <Run Text=" Cant. Nueva" Foreground="#FFA3BD36"  FontSize="32"/>
             </TextBlock>
-
             <TextBlock 
                 Text="Total($)"
                 FontSize="38"
@@ -107,29 +103,34 @@
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Grid.Column="5"/>
+                Grid.Column="5"
+            />
         </Grid>
         <Grid Grid.Row="3">
-            <ListView x:Name="lv_denominations" 
-                    Margin="0,0,0,0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top"
-                    ItemsSource="{Binding}">
-
+            <ListView 
+                x:Name="lv_denominations" 
+                Margin="0,0,0,0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                ItemsSource="{Binding}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="1"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Top"/>
+                        <UniformGrid 
+                            Columns="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                        />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalAlignment="Center"
-                            VerticalAlignment="Top" Background="Transparent"
+                        <Grid 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top" 
+                            Background="Transparent"
                             Margin="0,0,0,0"
                             Width="1000"
                             Height="60">
@@ -148,104 +149,96 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="0,0,0,0"
-                               Grid.Column="0"/>
-
+                               Grid.Column="0"
+                            />
                             <TextBlock 
-                                    Text="{Binding VALUE, StringFormat={}{0:C2}}"
-                                    FontSize="32"
-                                    FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
-                                    TextWrapping="Wrap"
-                                    Margin="0,0,30,0"
-                                    Foreground="#FF2F302E"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    Grid.Column="1" />
-
+                                Text="{Binding VALUE, StringFormat={}{0:C2}}"
+                                FontSize="32"
+                                FontFamily="Myriad Pro"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap"
+                                Margin="0,0,30,0"
+                                Foreground="#FF2F302E"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Grid.Column="1" 
+                            />
                             <TextBlock 
-                                    Text="{Binding CASSETTE}"
-                                    FontSize="32"
-                                    FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
-                                    TextWrapping="Wrap"
-                                    Margin="0,0,0,0"
-                                    Foreground="#FF2F302E"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Column="2" />
-
+                                Text="{Binding CASSETTE}"
+                                FontSize="32"
+                                FontFamily="Myriad Pro"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap"
+                                Margin="0,0,0,0"
+                                Foreground="#FF2F302E"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Column="2"
+                            />
                             <TextBlock 
-                                    Text="{Binding AMOUNT}"
-                                    FontSize="32"
-                                    FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
-                                    TextWrapping="Wrap"
-                                    Margin="0,0,40,0"
-                                    Foreground="#FF2F302E"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    Grid.Column="3">
+                                Text="{Binding AMOUNT}"
+                                FontSize="32"
+                                FontFamily="Myriad Pro"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap"
+                                Margin="0,0,40,0"
+                                Foreground="#FF2F302E"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Grid.Column="3">
                                 <Run Text=" - " FontWeight="Bold" />
                                 <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF0B4E92" />
                             </TextBlock>
-                                
                             <TextBlock 
-                                    Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"
-                                    FontSize="32"
-                                    FontFamily="Myriad Pro"
-                                    TextAlignment="Right"
-                                    TextWrapping="Wrap"
-                                    Margin="0,0,15,0"
-                                    Foreground="#FF2F302E"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    Grid.Column="4">
-                            </TextBlock>
+                                Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"
+                                FontSize="32"
+                                FontFamily="Myriad Pro"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap"
+                                Margin="0,0,15,0"
+                                Foreground="#FF2F302E"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Grid.Column="4"
+                            />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
         <Grid Grid.Row="4">
-
-            <TextBlock VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Margin="130,80,0,0"
-                    FontSize="50"
-                    FontWeight="Bold"
-                    FontFamily="Myriad Pro"
-                    Foreground="#FF1F77B6"
-                    Text="Valor Total:"/>
-
-            <TextBlock Name="txtValor"
-                    Text="{Binding TOTAL, StringFormat={}{0:C2}}"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Margin="450,80,0,0"
-                    FontSize="50"
-                    FontWeight="Bold"
-                    FontFamily="Myriad Pro"
-                    Foreground="#FF144F8B" />
-
-            <Image x:Name="btnNext"
-                   Source="/Images/Buttons/btn-acept.png"
-                   Stretch="Fill"
-                   Width="300"
-                   Height="120"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Center"
-                   Margin="0,0,50,80"
-                   TouchDown="BtnNext_TouchDown" />
-
-            <!--<Image x:Name="btnCancell"
-                   Source="/Images/Buttons/btn-cancel.png"
-                   Stretch="Fill"
-                   Width="300"
-                   Height="120"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Margin="0,0,0,50"
-                   TouchDown="BtnCancell_TouchDown" />-->
+            <TextBlock
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="130,80,0,0"
+                FontSize="50"
+                FontWeight="Bold"
+                FontFamily="Myriad Pro"
+                Foreground="#FFA3BD36" 
+                Text="Valor Total:"
+            />
+            <TextBlock 
+                Name="txtValor"
+                Text="{Binding TOTAL, StringFormat={}{0:C2}}"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="450,80,0,0"
+                FontSize="50"
+                FontWeight="Bold"
+                FontFamily="Myriad Pro"
+                Foreground="Gray" 
+            />
+            <Image 
+                x:Name="btnNext"
+                Source="/Images/Buttons/NewAceptar.png"
+                Stretch="Fill"
+                Width="300"
+                Height="120"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,120,200"
+                TouchDown="BtnNext_TouchDown" 
+            />
         </Grid>
     </Grid>
 </UserControl>

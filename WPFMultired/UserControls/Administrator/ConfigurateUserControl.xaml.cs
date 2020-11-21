@@ -28,6 +28,8 @@ namespace WPFMultired.UserControls.Administrator
 
                 txtMs.DataContext = init;
 
+                grvPublicity.Content = Utilities.UCPublicityBanner;
+
                 Initial();
             }
             catch (Exception ex)
