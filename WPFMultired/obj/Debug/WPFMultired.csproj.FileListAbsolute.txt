@@ -436,7 +436,6 @@ C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Deb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.dll
-C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Dapper.xml
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\EntityFramework.xml
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\EntityFramework.SqlServer.xml
@@ -448,7 +447,6 @@ C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Deb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.xml
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.xml
-C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.g.cs
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.g.cs

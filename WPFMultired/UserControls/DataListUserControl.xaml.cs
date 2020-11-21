@@ -205,10 +205,10 @@ namespace WPFMultired.UserControls
             {
                 if (!flag)
                 {
-                    return "/Images/Others/circle.png";
+                    return "/Images/Others/Newcircle.png";
                 }
 
-                return "/Images/Others/ok.png";
+                return "/Images/Others/Newok.png";
             }
             catch (Exception ex)
             {

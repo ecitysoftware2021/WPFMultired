@@ -71,6 +71,16 @@
                 Name="lbl_id"
                 FontSize="30" 
             />
+            <TextBlock  
+                Text="________________________________________________________________________________________________________________________________________________________"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,0" 
+                FontSize="10" 
+                Foreground="#FFA3BD36"
+                FontFamily="Myriad Pro"
+                VerticalAlignment="Center"
+                TextAlignment="Center" 
+            />
         </Grid>
         <Grid Grid.Row="3">
             <TextBox 
@@ -101,7 +111,7 @@
                 </TextBox.Background>
             </TextBox>
             <Image 
-                Source="/Images/Buttons/lupa.png"
+                Source="/Images/Buttons/Newlupa.png"
                 Name="btn_Search"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -115,7 +125,7 @@
                 Text="No se encontrarón coincidencias"
                 Margin="0,0,0,0"
                 Foreground="Red"
-                Visibility="Visible"
+                Visibility="Hidden"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
