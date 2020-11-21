@@ -72,13 +72,23 @@
                 FontSize="30" 
             />
             <TextBlock  
-                Text="________________________________________________________________________________________________________________________________________________________"
+                Text="_____________________________________________________________________________________________________________________________"
+                HorizontalAlignment="Center"
+                Margin="0,25,0,0" 
+                FontSize="10" 
+                Foreground="#FFA3BD36"
+                FontFamily="Myriad Pro"
+                VerticalAlignment="Center"
+                TextAlignment="Center" 
+            />
+            <TextBlock  
+                Text="_____________________________________________________________________________________________________________________________"
                 HorizontalAlignment="Center"
                 Margin="0,0,0,0" 
                 FontSize="10" 
                 Foreground="#FFA3BD36"
                 FontFamily="Myriad Pro"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 TextAlignment="Center" 
             />
         </Grid>
@@ -264,44 +274,28 @@
                                 TouchDown="Grid_TouchDown">
                                 <TextBlock 
                                     Text="{Binding Item1}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
-                                    Margin="250,0,0,0"
-                                    Foreground="#FF104B6D"
-                                    Height="60"
-                                    Width="700"
-                                    FontWeight="Bold"
+                                    Margin="80,0,0,0"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
-                                    Grid.Column="0" 
                                 />
                                 <TextBlock 
                                     Text="{Binding Item2}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
-                                    Margin="250,70,0,0"
-                                    Foreground="#FF104B6D"
+                                    Margin="0,0,150,0"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Left" 
+                                    HorizontalAlignment="Right" 
                                 />
                                 <Image 
                                     Source="{Binding Item3}"
                                     Height="50"
                                     Stretch="Uniform"
-                                    Margin="0,20,80,0"
+                                    Margin="0,0,80,0"
                                     HorizontalAlignment="Right"
-                                    VerticalAlignment="Center" 
-                                />
-                                <Image  
-                                    Source="/Images/Others/credit-card.png"
-                                    Height="150"
-                                    Stretch="Uniform"
-                                    Margin="90,20,0,0"
-                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center" 
                                 />
                             </Grid>
@@ -356,31 +350,28 @@
                                 TouchDown="Grid_TouchDown">
                                 <TextBlock 
                                     Text="{Binding Item1}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
-                                    Margin="65,0,0,0"
+                                    Margin="65,15,0,0"
                                     Foreground="Gray"
-                                    Width="700"
-                                    FontWeight="Bold"
+                                    FontWeight="DemiBold"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
                                     Grid.Column="0" 
                                 />
                                 <TextBlock 
                                     Text="{Binding Item5, StringFormat={}{0:C0}}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    Margin="0,0,180,0"
+                                    FontWeight="DemiBold"
+                                    Margin="0,15,180,0"
                                     Foreground="Gray"
-                                    FontWeight="Bold"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Right" 
                                 />
                                 <Image 
                                     Source="{Binding Item3}"
-                                    Height="50"
+                                    Height="60"
                                     Stretch="Uniform"
                                     Margin="0,0,80,0"
                                     HorizontalAlignment="Right"
@@ -388,67 +379,57 @@
                                 />
                                 <TextBlock 
                                     Text="{Binding Item7}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
-                                    Margin="65,0,0,80"
-                                    Foreground="#FF0D679A"
-                                    Width="700"
+                                    Margin="65,0,0,40"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
-                                    Grid.Column="0" 
                                 />
                                 <TextBlock 
                                     Text="{Binding Item8}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
-                                    Margin="65,0,0,0"
-                                    Foreground="#FF0D679A"
-                                    Width="700"
+                                    Margin="65,20,0,0"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
-                                    Grid.Column="0" 
                                 />
                                 <TextBlock 
                                     Text="{Binding Item9}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    TextAlignment="Justify"
-                                    TextWrapping="Wrap"
                                     Margin="65,80,0,0"
-                                    Foreground="#FF0D679A"
                                     Width="700"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     Grid.Column="0" 
                                 />
                                 <TextBlock
                                     Text="{Binding Item10, StringFormat={}{0:C0}}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    Margin="0,0,180,80"
-                                    Foreground="#FF0D679A"
+                                    Margin="0,0,180,40"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                 />
                                 <TextBlock 
                                     Text="{Binding Item11, StringFormat={}{0:C0}}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
-                                    Margin="0,0,180,0"
-                                    Foreground="#FF0D679A"
+                                    Margin="0,20,180,0"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                />
                                 <TextBlock 
                                     Text="{Binding Item12, StringFormat={}{0:C0}}"
-                                    FontSize="40"
+                                    FontSize="30"
                                     FontFamily="Arial"
                                     Margin="0,80,180,0"
-                                    Foreground="#FF0D679A"
+                                    Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                 />
@@ -520,7 +501,7 @@
                 Text=""
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                FontSize="25" 
+                FontSize="20" 
             />
             <TextBlock 
                 x:Name="txtErrorValor"

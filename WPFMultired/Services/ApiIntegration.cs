@@ -1200,7 +1200,7 @@ namespace WPFMultired.Services
                                     AmountCommission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2), new CultureInfo("en-US")),
                                     Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
                                     AmountTotal = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2), new CultureInfo("en-US")),
-                                    img = "/Images/Others/circle.png",
+                                    img = "/Images/Others/Newcircle.png",
                                     TypeTransaction = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DATADI, keyDesencript), 2),
                                 });
 

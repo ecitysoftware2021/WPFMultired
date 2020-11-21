@@ -59,7 +59,7 @@ namespace WPFMultired.UserControls
 
                 this.DataContext = this.paymentViewModel;
 
-                ActivateWallet();
+                //ActivateWallet();
             }
             catch (Exception ex)
             {

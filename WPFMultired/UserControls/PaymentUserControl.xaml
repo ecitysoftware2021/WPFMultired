@@ -35,46 +35,42 @@
             />
             <TextBlock 
                 Text="Dinero ingresado"
-                FontSize="60"
+                FontSize="40"
                 Width="500"
                 TextAlignment="Center"
                 TextWrapping="Wrap"
                 Margin="0,210,0,0"
                 FontFamily="Arial"
-                FontWeight="Bold"
                 Foreground="Gray"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center" 
             />
             <TextBlock 
                 Text="Denominación"
-                FontSize="50"
+                FontSize="30"
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
-                FontWeight="Bold"
                 Foreground="Gray"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left" Grid.Row="6" 
             />
             <TextBlock 
                 Text="Cantidad"
-                FontSize="50"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="150,0,0,0"
+                Margin="0,0,0,0"
                 FontFamily="Arial"
-                FontWeight="Bold"
                 Foreground="Gray"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center" 
             />
             <TextBlock 
                 Text="Total ($)"
-                FontSize="50"
+                FontSize="30"
                 TextAlignment="Center"
                 Margin="0,0,100,0"
                 FontFamily="Arial"
-                FontWeight="Bold"
                 Foreground="Gray"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right" 
@@ -115,7 +111,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock 
                                 Text="{Binding Denominacion, StringFormat={}{0:C0}}"
-                                FontSize="40"
+                                FontSize="30"
                                 FontFamily="Arial"
                                 TextAlignment="Right"
                                 TextWrapping="Wrap"
@@ -129,7 +125,7 @@
 
                             <TextBlock 
                                 Text="{Binding Quantity}"
-                                FontSize="40"
+                                FontSize="30"
                                 FontFamily="Arial"
                                 TextAlignment="Right"
                                 TextWrapping="Wrap"
@@ -143,7 +139,7 @@
                             />
                             <TextBlock 
                                 Text="{Binding Total, StringFormat={}{0:C0}}"
-                                FontSize="40"
+                                FontSize="30"
                                 FontFamily="Arial"
                                 TextAlignment="Right"
                                 TextWrapping="Wrap"
@@ -163,9 +159,9 @@
         <Grid Grid.Row="3">
             <TextBlock 
                 Text="Valor ingresado:"
-                FontSize="40"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="100,20,0,0"
+                Margin="100,50,0,0"
                 FontFamily="Arial"
                 Foreground="Gray"
                 VerticalAlignment="Top"
@@ -173,18 +169,17 @@
              />
             <TextBlock 
                 Text="{Binding ValorIngresado, StringFormat={}{0:C0}}"
-                FontSize="52"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="0,0,100,0"
+                Margin="0,50,100,0"
                 FontFamily="Arial"
-                Foreground="#FF0D4F92"
-                FontWeight="Bold"
+                Foreground="Gray"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
              />
             <TextBlock 
                 Text="Valor de comisión:"
-                FontSize="40"
+                FontSize="30"
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
@@ -194,19 +189,19 @@
              />
             <TextBlock 
                 Text="{Binding ValorComision, StringFormat={}{0:C0}}"
-                FontSize="45"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="0,180,100,0"
+                Margin="0,0,100,0"
                 FontFamily="Arial"
-                Foreground="#FF0D4F92"
-                VerticalAlignment="Top"
+                Foreground="Gray"
+                VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
              />
             <TextBlock 
                 Text="Valor a pagar:"
-                FontSize="40"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="100,20,0,0"
+                Margin="100,50,0,0"
                 FontFamily="Arial"
                 Foreground="Gray"
                 VerticalAlignment="Center"
@@ -214,12 +209,12 @@
              />
             <TextBlock 
                 Text="{Binding PayValue, StringFormat={}{0:C0}}"
-                FontSize="45"
+                FontSize="30"
                 TextAlignment="Center"
-                Margin="0,100,100,0"
+                Margin="0,50,100,0"
                 FontFamily="Arial"
-                Foreground="#FF0D4F92"
-                VerticalAlignment="Top"
+                Foreground="Gray"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Right"
              />
         </Grid>
