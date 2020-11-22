@@ -130,17 +130,6 @@
                 Margin="0,50,130,0" 
                 TouchDown="btn_Search_TouchDown"
             />
-            <TextBlock 
-                x:Name="txtErrorSearch"
-                Text="No se encontrarón coincidencias"
-                Margin="0,0,0,0"
-                Foreground="Red"
-                Visibility="Hidden"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                FontWeight="Bold"
-                FontSize="30" 
-            />
         </Grid>
         <Grid Grid.Row="4">
             <ListView 
@@ -498,6 +487,7 @@
                 VerticalAlignment="Center" 
                 Margin="0,0,70,60"                  
                 Width="40"
+                Visibility="Hidden"
                 TouchDown="btnQuestion_TouchDown"
             />
             <TextBlock 

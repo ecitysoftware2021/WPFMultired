@@ -14,8 +14,8 @@ namespace WPFMultired.Models
         public UserControl usercontrol { get; set; }
         public string message { get; set; }
         public string url { get; set; }
-
-        public Visibility btnAccept { get; set; }
-        public ETypeModal type { get; set; }
+        public Visibility btnAccept { get; set; } = Visibility.Hidden;
+        public Visibility Gif { get; set; } = Visibility.Hidden;
+        public ETypeModal type { get; set; } 
     }
 }

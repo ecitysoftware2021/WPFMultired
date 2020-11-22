@@ -13,6 +13,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
+        Closed="Window_Closed"
         >
     <Grid>
         <Image 
@@ -45,7 +46,7 @@
             VerticalAlignment="Center" 
             HorizontalAlignment="Center" 
             Height="300" 
-            Visibility="Hidden"
+            Visibility="{Binding Gif}"
         />
         <Image
             Source="/Images/Buttons/NewAceptar2.png"

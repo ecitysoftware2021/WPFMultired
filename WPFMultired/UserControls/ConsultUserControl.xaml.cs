@@ -30,6 +30,8 @@ namespace WPFMultired.UserControls
 
         private ReaderBarCode readerBarCode;
 
+        private ModalNewWindow modal;
+
         public ConsultUserControl(string company, string typeTransaction)
         {
             InitializeComponent();
@@ -105,12 +107,14 @@ namespace WPFMultired.UserControls
                     VisibleInput = System.Windows.Visibility.Hidden
                 };
 
-                Task.Run(() => {
+                Task.Run(() => 
+                {
                     viewModel.LoadListDocuments(transaction);
-                    Utilities.CloseModal();
+                    Thread.Sleep(2000);
+                    CloseModalNew();
                 });
 
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                LoadModalInformation();
 
                 cmb_type_id.SelectedIndex = 0;
 
@@ -184,23 +188,30 @@ namespace WPFMultired.UserControls
                         if (response != null && response.Data != null)
                         {
                             transaction = (Transaction)response.Data;
-                            Utilities.CloseModal();
+                            CloseModalNew();
                             readerBarCode.Stop();
                             Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
                         }
                         else 
                         {
-                            Utilities.CloseModal();
+                            //Utilities.CloseModal();
+                            
 
-                            ModalNewWindow modal = new ModalNewWindow(new DataModal
+                            Application.Current.Dispatcher.Invoke(delegate
                             {
-                                type = ETypeModal.Question,
-                                usercontrol = this,
-                                btnAccept = Visibility.Visible,
-                                message = response.Message ?? MessageResource.ErrorCoincidences
+                                CloseModalNew();
+
+                                modal = new ModalNewWindow(new DataModal
+                                {
+                                    type = ETypeModal.Question,
+                                    usercontrol = this,
+                                    btnAccept = Visibility.Visible,
+                                    message = response.Message ?? MessageResource.ErrorCoincidences
+                                });
+
+                                modal.ShowDialog();
                             });
 
-                            modal.ShowDialog();
 
                             //Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
                             viewModel.Value1 = string.Empty;
@@ -214,12 +225,52 @@ namespace WPFMultired.UserControls
                         Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
                     }
                 });
+
                 PassBoxIdentification.Password = string.Empty;
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                LoadModalInformation();
+                //Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
             }
             catch (Exception ex)
             {
-                Utilities.CloseModal();
+                CloseModalNew();
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void LoadModalInformation()
+        {
+            try
+            {
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    modal = new ModalNewWindow(new DataModal
+                    {
+                        type = ETypeModal.Alert,
+                        usercontrol = this,
+                        Gif = Visibility.Visible,
+                        message = MessageResource.LoadInformation
+                    });
+
+                    modal.ShowDialog();
+                });
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void CloseModalNew()
+        {
+            try
+            {
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    modal.Close();
+                });
+            }
+            catch (Exception ex)
+            {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
@@ -254,7 +305,19 @@ namespace WPFMultired.UserControls
                 }
                 else
                 {
-                    Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error);
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        modal = new ModalNewWindow(new DataModal
+                        {
+                            type = ETypeModal.Alert,
+                            usercontrol = this,
+                            btnAccept = Visibility.Visible,
+                            message = MessageResource.InfoIncorrect
+                        });
+
+                        modal.ShowDialog();
+                    });
+                    //Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error);
                 }
             }
             catch (Exception ex)
@@ -340,7 +403,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                ModalNewWindow modal = new ModalNewWindow(new DataModal
+                modal = new ModalNewWindow(new DataModal
                 {
                     type = ETypeModal.Question,
                     usercontrol = this,

@@ -238,23 +238,9 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (string.IsNullOrEmpty(txtValor.Text) || valueModel.Val <= 0)
+                if (string.IsNullOrEmpty(txtValor.Text) || valueModel.Val <= 0 || valueModel.Val < min || valueModel.Val > max)
                 {
-                    txtErrorValor.Text = "Debe ingresar el valor a pagar";
-                    return false;
-                }
-
-                //if (valueModel.Val % 100 != 0)
-                //{
-                //    txtErrorValor.Text = string.Concat("Esta máquina sólo recibe multiplos de $100",
-                //    Environment.NewLine, "Ejemplo: $100, $1.000, $10.000... etc.");
-                //    return false;
-                //}
-
-                if (valueModel.Val < min || valueModel.Val > max)
-                {
-                    txtErrorValor.Text = string.Concat("Debe ingresar un valor entre",
-                    Environment.NewLine, string.Format("{0} y {1}", min.ToString("C"), max.ToString("C")));
+                    ShowErrorMs();
                     return false;
                 }
 
@@ -285,6 +271,8 @@ namespace WPFMultired.UserControls
                     transaction.Product = (Product)((Grid)sender).Tag;
 
                     txtValor.IsEnabled = true;
+
+                    btnQuestion.Visibility = Visibility.Visible;
 
                     valueModel.Val = transaction.Product.Amount;
                 }
@@ -336,8 +324,6 @@ namespace WPFMultired.UserControls
                     txtCountNumber.Text = txtCountNumber.Text.Remove(4, 1);
                     return;
                 }
-
-                txtErrorSearch.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
@@ -358,7 +344,18 @@ namespace WPFMultired.UserControls
                     lv_depositos.Visibility = Visibility.Hidden;
                     lv_tarjetaC.Visibility = Visibility.Hidden;
                     lv_estadoC.Visibility = Visibility.Hidden;
-                    txtErrorSearch.Visibility = Visibility.Visible;
+                    btnQuestion.Visibility = Visibility.Hidden;
+                    transaction.Product = null;
+
+                    ModalNewWindow modal = new ModalNewWindow(new DataModal
+                    {
+                        type = ETypeModal.Question,
+                        usercontrol = this,
+                        btnAccept = Visibility.Visible,
+                        message = "Los datos ingresados del número de cuenta no coinciden. Valida la información e inténte más tarde."
+                    });
+
+                    modal.ShowDialog();
                 }
                 else
                 {
@@ -374,7 +371,20 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (ProductSelect.Data != null && Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
+                if (transaction.Product == null)
+                {
+                    ModalNewWindow modal = new ModalNewWindow(new DataModal
+                    {
+                        type = ETypeModal.Question,
+                        usercontrol = this,
+                        btnAccept = Visibility.Visible,
+                        message = "Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar."
+                    });
+
+                    modal.ShowDialog();
+                }
+                else
+                if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
                 {
                     transaction.Amount = valueModel.Val;
                     transaction.Product.AmountUser = valueModel.Val;
@@ -387,7 +397,7 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
+        private void ShowErrorMs()
         {
             try
             {
@@ -405,6 +415,11 @@ namespace WPFMultired.UserControls
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
+        }
+
+        private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
+        {
+            ShowErrorMs();
         }
     }
 }

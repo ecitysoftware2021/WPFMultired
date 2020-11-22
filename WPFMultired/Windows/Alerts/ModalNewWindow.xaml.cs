@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
@@ -32,7 +22,7 @@ namespace WPFMultired.Windows.Alerts
             try
             {
                 Data = data;
-                Data.usercontrol.Opacity = 0.2;
+                Data.usercontrol.Opacity = 0.1;
                 Data.url = Data.type == ETypeModal.Alert ? "/Images/Backgrounds/NewAlert.png" : "/Images/Backgrounds/NewQuestion.png";
                 this.DataContext = Data;
             }
@@ -48,6 +38,18 @@ namespace WPFMultired.Windows.Alerts
             {
                 Data.usercontrol.Opacity = 1;
                 DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                Data.usercontrol.Opacity = 1;
             }
             catch (Exception ex)
             {
