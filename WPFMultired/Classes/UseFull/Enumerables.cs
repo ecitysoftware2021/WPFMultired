@@ -12,6 +12,12 @@ namespace WPFMultired.Classes
         Error = 1,
         Device = 2
     }
+    
+    public enum ETypeModal
+    {
+        Question = 0,
+        Alert = 1,
+    }
 
     public enum EModalType
     {

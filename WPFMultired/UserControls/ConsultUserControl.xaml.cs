@@ -12,6 +12,7 @@ using WPFMultired.Classes.Peripherals;
 using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.ViewModel;
+using WPFMultired.Windows.Alerts;
 
 //     @
 //    <))>
@@ -33,21 +34,28 @@ namespace WPFMultired.UserControls
         {
             InitializeComponent();
 
-            grvPublicity.Content = Utilities.UCPublicityBanner;
-
-            if (transaction == null)
+            try
             {
-                transaction = new Transaction
+                grvPublicity.Content = Utilities.UCPublicityBanner;
+
+                if (transaction == null)
                 {
-                    CodeCompany = company,
-                    CodeTypeTransaction = typeTransaction,
-                    State = ETransactionState.Initial
-                };
-            }
+                    transaction = new Transaction
+                    {
+                        CodeCompany = company,
+                        CodeTypeTransaction = typeTransaction,
+                        State = ETransactionState.Initial
+                    };
+                }
 
-            if (readerBarCode == null)
+                if (readerBarCode == null)
+                {
+                    readerBarCode = new ReaderBarCode();
+                }
+            }
+            catch (Exception ex)
             {
-                readerBarCode = new ReaderBarCode();
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -78,6 +86,7 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -314,6 +323,25 @@ namespace WPFMultired.UserControls
         private void PassBoxIdentification_TouchDown(object sender, TouchEventArgs e)
         {
             Utilities.OpenKeyboard(true, sender, this, 450);
+        }
+
+        private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                ModalNewWindow modal = new ModalNewWindow(new DataModal
+                {
+                    type = ETypeModal.Question,
+                    usercontrol = this,
+                    message = $"{"Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas"}."
+                });
+
+                modal.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

@@ -499,3 +499,5 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Pu
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Grabador.Transaccion.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PublicityUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
+C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalNewWindow.g.cs
+C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalNewWindow.baml

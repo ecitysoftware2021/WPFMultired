@@ -102,6 +102,15 @@
                     VerticalAlignment="Center"
                     TextAlignment="Center" 
                 />
+                <Image 
+                    Name="btnQuestion"
+                    Source="/Images/Buttons/Question.png"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,100,10"                  
+                    Width="60"
+                    TouchDown="btnQuestion_TouchDown"
+                />
             </Grid>
 
             <Grid Grid.Row="1">
