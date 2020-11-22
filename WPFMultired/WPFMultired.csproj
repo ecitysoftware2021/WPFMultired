@@ -512,11 +512,8 @@
     <Resource Include="Images\Buttons\btn-cancel-alert.png" />
     <Resource Include="Images\Gif\gif-preload.gif" />
     <Resource Include="Images\Buttons\btn-wait-mony.png" />
-    <Resource Include="Images\Buttons\btn-cancel.png" />
-    <Resource Include="Images\Buttons\btn-back.png" />
     <Resource Include="Images\Buttons\btn-continue.png" />
     <Resource Include="Images\Backgrounds\bg-detail.png" />
-    <Resource Include="Images\Buttons\btn-exit.png" />
     <Resource Include="Images\Backgrounds\bg-file.png" />
     <Resource Include="Images\Backgrounds\bg-alert-error.png" />
     <Resource Include="Images\Backgrounds\bg-alert-info.png" />
@@ -734,9 +731,6 @@
     <Resource Include="Images\Buttons\btn-qr.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\btn-acept.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\MR_ValidateStatusAdmin\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -790,9 +784,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Buttons\btn-consult.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-no-qr.png" />
@@ -917,9 +908,6 @@
     <Resource Include="Images\Others\credit-card.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\btn-continuar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Keyboard\Amarillo.png" />
     <Resource Include="Images\Keyboard\Azul.png" />
     <Resource Include="Images\Keyboard\BACKSPACE.png" />
@@ -953,7 +941,6 @@
     <Resource Include="Images\Backgrounds\bgNewVacio3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\NewAceptar.png" />
     <Resource Include="Images\Buttons\NewSalir.png" />
   </ItemGroup>
   <ItemGroup>

@@ -194,26 +194,26 @@ namespace WPFMultired.UserControls
                         }
                         else 
                         {
-                            //Utilities.CloseModal();
+                            Utilities.CloseModal();
                             
 
-                            Application.Current.Dispatcher.Invoke(delegate
-                            {
-                                CloseModalNew();
+                            //Application.Current.Dispatcher.Invoke(delegate
+                            //{
+                            //    CloseModalNew();
 
-                                modal = new ModalNewWindow(new DataModal
-                                {
-                                    type = ETypeModal.Question,
-                                    usercontrol = this,
-                                    btnAccept = Visibility.Visible,
-                                    message = response.Message ?? MessageResource.ErrorCoincidences
-                                });
+                            //    modal = new ModalNewWindow(new DataModal
+                            //    {
+                            //        type = ETypeModal.Question,
+                            //        usercontrol = this,
+                            //        btnAccept = Visibility.Visible,
+                            //        message = response.Message ?? MessageResource.ErrorCoincidences
+                            //    });
 
-                                modal.ShowDialog();
-                            });
+                            //    modal.ShowDialog();
+                            //});
 
 
-                            //Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
+                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
                             viewModel.Value1 = string.Empty;
 
                             //Utilities.navigator.Navigate(UserControlView.Main);
@@ -227,8 +227,8 @@ namespace WPFMultired.UserControls
                 });
 
                 PassBoxIdentification.Password = string.Empty;
-                LoadModalInformation();
-                //Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                //LoadModalInformation();
+                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
             }
             catch (Exception ex)
             {
@@ -305,19 +305,19 @@ namespace WPFMultired.UserControls
                 }
                 else
                 {
-                    Application.Current.Dispatcher.Invoke(delegate
-                    {
-                        modal = new ModalNewWindow(new DataModal
-                        {
-                            type = ETypeModal.Alert,
-                            usercontrol = this,
-                            btnAccept = Visibility.Visible,
-                            message = MessageResource.InfoIncorrect
-                        });
+                    //Application.Current.Dispatcher.Invoke(delegate
+                    //{
+                    //    modal = new ModalNewWindow(new DataModal
+                    //    {
+                    //        type = ETypeModal.Alert,
+                    //        usercontrol = this,
+                    //        btnAccept = Visibility.Visible,
+                    //        message = MessageResource.InfoIncorrect
+                    //    });
 
-                        modal.ShowDialog();
-                    });
-                    //Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error);
+                    //    modal.ShowDialog();
+                    //});
+                    Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error);
                 }
             }
             catch (Exception ex)
@@ -403,15 +403,17 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                modal = new ModalNewWindow(new DataModal
-                {
-                    type = ETypeModal.Question,
-                    usercontrol = this,
-                    btnAccept = Visibility.Visible,
-                    message = "Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
-                });
+                //modal = new ModalNewWindow(new DataModal
+                //{
+                //    type = ETypeModal.Question,
+                //    usercontrol = this,
+                //    btnAccept = Visibility.Visible,
+                //    message = "Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
+                //});
 
-                modal.ShowDialog();
+                //modal.ShowDialog();
+                Utilities.ShowModal("Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas.", EModalType.Error);
+
             }
             catch (Exception ex)
             {

@@ -15,10 +15,10 @@
         Width="1250.599"
         WindowStartupLocation="CenterScreen" >
     
-    <Grid TouchDown="Grid_TouchDown">
-        <Grid.Background>
+    <Grid>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="{Binding ImageModal}" Stretch="Fill"/>
-        </Grid.Background>
+        </Grid.Background>-->
 
         <Grid>
             <Grid.RowDefinitions>
@@ -28,6 +28,14 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
+                <Image 
+                    Source="/Images/Backgrounds/NewAlert.png"
+                    HorizontalAlignment="Center"
+                    Height="700"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0"
+                    Stretch="Uniform"
+                />
                 <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                        gif:ImageBehavior.AnimateInDesignMode="True"
                        gif:ImageBehavior.AutoStart="True" 
@@ -65,17 +73,15 @@
                            VerticalAlignment="Center"
                            TextAlignment="Center" />
 
-                <TextBlock x:Name="LblMessageTouch" 
-                           Text="¡Toca la pantalla para continuar!"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,30" 
-                           FontSize="30" 
-                           Width="500"
-                           FontFamily="Myriad Pro"
-                           Foreground="#FF606060"
-                           TextWrapping="WrapWithOverflow"
-                           VerticalAlignment="Bottom"
-                           TextAlignment="Center" />
+                <Image
+                    Name="btnAccept"
+                    Source="/Images/Buttons/NewAceptar2.png"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="0,600,0,0"  
+                    Width="350"
+                    TouchDown="Grid_TouchDown"
+                />
             </Grid>
 
             <Grid Grid.Row ="2">
