@@ -32,7 +32,7 @@ namespace WPFMultired.Windows.Alerts
             try
             {
                 Data = data;
-                Data.usercontrol.Opacity = 0.3;
+                Data.usercontrol.Opacity = 0.2;
                 Data.url = Data.type == ETypeModal.Alert ? "/Images/Backgrounds/NewAlert.png" : "/Images/Backgrounds/NewQuestion.png";
                 this.DataContext = Data;
             }
@@ -44,8 +44,15 @@ namespace WPFMultired.Windows.Alerts
 
         private void Grid_TouchDown(object sender, TouchEventArgs e)
         {
-            Data.usercontrol.Opacity = 1;
-            DialogResult = true;
+            try
+            {
+                Data.usercontrol.Opacity = 1;
+                DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

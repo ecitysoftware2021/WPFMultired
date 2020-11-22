@@ -333,7 +333,7 @@ namespace WPFMultired.UserControls
                 {
                     type = ETypeModal.Question,
                     usercontrol = this,
-                    message = $"{"Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas"}."
+                    message = $"Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
                 });
 
                 modal.ShowDialog();

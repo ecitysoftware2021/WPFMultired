@@ -6,15 +6,22 @@
         xmlns:local="clr-namespace:WPFMultired.Windows.Alerts"
         mc:Ignorable="d"
         Title="ModalNewWindow" WindowStyle="None"
-        Height="700" 
-        Width="700"
-        Background="Transparent"
+        Height="1920" 
+        Width="1080"
+        AllowsTransparency="True"
+        Background="White"
         WindowStartupLocation="CenterScreen"
+        TouchDown="Grid_TouchDown"
         >
-    <Grid TouchDown="Grid_TouchDown">
-        <Grid.Background>
-            <ImageBrush ImageSource="{Binding url}"/>
-        </Grid.Background>
+    <Grid>
+        <Image 
+            Source="{Binding url}"
+            HorizontalAlignment="Center"
+            Height="700"
+            VerticalAlignment="Center"
+            Margin="0,0,0,0"
+            Stretch="Uniform"
+        />
         <TextBlock 
             Name="txtMs"
             Text="{Binding message}"
