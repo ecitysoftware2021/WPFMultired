@@ -259,7 +259,7 @@
     <value>Estamos consultando las coincidencias. Regálenos unos segundos</value>
   </data>
   <data name="ErrorCoincidences" xml:space="preserve">
-    <value>No se encontraron coincidencias en la validación de la identificación, vuelva a intentarlo</value>
+    <value>Valida el número de identificación ingresado, no encontramos coincidencias para la transacción solicitada.</value>
   </data>
   <data name="ErrorFoundFiles" xml:space="preserve">
     <value>En el momento no hay certificados para generar, vuelva pronto.</value>

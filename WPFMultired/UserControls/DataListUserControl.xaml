@@ -451,7 +451,7 @@
             <TextBlock 
                 Name="txtValorComision"
                 Foreground="Gray"
-                Margin="0,0,100,70"
+                Margin="0,0,120,70"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 FontSize="30"
@@ -471,7 +471,7 @@
                 md:HintAssist.FloatingScale="0.3"
                 Text="{Binding Val, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
                 Height="60" 
-                Margin="0,0,100,80" 
+                Margin="0,0,120,80" 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Width="250"
@@ -491,6 +491,15 @@
                     <SolidColorBrush Color="White" Opacity="0.6"/>
                 </TextBox.Background>
             </TextBox>
+            <Image 
+                Name="btnQuestion"
+                Source="/Images/Buttons/Question.png"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center" 
+                Margin="0,0,70,60"                  
+                Width="40"
+                TouchDown="btnQuestion_TouchDown"
+            />
             <TextBlock 
                 x:Name="txtMsInfo"
                 Margin="0,0,0,0"

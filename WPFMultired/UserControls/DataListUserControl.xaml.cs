@@ -13,6 +13,7 @@ using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.ViewModel;
 using System.Windows;
+using WPFMultired.Windows.Alerts;
 
 namespace WPFMultired.UserControls
 {
@@ -383,6 +384,26 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
+        {
+            try
+            {
+                ModalNewWindow modal = new ModalNewWindow(new DataModal
+                {
+                    type = ETypeModal.Question,
+                    usercontrol = this,
+                    btnAccept = Visibility.Visible,
+                    message = $"Por favor, digita el valor a consignar (mínimo {transaction.Product.AmountMin.ToString("C")} - máximo {transaction.Product.AmountMax.ToString("C")}). El dispositivo recibe montos de dinero redondeados al múltiplo de $100."
+                });
+
+                modal.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
     }

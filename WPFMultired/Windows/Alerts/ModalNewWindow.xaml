@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFMultired.Windows.Alerts"
         mc:Ignorable="d"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        gif:ImageBehavior.AnimateInDesignMode="True"
         Title="ModalNewWindow" WindowStyle="None"
         Height="1920" 
         Width="1080"
         AllowsTransparency="True"
-        Background="White"
+        Background="Transparent"
         WindowStartupLocation="CenterScreen"
-        TouchDown="Grid_TouchDown"
         >
     <Grid>
         <Image 
@@ -34,6 +35,26 @@
             Foreground="Gray"
             TextWrapping="Wrap"
             TextAlignment="Center"
+        />
+        <Image 
+            gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
+            gif:ImageBehavior.AnimateInDesignMode="True"
+            gif:ImageBehavior.AutoStart="True"
+            Stretch="Uniform"
+            Margin="0,550,0,0" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Height="300" 
+            Visibility="Hidden"
+        />
+        <Image
+            Source="/Images/Buttons/NewAceptar2.png"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="0,600,0,0"  
+            Visibility="{Binding btnAccept}"
+            Width="350"
+            TouchDown="Grid_TouchDown"
         />
     </Grid>
 </Window>

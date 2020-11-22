@@ -191,7 +191,18 @@ namespace WPFMultired.UserControls
                         else 
                         {
                             Utilities.CloseModal();
-                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
+
+                            ModalNewWindow modal = new ModalNewWindow(new DataModal
+                            {
+                                type = ETypeModal.Question,
+                                usercontrol = this,
+                                btnAccept = Visibility.Visible,
+                                message = response.Message ?? MessageResource.ErrorCoincidences
+                            });
+
+                            modal.ShowDialog();
+
+                            //Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
                             viewModel.Value1 = string.Empty;
 
                             //Utilities.navigator.Navigate(UserControlView.Main);
@@ -333,7 +344,8 @@ namespace WPFMultired.UserControls
                 {
                     type = ETypeModal.Question,
                     usercontrol = this,
-                    message = $"Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
+                    btnAccept = Visibility.Visible,
+                    message = "Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
                 });
 
                 modal.ShowDialog();
