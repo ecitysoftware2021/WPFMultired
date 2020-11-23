@@ -56,6 +56,7 @@ namespace WPFMultired.UserControls
                 transaction.Payment.viewList.Source = transaction.Payment.Denominations.Where(d => d.Code == "MA" || d.Code == "AP").ToList();
                 lv_denominations.DataContext = transaction.Payment.viewList;
                 lv_denominations.Items.Refresh();
+                
                 InitTimer();
             }
             catch (Exception ex)

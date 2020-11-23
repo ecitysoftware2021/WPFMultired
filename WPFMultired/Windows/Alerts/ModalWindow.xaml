@@ -10,9 +10,12 @@
         Title="ModalWindow"  
         WindowStyle="None"
         Topmost="False"
+        Background="Transparent"
+        AllowsTransparency="True"
         WindowState="Maximized"
         Height="2064.095" 
         Width="1250.599"
+        Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" >
     
     <Grid>
@@ -31,7 +34,7 @@
                 <Image 
                     Source="/Images/Backgrounds/NewAlert.png"
                     HorizontalAlignment="Center"
-                    Height="700"
+                    Height="800"
                     VerticalAlignment="Center"
                     Margin="0,0,0,0"
                     Stretch="Uniform"
@@ -41,22 +44,21 @@
                        gif:ImageBehavior.AutoStart="True" 
                        x:Name="GifLoadder"  
                        Stretch="Fill"
-                       VerticalAlignment="Top" 
+                       VerticalAlignment="Center" 
                        HorizontalAlignment="Center" 
                        Width="180" 
                        Height="180"
-                       Margin="20,180,0,0"
+                       Margin="20,270,0,0"
                        Visibility="Hidden"/>
 
                 <TextBlock x:Name="LblTittle" 
                            Text="{Binding Tittle}"
                            HorizontalAlignment="Center"
-                           Margin="0,50,0,0" 
-                           FontSize="48" 
+                           Margin="0,0,0,200" 
+                           FontSize="40" 
                            Width="500"
                            FontFamily="Myriad Pro"
-                           FontWeight="Bold"
-                           Foreground="#FF0D679A"
+                           Foreground="Gray"
                            TextWrapping="WrapWithOverflow"
                            VerticalAlignment="Center"
                            TextAlignment="Center" />
@@ -64,12 +66,12 @@
                 <TextBlock x:Name="LblMessage" 
                            Text="{Binding Messaje}"
                            HorizontalAlignment="Center"
-                           Margin="0,320,0,0" 
-                           FontSize="40" 
-                           Width="800"
+                           Margin="0,20,0,0" 
+                           FontSize="30" 
+                           Width="600"
                            FontFamily="Myriad Pro"
-                           Foreground="#FF0D679A"
-                           TextWrapping="WrapWithOverflow"
+                           Foreground="Gray"
+                           TextWrapping="Wrap"
                            VerticalAlignment="Center"
                            TextAlignment="Center" />
 
@@ -78,7 +80,7 @@
                     Source="/Images/Buttons/NewAceptar2.png"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
-                    Margin="0,600,0,0"  
+                    Margin="0,700,0,0"  
                     Width="350"
                     TouchDown="Grid_TouchDown"
                 />

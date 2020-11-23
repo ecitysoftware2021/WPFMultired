@@ -1,18 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using WPFMultired.Classes;
-using WPFMultired.DataModel;
 using WPFMultired.Models;
 using WPFMultired.Resources;
-using WPFMultired.Services;
-using WPFMultired.Services.Object;
 
 namespace WPFMultired.ViewModel
 {
@@ -297,7 +291,7 @@ namespace WPFMultired.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ViewList)));
             }
         }
-       
+
 
         private List<ItemList> _dataList;
 
@@ -328,59 +322,55 @@ namespace WPFMultired.ViewModel
         {
             try
             {
-                //TODO:quitar este for
-                for (int i = 0; i < 14; i++)
+                foreach (var product in transaction.Products)
                 {
-                    foreach (var product in transaction.Products)
+                    switch (transaction.eTypeService)
                     {
-                        switch (transaction.eTypeService)
-                        {
-                            case ETypeServiceSelect.Deposito:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.Amount,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption
-                                });
-                                break;
-                            case ETypeServiceSelect.TarjetaCredito:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.Amount,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption
-                                });
-                                break;
-                            case ETypeServiceSelect.EstadoCuenta:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.Amount,
-                                    Item7 = product.AccountStateProduct.DESAPO ?? "NA",
-                                    Item8 = product.AccountStateProduct.DESCRE ?? "NA",
-                                    Item9 = product.AccountStateProduct.DESPAP ?? "NA",
-                                    Item10 = product.AccountStateProduct.VLRAPO,
-                                    Item11 = product.AccountStateProduct.VLRCRE,
-                                    Item12 = product.AccountStateProduct.VLRPAP,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption
-                                });
-                                break;
-                        }
+                        case ETypeServiceSelect.Deposito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Item7 = product.AccountStateProduct.DESAPO ?? "NA",
+                                Item8 = product.AccountStateProduct.DESCRE ?? "NA",
+                                Item9 = product.AccountStateProduct.DESPAP ?? "NA",
+                                Item10 = product.AccountStateProduct.VLRAPO,
+                                Item11 = product.AccountStateProduct.VLRCRE,
+                                Item12 = product.AccountStateProduct.VLRPAP,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
                     }
                 }
             }

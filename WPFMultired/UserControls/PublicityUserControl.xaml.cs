@@ -41,11 +41,11 @@ namespace WPFMultired.UserControls
             {
                 if (_imageSleader == null)
                 {
-                    _imageSleader = new ImageSleader(null, Utilities.GetConfiguration("PathPublish"));
+                    _imageSleader = new ImageSleader(null, Utilities.GetConfiguration("PathPublish2"));
 
                     this.DataContext = _imageSleader.imageModel;
 
-                    _imageSleader.time = 3;
+                    _imageSleader.time = 5;
 
                     _imageSleader.isRotate = true;
 

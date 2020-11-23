@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel;
+using System.Windows.Controls;
 using WPFMultired.Classes;
 
 namespace WPFMultired.Models
 {
     public class ModalModel : INotifyPropertyChanged
     {
+        public UserControl userControl;
+
         private string _Messaje;
 
         public string Messaje

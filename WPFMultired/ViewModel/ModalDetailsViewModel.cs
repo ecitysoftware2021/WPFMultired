@@ -377,7 +377,7 @@ namespace WPFMultired.ViewModel
                     Utilities.CloseModal();
                 });
 
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                //Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
             }
             catch (Exception ex)
             {

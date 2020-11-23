@@ -61,7 +61,7 @@ namespace WPFMultired.UserControls
                     AdminPayPlus.UpdateTransaction(this.transaction);
 
                     Thread.Sleep(1000);
-
+                    
                     Utilities.PrintVoucher(this.transaction);
 
                     Thread.Sleep(4000);
@@ -97,7 +97,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (Utilities.ShowModal("¿Desea realizar cashback?", EModalType.Information))
+                if (Utilities.ShowModal("¿Desea realizar cashback?", EModalType.Information,this))
                 {
                     transaction.IsCashBack = true;
                     this.transaction.Type = ETransactionType.Withdrawal;

@@ -77,30 +77,29 @@ namespace WPFMultired.Models
                         break;
                 }
 
-                //TODO:descomentar
-                //TimerService.Close();
+                TimerService.Close();
 
-                //if (initTimer)
-                //{
-                //    TimerService.CallBackTimerOut = response =>
-                //    {
-                //        try
-                //        {
-                //            //TODO:corregir
-                //            Application.Current.Dispatcher.Invoke((Action)delegate
-                //            {
-                //                WPKeyboard.Keyboard.CloseKeyboard(View);
-                //                View = new MainUserControl();
-                //            });
-                //            GC.Collect();
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //        }
-                //    };
+                if (initTimer)
+                {
+                    TimerService.CallBackTimerOut = response =>
+                    {
+                        try
+                        {
+                            //TODO:corregir
+                            Application.Current.Dispatcher.Invoke((Action)delegate
+                            {
+                                WPKeyboard.Keyboard.CloseKeyboard(View);
+                                View = new MainUserControl();
+                            });
+                            GC.Collect();
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    };
 
-                //    TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationView")));
-                //}
+                    TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationView")));
+                }
             }
             catch (Exception ex)
             {

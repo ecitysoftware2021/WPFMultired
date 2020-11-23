@@ -52,7 +52,7 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static bool ShowModal(string message, EModalType type, bool timer = false)
+        public static bool ShowModal(string message, EModalType type, System.Windows.Controls.UserControl control, bool timer = false)
         {
             bool response = false;
             try
@@ -62,6 +62,7 @@ namespace WPFMultired.Classes
                     Tittle = "Estimado Cliente: ",
                     Messaje = message,
                     TypeModal = type,
+                    userControl = control,
                     ImageModal = ImagesUrlResource.AlertBlanck,
                 };
 

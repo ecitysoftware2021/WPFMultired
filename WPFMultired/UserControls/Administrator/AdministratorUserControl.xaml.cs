@@ -167,19 +167,19 @@ namespace WPFMultired.UserControls.Administrator
 
                         Utilities.CloseModal();
 
-                        Utilities.ShowModal(MessageResource.TransactionFinish, EModalType.Error, false);
+                        Utilities.ShowModal(MessageResource.TransactionFinish, EModalType.Error, this);
 
                         Utilities.RestartApp();
                     }
                     else
                     {
                         Utilities.CloseModal();
-                        Utilities.ShowModal(MessageResource.ErrorTransaction, EModalType.Error, false);
+                        Utilities.ShowModal(MessageResource.ErrorTransaction, EModalType.Error, this);
                         Utilities.RestartApp();
                     }
                 });
 
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, false);
+                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
             }
             catch (Exception ex)
             {

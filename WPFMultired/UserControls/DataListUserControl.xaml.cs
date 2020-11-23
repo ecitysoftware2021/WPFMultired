@@ -347,15 +347,7 @@ namespace WPFMultired.UserControls
                     btnQuestion.Visibility = Visibility.Hidden;
                     transaction.Product = null;
 
-                    ModalNewWindow modal = new ModalNewWindow(new DataModal
-                    {
-                        type = ETypeModal.Question,
-                        usercontrol = this,
-                        btnAccept = Visibility.Visible,
-                        message = "Los datos ingresados del número de cuenta no coinciden. Valida la información e inténte más tarde."
-                    });
-
-                    modal.ShowDialog();
+                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden.Valida la información e inténte más tarde.", EModalType.Error, this);
                 }
                 else
                 {
@@ -373,15 +365,7 @@ namespace WPFMultired.UserControls
             {
                 if (transaction.Product == null)
                 {
-                    ModalNewWindow modal = new ModalNewWindow(new DataModal
-                    {
-                        type = ETypeModal.Question,
-                        usercontrol = this,
-                        btnAccept = Visibility.Visible,
-                        message = "Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar."
-                    });
-
-                    modal.ShowDialog();
+                    Utilities.ShowModal("Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar.", EModalType.Error, this);
                 }
                 else
                 if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
@@ -401,15 +385,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                ModalNewWindow modal = new ModalNewWindow(new DataModal
-                {
-                    type = ETypeModal.Question,
-                    usercontrol = this,
-                    btnAccept = Visibility.Visible,
-                    message = $"Por favor, digita el valor a consignar (mínimo {transaction.Product.AmountMin.ToString("C")} - máximo {transaction.Product.AmountMax.ToString("C")}). El dispositivo recibe montos de dinero redondeados al múltiplo de $100."
-                });
-
-                modal.ShowDialog();
+                Utilities.ShowModal($"Por favor, digita el valor a consignar (mínimo {transaction.Product.AmountMin.ToString("C")} - máximo {transaction.Product.AmountMax.ToString("C")}). El dispositivo recibe montos de dinero redondeados al múltiplo de $100.", EModalType.Error, this);
             }
             catch (Exception ex)
             {

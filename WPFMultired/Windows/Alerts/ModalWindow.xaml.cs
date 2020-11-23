@@ -23,6 +23,8 @@ namespace WPFMultired.Windows
 
             this.DataContext = this.modal;
 
+            this.modal.userControl.Opacity = 0.2;
+
             ConfigureModal();
         }
 
@@ -124,6 +126,11 @@ namespace WPFMultired.Windows
         private void BtnNo_TouchDown(object sender, TouchEventArgs e)
         {
             this.DialogResult = false;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.modal.userControl.Opacity = 1;
         }
     }
 }

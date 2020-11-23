@@ -84,7 +84,7 @@ namespace WPFMultired.UserControls
                 if (AdminPayPlus.DataPayPlus.StateUpdate)
                 {
                     _validatePaypad = false;
-                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, true);
+                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, this, true);
                     Utilities.UpdateApp();
                 }
             }
@@ -152,7 +152,7 @@ namespace WPFMultired.UserControls
 
                         if (response != 8)
                         {
-                            if (Utilities.ShowModal(MessageResource.ErrorNoPaper, EModalType.Information, false))
+                            if (Utilities.ShowModal(MessageResource.ErrorNoPaper, EModalType.Information, this))
                             {
                                 Redirect(true);
                             }
@@ -170,7 +170,7 @@ namespace WPFMultired.UserControls
                 else
                 {
                     _imageSleader.Stop();
-                    Utilities.ShowModal(MessageResource.OutService, EModalType.Error, false);
+                    Utilities.ShowModal(MessageResource.OutService, EModalType.Error, this);
                     Utilities.RestartApp();
                 }
             }

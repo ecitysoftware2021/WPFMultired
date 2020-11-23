@@ -61,7 +61,7 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (AdminPayPlus.DataPayPlus.StateUpdate)
                 {
-                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, false);
+                    Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, this);
                     Utilities.UpdateApp();
                 }
                 else if (AdminPayPlus.DataPayPlus.StateBalanece)
@@ -84,7 +84,7 @@ namespace WPFMultired.UserControls.Administrator
             }
             catch (Exception ex)
             {
-                Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, false);
+                Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, this);
                 Initial();
             }
         }
@@ -100,7 +100,7 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, false);
+                    Utilities.ShowModal(string.Concat(init.DescriptionStatusPayPlus, " ", MessageResource.NoService), EModalType.Error, this);
                     Initial();
                 }
             });

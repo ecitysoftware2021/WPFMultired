@@ -81,7 +81,7 @@ namespace WPFMultired.UserControls
 
                         if (this.transaction.IdTransactionAPi == 0)
                         {
-                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
+                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error,this);
                             Utilities.navigator.Navigate(UserControlView.Main);
                         }
                         else
@@ -103,7 +103,7 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                         }
                     });
-                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
                 }
                 else
                 {

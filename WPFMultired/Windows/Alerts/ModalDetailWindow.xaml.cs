@@ -52,7 +52,7 @@ namespace WPFMultired.Windows.Alerts
             {
                 if (this.transaction.IsCashBack) 
                 {
-                    Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
+                    //Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
                 }
                 
                 txt_amount.Focus();
@@ -118,7 +118,7 @@ namespace WPFMultired.Windows.Alerts
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
+                                    //Utilities.ShowModal("Ingresar efectivo a retirar en un monto inferior o igual al depositado", EModalType.Error);
                                 }
                             }
                             else
@@ -134,7 +134,7 @@ namespace WPFMultired.Windows.Alerts
                         }
                         else
                         {
-                            Utilities.ShowModal("Ingrese un valor a retirar valido", EModalType.Error);
+                           // Utilities.ShowModal("Ingrese un valor a retirar valido", EModalType.Error);
                         }
                         break;
                     case ETypeDetailModel.CodeOTP:
@@ -187,7 +187,7 @@ namespace WPFMultired.Windows.Alerts
 
                         if (this.transaction.IdTransactionAPi == 0)
                         {
-                                Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
+                                //Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error);
                                 Utilities.navigator.Navigate(UserControlView.Main);
                                 Application.Current.Dispatcher.Invoke(delegate
                                 {
@@ -208,7 +208,7 @@ namespace WPFMultired.Windows.Alerts
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal("El dispositivo no cuenta con el dinero solicitado", EModalType.Error);
+                                    //Utilities.ShowModal("El dispositivo no cuenta con el dinero solicitado", EModalType.Error);
                                 }
                             }
                             else
@@ -221,7 +221,7 @@ namespace WPFMultired.Windows.Alerts
                             }
                         }
                     });
-                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                    //Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
                 }
             }
             catch (Exception ex)

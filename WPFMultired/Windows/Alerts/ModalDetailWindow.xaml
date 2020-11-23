@@ -182,7 +182,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3">
-                    <Image Source="/Images/Buttons/btn-exit.png"
+                    <Image Source="/Images/Buttons/Newcancelar.png"
                            Width="200"
                            Name="btn_cancel"
                            Margin="170,0,0,80"
@@ -198,9 +198,9 @@
                         Visibility="{Binding VisibilityCancel}"
                         Margin="0,40,0,0"
                         TouchDown="Btn_cancel_TouchDown"
-                        Source="/Images/Buttons/btn-exit.png" />
+                        Source="/Images/Buttons/Newsalir.png" />
 
-                    <Image Source="/Images/Buttons/btn-acept.png"
+                    <Image Source="/Images/Buttons/newaceptar2.png"
                            Width="200"
                            Name="btn_finish"
                            Margin="0,0,160,80"

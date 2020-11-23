@@ -29,7 +29,6 @@ namespace WPFMultired.Classes
             }
             catch (Exception)
             {
-                Utilities.ShowModal(MessageResource.Error, EModalType.Error);
             }
         }
 

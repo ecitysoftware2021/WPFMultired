@@ -125,8 +125,8 @@
                 Name="btn_Search"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Width="60"
-                Opacity="0.3"
+                Height="58"
+                Opacity="1"
                 Margin="0,50,130,0" 
                 TouchDown="btn_Search_TouchDown"
             />

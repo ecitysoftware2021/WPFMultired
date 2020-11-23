@@ -139,7 +139,7 @@ namespace WPFMultired.UserControls.Administrator
             {
                 if (viewModel.TypeLogin == 2 && !Validation())
                 {
-                   Utilities.ShowModal(viewModel.MessageError, EModalType.Error, false);
+                   Utilities.ShowModal(viewModel.MessageError, EModalType.Error, this);
 
                   // var data = await AdminPayPlus.DataListPaypad(viewModel.TypeOperation);
 
@@ -160,12 +160,12 @@ namespace WPFMultired.UserControls.Administrator
                             Utilities.CloseModal();
                             if (response != null && !string.IsNullOrEmpty(response.Item2))
                             {
-                                Utilities.ShowModal(response.Item2, EModalType.Error, false);
+                                Utilities.ShowModal(response.Item2, EModalType.Error, this);
 
                             }
                             else
                             {
-                                Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, false);
+                                Utilities.ShowModal(MessageResource.ErrorDates, EModalType.Error, this);
                             }
 
                             viewModel.IsReadQr = false;
@@ -184,14 +184,14 @@ namespace WPFMultired.UserControls.Administrator
                             else
                             {
                                 Utilities.CloseModal();
-                                Utilities.ShowModal(MessageResource.NoInformation, EModalType.Error, false);
+                                Utilities.ShowModal(MessageResource.NoInformation, EModalType.Error, this);
                                 viewModel.IsReadQr = false;
                                 ClearForm();
                             }
                         }
                     });
 
-                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, false);
+                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, this);
                 }
             }
             catch (Exception ex)

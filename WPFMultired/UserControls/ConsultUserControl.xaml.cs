@@ -30,8 +30,6 @@ namespace WPFMultired.UserControls
 
         private ReaderBarCode readerBarCode;
 
-        private ModalNewWindow modal;
-
         public ConsultUserControl(string company, string typeTransaction)
         {
             InitializeComponent();
@@ -107,14 +105,14 @@ namespace WPFMultired.UserControls
                     VisibleInput = System.Windows.Visibility.Hidden
                 };
 
-                Task.Run(() => 
+                Task.Run(() =>
                 {
                     viewModel.LoadListDocuments(transaction);
                     Thread.Sleep(2000);
-                    CloseModalNew();
+                    Utilities.CloseModal();
                 });
 
-                LoadModalInformation();
+                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, this);
 
                 cmb_type_id.SelectedIndex = 0;
 
@@ -185,38 +183,19 @@ namespace WPFMultired.UserControls
                     try
                     {
                         var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
+
+                        Utilities.CloseModal();
+
                         if (response != null && response.Data != null)
                         {
                             transaction = (Transaction)response.Data;
-                            CloseModalNew();
                             readerBarCode.Stop();
                             Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
                         }
-                        else 
+                        else
                         {
-                            Utilities.CloseModal();
-                            
-
-                            //Application.Current.Dispatcher.Invoke(delegate
-                            //{
-                            //    CloseModalNew();
-
-                            //    modal = new ModalNewWindow(new DataModal
-                            //    {
-                            //        type = ETypeModal.Question,
-                            //        usercontrol = this,
-                            //        btnAccept = Visibility.Visible,
-                            //        message = response.Message ?? MessageResource.ErrorCoincidences
-                            //    });
-
-                            //    modal.ShowDialog();
-                            //});
-
-
-                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error);
+                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error, this);
                             viewModel.Value1 = string.Empty;
-
-                            //Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
                     catch (Exception ex)
@@ -227,50 +206,11 @@ namespace WPFMultired.UserControls
                 });
 
                 PassBoxIdentification.Password = string.Empty;
-                //LoadModalInformation();
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload);
+                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, this);
             }
             catch (Exception ex)
             {
-                CloseModalNew();
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private void LoadModalInformation()
-        {
-            try
-            {
-                Application.Current.Dispatcher.Invoke(delegate
-                {
-                    modal = new ModalNewWindow(new DataModal
-                    {
-                        type = ETypeModal.Alert,
-                        usercontrol = this,
-                        Gif = Visibility.Visible,
-                        message = MessageResource.LoadInformation
-                    });
-
-                    modal.ShowDialog();
-                });
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
-
-        private void CloseModalNew()
-        {
-            try
-            {
-                Application.Current.Dispatcher.Invoke(delegate
-                {
-                    modal.Close();
-                });
-            }
-            catch (Exception ex)
-            {
+                Utilities.CloseModal();
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
@@ -305,19 +245,7 @@ namespace WPFMultired.UserControls
                 }
                 else
                 {
-                    //Application.Current.Dispatcher.Invoke(delegate
-                    //{
-                    //    modal = new ModalNewWindow(new DataModal
-                    //    {
-                    //        type = ETypeModal.Alert,
-                    //        usercontrol = this,
-                    //        btnAccept = Visibility.Visible,
-                    //        message = MessageResource.InfoIncorrect
-                    //    });
-
-                    //    modal.ShowDialog();
-                    //});
-                    Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error);
+                    Utilities.ShowModal(MessageResource.InfoIncorrect, EModalType.Error, this);
                 }
             }
             catch (Exception ex)
@@ -401,24 +329,7 @@ namespace WPFMultired.UserControls
 
         private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
         {
-            try
-            {
-                //modal = new ModalNewWindow(new DataModal
-                //{
-                //    type = ETypeModal.Question,
-                //    usercontrol = this,
-                //    btnAccept = Visibility.Visible,
-                //    message = "Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas."
-                //});
-
-                //modal.ShowDialog();
-                Utilities.ShowModal("Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas.", EModalType.Error);
-
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
+            Utilities.ShowModal("Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas.", EModalType.Error, this);
         }
     }
 }

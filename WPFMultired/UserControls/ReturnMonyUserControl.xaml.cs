@@ -188,7 +188,7 @@ namespace WPFMultired.UserControls
                                 else
                                 {
                                     AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                                    Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error);
+                                    Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error,this);
                                     transaction.State = ETransactionState.ErrorService;
                                 }
                             }
@@ -196,7 +196,7 @@ namespace WPFMultired.UserControls
                             {
                                 Utilities.CloseModal();
                                 transaction.StateNotification = 1;
-                                Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error);
+                                Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error,this);
                             }
 
                             if (transaction.IdTransactionAPi > 0)
@@ -206,13 +206,13 @@ namespace WPFMultired.UserControls
                             else
                             {
                                 AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                                Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error);
+                                Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error,this);
 
                                 Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
                             }
                         });
 
-                        Utilities.ShowModal(MessageResource.FinishTransaction, EModalType.Preload);
+                        Utilities.ShowModal(MessageResource.FinishTransaction, EModalType.Preload,this);
                     }
                     else
                     {
