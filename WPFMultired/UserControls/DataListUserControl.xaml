@@ -43,6 +43,15 @@
                 VerticalAlignment="Bottom"
                 Margin="0,0,80,0"
             />
+            <TextBlock  
+                x:Name="txtHoraActual"
+                HorizontalAlignment="Right"
+                Margin="0,70,70,0" 
+                FontSize="30" 
+                Foreground="Gray"
+                VerticalAlignment="Top"
+                TextAlignment="Center" 
+            />
             <Image 
                 Source="../Images/Buttons/NewSalir.png"
                 HorizontalAlignment="Right"
@@ -446,7 +455,7 @@
                 FontSize="30"
             />
             <TextBlock 
-                Text="Valor a pagar"
+                Text="Valor a depositar"
                 Foreground="Gray"
                 Margin="100,0,0,80"
                 HorizontalAlignment="Left"

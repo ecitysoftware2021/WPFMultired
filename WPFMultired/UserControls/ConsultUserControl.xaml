@@ -24,6 +24,15 @@
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="1">
+            <TextBlock  
+                x:Name="txtHoraActual"
+                HorizontalAlignment="Right"
+                Margin="0,70,70,0" 
+                FontSize="30" 
+                Foreground="Gray"
+                VerticalAlignment="Top"
+                TextAlignment="Center" 
+            />
             <Image 
                 x:Name="btn_exit"
                 Source="../Images/Buttons/NewSalir.png"

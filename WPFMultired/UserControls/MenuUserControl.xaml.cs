@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
@@ -26,7 +27,8 @@ namespace WPFMultired.UserControls
             InitializeComponent();
 
             grvPublicity.Content = Utilities.UCPublicityBanner;
-            //ShowModal();
+
+            GoTime();
         }
 
         private void ConfigurateView()
@@ -84,14 +86,7 @@ namespace WPFMultired.UserControls
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            try
-            {
-                ConfigurateView();
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
+            ConfigurateView();
         }
 
         private void Grid_list_TouchDown(object sender, TouchEventArgs e)
@@ -100,17 +95,37 @@ namespace WPFMultired.UserControls
             {
                 if (((Grid)sender).Tag != null)
                 {
-                    //if (AdminPayPlus.DataPayPlus.ListCompanies.Count == 1)
-                    //{
                     var company = AdminPayPlus.DataPayPlus.ListCompanies.FirstOrDefault(x => x.Item1.Contains(Utilities.GetConfiguration("SourceEntity"))).Item1;
 
                     Utilities.navigator.Navigate(UserControlView.Consult, true, company, ((Grid)sender).Tag);
-                    //}
-                    //else
-                    //if(AdminPayPlus.DataPayPlus.ListCompanies.Count > 1) {
-                    //    Utilities.navigator.Navigate(UserControlView.MenuCompaniesUserControl, true, ((Grid)sender).Tag);
-                    //}
                 }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void GoTime()
+        {
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(1);
+                timer.Tick += UpdateTime;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            try
+            {
+                txtHoraActual.Text = DateTime.Now.ToString("HH:mm tt");
             }
             catch (Exception ex)
             {

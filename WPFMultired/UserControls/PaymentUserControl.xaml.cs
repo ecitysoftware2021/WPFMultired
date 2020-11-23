@@ -13,6 +13,7 @@ using WPFMultired.Resources;
 using System.Threading;
 using System.Globalization;
 using Grabador.Transaccion;
+using System.Windows.Threading;
 
 namespace WPFMultired.UserControls
 {
@@ -32,6 +33,8 @@ namespace WPFMultired.UserControls
             this.transaction = transaction;
 
             grvPublicity.Content = Utilities.UCPublicityBanner;
+
+            GoTime();
 
             OrganizeValues();
         }
@@ -360,10 +363,9 @@ namespace WPFMultired.UserControls
 
                 if (Utilities.ShowModal(MessageResource.CancelTransaction, EModalType.Information,this))
                 {
-                    //TODO:descomentar
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    //CLSGrabador.FinalizarGrabacion();
+                    CLSGrabador.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
                         if (paymentViewModel.ValorIngresado > 0)
@@ -405,9 +407,8 @@ namespace WPFMultired.UserControls
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 
-                //TODO:descomentar
-                //AdminPayPlus.ControlPeripherals.StopAceptance();
-                //AdminPayPlus.ControlPeripherals.callbackLog = null;
+                AdminPayPlus.ControlPeripherals.StopAceptance();
+                AdminPayPlus.ControlPeripherals.callbackLog = null;
 
                 SavePay();
             }
@@ -418,6 +419,33 @@ namespace WPFMultired.UserControls
                 this.paymentViewModel.ImgContinue = Visibility.Visible;
 
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
+            }
+        }
+
+        private void GoTime()
+        {
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(1);
+                timer.Tick += UpdateTime;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            try
+            {
+                txtHoraActual.Text = DateTime.Now.ToString("HH:mm tt");
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
     }

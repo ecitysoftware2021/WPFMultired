@@ -14,6 +14,7 @@ using WPFMultired.Resources;
 using WPFMultired.ViewModel;
 using System.Windows;
 using WPFMultired.Windows.Alerts;
+using System.Windows.Threading;
 
 namespace WPFMultired.UserControls
 {
@@ -39,6 +40,8 @@ namespace WPFMultired.UserControls
             grvPublicity.Content = Utilities.UCPublicityBanner;
 
             ProductSelect = new ItemList();
+
+            GoTime();
 
             ConfigurateView();
         }
@@ -396,6 +399,33 @@ namespace WPFMultired.UserControls
         private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
         {
             ShowErrorMs();
+        }
+
+        private void GoTime()
+        {
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(1);
+                timer.Tick += UpdateTime;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            try
+            {
+                txtHoraActual.Text = DateTime.Now.ToString("HH:mm tt");
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

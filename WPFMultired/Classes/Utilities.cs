@@ -195,7 +195,7 @@ namespace WPFMultired.Classes
                         };
                     if (transaction.Type == ETransactionType.Deposit)
                     {
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Pago de estados de cuenta", x = 68, y = y += 100 });
+                        data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.eTypeService.ToString(), x = 68, y = y += 100 });
                     }
                     else
                     {

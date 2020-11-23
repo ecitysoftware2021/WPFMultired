@@ -189,7 +189,7 @@
                                 HorizontalAlignment="Right"
                                 Grid.Column="3">
                                 <Run Text=" - " FontWeight="Bold" />
-                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FF0B4E92" />
+                                <Run Text="{Binding AMOUNT_NEW}" Foreground="#FFA3BD36"  />
                             </TextBlock>
                             <TextBlock 
                                 Text="{Binding TOTAL_AMOUNT, StringFormat={}{0:C2}}"

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Classes.Peripherals;
 using WPFMultired.Models;
@@ -52,6 +53,8 @@ namespace WPFMultired.UserControls
                 {
                     readerBarCode = new ReaderBarCode();
                 }
+
+                GoTime();
             }
             catch (Exception ex)
             {
@@ -194,7 +197,7 @@ namespace WPFMultired.UserControls
                         }
                         else
                         {
-                            Utilities.ShowModal(response.Message ?? MessageResource.ErrorCoincidences, EModalType.Error, this);
+                            Utilities.ShowModal(/*response.Message ??*/ MessageResource.ErrorCoincidences, EModalType.Error, this);
                             viewModel.Value1 = string.Empty;
                         }
                     }
@@ -330,6 +333,33 @@ namespace WPFMultired.UserControls
         private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
         {
             Utilities.ShowModal("Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas.", EModalType.Error, this);
+        }
+
+        private void GoTime()
+        {
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(1);
+                timer.Tick += UpdateTime;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            try
+            {
+                txtHoraActual.Text = DateTime.Now.ToString("HH:mm tt");
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
@@ -36,6 +37,8 @@ namespace WPFMultired.UserControls
             this.transaction = transaction;
 
             this.DataContext = transaction.Product;
+
+            GoTime();
         }
 
         private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
@@ -88,16 +91,15 @@ namespace WPFMultired.UserControls
                         {
                             Task.Run(() =>
                             {
-                                //TODO:descomentar
-                                //CLSGrabador.IniciarGrabacion(new DataVidio
-                                //{
-                                //    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
-                                //    mailAlert = "'ecitysoftware@gmail.com'",
-                                //    transactionID = transaction.IdTransactionAPi,
-                                //    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
-                                //    selectedCamera = 0,
-                                //    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
-                                //});
+                                CLSGrabador.IniciarGrabacion(new DataVidio
+                                {
+                                    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                    mailAlert = "'ecitysoftware@gmail.com'",
+                                    transactionID = transaction.IdTransactionAPi,
+                                    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                    selectedCamera = 0,
+                                    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                });
                             });
 
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
@@ -119,6 +121,33 @@ namespace WPFMultired.UserControls
         private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
         {
             Utilities.navigator.Navigate(UserControlView.Main);
+        }
+
+        private void GoTime()
+        {
+            try
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(1);
+                timer.Tick += UpdateTime;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            try
+            {
+                txtHoraActual.Text = DateTime.Now.ToString("HH:mm tt");
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
     }
 }

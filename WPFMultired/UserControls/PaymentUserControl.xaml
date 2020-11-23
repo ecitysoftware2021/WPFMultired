@@ -23,6 +23,15 @@
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="1">
+            <TextBlock  
+                x:Name="txtHoraActual"
+                HorizontalAlignment="Right"
+                Margin="0,70,70,0" 
+                FontSize="30" 
+                Foreground="Gray"
+                VerticalAlignment="Top"
+                TextAlignment="Center" 
+            />
             <Image 
                 x:Name="btnCancell"
                 Source="../Images/Buttons/NewSalir.png"
@@ -113,13 +122,13 @@
                                 Text="{Binding Denominacion, StringFormat={}{0:C0}}"
                                 FontSize="30"
                                 FontFamily="Arial"
-                                TextAlignment="Right"
+                                TextAlignment="Center"
                                 TextWrapping="Wrap"
                                 Margin="0,0,30,0"
                                 Foreground="#606060"
                                 Width="300"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Left"
                                 Grid.Column="0" 
                             />
 
@@ -127,13 +136,13 @@
                                 Text="{Binding Quantity}"
                                 FontSize="30"
                                 FontFamily="Arial"
-                                TextAlignment="Right"
+                                TextAlignment="Center"
                                 TextWrapping="Wrap"
                                 Width="200"
                                 Margin="0,0,0,0"
-                                Foreground="#FF104B6D"
+                                Foreground="Gray"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="left"
                                 FontWeight="Bold"
                                 Grid.Column="1" 
                             />
@@ -145,7 +154,7 @@
                                 TextWrapping="Wrap"
                                 Margin="0,0,30,0"
                                 Width="230"
-                                Foreground="#FF104B6D"
+                                Foreground="Gray"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 FontWeight="Bold"
@@ -198,7 +207,7 @@
                 HorizontalAlignment="Right"
              />
             <TextBlock 
-                Text="Valor a pagar:"
+                Text="Valor a depositar:"
                 FontSize="30"
                 TextAlignment="Center"
                 Margin="100,50,0,0"

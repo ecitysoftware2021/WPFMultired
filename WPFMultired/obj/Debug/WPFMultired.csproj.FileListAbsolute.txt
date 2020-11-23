@@ -426,8 +426,6 @@ C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Deb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
-C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalNewWindow.g.cs
-C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalNewWindow.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe.config
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.pdb
