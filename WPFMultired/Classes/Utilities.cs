@@ -52,14 +52,14 @@ namespace WPFMultired.Classes
             }
         }
 
-        public static bool ShowModal(string message, EModalType type, System.Windows.Controls.UserControl control, bool timer = false)
+        public static bool ShowModal(string message, EModalType type, System.Windows.Controls.UserControl control, bool timer = false, string tittle = "")
         {
             bool response = false;
             try
             {
                 ModalModel model = new ModalModel
                 {
-                    Tittle = "Estimado Cliente: ",
+                    Tittle = tittle,
                     Messaje = message,
                     TypeModal = type,
                     userControl = control,

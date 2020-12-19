@@ -65,7 +65,8 @@ namespace WPFMultired.UserControls
                     {
                         Colum1 = transaction.payer.NAME,
                         Amount = transaction.Amount,
-                        Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
+                        //Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
+                        Colum2 = transaction.payer.IDENTIFICATION,
                         Tittle = transaction.Observation,
                         DataList = new List<ItemList>(),
                         ViewList = new CollectionViewSource(),
@@ -359,6 +360,7 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -376,11 +378,27 @@ namespace WPFMultired.UserControls
                     transaction.Amount = valueModel.Val;
                     transaction.Product.AmountUser = valueModel.Val;
 
+                    if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
+                    {
+                        Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta quedará en mora.", EModalType.Error, this);
+
+                        if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
+                        {
+                            Utilities.ShowModal("La tarjeta de crédito que vas a cancelar se encuentra en estado prejurídico, los honorarios están calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se véra reflejado en el recibo de la transacción.", EModalType.Error, this);
+                        }
+
+                        if (transaction.Product.AccountStateProduct != null && transaction.Product.AccountStateProduct.FLGHON)
+                        {
+                            Utilities.ShowModal("El crédito que vas a cancelar se encuentra en estado prejurídico, los honorarios están calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se véra reflejado en el recibo de la transacción.", EModalType.Error, this);
+                        }
+                    }
+
                     Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
                 }
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 

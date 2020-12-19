@@ -62,7 +62,8 @@ namespace WPFMultired.UserControls
 
                 this.DataContext = this.paymentViewModel;
 
-                ActivateWallet();
+                //TODO:descomentar
+                //ActivateWallet();
             }
             catch (Exception ex)
             {
@@ -77,7 +78,7 @@ namespace WPFMultired.UserControls
                 TimerService.Close();
                 TimerService.CallBackTimerOut = response =>
                 {
-                    if (Utilities.ShowModal("Expiro el tiempo de la transaccion. ¿Desea ingresar dinero adicional?", EModalType.Information,this))
+                    if (Utilities.ShowModal("Expiro el tiempo de la transaccion. ¿Desea ingresar dinero adicional?", EModalType.Information, this))
                     {
                         TimerService.Reset();
                     }
@@ -143,37 +144,44 @@ namespace WPFMultired.UserControls
 
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
-                                //if (!Utilities.ShowModal("Usted ha depositado más dinero ¿Desea abonar el excedente al siguiente pago o desea que el cajero le devuelva el excedente?", EModalType.MaxAmount))
-                                //{
                                 this.paymentViewModel.ImgCambio = Visibility.Visible;
 
                                 if (paymentViewModel.ValorSobrante >= 100)
                                 {
                                     var decimas = paymentViewModel.ValorSobrante % 100;
-                                    //if (decimas > 0)
-                                    //{
-                                    //    Utilities.ShowModal(string.Concat("Solo se puede devolver ", (paymentViewModel.ValorSobrante - decimas).ToString("C", new CultureInfo("en-US")), ", se abonará el excedente al siguiente pago."), EModalType.Error);
-                                    //}
 
-                                    if (!Utilities.ShowModal(string.Concat("Su transacción tiene una devolución de saldo de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US"))), EModalType.ReturnMoney,this))
+                                    if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta
+                                     || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                                     {
-                                        ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                        if (paymentViewModel.ValorSobrante < 100)
+                                        {
+                                            SavePay();
+                                        }
+                                        else
+                                        {
+                                            ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                        }
                                     }
                                     else
                                     {
-                                        SavePay();
+                                        string ms = string.Concat("Su transacción tiene una devolución por valor de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US")));
+                                        string tittle = "Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
+
+                                        if (!Utilities.ShowModal(ms, EModalType.ReturnMoney, this, false, tittle))
+                                        {
+                                            ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                        }
+                                        else
+                                        {
+                                            SavePay();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {paymentViewModel.ValorSobrante.ToString("C")} al siguiente pago.", EModalType.Error,this);
+                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {paymentViewModel.ValorSobrante.ToString("C")} a la siguiente consignación.", EModalType.Error, this);
                                     SavePay();
                                 }
-                                //}
-                                //else
-                                //{
-                                //    SavePay();
-                                //}
                             }
                             else
                             {
@@ -210,7 +218,7 @@ namespace WPFMultired.UserControls
                             transaction.State = ETransactionState.Error;
                             if (error.Item1.Equals("AP"))
                             {
-                                Utilities.ShowModal(MessageResource.ErrorPayment, EModalType.Error,this);
+                                Utilities.ShowModal(MessageResource.ErrorPayment, EModalType.Error, this);
                                 AdminPayPlus.ControlPeripherals.StopAceptance();
                                 if (paymentViewModel.ValorIngresado > 0)
                                 {
@@ -252,8 +260,8 @@ namespace WPFMultired.UserControls
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
-                    //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
-                    if (state)
+            //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
+            if (state)
                     {
                         paymentViewModel.ValorDispensado = valueOut;
 
@@ -264,7 +272,7 @@ namespace WPFMultired.UserControls
                         else
                         {
                             transaction.Observation += MessageResource.IncompleteMony;
-                            Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error,this);
+                            Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error, this);
                             SavePay(ETransactionState.Error);
                         }
                     }
@@ -327,12 +335,12 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
                         });
 
-                        Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
+                        Utilities.ShowModal("Te recordamos que este dispositivo envía la información de tu transacción al correo electrónico registrado por el titular de la cuenta.", EModalType.Preload, this);
                     }
                     else
                     {
                         AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                        Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error,this);
+                        Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
 
                         if (this.paymentViewModel.ValorIngresado > 0)
                         {
@@ -361,11 +369,12 @@ namespace WPFMultired.UserControls
 
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-                if (Utilities.ShowModal(MessageResource.CancelTransaction, EModalType.Information,this))
+                if (Utilities.ShowModal(MessageResource.CancelTransaction, EModalType.Information, this))
                 {
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    CLSGrabador.FinalizarGrabacion();
+                    //TODO:descomentar
+                    //CLSGrabador.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
                         if (paymentViewModel.ValorIngresado > 0)
@@ -403,7 +412,7 @@ namespace WPFMultired.UserControls
 
             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-            if (!Utilities.ShowModal("¿Desea ingresar dinero adicional?", EModalType.Information,this))
+            if (!Utilities.ShowModal("¿Desea ingresar dinero adicional?", EModalType.Information, this))
             {
                 this.paymentViewModel.PayValue = this.paymentViewModel.ValorIngresado;
 

@@ -52,7 +52,8 @@ namespace WPFMultired.UserControls
 
                 GC.Collect();
                 
-                CLSGrabador.FinalizarGrabacion();
+                //TODO:descomentar
+                //CLSGrabador.FinalizarGrabacion();
 
                 Task.Run(() =>
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -99,6 +100,10 @@ namespace WPFMultired.UserControls
 
                     Utilities.navigator.Navigate(UserControlView.Consult, true, company, ((Grid)sender).Tag);
                 }
+                //decimal ValorSobrante = 2000;
+                //string ms = string.Concat("Su transacción tiene una devolución de saldo de ", ValorSobrante.ToString("C", new CultureInfo("en-US")));
+                //string tittle = "Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
+                //Utilities.ShowModal(ms, EModalType.ReturnMoney, this, false, tittle);
             }
             catch (Exception ex)
             {

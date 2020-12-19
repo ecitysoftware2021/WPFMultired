@@ -1209,6 +1209,7 @@ namespace WPFMultired.Services
                                     case ETypeServiceSelect.Deposito:
                                         break;
                                     case ETypeServiceSelect.TarjetaCredito:
+                                        transaction.Products[count].ExtraTarjetaCredito = JsonConvert.DeserializeObject<DataExtraTarjetaCredito>(transaction.Products[count].TypeTransaction);
                                         break;
                                     case ETypeServiceSelect.EstadoCuenta:
                                         transaction.Products[count].AccountStateProduct = JsonConvert.DeserializeObject<AccountStateProduct>(transaction.Products[count].TypeTransaction);

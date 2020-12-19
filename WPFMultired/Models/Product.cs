@@ -22,6 +22,7 @@ namespace WPFMultired.Models
         public string AcountNumberMasc { get; set; }
         public string img { get; set; }
         public AccountStateProduct AccountStateProduct { get; set; }
+        public DataExtraTarjetaCredito ExtraTarjetaCredito { get; set; }
     }
 
     public class AccountStateProduct
@@ -41,5 +42,17 @@ namespace WPFMultired.Models
         public string SEGPAP { get; set; }
         public decimal VLRPAP { get; set; }
         public string DESPAP { get; set; }
+        public bool FLGHON { get; set; }
     }
+
+    public class DataExtraTarjetaCredito
+    {
+        public string ICONOS { get; set; }
+        public string NUMTAR { get; set; }
+        public string SALMIN { get; set; }
+        public int NROSEG { get; set; }
+        public string DESTAR { get; set; }
+        public bool FLGHON { get; set; }
+    }
+
 }

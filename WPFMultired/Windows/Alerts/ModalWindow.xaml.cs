@@ -97,7 +97,10 @@ namespace WPFMultired.Windows
                     this.LblMessageReturn.Visibility = Visibility.Visible;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Hidden;
+                    LblMessage.FontSize = 30;
                 }
+
+                GifLoadder.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {

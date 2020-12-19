@@ -83,6 +83,7 @@ namespace WPFMultired.UserControls
                 if (transaction.CodeTypeTransaction == codTarjetaCrd)
                 {
                     transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
+                    txt_title.Text = "Para iniciar, acerca el código de barras de tu extracto al lector del dispositivo o ingresa el número de identificación de la persona a la cual le realizarás la transacción";
                 }
 
                 ConfigView();
