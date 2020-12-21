@@ -126,6 +126,7 @@
                     Foreground="Gray"
                     VerticalAlignment="Center"
                     TextAlignment="Center" 
+                    IsReadOnly="True"
                  >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -168,6 +169,7 @@
                     Foreground="Gray"
                     VerticalAlignment="Center"
                     TextAlignment="Center" 
+                    IsReadOnly="True"
                 >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">

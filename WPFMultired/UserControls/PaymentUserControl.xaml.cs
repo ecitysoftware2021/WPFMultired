@@ -64,6 +64,8 @@ namespace WPFMultired.UserControls
 
                 //TODO:descomentar
                 //ActivateWallet();
+
+                SavePay();
             }
             catch (Exception ex)
             {
@@ -308,13 +310,17 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (!this.paymentViewModel.StatePay)
+                Task.Run(() =>
                 {
+                    Thread.Sleep(8000);
+                    //TODO:descomentar
+                    //if (!this.paymentViewModel.StatePay)
+                    //{
                     this.paymentViewModel.StatePay = true;
                     transaction.Payment = paymentViewModel;
                     transaction.State = statePay;
 
-                    AdminPayPlus.ControlPeripherals.ClearValues();
+                    //AdminPayPlus.ControlPeripherals.ClearValues();
 
                     if (transaction.IdTransactionAPi > 0)
                     {
@@ -351,7 +357,8 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
-                }
+                    //   }
+                });
             }
             catch (Exception ex)
             {
