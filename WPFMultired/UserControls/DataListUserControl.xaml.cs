@@ -351,7 +351,7 @@ namespace WPFMultired.UserControls
                     btnQuestion.Visibility = Visibility.Hidden;
                     transaction.Product = null;
 
-                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden.Valida la información e inténte más tarde.", EModalType.Error, this);
+                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden. Valida la información e inténtalo de nuevo.", EModalType.Error, this);
                 }
                 else
                 {
