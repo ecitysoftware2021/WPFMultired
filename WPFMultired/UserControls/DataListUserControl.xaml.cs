@@ -72,32 +72,30 @@ namespace WPFMultired.UserControls
                         ViewList = new CollectionViewSource(),
                     };
 
-                    viewModel.ConfigurateDataList(transaction);
-                    RefreshView();
-
-                    Dispatcher.BeginInvoke((Action)delegate
+                    switch (transaction.eTypeService)
                     {
-                        switch (transaction.eTypeService)
-                        {
-                            case ETypeServiceSelect.Deposito:
-                                lv_depositos.Visibility = Visibility.Visible;
-                                break;
-                            case ETypeServiceSelect.TarjetaCredito:
-                                lv_tarjetaC.Visibility = Visibility.Visible;
-                                break;
-                            case ETypeServiceSelect.EstadoCuenta:
-                                lv_estadoC.Visibility = Visibility.Visible;
-                                break;
-                        }
+                        case ETypeServiceSelect.Deposito:
+                            lv_depositos.Visibility = Visibility.Visible;
+                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números de la cuenta";
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            lv_tarjetaC.Visibility = Visibility.Visible;
+                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números de la tarjeta";
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            lv_estadoC.Visibility = Visibility.Visible;
+                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números del crédito";
+                            break;
+                    }
 
-                        if (transaction.TypeDocument != "0")
-                        {
-                            lv_depositos.Visibility = Visibility.Hidden;
-                            lv_tarjetaC.Visibility = Visibility.Hidden;
-                            lv_estadoC.Visibility = Visibility.Hidden;
-                        }
-                    });
-                    GC.Collect();
+                    if (transaction.TypeDocument != "0")
+                    {
+                        lv_depositos.Visibility = Visibility.Hidden;
+                        lv_tarjetaC.Visibility = Visibility.Hidden;
+                        lv_estadoC.Visibility = Visibility.Hidden;
+                    }
+
+                    viewModel.ConfigurateDataList(transaction);
                 }
 
                 this.DataContext = viewModel;
@@ -112,35 +110,31 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Dispatcher.BeginInvoke((Action)delegate
+                viewModel.ViewList.Source = item == null ? viewModel.DataList : viewModel.DataList.Where(x => x.Item2 == item.Item2);
+
+                if (ProductSelect != null)
                 {
-                    viewModel.ViewList.Source = item == null ? viewModel.DataList : viewModel.DataList.Where(x => x.Item2 == item.Item2);
+                    ProductSelect.Item3 = GetImage(false);
+                }
 
-                    if (ProductSelect != null)
-                    {
-                        ProductSelect.Item3 = GetImage(false);
-                    }
-
-                    switch (transaction.eTypeService)
-                    {
-                        case ETypeServiceSelect.Deposito:
-                            lv_depositos.Visibility = Visibility.Visible;
-                            lv_depositos.DataContext = viewModel.ViewList;
-                            lv_depositos.Items.Refresh();
-                            break;
-                        case ETypeServiceSelect.TarjetaCredito:
-                            lv_tarjetaC.Visibility = Visibility.Visible;
-                            lv_tarjetaC.DataContext = viewModel.ViewList;
-                            lv_tarjetaC.Items.Refresh();
-                            break;
-                        case ETypeServiceSelect.EstadoCuenta:
-                            lv_estadoC.Visibility = Visibility.Visible;
-                            lv_estadoC.DataContext = viewModel.ViewList;
-                            lv_estadoC.Items.Refresh();
-                            break;
-                    }
-                });
-                GC.Collect();
+                switch (transaction.eTypeService)
+                {
+                    case ETypeServiceSelect.Deposito:
+                        lv_depositos.Visibility = Visibility.Visible;
+                        lv_depositos.DataContext = viewModel.ViewList;
+                        lv_depositos.Items.Refresh();
+                        break;
+                    case ETypeServiceSelect.TarjetaCredito:
+                        lv_tarjetaC.Visibility = Visibility.Visible;
+                        lv_tarjetaC.DataContext = viewModel.ViewList;
+                        lv_tarjetaC.Items.Refresh();
+                        break;
+                    case ETypeServiceSelect.EstadoCuenta:
+                        lv_estadoC.Visibility = Visibility.Visible;
+                        lv_estadoC.DataContext = viewModel.ViewList;
+                        lv_estadoC.Items.Refresh();
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -294,8 +288,6 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                txtErrorValor.Text = string.Empty;
-
                 if (txtValor.Text.Length > 14)
                 {
                     txtValor.Text = txtValor.Text.Remove(14, 1);
@@ -309,6 +301,7 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 
@@ -329,6 +322,7 @@ namespace WPFMultired.UserControls
             }
             catch (Exception ex)
             {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
 

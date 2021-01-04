@@ -208,7 +208,7 @@
                 HorizontalAlignment="Right"
              />
             <TextBlock 
-                Text="Valor a depositar:"
+                Text="Valor a consignar:"
                 FontSize="30"
                 TextAlignment="Center"
                 Margin="100,50,0,0"

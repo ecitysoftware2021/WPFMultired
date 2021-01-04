@@ -17,7 +17,7 @@
             <RowDefinition Height="200" />
             <RowDefinition Height="110" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="300" />
             <RowDefinition Height="160" />
             <RowDefinition Height="380" />
             <RowDefinition Height="280" />
@@ -102,7 +102,7 @@
         <Grid Grid.Row="2">
             <TextBox 
                 x:Name="txtCountNumber"
-                md:HintAssist.Hint="             Digita los últimos cuatro (4) números de la cuenta"
+                md:HintAssist.Hint="{Binding Colum3}"
                 md:HintAssist.IsFloating="True"
                 md:HintAssist.FloatingScale="0.3"
                 HorizontalAlignment="Center" 
@@ -128,7 +128,7 @@
                 </TextBox.Background>
             </TextBox>
             <Image 
-                Source="/Images/Buttons/Newlupa.png"
+                Source="/Images/Buttons/lupe.png"
                 Name="btn_Search"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -508,18 +508,6 @@
                 Width="40"
                 Visibility="Hidden"
                 TouchDown="btnQuestion_TouchDown"
-            />
-            <TextBlock 
-                x:Name="txtErrorValor"
-                Margin="0,0,100,0"
-                Width="520"
-                TextAlignment="Center"
-                TextWrapping="Wrap"
-                Foreground="Red"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                FontWeight="Bold"
-                FontSize="25" 
             />
         </Grid>
         <Grid Grid.Row="5">
