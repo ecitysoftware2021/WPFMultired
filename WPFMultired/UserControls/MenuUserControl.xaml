@@ -17,7 +17,7 @@
             <RowDefinition Height="380" />
             <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="0">
@@ -42,11 +42,12 @@
             <TextBlock 
                 Text="Selecciona la transacción que quieres realizar:"
                 FontFamily="Arial"
-                FontSize="40"
+                FontSize="35"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Margin="0,0,0,400" 
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
+                FontWeight="SemiBold"
                 TextAlignment="Center"
             />
             <ListView 
@@ -95,13 +96,13 @@
                                 Source="/Images/Resources/New00011.png"
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Center" 
-                                Height="90" 
+                                Height="80" 
                                 Stretch="Uniform" 
                             />
                             <TextBlock 
                                 Text="{Binding Item1}"
-                                FontSize="40"
-                                Foreground="Gray"
+                                FontSize="35"
+                                Foreground="#FF5D5D5D"
                                 Margin="100,0,0,0"
                                 TextAlignment="Left"
                                 HorizontalAlignment="Left"   

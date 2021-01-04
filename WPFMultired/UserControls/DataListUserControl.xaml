@@ -80,31 +80,29 @@
                 Name="lbl_id"
                 FontSize="30" 
             />
-            <TextBlock  
-                Text="_____________________________________________________________________________________________________________________________"
+            <Image 
+                Source="../Images/Others/lineGreen.png"
                 HorizontalAlignment="Center"
-                Margin="0,25,0,0" 
-                FontSize="10" 
-                Foreground="#FFA3BD36"
-                FontFamily="Myriad Pro"
                 VerticalAlignment="Center"
-                TextAlignment="Center" 
+                Margin="0,35,0,0" 
+                Width="500"
+                Height="3"
+                Stretch="Fill"
             />
-            <TextBlock  
-                Text="_____________________________________________________________________________________________________________________________"
+            <Image 
+                Source="../Images/Others/lineGreen.png"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,0" 
-                FontSize="10" 
-                Foreground="#FFA3BD36"
-                FontFamily="Myriad Pro"
                 VerticalAlignment="Bottom"
-                TextAlignment="Center" 
+                Margin="0,35,0,0" 
+                Width="500"
+                Height="3"
+                Stretch="Fill"
             />
         </Grid>
         <Grid Grid.Row="2">
             <TextBox 
                 x:Name="txtCountNumber"
-                md:HintAssist.Hint="                   Digite los últimos (4) dígitos de la cuenta"
+                md:HintAssist.Hint="             Digita los últimos cuatro (4) números de la cuenta"
                 md:HintAssist.IsFloating="True"
                 md:HintAssist.FloatingScale="0.3"
                 HorizontalAlignment="Center" 
@@ -143,7 +141,7 @@
         <Grid Grid.Row="3">
             <ListView 
                 x:Name="lv_depositos" 
-                Margin="0,80,0,0"
+                Margin="0,60,0,0"
                 Background="Red"
                 Visibility="Hidden"
                 BorderBrush="Transparent"
@@ -440,23 +438,35 @@
         <Grid Name="grvDetalle" Grid.Row="4">
             <TextBlock 
                 Text="Valor de comisión"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 Margin="100,0,0,70"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontSize="30"
             />
-            <TextBlock 
+            <TextBox 
                 Name="txtValorComision"
                 Foreground="Gray"
-                Margin="0,0,120,70"
+                Margin="0,0,120,60"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 FontSize="30"
-            />
+                Height="50" 
+                Width="250"
+                TextAlignment="Right"
+            >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0.6"/>
+                </TextBox.Background>
+            </TextBox>
             <TextBlock 
-                Text="Valor a depositar"
-                Foreground="Gray"
+                Text="Valor a consignar"
+                Foreground="#FF5D5D5D"
                 Margin="100,0,0,80"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -468,7 +478,7 @@
                 md:HintAssist.IsFloating="True"
                 md:HintAssist.FloatingScale="0.3"
                 Text="{Binding Val, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
-                Height="60" 
+                Height="50" 
                 Margin="0,0,120,80" 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
@@ -491,25 +501,13 @@
             </TextBox>
             <Image 
                 Name="btnQuestion"
-                Source="/Images/Buttons/Question.png"
+                Source="/Images/others/Question.png"
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Center" 
                 Margin="0,0,70,60"                  
                 Width="40"
                 Visibility="Hidden"
                 TouchDown="btnQuestion_TouchDown"
-            />
-            <TextBlock 
-                x:Name="txtMsInfo"
-                Margin="0,0,0,0"
-                Width="560"
-                TextAlignment="Center"
-                TextWrapping="Wrap"
-                Foreground="Gray"
-                Text=""
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                FontSize="20" 
             />
             <TextBlock 
                 x:Name="txtErrorValor"

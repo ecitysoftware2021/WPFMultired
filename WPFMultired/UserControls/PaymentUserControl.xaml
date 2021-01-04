@@ -16,10 +16,11 @@
             <RowDefinition Height="450" />
             <RowDefinition Height="*" />
             <RowDefinition Height="200" />
+            <RowDefinition Height="160"/>
             <RowDefinition Height="380" />
-            <RowDefinition Height="440"/>
+            <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="4">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="0">
@@ -50,7 +51,7 @@
                 TextWrapping="Wrap"
                 Margin="0,210,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center" 
             />
@@ -60,7 +61,7 @@
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left" Grid.Row="6" 
             />
@@ -70,7 +71,7 @@
                 TextAlignment="Center"
                 Margin="0,0,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Center" 
             />
@@ -80,7 +81,7 @@
                 TextAlignment="Center"
                 Margin="0,0,100,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right" 
             />
@@ -172,7 +173,7 @@
                 TextAlignment="Center"
                 Margin="100,50,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
              />
@@ -192,7 +193,7 @@
                 TextAlignment="Center"
                 Margin="100,0,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left"
              />
@@ -212,7 +213,7 @@
                 TextAlignment="Center"
                 Margin="100,50,0,0"
                 FontFamily="Arial"
-                Foreground="Gray"
+                Foreground="#FF5D5D5D"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
              />

@@ -83,6 +83,7 @@ namespace WPFMultired.UserControls
                 if (transaction.CodeTypeTransaction == codTarjetaCrd)
                 {
                     transaction.eTypeService = ETypeServiceSelect.TarjetaCredito;
+                    txt_title.Width = 800;
                     txt_title.Text = "Para iniciar, acerca el código de barras de tu extracto al lector del dispositivo o ingresa el número de identificación de la persona a la cual le realizarás la transacción";
                 }
 
@@ -333,7 +334,7 @@ namespace WPFMultired.UserControls
 
         private void btnQuestion_TouchDown(object sender, TouchEventArgs e)
         {
-            Utilities.ShowModal("Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas.", EModalType.Error, this);
+            Utilities.ShowModal(" \"Si el tipo de documento que seleccionaste es un NIT, digítalo con el número de verificación sin guiones ni comas\".", EModalType.Error, this);
         }
 
         private void GoTime()

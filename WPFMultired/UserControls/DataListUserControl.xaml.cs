@@ -83,11 +83,9 @@ namespace WPFMultired.UserControls
                                 lv_depositos.Visibility = Visibility.Visible;
                                 break;
                             case ETypeServiceSelect.TarjetaCredito:
-                                txtMsInfo.Text = "Estimado asociado, de no cancelar el valor completo sugerido, su tarjeta quedará en mora.";
                                 lv_tarjetaC.Visibility = Visibility.Visible;
                                 break;
                             case ETypeServiceSelect.EstadoCuenta:
-                                txtMsInfo.Text = "Estimado asociado, de no cancelar el valor completo sugerido, su crédito quedará en mora.";
                                 lv_estadoC.Visibility = Visibility.Visible;
                                 break;
                         }
@@ -380,7 +378,10 @@ namespace WPFMultired.UserControls
 
                     if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                     {
-                        Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta quedará en mora.", EModalType.Error, this);
+                        if (transaction.Amount < transaction.Product.Amount)
+                        {
+                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta quedará en mora.", EModalType.Error, this);
+                        }
 
                         if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
                         {

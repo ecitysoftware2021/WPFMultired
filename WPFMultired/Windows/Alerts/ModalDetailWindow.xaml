@@ -24,9 +24,9 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="1" Margin="50,0,50,0">
-            <Grid.Background>
+            <!--<Grid.Background>
                 <ImageBrush ImageSource="/Images/Backgrounds/bg-alert-details.png"/>
-            </Grid.Background>
+            </Grid.Background>-->
 
             <Grid>
                 <Grid.RowDefinitions>

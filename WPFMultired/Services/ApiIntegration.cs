@@ -92,13 +92,21 @@ namespace WPFMultired.Services
 
         private string ConcatOrSplitTimeStamp(string text, int operation = 1)
         {
-            if (operation == 1)
+            try
             {
-                return string.Concat(text, "|", timeStamp);
+                if (operation == 1)
+                {
+                    return string.Concat(text, "|", timeStamp);
+                }
+                else
+                {
+                    return text.Split('|')[0];
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return text.Split('|')[0];
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                return null;
             }
         }
 

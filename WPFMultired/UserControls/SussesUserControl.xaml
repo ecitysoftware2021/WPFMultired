@@ -14,14 +14,14 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Image 
                 gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                 gif:ImageBehavior.AnimateInDesignMode="True"

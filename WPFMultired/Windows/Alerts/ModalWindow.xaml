@@ -17,77 +17,77 @@
         Width="1250.599"
         Closed="Window_Closed"
         WindowStartupLocation="CenterScreen" >
-    
-    <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="{Binding ImageModal}" Stretch="Fill"/>
-        </Grid.Background>-->
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="360" />
-                <RowDefinition Height="810" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+    <Grid TouchDown="Grid_TouchDown">
+        <Grid.Background>
+            <ImageBrush  ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Fill" Opacity="0.01"/>
+            </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="360" />
+            <RowDefinition Height="810" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1">
-                <Image 
-                    Source="/Images/Backgrounds/NewAlert.png"
-                    HorizontalAlignment="Center"
-                    Height="800"
-                    VerticalAlignment="Center"
-                    Margin="0,0,0,0"
-                    Stretch="Uniform"
-                />
-                <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
-                       gif:ImageBehavior.AnimateInDesignMode="True"
-                       gif:ImageBehavior.AutoStart="True" 
-                       x:Name="GifLoadder"  
-                       Stretch="Fill"
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" 
-                       Width="180" 
-                       Height="180"
-                       Margin="20,270,0,0"
-                       Visibility="Hidden"/>
-
-                <TextBlock x:Name="LblTittle" 
-                           Text="{Binding Tittle}"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,200" 
-                           FontSize="30" 
-                           Width="600"
-                           FontFamily="Myriad Pro"
-                           Foreground="Gray"
-                           TextWrapping="WrapWithOverflow"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-
-                <TextBlock x:Name="LblMessage" 
-                           Text="{Binding Messaje}"
-                           HorizontalAlignment="Center"
-                           Margin="0,50,0,0" 
-                           FontSize="35" 
-                           Width="600"
-                           FontFamily="Myriad Pro"
-                           Foreground="Gray"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center" />
-
-                <Image
-                    Name="btnAccept"
-                    Source="/Images/Buttons/NewAceptar2.png"
-                    HorizontalAlignment="Center" 
+        <Grid Grid.Row="1">
+            <Image 
+                Source="/Images/Backgrounds/NewAlert.png"
+                HorizontalAlignment="Center"
+                Height="550"
+                VerticalAlignment="Center"
+                Margin="0,0,0,0"
+                Stretch="Uniform"
+            />
+            <Image gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
+                    gif:ImageBehavior.AnimateInDesignMode="True"
+                    gif:ImageBehavior.AutoStart="True" 
+                    x:Name="GifLoadder"  
+                    Stretch="Fill"
                     VerticalAlignment="Center" 
-                    Margin="0,700,0,0"  
-                    Width="350"
-                    TouchDown="Grid_TouchDown"
-                />
-            </Grid>
+                    HorizontalAlignment="Center" 
+                    Width="180" 
+                    Height="180"
+                    Margin="20,270,0,0"
+                    Visibility="Hidden"/>
 
-            <Grid Grid.Row ="2">
-                <TextBlock x:Name="LblMessageReturn" 
+            <TextBlock 
+                x:Name="LblMessage" 
+                Text="{Binding Messaje}"
+                HorizontalAlignment="Center"
+                Margin="0,50,0,0" 
+                FontSize="25" 
+                Width="370"
+                FontFamily="Myriad Pro"
+                Foreground="Gray"
+                TextWrapping="Wrap"
+                VerticalAlignment="Center"
+                TextAlignment="Center" 
+            />
+            <TextBlock
+                x:Name="LblMessageTouch"
+                Text="Toca la pantalla para continuar"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,160" 
+                FontSize="30" 
+                Width="600"
+                FontFamily="Myriad Pro"
+                TextWrapping="WrapWithOverflow"
+                VerticalAlignment="Bottom"
+                TextAlignment="Center" 
+            />
+            <!--<Image
+                Name="btnAccept"
+                Source="/Images/Buttons/NewAceptar2.png"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Margin="0,700,0,0"  
+                Width="350"
+                Visibility="Visible"
+                TouchDown="Grid_TouchDown"
+            />-->
+        </Grid>
+
+        <Grid Grid.Row ="2">
+            <TextBlock x:Name="LblMessageReturn" 
                            Text="Si su saldo presenta valores inferiores a $100 este excedente se abonará automáticamente a su cuenta"
                            HorizontalAlignment="Center"
                            Margin="0,-50,0,0" 
@@ -99,7 +99,7 @@
                            TextWrapping="WrapWithOverflow"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
-                <Image x:Name="BtnOk" 
+            <Image x:Name="BtnOk" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"
                         Width="250"
@@ -108,7 +108,7 @@
                         TouchDown="BtnOk_TouchDown"
                         Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
 
-                <Image x:Name="BtnNo" 
+            <Image x:Name="BtnNo" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Width="250"
@@ -117,7 +117,7 @@
                         TouchDown="BtnNo_TouchDown"
                         Source="/Images/Buttons/btn-cancel-alert.png" Stretch="Fill" />
 
-                <Image x:Name="BtnYes" 
+            <Image x:Name="BtnYes" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Width="250"
@@ -126,7 +126,7 @@
                         TouchDown="BtnYes_TouchDown"
                         Source="/Images/Buttons/btn-continue.png" Stretch="Fill" />
 
-                <Image x:Name="BtnFinish" 
+            <Image x:Name="BtnFinish" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Width="350"
@@ -135,7 +135,7 @@
                         TouchDown="BtnYes_TouchDown"
                         Source="/Images/Buttons/changeamount.png" Stretch="Fill" />
 
-                <Image x:Name="BtnEnterMony" 
+            <Image x:Name="BtnEnterMony" 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Width="350"
@@ -143,7 +143,6 @@
                         Margin="0,80,180,0"
                         TouchDown="BtnNo_TouchDown"
                         Source="/Images/Buttons/newdevolver.png" Stretch="Fill" />
-            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -39,7 +39,7 @@ namespace WPFMultired.Windows
                     this.BtnFinish.Visibility = Visibility.Hidden;
                     this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
-                    this.btnAccept.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Visible;
                 }
                 else if (this.modal.TypeModal == EModalType.NotExistAccount)
@@ -49,7 +49,7 @@ namespace WPFMultired.Windows
                     this.BtnOk.Visibility = Visibility.Visible;
                     this.BtnYes.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
-                    this.btnAccept.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Hidden;
                     //InitTimer();
                 }
@@ -60,7 +60,7 @@ namespace WPFMultired.Windows
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
-                    this.btnAccept.Visibility = Visibility.Visible;
+                    this.LblMessageTouch.Visibility = Visibility.Visible;
                     GifLoadder.Visibility = Visibility.Hidden;
                     //InitTimer();
                 }
@@ -71,7 +71,7 @@ namespace WPFMultired.Windows
 
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
-                    this.btnAccept.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Hidden;
                 }
@@ -82,7 +82,7 @@ namespace WPFMultired.Windows
                     this.BtnEnterMony.Visibility = Visibility.Hidden;
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Visible;
-                    this.btnAccept.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     this.BtnNo.Visibility = Visibility.Visible;
                     GifLoadder.Visibility = Visibility.Hidden;
                 }
@@ -93,7 +93,7 @@ namespace WPFMultired.Windows
                     this.BtnEnterMony.Visibility = Visibility.Visible;
                     this.BtnOk.Visibility = Visibility.Hidden;
                     this.BtnYes.Visibility = Visibility.Hidden;
-                    this.btnAccept.Visibility = Visibility.Hidden;
+                    this.LblMessageTouch.Visibility = Visibility.Hidden;
                     this.LblMessageReturn.Visibility = Visibility.Visible;
                     this.BtnNo.Visibility = Visibility.Hidden;
                     GifLoadder.Visibility = Visibility.Hidden;
