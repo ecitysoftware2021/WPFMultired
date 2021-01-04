@@ -511,9 +511,6 @@
     <Resource Include="Images\Buttons\btn-continue.png" />
     <Resource Include="Images\Backgrounds\bg-detail.png" />
     <Resource Include="Images\Backgrounds\bg-file.png" />
-    <Resource Include="Images\Backgrounds\bg-alert-error.png" />
-    <Resource Include="Images\Backgrounds\bg-alert-info.png" />
-    <Resource Include="Images\Backgrounds\bg-blanck.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -714,9 +711,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-menu.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Buttons\btn-consign.png" />
   </ItemGroup>
   <ItemGroup>
@@ -799,9 +793,6 @@
     <Resource Include="Images\Resources\RED.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-alert-details.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Buttons\btn-continue-pay.png" />
   </ItemGroup>
   <ItemGroup>
@@ -833,9 +824,6 @@
   <ItemGroup>
     <Resource Include="Images\Buttons\btn-enter-mony.png" />
     <Resource Include="Images\Buttons\btn-finish-transaction.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-detail-transaction.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MR_ConsultInvoice\configuration91.svcinfo" />
@@ -870,13 +858,7 @@
     <Resource Include="Images\Buttons\btn-return.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-succes-pay.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Others\logotipo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-alert-blanck.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Resources\00011.png" />
@@ -889,12 +871,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\alert.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\bg-alert-blanck2.jpg" />
-    <Resource Include="Images\Backgrounds\bg-alert-details1.png" />
-    <Resource Include="Images\Backgrounds\bg-alert-error1.png" />
-    <Resource Include="Images\Backgrounds\bg-alert-info1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\credit-card.png" />
@@ -922,9 +898,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\img-boucher.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\bgNewVacio.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Backgrounds\bgNewVacio2.jpg" />
@@ -981,9 +954,6 @@
   <ItemGroup>
     <Resource Include="Images\Backgrounds\NewAlert.png" />
     <Resource Include="Images\Backgrounds\NewQuestion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Backgrounds\NewInfo2.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Gif\comultrasanGif.gif" />

@@ -13,19 +13,19 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
             <RowDefinition Height="220" />
             <RowDefinition Height="200" />
             <RowDefinition Height="110" />
             <RowDefinition Height="*" />
             <RowDefinition Height="200" />
             <RowDefinition Height="160" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="280" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="6">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Image 
                 Source="../Images/Buttons/NewAtras.png"
                 HorizontalAlignment="Right"
@@ -61,7 +61,7 @@
                 TouchDown="Btn_exit_TouchDown" 
             />
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <TextBlock
                 Text="{Binding Colum1}"
                 Foreground="Gray"
@@ -101,7 +101,7 @@
                 TextAlignment="Center" 
             />
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <TextBox 
                 x:Name="txtCountNumber"
                 md:HintAssist.Hint="                   Digite los últimos (4) dígitos de la cuenta"
@@ -140,7 +140,7 @@
                 TouchDown="btn_Search_TouchDown"
             />
         </Grid>
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="3">
             <ListView 
                 x:Name="lv_depositos" 
                 Margin="0,80,0,0"
@@ -437,7 +437,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Name="grvDetalle" Grid.Row="5">
+        <Grid Name="grvDetalle" Grid.Row="4">
             <TextBlock 
                 Text="Valor de comisión"
                 Foreground="Gray"
@@ -524,7 +524,7 @@
                 FontSize="25" 
             />
         </Grid>
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="5">
             <Image 
                 Source="/Images/Buttons/NewAceptar2.png"
                 Name="btn_Accept"

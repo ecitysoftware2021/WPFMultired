@@ -14,16 +14,16 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
             <RowDefinition Height="230" />
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="280" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="3">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <TextBlock  
                 x:Name="txtHoraActual"
                 HorizontalAlignment="Right"
@@ -52,7 +52,7 @@
                 TouchDown="Btn_back_TouchDown"
             />
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <TextBlock 
                 Name="txt_title"
                 FontSize="30"
@@ -67,7 +67,7 @@
                 Text="Para iniciar, ingresa el número de identificación de la persona a la cual le realizarás la transacción" 
              />
         </Grid>
-        <Grid Grid.Row="3" Name="gd_payer" Margin="50,0,50,0">
+        <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>

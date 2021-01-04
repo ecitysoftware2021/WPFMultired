@@ -12,16 +12,16 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
             <RowDefinition Height="200" />
+            <RowDefinition Height="380" />
             <RowDefinition Height="280" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <TextBlock  
                 x:Name="txtHoraActual"
                 HorizontalAlignment="Right"
@@ -50,7 +50,7 @@
                 TouchDown="Btn_back_TouchDown" 
             />
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid>
                 <Image 
                     Source="/Images/Others/alert.png"
@@ -182,7 +182,7 @@
                 </TextBox>
             </Grid>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Image 
                 Name="btn_Accept"
                 Source="/Images/Buttons/NewAceptar2.png"
