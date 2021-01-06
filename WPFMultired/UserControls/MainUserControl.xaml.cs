@@ -104,7 +104,7 @@ namespace WPFMultired.UserControls
 
                     this.DataContext = _imageSleader.imageModel;
 
-                    _imageSleader.time = 3;
+                    _imageSleader.time = int.Parse(Utilities.GetConfiguration("TimerPublicity"));
 
                     _imageSleader.isRotate = true;
 

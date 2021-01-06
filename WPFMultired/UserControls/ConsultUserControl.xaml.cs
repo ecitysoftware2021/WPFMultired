@@ -117,7 +117,7 @@ namespace WPFMultired.UserControls
                     Utilities.CloseModal();
                 });
 
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, this);
+                Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
 
                 cmb_type_id.SelectedIndex = 0;
 
@@ -211,7 +211,7 @@ namespace WPFMultired.UserControls
                 });
 
                 PassBoxIdentification.Password = string.Empty;
-                Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload, this);
+                Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
             }
             catch (Exception ex)
             {

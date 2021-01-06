@@ -924,9 +924,6 @@
     <Resource Include="Images\Resources\New00011.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Publish\Publicity1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Buttons\NewConsultar.png" />
   </ItemGroup>
   <ItemGroup>
@@ -983,6 +980,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Buttons\lupe.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Publish\Cajero-Multifucional.png" />
+    <Resource Include="Images\Publish\Credito-a-un-click-.png" />
+    <Resource Include="Images\Publish\Digiahorro.png" />
+    <Resource Include="Images\Publish\Fibot.png" />
+    <Resource Include="Images\Publish\Hazlo-on.png" />
+    <Resource Include="Images\Publish\Juntos-Podemos.png" />
+    <Resource Include="Images\Publish\PAP-Salvavidas.png" />
+    <Resource Include="Images\Publish\Parche-Educativo.png" />
+    <Resource Include="Images\Publish\Tarjeta-de-crédito.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
