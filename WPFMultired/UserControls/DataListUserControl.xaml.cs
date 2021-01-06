@@ -76,15 +76,15 @@ namespace WPFMultired.UserControls
                     {
                         case ETypeServiceSelect.Deposito:
                             lv_depositos.Visibility = Visibility.Visible;
-                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números de la cuenta";
+                            viewModel.Colum3 = "            Digita los últimos cuatro (4) números de la cuenta";
                             break;
                         case ETypeServiceSelect.TarjetaCredito:
                             lv_tarjetaC.Visibility = Visibility.Visible;
-                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números de la tarjeta";
+                            viewModel.Colum3 = "            Digita los últimos cuatro (4) números de la tarjeta";
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
                             lv_estadoC.Visibility = Visibility.Visible;
-                            viewModel.Colum3 = "             Digita los últimos cuatro (4) números del crédito";
+                            viewModel.Colum3 = "            Digita los últimos cuatro (4) números del crédito";
                             break;
                     }
 
@@ -343,7 +343,7 @@ namespace WPFMultired.UserControls
                     btnQuestion.Visibility = Visibility.Hidden;
                     transaction.Product = null;
 
-                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden. Valida la información e inténtalo de nuevo.", EModalType.Error, this);
+                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden. Valida la información e inténtalo más tarde.", EModalType.Error, this);
                 }
                 else
                 {
@@ -372,9 +372,14 @@ namespace WPFMultired.UserControls
 
                     if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                     {
-                        if (transaction.Amount < transaction.Product.Amount)
+                        if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito && transaction.Amount < transaction.Product.Amount)
                         {
                             Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta quedará en mora.", EModalType.Error, this);
+                        }
+                        
+                        if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta && transaction.Amount < transaction.Product.Amount)
+                        {
+                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu crédito quedará en mora.", EModalType.Error, this);
                         }
 
                         if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)

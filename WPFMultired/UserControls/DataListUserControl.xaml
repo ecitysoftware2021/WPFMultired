@@ -437,7 +437,7 @@
         </Grid>
         <Grid Name="grvDetalle" Grid.Row="4">
             <TextBlock 
-                Text="Valor de comisión"
+                Text="Comisión"
                 Foreground="#FF5D5D5D"
                 Margin="100,0,0,70"
                 HorizontalAlignment="Left"

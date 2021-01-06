@@ -188,7 +188,7 @@
                 HorizontalAlignment="Right"
              />
             <TextBlock 
-                Text="Valor de comisión:"
+                Text="Comisión:"
                 FontSize="30"
                 TextAlignment="Center"
                 Margin="100,0,0,0"
@@ -208,7 +208,8 @@
                 HorizontalAlignment="Right"
              />
             <TextBlock 
-                Text="Valor a consignar:"
+                x:Name="txtPayValue"
+                Text="Valor a pagar:"
                 FontSize="30"
                 TextAlignment="Center"
                 Margin="100,50,0,0"
@@ -218,6 +219,7 @@
                 HorizontalAlignment="Left"
              />
             <TextBlock 
+                x:Name="txtPayValueData"
                 Text="{Binding PayValue, StringFormat={}{0:C0}}"
                 FontSize="30"
                 TextAlignment="Center"

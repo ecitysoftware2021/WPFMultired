@@ -22,7 +22,7 @@
             <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
         <Grid Grid.Row="0">
-            <Image 
+            <!--<Image 
                 gif:ImageBehavior.AnimatedSource="/Images/Gif/gif-preload.gif" 
                 gif:ImageBehavior.AnimateInDesignMode="True"
                 gif:ImageBehavior.AutoStart="True" 
@@ -33,7 +33,7 @@
                 Width="180" 
                 Height="180"
                 Margin="0,0,0,50"
-            />
+            />-->
             <Image 
                 Source="/Images/backgrounds/success.png"
                 HorizontalAlignment="Center" 

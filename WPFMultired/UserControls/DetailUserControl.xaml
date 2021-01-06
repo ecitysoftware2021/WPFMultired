@@ -136,7 +136,7 @@
                     </TextBox.Background>
                 </TextBox>
                 <TextBlock  
-                    Text="Valor de comisión"
+                    Text="Comisión"
                     HorizontalAlignment="Left"
                     Margin="150,615,0,0" 
                     FontSize="30" 

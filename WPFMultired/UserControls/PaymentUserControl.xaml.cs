@@ -60,6 +60,12 @@ namespace WPFMultired.UserControls
                     ValorComision = transaction.Product.AmountCommission
                 };
 
+                if (transaction.eTypeService == ETypeServiceSelect.Deposito)
+                {
+                    txtPayValue.Visibility = Visibility.Hidden;
+                    txtPayValueData.Visibility = Visibility.Hidden;
+                }
+
                 this.DataContext = this.paymentViewModel;
 
                 //TODO:descomentar
