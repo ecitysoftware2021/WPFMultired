@@ -106,7 +106,7 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                         }
                     });
-                    Utilities.ShowModal(MessageResource.LoadInformation, EModalType.Preload,this);
+                    Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload,this);
                 }
                 else
                 {
