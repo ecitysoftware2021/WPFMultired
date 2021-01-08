@@ -91,16 +91,25 @@ namespace WPFMultired.UserControls
                         {
                             Task.Run(() =>
                             {
-                                //TODO:descomentar
-                                //CLSGrabador.IniciarGrabacion(new DataVidio
-                                //{
-                                //    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
-                                //    mailAlert = "'ecitysoftware@gmail.com'",
-                                //    transactionID = transaction.IdTransactionAPi,
-                                //    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
-                                //    selectedCamera = 0,
-                                //    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
-                                //});
+                                CLSGrabador.IniciarGrabacion(new DataVidio
+                                {
+                                    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                    mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                    transactionID = transaction.IdTransactionAPi,
+                                    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                    selectedCamera = 0,
+                                    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                });
+                                
+                                CLSGrabador.IniciarGrabacion(new DataVidio
+                                {
+                                    paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                    mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                    transactionID = transaction.IdTransactionAPi,
+                                    RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                    selectedCamera = 1,
+                                    videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                });
                             });
 
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);

@@ -49,11 +49,9 @@ namespace WPFMultired.UserControls
                         Reference = transaction.reference
                     }, ELogType.General);
                 }
-
                 GC.Collect();
                 
-                //TODO:descomentar
-                //CLSGrabador.FinalizarGrabacion();
+                CLSGrabador.FinalizarGrabacion();
 
                 Task.Run(() =>
                 {

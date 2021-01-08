@@ -362,7 +362,6 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Dapper.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\EntityFramework.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Ghostscript.NET.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Grabador.Transaccion.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignColors.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignThemes.Wpf.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newtonsoft.Json.dll

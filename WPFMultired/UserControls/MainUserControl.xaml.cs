@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
@@ -32,6 +33,8 @@ namespace WPFMultired.UserControls
         public MainUserControl(bool validatePaypad = true)
         {
             InitializeComponent();
+
+            CLSGrabador.FinalizarGrabacion();
 
             _validatePaypad = validatePaypad;
 
