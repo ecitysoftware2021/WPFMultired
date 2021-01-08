@@ -226,7 +226,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrindlen(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetIdioms: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetIdioms: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -286,7 +286,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrtiptrnc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetTypeTransaction: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetTypeTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -348,7 +348,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrintmul(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetInstitutions: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetInstitutions: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -421,7 +421,7 @@ namespace WPFMultired.Services
                         
                         var response = client.mtrdoctrnc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetTypeDocument: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetTypeDocument: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
                         
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -486,7 +486,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrprocli(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetProductsClient: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetProductsClient: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -574,7 +574,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrgenotp(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GenerateCodeOTP: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GenerateCodeOTP: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -636,7 +636,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrvalotp(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ValidateOTP: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ValidateOTP: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -728,7 +728,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrprotrn(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -783,7 +783,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrctlaqrc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ConsultQR: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ConsultQR: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
                        
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -858,7 +858,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrvalarqc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetAdminStatus: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetAdminStatus: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             !string.IsNullOrEmpty(response.O_MOVIMIENTO) &&
@@ -903,7 +903,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrretarqc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GetAdminOperation: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GetAdminOperation: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) && response.LISTAREGISTROS != null &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -986,7 +986,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrproarqc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response SendAdminProcess: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response SendAdminProcess: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -1041,7 +1041,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrvaladmc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ValidateAdminQr: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ValidateAdminQr: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
@@ -1127,7 +1127,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrctlbllc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ReportCash: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ReportCash: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         var Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
@@ -1184,7 +1184,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrhalleyc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ConsultInvoice: {response} LLave: {keyDesencript}","", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ConsultInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}","", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
@@ -1320,7 +1320,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrrecfacc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ReportInvoice: {response} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ReportInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
