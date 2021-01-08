@@ -497,3 +497,4 @@ C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Deb
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+C:\Users\Jhon.Zapata.LJHPCECITY\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
