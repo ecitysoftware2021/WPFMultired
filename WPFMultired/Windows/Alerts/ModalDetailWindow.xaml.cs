@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -200,6 +201,28 @@ namespace WPFMultired.Windows.Alerts
                             {
                                 if (this.transaction.IsReturn)
                                 {
+                                    Task.Run(() =>
+                                    {
+                                        CLSGrabador.IniciarGrabacion(new DataVidio
+                                        {
+                                            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                            transactionID = transaction.IdTransactionAPi,
+                                            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                            selectedCamera = 0,
+                                            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                        });
+
+                                        CLSGrabador.IniciarGrabacion(new DataVidio
+                                        {
+                                            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                            transactionID = transaction.IdTransactionAPi,
+                                            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                            selectedCamera = 1,
+                                            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                        });
+                                    });
                                     Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
                                     Application.Current.Dispatcher.Invoke(delegate
                                     {
@@ -213,6 +236,28 @@ namespace WPFMultired.Windows.Alerts
                             }
                             else
                             {
+                                Task.Run(() =>
+                                {
+                                    CLSGrabador.IniciarGrabacion(new DataVidio
+                                    {
+                                        paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                        mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                        transactionID = transaction.IdTransactionAPi,
+                                        RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                        selectedCamera = 0,
+                                        videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                    });
+
+                                    CLSGrabador.IniciarGrabacion(new DataVidio
+                                    {
+                                        paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                                        mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                                        transactionID = transaction.IdTransactionAPi,
+                                        RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                                        selectedCamera = 1,
+                                        videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                                    });
+                                });
                                 Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                                 Application.Current.Dispatcher.Invoke(delegate
                                 {
