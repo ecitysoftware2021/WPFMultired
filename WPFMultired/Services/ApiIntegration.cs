@@ -297,13 +297,13 @@ namespace WPFMultired.Services
                             {
                                 //if (int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2)) < 10)
                                 //{
-                                    transaction.Add(new ItemList
-                                    {
-                                        Item1 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DSCTRN, keyDesencript), 2),
-                                        Item2 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_ENTREC, keyDesencript), 2),
-                                        Item3 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2),
-                                        ImageSourse = string.Concat(Utilities.GetConfiguration("ResourcesUrl"), ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2), ".png")
-                                    });
+                                transaction.Add(new ItemList
+                                {
+                                    Item1 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_DSCTRN, keyDesencript), 2),
+                                    Item2 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_ENTREC, keyDesencript), 2),
+                                    Item3 = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2),
+                                    ImageSourse = string.Concat(Utilities.GetConfiguration("ResourcesUrl"), ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_TIPTRN, keyDesencript), 2), ".png")
+                                });
                                 //}
                             }
                             return new Response { Data = transaction };
@@ -418,11 +418,11 @@ namespace WPFMultired.Services
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request GetTypeDocument: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
-                        
+
                         var response = client.mtrdoctrnc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response GetTypeDocument: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-                        
+
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.LISTAREGISTROS.O_RTNCON > 0)
@@ -784,7 +784,7 @@ namespace WPFMultired.Services
                         var response = client.mtrctlaqrc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response ConsultQR: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-                       
+
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
@@ -860,11 +860,21 @@ namespace WPFMultired.Services
 
                         AdminPayPlus.SaveErrorControl($"Response GetAdminStatus: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
-                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
-                            !string.IsNullOrEmpty(response.O_MOVIMIENTO) &&
-                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        if (response != null
+                            && !string.IsNullOrEmpty(response.O_CODIGOERROR)
+                            && !string.IsNullOrEmpty(response.O_MOVIMIENTO)
+                            && int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            return new Response { Data = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MOVIMIENTO, keyDesencript), 2)) };
+                            DATAINIT init = new DATAINIT
+                            {
+                                O_CODIGOERROR = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)),
+                                O_DESCRIPCION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DESCRIPCION, keyDesencript), 2),
+                                O_MENSAJEERROR = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2),
+                                O_MOVIMIENTO = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MOVIMIENTO, keyDesencript), 2)),
+                                O_STATUSACEPTADOR = bool.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_STATUSACEPTADOR, keyDesencript), 2)),
+                                O_STATUSDISPENSER = bool.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_STATUSDISPENSER, keyDesencript), 2))
+                            };
+                            return new Response { Data = init };
                         }
                     }
                 }
@@ -1184,7 +1194,7 @@ namespace WPFMultired.Services
 
                         var response = client.mtrhalleyc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response ConsultInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}","", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response ConsultInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&

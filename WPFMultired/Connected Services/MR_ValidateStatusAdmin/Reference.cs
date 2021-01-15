@@ -30,7 +30,7 @@ namespace WPFMultired.MR_ValidateStatusAdmin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -146,7 +146,7 @@ namespace WPFMultired.MR_ValidateStatusAdmin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -160,6 +160,10 @@ namespace WPFMultired.MR_ValidateStatusAdmin {
         private string o_MOVIMIENTOField;
         
         private string o_DESCRIPCIONField;
+        
+        private string o_STATUSACEPTADORField;
+        
+        private string o_STATUSDISPENSERField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -206,6 +210,30 @@ namespace WPFMultired.MR_ValidateStatusAdmin {
             set {
                 this.o_DESCRIPCIONField = value;
                 this.RaisePropertyChanged("O_DESCRIPCION");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string O_STATUSACEPTADOR {
+            get {
+                return this.o_STATUSACEPTADORField;
+            }
+            set {
+                this.o_STATUSACEPTADORField = value;
+                this.RaisePropertyChanged("O_STATUSACEPTADOR");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string O_STATUSDISPENSER {
+            get {
+                return this.o_STATUSDISPENSERField;
+            }
+            set {
+                this.o_STATUSDISPENSERField = value;
+                this.RaisePropertyChanged("O_STATUSDISPENSER");
             }
         }
         

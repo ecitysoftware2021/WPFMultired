@@ -107,7 +107,7 @@ namespace WPFMultired.Services.Object
                 {
                     return this.DATALIST.Where(i => (i.DEVICE_TYPE_ID == (int)ETypeDevice.DP) || (i.DEVICE_TYPE_ID == (int)ETypeDevice.MD)).ToList();
                 }
-                else if (type == ETypeAdministrator.Balancing )
+                else if (type == ETypeAdministrator.Balancing)
                 {
                     return this.DATALIST.Where(i => (i.DEVICE_TYPE_ID == (int)ETypeDevice.AP) || (i.DEVICE_TYPE_ID == (int)ETypeDevice.MA)).ToList();
                 }
@@ -238,5 +238,13 @@ namespace WPFMultired.Services.Object
         public string ENTDST { get; set; }
         public string NOMDST { get; set; }
     }
-
+    public class DATAINIT
+    {
+        public int O_CODIGOERROR { get; set; }
+        public string O_MENSAJEERROR { get; set; }
+        public int O_MOVIMIENTO { get; set; }
+        public string O_DESCRIPCION { get; set; }
+        public bool O_STATUSACEPTADOR { get; set; }
+        public bool O_STATUSDISPENSER { get; set; }
+    }
 }

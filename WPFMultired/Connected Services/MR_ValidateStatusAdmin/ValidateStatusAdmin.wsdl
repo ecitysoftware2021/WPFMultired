@@ -31,15 +31,17 @@
           <xs:element name="O_MENSAJEERROR" type="xs:string" />
           <xs:element name="O_MOVIMIENTO" type="xs:string" />
           <xs:element name="O_DESCRIPCION" type="xs:string" />
+          <xs:element name="O_STATUSACEPTADOR" type="xs:string" />
+          <xs:element name="O_STATUSDISPENSER" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrvalarqc">
-    <part name="parameters" element="tns:mtrvalarqc" />
-  </message>
   <message name="mtrvalarqcResponse">
     <part name="parameters" element="tns:mtrvalarqcResponse" />
+  </message>
+  <message name="mtrvalarqc">
+    <part name="parameters" element="tns:mtrvalarqc" />
   </message>
   <portType name="ValidateStatusAdminServices">
     <operation name="mtrvalarqc">

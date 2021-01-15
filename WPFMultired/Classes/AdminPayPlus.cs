@@ -78,6 +78,7 @@ namespace WPFMultired.Classes
         }
 
         private string _descriptionStatusPayPlus;
+        public static string _descriptionStatusPayPlusDetail;
 
         public string DescriptionStatusPayPlus
         {
@@ -149,7 +150,7 @@ namespace WPFMultired.Classes
                 }
                 else
                 {
-                    DescriptionStatusPayPlus = MessageResource.StatePayPlusFail;
+                    DescriptionStatusPayPlus = string.Format(MessageResource.StatePayPlusFail, _descriptionStatusPayPlusDetail);
                     callbackResult?.Invoke(false);
                 }
             }
@@ -212,13 +213,15 @@ namespace WPFMultired.Classes
                     _dataPayPlus.Message = result.Message;
                     _dataPayPlus.ListImages = result.ListImages;
                     _dataPayPlus.StateUpdate = result.StateUpdate;
-                    
-                    //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
-                    var validateStatus = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
 
-                    if (validateStatus != null && ((int)validateStatus.Data) > 0)
+                    //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
+                    var responseInit = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+                    DATAINIT validateStatus = (responseInit.Data as DATAINIT);
+                    _dataPayPlus.StateAceptance = validateStatus.O_STATUSACEPTADOR;
+                    _dataPayPlus.StateDispenser = validateStatus.O_STATUSDISPENSER;
+                    if (validateStatus != null && validateStatus.O_MOVIMIENTO > 0)
                     {
-                        if ((int)validateStatus.Data == (int)ETypeAdministrator.Balancing)
+                        if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Balancing)
                         {
                             _dataPayPlus.StateBalanece = true;
 
@@ -230,7 +233,7 @@ namespace WPFMultired.Classes
                                 Date = DateTime.Now
                             }, ELogType.General);
                         }
-                        else if ((int)validateStatus.Data == (int)ETypeAdministrator.Upload)
+                        else if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Upload)
                         {
                             _dataPayPlus.StateUpload = true;
 
@@ -269,22 +272,26 @@ namespace WPFMultired.Classes
                         return true;
                     }
 
-                    if(_dataPayPlus.State && _dataPayPlus.StateAceptance && _dataPayPlus.StateDispenser)
+                    if (!_dataPayPlus.StateDispenser)
                     {
-                        return true;
+                        _descriptionStatusPayPlusDetail = "2";
+                    }
+                    else if (!_dataPayPlus.StateAceptance)
+                    {
+                        _descriptionStatusPayPlusDetail = "1";
                     }
                     else
                     {
-                        SaveLog(new RequestLog
-                        {
-                            Reference = response.ToString(),
-                            Description = MessageResource.NoGoInitial + _dataPayPlus.Message,
-                            State = 6,
-                            Date = DateTime.Now
-                        }, ELogType.General);
-
-                        SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
+                        return true;
                     }
+                    SaveLog(new RequestLog
+                    {
+                        Reference = response.ToString(),
+                        Description = MessageResource.NoGoInitial + _dataPayPlus.Message,
+                        State = 6,
+                        Date = DateTime.Now
+                    }, ELogType.General);
+                    SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
                 }
             }
             catch (Exception ex)
@@ -311,7 +318,7 @@ namespace WPFMultired.Classes
                 var companies = await ApiIntegration.CallService(ETypeService.Institutions, null);
                 if (companies != null)
                 {
-                   DataPayPlus.ListCompanies = (List<ItemList>)companies.Data;
+                    DataPayPlus.ListCompanies = (List<ItemList>)companies.Data;
                 }
 
                 var typeTransactions = await ApiIntegration.CallService(ETypeService.Type_Transaction, null);
@@ -360,6 +367,7 @@ namespace WPFMultired.Classes
 
                     Finish(isSucces);
                 };
+
                 _controlPeripherals.Start();
 
             }
@@ -465,7 +473,7 @@ namespace WPFMultired.Classes
                             idPaypad = int.Parse(Utilities.GetConfiguration("idPaypad"));
                         }
 
-                        if (desciption.Contains("FATAL"))   
+                        if (desciption.Contains("FATAL"))
                         {
                             level = ELevelError.Strong;
                         }
@@ -586,7 +594,7 @@ namespace WPFMultired.Classes
                                 EXTRA_DATA = string.Concat("Numero de recuperacion: ", transaction.reference),
                                 TRANSACTION_DESCRIPTION_ID = 0,
                                 STATE = true
-                            }) ;
+                            });
 
                             if (data != null)
                             {
@@ -796,7 +804,7 @@ namespace WPFMultired.Classes
 
                 if (response != null)
                 {
-                   // var operationControl = JsonConvert.DeserializeObject<PaypadOperationControl>(response.ToString());
+                    // var operationControl = JsonConvert.DeserializeObject<PaypadOperationControl>(response.ToString());
 
                     return (PaypadOperationControl)response.Data;
                 }
@@ -817,7 +825,7 @@ namespace WPFMultired.Classes
                 Task.Run(async () =>
                 {
                     var transactions = SqliteDataAccess.GetTransactionNotific();
-                    if (transactions!= null && transactions.Count > 0)
+                    if (transactions != null && transactions.Count > 0)
                     {
                         foreach (var transaction in transactions)
                         {
