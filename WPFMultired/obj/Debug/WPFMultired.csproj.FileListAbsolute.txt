@@ -522,7 +522,6 @@ C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newton
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.xml
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.xml
-C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.g.cs
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.g.cs

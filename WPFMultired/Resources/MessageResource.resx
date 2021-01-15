@@ -295,7 +295,7 @@
     <value>Comprobando estado del PayPlus...</value>
   </data>
   <data name="StatePayPlusFail" xml:space="preserve">
-    <value>¡El dispositivo no cuenta con cargue suficiente!</value>
+    <value>¡No se puede habilitar el dispositivo: razón {0}!</value>
   </data>
   <data name="ValidatePeripherals" xml:space="preserve">
     <value>Validando periférico ...</value>

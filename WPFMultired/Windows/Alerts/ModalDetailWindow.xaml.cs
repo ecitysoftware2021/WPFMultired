@@ -1,6 +1,7 @@
 ﻿using Grabador.Transaccion;
 using System;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -212,7 +213,7 @@ namespace WPFMultired.Windows.Alerts
                                             selectedCamera = 0,
                                             videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
                                         });
-
+                                        Thread.Sleep(500);
                                         CLSGrabador.IniciarGrabacion(new DataVidio
                                         {
                                             paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
