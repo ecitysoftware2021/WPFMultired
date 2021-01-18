@@ -15,9 +15,7 @@ using WPFMultired.Resources;
 using WPFMultired.ViewModel;
 using WPFMultired.Windows.Alerts;
 
-//     @
-//    <))>
-//    _/\_
+
 namespace WPFMultired.UserControls
 {
     /// <summary>
@@ -199,7 +197,7 @@ namespace WPFMultired.UserControls
                         }
                         else
                         {
-                            Utilities.ShowModal(/*response.Message ??*/ MessageResource.ErrorCoincidences, EModalType.Error, this);
+                            Utilities.ShowModal(response.Message, EModalType.Error, this);
                             viewModel.Value1 = string.Empty;
                         }
                     }
