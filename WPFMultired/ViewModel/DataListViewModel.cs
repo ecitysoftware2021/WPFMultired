@@ -347,12 +347,12 @@ namespace WPFMultired.ViewModel
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
                                 Item5 = product.Amount,
-                                Item13 = product.AccountStateProduct.VLRHON,
-                                Item14 = product.AccountStateProduct.DESHON,
+                                Item13 = product.ExtraTarjetaCredito.VLRHON,
+                                Item14 = product.ExtraTarjetaCredito.DESHON,
                                 Index = transaction.Products.IndexOf(product),
                                 Data = product,
                                 ImageSourse = ImagesUrlResource.ImageOnSelectOption,
-                                VisibilityHON = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden",
+                                VisibilityHON = product.ExtraTarjetaCredito.FLGHON ? "Visible" : "Hidden",
                             });
                             break;
                         case ETypeServiceSelect.EstadoCuenta:

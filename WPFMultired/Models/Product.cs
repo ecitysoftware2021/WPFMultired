@@ -56,6 +56,8 @@ namespace WPFMultired.Models
         public int NROSEG { get; set; }
         public string DESTAR { get; set; }
         public bool FLGHON { get; set; }
+        public decimal VLRHON { get; set; }
+        public string DESHON { get; set; }
     }
 
 }
