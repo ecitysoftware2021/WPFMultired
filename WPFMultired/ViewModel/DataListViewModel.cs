@@ -347,9 +347,12 @@ namespace WPFMultired.ViewModel
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
                                 Item5 = product.Amount,
+                                Item13 = product.AccountStateProduct.VLRHON,
+                                Item14 = product.AccountStateProduct.DESHON,
                                 Index = transaction.Products.IndexOf(product),
                                 Data = product,
-                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                                VisibilityHON = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden",
                             });
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
@@ -359,7 +362,7 @@ namespace WPFMultired.ViewModel
                                 Item2 = product.Code,
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
-                                Item5 = product.Amount,
+                                Item5 = product.AmountTotal,
                                 Item7 = product.AccountStateProduct.DESAPO,
                                 Item8 = product.AccountStateProduct.DESCRE,
                                 Item9 = product.AccountStateProduct.DESPAP,

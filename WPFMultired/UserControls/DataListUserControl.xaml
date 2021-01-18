@@ -276,6 +276,7 @@
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
+                                    FontWeight="Bold"
                                 />
                                 <TextBlock 
                                     Text="{Binding Item2}"
@@ -285,6 +286,7 @@
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right" 
+                                    FontWeight="Bold"
                                 />
                                 <Image 
                                     Source="{Binding Item3}"
@@ -293,6 +295,24 @@
                                     Margin="0,0,80,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center" 
+                                />
+                                <TextBlock 
+                                    Text="{Binding Item13}"
+                                    FontSize="30"
+                                    FontFamily="Arial"
+                                    Margin="80,80,0,0"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                />
+                                <TextBlock 
+                                    Text="{Binding Item14, StringFormat={}{0:C0}}"
+                                    FontSize="30"
+                                    FontFamily="Arial"
+                                    Margin="0,80,150,0"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right" 
                                 />
                             </Grid>
                         </StackPanel>
