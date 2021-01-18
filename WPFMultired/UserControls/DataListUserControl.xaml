@@ -402,6 +402,18 @@
                                     HorizontalAlignment="Left"
                                     Grid.Column="0" 
                                 />
+                                <TextBlock 
+                                    Text="{Binding Item14}"
+                                    FontSize="30"
+                                    FontFamily="Arial"
+                                    Margin="65,100,0,0"
+                                    Width="700"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Grid.Column="0" 
+                                   Visibility="{Binding Visibility}"
+                                />
                                 <TextBlock
                                     Text="{Binding Item10, StringFormat={}{0:C0}}"
                                     FontSize="30"
@@ -428,6 +440,16 @@
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
+                                />
+                                <TextBlock 
+                                    Text="{Binding Item13, StringFormat={}{0:C0}}"
+                                    FontSize="30"
+                                    FontFamily="Arial"
+                                    Margin="0,100,180,0"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Visibility="{Binding Visibility}"
                                 />
                             </Grid>
                         </StackPanel>

@@ -38,11 +38,14 @@ namespace WPFMultired.Models
         public decimal VLRAPO { get; set; }
         public string DESAPO { get; set; }
         public int FLGPAP { get; set; }
+        public string DESHON { get; set; }
+        public decimal VLRHON { get; set; }
+        public bool FLGHON { get; set; }
         public string CTAPAP { get; set; }
         public string SEGPAP { get; set; }
         public decimal VLRPAP { get; set; }
         public string DESPAP { get; set; }
-        public bool FLGHON { get; set; }
+
     }
 
     public class DataExtraTarjetaCredito

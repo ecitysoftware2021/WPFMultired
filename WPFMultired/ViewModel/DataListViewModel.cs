@@ -366,9 +366,12 @@ namespace WPFMultired.ViewModel
                                 Item10 = product.AccountStateProduct.VLRAPO,
                                 Item11 = product.AccountStateProduct.VLRCRE,
                                 Item12 = product.AccountStateProduct.VLRPAP,
+                                Item13 = product.AccountStateProduct.VLRHON,
+                                Item14 = product.AccountStateProduct.DESHON,
                                 Index = transaction.Products.IndexOf(product),
                                 Data = product,
-                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                                Visibility = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden"
                             });
                             break;
                     }

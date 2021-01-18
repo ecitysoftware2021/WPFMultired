@@ -223,6 +223,42 @@ namespace WPFMultired.Models
                 }
             }
         }
+        
+        private decimal _item13;
+
+        public decimal Item13
+        {
+            get
+            {
+                return _item13;
+            }
+            set
+            {
+                if (_item13 != value)
+                {
+                    _item13 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item13)));
+                }
+            }
+        }
+
+        private string _item14;
+
+        public string Item14
+        {
+            get
+            {
+                return _item14;
+            }
+            set
+            {
+                if (_item14 != value)
+                {
+                    _item14 = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item14)));
+                }
+            }
+        }
 
         private int _index;
 
@@ -274,6 +310,24 @@ namespace WPFMultired.Models
                 {
                     _data = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Data)));
+                }
+            }
+        }
+
+        private string _visibility;
+
+        public string Visibility
+        {
+            get
+            {
+                return _visibility;
+            }
+            set
+            {
+                if (_visibility != value)
+                {
+                    _visibility = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Visibility)));
                 }
             }
         }

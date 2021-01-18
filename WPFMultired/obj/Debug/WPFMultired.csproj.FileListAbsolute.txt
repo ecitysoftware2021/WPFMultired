@@ -569,3 +569,4 @@ C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMul
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
