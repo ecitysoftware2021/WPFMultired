@@ -133,7 +133,7 @@ namespace WPFMultired.Models
                 }
             }
         }
-        
+
         private string _item8;
 
         public string Item8
@@ -151,7 +151,7 @@ namespace WPFMultired.Models
                 }
             }
         }
-        
+
         private string _item9;
 
         public string Item9
@@ -223,7 +223,7 @@ namespace WPFMultired.Models
                 }
             }
         }
-        
+
         private decimal _item13;
 
         public decimal Item13
@@ -314,20 +314,55 @@ namespace WPFMultired.Models
             }
         }
 
-        private string _visibility;
+        private string _visibilityHON;
 
-        public string Visibility
+        public string VisibilityHON
         {
             get
             {
-                return _visibility;
+                return _visibilityHON;
             }
             set
             {
-                if (_visibility != value)
+                if (_visibilityHON != value)
                 {
-                    _visibility = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Visibility)));
+                    _visibilityHON = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityHON)));
+                }
+            }
+        }
+
+        private string _visibilityPAP;
+
+        public string VisibilityPAP
+        {
+            get
+            {
+                return _visibilityPAP;
+            }
+            set
+            {
+                if (_visibilityPAP != value)
+                {
+                    _visibilityPAP = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityPAP)));
+                }
+            }
+        }
+        private string _visibilityAPO;
+
+        public string VisibilityAPO
+        {
+            get
+            {
+                return _visibilityAPO;
+            }
+            set
+            {
+                if (_visibilityAPO != value)
+                {
+                    _visibilityAPO = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisibilityAPO)));
                 }
             }
         }

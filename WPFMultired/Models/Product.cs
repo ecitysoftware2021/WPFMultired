@@ -32,12 +32,12 @@ namespace WPFMultired.Models
         public decimal VLRCRE { get; set; }
         public int NROSEG { get; set; }
         public string DESCRE { get; set; }
-        public int FLGAPO { get; set; }
+        public bool FLGAPO { get; set; }
         public string CTAAPO { get; set; }
         public string SEGAPO { get; set; }
         public decimal VLRAPO { get; set; }
         public string DESAPO { get; set; }
-        public int FLGPAP { get; set; }
+        public bool FLGPAP { get; set; }
         public string DESHON { get; set; }
         public decimal VLRHON { get; set; }
         public bool FLGHON { get; set; }

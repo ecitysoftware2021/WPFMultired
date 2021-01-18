@@ -360,9 +360,9 @@ namespace WPFMultired.ViewModel
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
                                 Item5 = product.Amount,
-                                Item7 = product.AccountStateProduct.DESAPO ?? "n/a",
-                                Item8 = product.AccountStateProduct.DESCRE ?? "n/a",
-                                Item9 = product.AccountStateProduct.DESPAP ?? "n/a",
+                                Item7 = product.AccountStateProduct.DESAPO,
+                                Item8 = product.AccountStateProduct.DESCRE,
+                                Item9 = product.AccountStateProduct.DESPAP,
                                 Item10 = product.AccountStateProduct.VLRAPO,
                                 Item11 = product.AccountStateProduct.VLRCRE,
                                 Item12 = product.AccountStateProduct.VLRPAP,
@@ -371,7 +371,9 @@ namespace WPFMultired.ViewModel
                                 Index = transaction.Products.IndexOf(product),
                                 Data = product,
                                 ImageSourse = ImagesUrlResource.ImageOnSelectOption,
-                                Visibility = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden"
+                                VisibilityHON = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden",
+                                VisibilityPAP = product.AccountStateProduct.FLGPAP ? "Visible" : "Hidden",
+                                VisibilityAPO = product.AccountStateProduct.FLGAPO ? "Visible" : "Hidden"
                             });
                             break;
                     }
