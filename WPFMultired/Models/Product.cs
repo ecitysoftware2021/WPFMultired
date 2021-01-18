@@ -30,7 +30,7 @@ namespace WPFMultired.Models
         public string ICONOS { get; set; }
         public string CTACRE { get; set; }
         public decimal VLRCRE { get; set; }
-        public int NROSEG { get; set; }
+        public string NROSEG { get; set; }
         public string DESCRE { get; set; }
         public bool FLGAPO { get; set; }
         public string CTAAPO { get; set; }
@@ -53,7 +53,7 @@ namespace WPFMultired.Models
         public string ICONOS { get; set; }
         public string NUMTAR { get; set; }
         public string SALMIN { get; set; }
-        public int NROSEG { get; set; }
+        public string NROSEG { get; set; }
         public string DESTAR { get; set; }
         public bool FLGHON { get; set; }
         public decimal VLRHON { get; set; }

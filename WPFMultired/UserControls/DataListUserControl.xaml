@@ -297,22 +297,24 @@
                                     VerticalAlignment="Center" 
                                 />
                                 <TextBlock 
-                                    Text="{Binding Item13}"
+                                    Text="{Binding Item14}"
                                     FontSize="30"
                                     FontFamily="Arial"
                                     Margin="80,80,0,0"
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
+                                    Visibility="{Binding VisibilityHON}"
                                 />
                                 <TextBlock 
-                                    Text="{Binding Item14, StringFormat={}{0:C0}}"
+                                    Text="{Binding Item13, StringFormat={}{0:C0}}"
                                     FontSize="30"
                                     FontFamily="Arial"
                                     Margin="0,80,150,0"
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right" 
+                                    Visibility="{Binding VisibilityHON}"
                                 />
                             </Grid>
                         </StackPanel>
