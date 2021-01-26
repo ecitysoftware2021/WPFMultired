@@ -56,6 +56,7 @@ namespace WPFMultired.Models
         public int StateNotification { get; set; }
 
         public List<Product> Products { get; set; }
+        public DATOSADICIONALES DatosAdicionales { get; set; }
 
         public Product Product { get; set; }
 

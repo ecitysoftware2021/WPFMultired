@@ -28,7 +28,7 @@ namespace WPFMultired.MR_NotificInvoice {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -214,7 +214,7 @@ namespace WPFMultired.MR_NotificInvoice {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -260,7 +260,7 @@ namespace WPFMultired.MR_NotificInvoice {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -348,7 +348,7 @@ namespace WPFMultired.MR_NotificInvoice {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -380,6 +380,8 @@ namespace WPFMultired.MR_NotificInvoice {
         private string o_LLAVEMULTIREDField;
         
         private string o_NOMBREENTIDADField;
+        
+        private string o_DATOSADICIONALESField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -534,6 +536,18 @@ namespace WPFMultired.MR_NotificInvoice {
             set {
                 this.o_NOMBREENTIDADField = value;
                 this.RaisePropertyChanged("O_NOMBREENTIDAD");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string O_DATOSADICIONALES {
+            get {
+                return this.o_DATOSADICIONALESField;
+            }
+            set {
+                this.o_DATOSADICIONALESField = value;
+                this.RaisePropertyChanged("O_DATOSADICIONALES");
             }
         }
         

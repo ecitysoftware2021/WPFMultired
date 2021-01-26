@@ -729,7 +729,7 @@ namespace WPFMultired.Services
                         var response = client.mtrprotrn(request);
 
                         AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-
+                       
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
@@ -1329,7 +1329,8 @@ namespace WPFMultired.Services
                         AdminPayPlus.SaveErrorControl($"Request ReportInvoice: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
                         var response = client.mtrrecfacc(request);
-
+                        var ggggggg = Encryptor.Decrypt(response.O_APROBACION, keyDesencript);
+                        var jhjhjh = Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript);
                         AdminPayPlus.SaveErrorControl($"Response ReportInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
 
@@ -1342,6 +1343,7 @@ namespace WPFMultired.Services
                             transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIA, keyDesencript), 2);
                             transaction.nameentity = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREENTIDAD, keyDesencript), 2);
                             transaction.AmountComission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORCOMISION, keyDesencript), 2), new CultureInfo("en-US"));
+                            transaction.DatosAdicionales = JsonConvert.DeserializeObject<DATOSADICIONALES> (ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript), 2));
                             return new Response { Data = transaction };
                         }
                         else

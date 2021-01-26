@@ -247,4 +247,36 @@ namespace WPFMultired.Services.Object
         public bool O_STATUSACEPTADOR { get; set; }
         public bool O_STATUSDISPENSER { get; set; }
     }
+    public class DATOSADICIONALES
+    {
+        public string DESFOR { get; set; }
+        public string FORPAG { get; set; }
+        public string DESCLI { get; set; }
+        public string NOMCLI { get; set; }
+        public string DESDOC { get; set; }
+        public string NRONIT { get; set; }
+        public string DESPRO { get; set; }
+        public string NROPRO { get; set; }
+        public string ESTTRN { get; set; }
+        public string DESEST { get; set; }
+        public string DESAPR { get; set; }
+        public string NROAPR { get; set; }
+        public string DESAPL { get; set; }
+        public string VLRAPL { get; set; }
+        public bool FLGAPO { get; set; }
+        public string DESAPO { get; set; }
+        public string VLRAPO { get; set; }
+        public bool FLGPAP { get; set; }
+        public string DESPAP { get; set; }
+        public string VLRPAP { get; set; }
+        public string DESCOM { get; set; }
+        public string VLRCOM { get; set; }
+        public string DESEXC { get; set; }
+        public string VLREXC { get; set; }
+        public bool FLGHON { get; set; }
+        public string DESHON { get; set; }
+        public string VLRHON { get; set; }
+        public string DESTOT { get; set; }
+        public string VLRTOT { get; set; }
+    }
 }

@@ -149,9 +149,7 @@ C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.cspr
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\LoginAdministratorUserControl.g.cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.g.cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ReturnMonyUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ConsultUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.g.cs
@@ -166,9 +164,7 @@ C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\App.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\AdministratorUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\ConfigurateUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Administrator\LoginAdministratorUserControl.baml
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuCompaniesUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MenuUserControl.baml
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\ReadQRUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ReturnMonyUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ConsultUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\MainUserControl.baml
@@ -343,18 +339,12 @@ D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl
 D:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.g.cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailUserControl.g.cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\Windows\Alerts\ModalDetailWindow.g.cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.pdb
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DataListUserControl.baml
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailAcountUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\DetailUserControl.baml
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Modals\SelectIdiomUserControl.baml
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\ResumeTransactionUserControl.baml
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Grabador.Transaccion.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe.config
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.pdb
@@ -569,3 +559,6 @@ C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMul
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
+C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PublicityUserControl.g.cs
+C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PublicityUserControl.baml

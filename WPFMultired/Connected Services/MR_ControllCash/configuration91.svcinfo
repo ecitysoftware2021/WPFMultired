@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QaYpsil+DT9ausYM3ZrDMkOABjc=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="wNiJwWnO3QqCjx3J6QCZE2+h6XX4Uhas89rUl0KZRvM=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="ASMControllerServicesPortBinding">
       <properties>

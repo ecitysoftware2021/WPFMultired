@@ -60,6 +60,7 @@
           <xs:element name="O_VALORCOMISION" type="xs:string" />
           <xs:element name="O_LLAVEMULTIRED" type="xs:string" />
           <xs:element name="O_NOMBREENTIDAD" type="xs:string" />
+          <xs:element name="O_DATOSADICIONALES" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
