@@ -186,21 +186,17 @@ namespace WPFMultired.Classes
                     int sum = 20;
                     int x = 200;
                     int xKey = 15;
-                    int xMax = 250;
-                    float multiplier = (xMax / 48);
+                    int xMax = 270;
+
+                    float multiplier = (xMax / 45);
 
                     var data = new List<DataPrinter>()
                         {
                             new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 35, y= y },
                         };
-                    if (transaction.Type == ETransactionType.Deposit)
-                    {
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.eTypeService.ToString(), x = 68, y = y += 100 });
-                    }
-                    else
-                    {
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = "Retiro", x = 115, y = y += 100 });
-                    }
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.Observation, x = 50, y = y += 100 });
+
 
                     //data.Add(new DataPrinter { brush = color, font = fontKey, value = "Multi-Red", x = 100, y = y += sum });
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "ASM", x = 25, y = y += sum });
@@ -215,27 +211,27 @@ namespace WPFMultired.Classes
 
                     //Forma de pago
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESFOR, x = xKey, y = y += 30 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.FORPAG ?? string.Empty, x = 90, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.FORPAG ?? string.Empty, x = (xMax-transaction.DatosAdicionales.FORPAG.Length*multiplier), y = y });
 
                     //Nombre cliente
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESCLI, x = xKey, y = y += 30 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NOMCLI ?? string.Empty, x = 90, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESCLI, x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NOMCLI ?? string.Empty, x = xKey, y = y+=sum });
 
                     //Documento cliente
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESDOC, x = xKey, y = y += 30 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(transaction.DatosAdicionales.NRONIT.Substring(0, 2), "x".PadRight(6)) ?? string.Empty, x = 90, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESDOC, x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Concat(transaction.DatosAdicionales.NRONIT) ?? string.Empty, x = (xMax-transaction.DatosAdicionales.NRONIT.Length*multiplier), y = y });
 
                     //Estado transaccion
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.ESTTRN , x = xKey, y = y += 30 });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.DESEST, x = x, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.ESTTRN, x = xKey, y = y += 30 });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.DESEST, x = (xMax-transaction.DatosAdicionales.DESEST.Length*multiplier), y = y });
 
                     //Número de aprobación
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPR , x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROAPR, x = x, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPR, x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROAPR, x = (xMax-transaction.DatosAdicionales.NROAPR.Length*multiplier), y = y });
 
                     //Descripcion producto
-                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESPRO , x = xKey, y = y += sum });
-                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROPRO, x = x, y = y });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESPRO, x = xKey, y = y += sum });
+                    data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROPRO, x = (xMax-transaction.DatosAdicionales.NROPRO.Length*multiplier), y = y });
 
                     if (transaction.CodeTypeTransaction == GetConfiguration("CodDepositos"))
                     {
@@ -252,26 +248,26 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT).Length * multiplier), y = y });
 
                     }
-                    else if(transaction.CodeTypeTransaction== GetConfiguration("CodEstadoCuenta"))
+                    else if (transaction.CodeTypeTransaction == GetConfiguration("CodEstadoCuenta"))
                     {
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPL, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRAPL), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRAPL).Length * multiplier), y = y });
 
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESEXC, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC).Length * multiplier), y = y });
-                        
+
                         if (transaction.DatosAdicionales.FLGPAP)
                         {
                             data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESPAP, x = xKey, y = y += sum });
                             data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRPAP), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRPAP).Length * multiplier), y = y });
                         }
-                        
+
                         if (transaction.DatosAdicionales.FLGAPO)
                         {
                             data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPO, x = xKey, y = y += sum });
                             data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRAPO), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRAPO).Length * multiplier), y = y });
                         }
-                        
+
                         if (transaction.DatosAdicionales.FLGHON)
                         {
                             data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESHON, x = xKey, y = y += sum });
@@ -288,7 +284,7 @@ namespace WPFMultired.Classes
 
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESEXC, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC).Length * multiplier), y = y });
-                        
+
                         if (transaction.DatosAdicionales.FLGHON)
                         {
                             data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESHON, x = xKey, y = y += sum });

@@ -126,8 +126,9 @@ namespace WPFMultired.UserControls
                                 if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
                                 {
                                     this.paymentViewModel.ImgContinue = Visibility.Visible;
-                                    this.paymentViewModel.ImgCancel = Visibility.Hidden;
                                 }
+
+                                this.paymentViewModel.ImgCancel = Visibility.Hidden;
                                 paymentViewModel.RefreshListDenomination(int.Parse(enterValue.Item1.ToString()), 1, enterValue.Item2);
 
                                 AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, enterValue.Item1, 2, 1, enterValue.Item2, string.Empty);
