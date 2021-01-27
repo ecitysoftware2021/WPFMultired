@@ -138,7 +138,7 @@ namespace WPFMultired.UserControls
                 {
                     Utilities.navigator.Navigate(UserControlView.Login, false, ETypeAdministrator.Diminish);
                 }
-                else if (AdminPayPlus.DataPayPlus.State && AdminPayPlus.DataPayPlus.StateAceptance && AdminPayPlus.DataPayPlus.StateDispenser)
+                else if (AdminPayPlus.DataPayPlus.StateAceptance && AdminPayPlus.DataPayPlus.StateDispenser)
                 {
                     int response = AdminPayPlus.PrintService.StatusPrint();
 

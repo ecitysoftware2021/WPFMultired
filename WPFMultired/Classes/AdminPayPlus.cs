@@ -200,99 +200,85 @@ namespace WPFMultired.Classes
         {
             try
             {
-                var response = await api.CallApi("InitPaypad");
-                if (response != null)
+
+                var responseInit = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+                DATAINIT validateStatus = (responseInit.Data as DATAINIT);
+                _dataPayPlus.StateAceptance = validateStatus.O_STATUSACEPTADOR;
+                _dataPayPlus.StateDispenser = validateStatus.O_STATUSDISPENSER;
+                if (validateStatus != null && validateStatus.O_MOVIMIENTO > 0)
                 {
-                    var result = JsonConvert.DeserializeObject<DataPayPlus>(response.ToString());
-
-                    _dataPayPlus.State = result.State;
-                    _dataPayPlus.StateAceptance = result.StateAceptance;
-                    _dataPayPlus.StateDispenser = result.StateDispenser;
-                    _dataPayPlus.StateBalanece = result.StateBalanece;
-                    _dataPayPlus.StateUpload = result.StateUpload;
-                    _dataPayPlus.Message = result.Message;
-                    _dataPayPlus.ListImages = result.ListImages;
-                    _dataPayPlus.StateUpdate = result.StateUpdate;
-
-                    //Utilities.ImagesSlider = JsonConvert.DeserializeObject<List<string>>(data.ListImages.ToString());
-                    var responseInit = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
-                    DATAINIT validateStatus = (responseInit.Data as DATAINIT);
-                    _dataPayPlus.StateAceptance = validateStatus.O_STATUSACEPTADOR;
-                    _dataPayPlus.StateDispenser = validateStatus.O_STATUSDISPENSER;
-                    if (validateStatus != null && validateStatus.O_MOVIMIENTO > 0)
+                    if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Balancing)
                     {
-                        if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Balancing)
-                        {
-                            _dataPayPlus.StateBalanece = true;
+                        _dataPayPlus.StateBalanece = true;
 
-                            SaveLog(new RequestLog
-                            {
-                                Reference = response.ToString(),
-                                Description = MessageResource.PaypadGoAdmin,
-                                State = 4,
-                                Date = DateTime.Now
-                            }, ELogType.General);
-                        }
-                        else if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Upload)
-                        {
-                            _dataPayPlus.StateUpload = true;
-
-                            SaveLog(new RequestLog
-                            {
-                                Reference = response.ToString(),
-                                Description = MessageResource.PaypadGoAdmin,
-                                State = 4,
-                                Date = DateTime.Now
-                            }, ELogType.General);
-                        }
-                        else
-                        {
-                            _dataPayPlus.StateDiminish = true;
-
-                            SaveLog(new RequestLog
-                            {
-                                Reference = response.ToString(),
-                                Description = MessageResource.PaypadGoAdmin,
-                                State = 4,
-                                Date = DateTime.Now
-                            }, ELogType.General);
-
-                        }
-                    }
-
-                    if (_dataPayPlus.StateBalanece || _dataPayPlus.StateUpload)
-                    {
                         SaveLog(new RequestLog
                         {
-                            Reference = response.ToString(),
+                            Reference = "Arqueo",
                             Description = MessageResource.PaypadGoAdmin,
                             State = 4,
                             Date = DateTime.Now
                         }, ELogType.General);
-                        return true;
                     }
+                    else if (validateStatus.O_MOVIMIENTO == (int)ETypeAdministrator.Upload)
+                    {
+                        _dataPayPlus.StateUpload = true;
 
-                    if (!_dataPayPlus.StateDispenser)
-                    {
-                        _descriptionStatusPayPlusDetail = "2";
-                    }
-                    else if (!_dataPayPlus.StateAceptance)
-                    {
-                        _descriptionStatusPayPlusDetail = "1";
+                        SaveLog(new RequestLog
+                        {
+                            Reference = "Cargue",
+                            Description = MessageResource.PaypadGoAdmin,
+                            State = 4,
+                            Date = DateTime.Now
+                        }, ELogType.General);
                     }
                     else
                     {
-                        return true;
+                        _dataPayPlus.StateDiminish = true;
+
+                        SaveLog(new RequestLog
+                        {
+                            Reference = "Disminución",
+                            Description = MessageResource.PaypadGoAdmin,
+                            State = 4,
+                            Date = DateTime.Now
+                        }, ELogType.General);
+
                     }
+                }
+
+                if (_dataPayPlus.StateBalanece || _dataPayPlus.StateUpload)
+                {
                     SaveLog(new RequestLog
                     {
-                        Reference = response.ToString(),
-                        Description = MessageResource.NoGoInitial + _dataPayPlus.Message,
-                        State = 6,
+                        Reference = "Modo administrativo",
+                        Description = MessageResource.PaypadGoAdmin,
+                        State = 4,
                         Date = DateTime.Now
                     }, ELogType.General);
-                    SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
+                    return true;
                 }
+
+                if (!_dataPayPlus.StateDispenser)
+                {
+                    _descriptionStatusPayPlusDetail = "2";
+                }
+                else if (!_dataPayPlus.StateAceptance)
+                {
+                    _descriptionStatusPayPlusDetail = "1";
+                }
+                else
+                {
+                    return true;
+                }
+                SaveLog(new RequestLog
+                {
+                    Reference = "Mensaje Inicial",
+                    Description = MessageResource.NoGoInitial + _dataPayPlus.Message,
+                    State = 6,
+                    Date = DateTime.Now
+                }, ELogType.General);
+                SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
+
             }
             catch (Exception ex)
             {
