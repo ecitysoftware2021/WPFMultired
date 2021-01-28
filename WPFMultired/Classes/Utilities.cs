@@ -195,6 +195,42 @@ namespace WPFMultired.Classes
                             new DataPrinter{ image = Image.FromFile(GetConfiguration("ImageBoucher")),  x = 35, y= y },
                         };
 
+                    if (transaction.DatosAdicionales==null)
+                    {
+                        transaction.DatosAdicionales = new DATOSADICIONALES 
+                        {
+                            DESAPL=string.Empty,
+                            DESAPO= string.Empty,
+                            DESAPR = string.Empty,
+                            DESCLI = string.Empty,
+                            DESCOM = string.Empty,
+                            DESDOC = string.Empty,
+                            DESEST = string.Empty,
+                            DESEXC = string.Empty,
+                            DESFOR = string.Empty,
+                            DESHON = string.Empty,
+                            DESPAP = string.Empty,
+                            DESPRO = string.Empty,
+                            DESTOT = string.Empty,
+                            ESTTRN = string.Empty,
+                            FLGAPO=false,
+                            FLGHON=false,
+                            FLGPAP=false,
+                            FORPAG = string.Empty,
+                            NOMCLI = string.Empty,
+                            NROAPR = string.Empty,
+                            NRONIT = string.Empty,
+                            NROPRO = string.Empty,
+                            VLRAPL = string.Empty,
+                            VLRAPO = string.Empty,
+                            VLRCOM = string.Empty,
+                            VLREXC = string.Empty,
+                            VLRHON = string.Empty,
+                            VLRPAP = string.Empty,
+                            VLRTOT = string.Empty
+                        };
+                    }
+
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.Observation, x = 50, y = y += 100 });
 
 
@@ -244,9 +280,7 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESEXC, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLREXC).Length * multiplier), y = y });
 
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESTOT, x = xKey, y = y += 30 });
-                        data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT).Length * multiplier), y = y });
-
+                        
                     }
                     else if (transaction.CodeTypeTransaction == GetConfiguration("CodEstadoCuenta"))
                     {
@@ -295,6 +329,10 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRCOM), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRCOM).Length * multiplier), y = y });
 
                     }
+
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESTOT, x = xKey, y = y += 30 });
+                    data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT), x = (xMax - string.Format("{0:C0}", transaction.DatosAdicionales.VLRTOT).Length * multiplier), y = y });
+
 
                     data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total ingresado:", x = xKey, y = y += 30 });
                     data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C0}", transaction.Payment.ValorIngresado), x = (xMax - string.Format("{0:C0}", transaction.Payment.ValorIngresado).Length * multiplier), y = y });

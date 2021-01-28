@@ -15,9 +15,6 @@ using WPFMultired.Resources;
 using WPFMultired.Services;
 using WPFMultired.Services.Object;
 
-//     @
-//    <))>
-//    _/\_
 namespace WPFMultired.Classes
 {
     public class AdminPayPlus : INotifyPropertyChanged

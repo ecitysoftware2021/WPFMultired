@@ -126,9 +126,9 @@ namespace WPFMultired.UserControls
                                 if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
                                 {
                                     this.paymentViewModel.ImgContinue = Visibility.Visible;
+                                    this.paymentViewModel.ImgCancel = Visibility.Hidden;
                                 }
 
-                                this.paymentViewModel.ImgCancel = Visibility.Hidden;
                                 paymentViewModel.RefreshListDenomination(int.Parse(enterValue.Item1.ToString()), 1, enterValue.Item2);
 
                                 AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, enterValue.Item1, 2, 1, enterValue.Item2, string.Empty);
@@ -266,8 +266,8 @@ namespace WPFMultired.UserControls
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
-            //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
-            if (state)
+                    //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
+                    if (state)
                     {
                         paymentViewModel.ValorDispensado = valueOut;
 
@@ -382,7 +382,7 @@ namespace WPFMultired.UserControls
                 {
                     AdminPayPlus.ControlPeripherals.StopAceptance();
                     AdminPayPlus.ControlPeripherals.callbackLog = null;
-                    
+
                     CLSGrabador.FinalizarGrabacion();
                     if (!this.paymentViewModel.StatePay)
                     {
