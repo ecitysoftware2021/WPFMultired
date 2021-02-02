@@ -859,7 +859,7 @@ namespace WPFMultired.Services
                         var response = client.mtrvalarqc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response GetAdminStatus: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-
+        
                         if (response != null
                             && !string.IsNullOrEmpty(response.O_CODIGOERROR)
                             && !string.IsNullOrEmpty(response.O_MOVIMIENTO)

@@ -55,7 +55,7 @@
                 HorizontalAlignment="Center"
                 Margin="0,50,0,0" 
                 FontSize="25" 
-                Width="370"
+                Width="450"
                 FontFamily="Myriad Pro"
                 Foreground="Gray"
                 TextWrapping="Wrap"
@@ -88,7 +88,7 @@
 
         <Grid Grid.Row ="2">
             <TextBlock x:Name="LblMessageReturn" 
-                           Text="Si su saldo presenta valores inferiores a $100 este excedente se abonará automáticamente a su cuenta"
+                           Text="Si tu vuelto es inferior a $100 este valor se abonará automaticamente a la cuenta que estas consignando"
                            HorizontalAlignment="Center"
                            Margin="0,-50,0,0" 
                            FontSize="30" 

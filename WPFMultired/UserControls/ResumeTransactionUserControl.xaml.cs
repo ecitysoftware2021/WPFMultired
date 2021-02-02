@@ -31,7 +31,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                tb_name_company.Text = AdminPayPlus.DataPayPlus.ListCompanies.Where(c => c.Item1 == transaction.CodeCompany).FirstOrDefault().Item2;
+                //tb_name_company.Text = AdminPayPlus.DataPayPlus.ListCompanies.Where(c => c.Item1 == transaction.CodeCompany).FirstOrDefault().Item2;
                 tb_name_client.Text = transaction.payer.NAME;
                 tb_amount_pay.Text = string.Format("{0:C0}", transaction.Amount);
                 tb_extra_amount_pay.Text = string.Format("{0:C0}", transaction.Payment.ValorSobrante);

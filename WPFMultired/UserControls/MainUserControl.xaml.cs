@@ -9,9 +9,6 @@ using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Resources;
 
-//     @
-//    <))>
-//    _/\_
 namespace WPFMultired.UserControls
 {
     /// <summary>

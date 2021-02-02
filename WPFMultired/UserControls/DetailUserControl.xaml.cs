@@ -1,20 +1,10 @@
 ﻿using Grabador.Transaccion;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Models;
@@ -38,8 +28,27 @@ namespace WPFMultired.UserControls
             this.transaction = transaction;
 
             this.DataContext = transaction.Product;
-
+            ConfigurateView();
             GoTime();
+        }
+
+        private void ConfigurateView()
+        {
+            switch (transaction.eTypeService)
+            {
+                case ETypeServiceSelect.Deposito:
+                    lblTitle.Text = "Vas a consignar dinero en la cuenta";
+                    lblAmountTitle.Text = "Valor a consignar";
+                    break;
+                case ETypeServiceSelect.TarjetaCredito:
+                    lblTitle.Text = "Vas a pagar a la tarjeta de crédito";
+                    lblAmountTitle.Text = "Valor a pagar (incluido comisión)";
+                    break;
+                case ETypeServiceSelect.EstadoCuenta:
+                    lblTitle.Text = "Vas a pagar al estado de cuenta";
+                    lblAmountTitle.Text = "Valor a pagar (incluido comisión)";
+                    break;
+            }
         }
 
         private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
@@ -58,7 +67,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.Main);
+                Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
             }
             catch (Exception ex)
             {

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Windows;
+﻿using Grabador.Transaccion;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Models;
-using WPFMultired.ViewModel;
-using System.Reflection;
-using WPFMultired.Services.Object;
-using System.Windows.Data;
-using System.Collections.Generic;
 using WPFMultired.Resources;
-using System.Threading;
-using System.Globalization;
-using Grabador.Transaccion;
-using System.Windows.Threading;
+using WPFMultired.Services.Object;
+using WPFMultired.ViewModel;
 
 namespace WPFMultired.UserControls
 {
@@ -67,7 +66,6 @@ namespace WPFMultired.UserControls
                 }
 
                 this.DataContext = this.paymentViewModel;
-
                 ActivateWallet();
             }
             catch (Exception ex)
@@ -185,7 +183,7 @@ namespace WPFMultired.UserControls
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {paymentViewModel.ValorSobrante.ToString("C")} a la siguiente consignación.", EModalType.Error, this);
+                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {string.Format("{0:C0}", paymentViewModel.ValorSobrante)} a la misma cuenta a la que estas consignando.", EModalType.Error, this);
                                     SavePay();
                                 }
                             }
@@ -322,7 +320,7 @@ namespace WPFMultired.UserControls
                         transaction.Payment = paymentViewModel;
                         transaction.State = statePay;
 
-                        AdminPayPlus.ControlPeripherals.ClearValues();
+                        //AdminPayPlus.ControlPeripherals.ClearValues();
 
                         if (transaction.IdTransactionAPi > 0)
                         {

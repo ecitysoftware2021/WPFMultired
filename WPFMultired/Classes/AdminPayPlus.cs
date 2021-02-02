@@ -1,8 +1,6 @@
-﻿using Grabador.Transaccion;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -140,9 +138,7 @@ namespace WPFMultired.Classes
                 if (await ValidatePaypad())
                 {
                     await DownloadInformation();
-
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
-
                     ValidatePeripherals();
                 }
                 else

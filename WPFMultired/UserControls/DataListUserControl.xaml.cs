@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WPFMultired.Classes;
 using WPFMultired.Models;
 using WPFMultired.Resources;
 using WPFMultired.ViewModel;
-using System.Windows;
-using WPFMultired.Windows.Alerts;
-using System.Windows.Threading;
 
 namespace WPFMultired.UserControls
 {
@@ -30,6 +26,7 @@ namespace WPFMultired.UserControls
         private ValueModel valueModel;
 
         private DataListViewModel viewModel;
+        private string questionMsg = string.Empty;
 
         public DataListUserControl(Transaction transaction)
         {
@@ -71,20 +68,23 @@ namespace WPFMultired.UserControls
                         DataList = new List<ItemList>(),
                         ViewList = new CollectionViewSource(),
                     };
-
+                    transaction.Product = null;
                     switch (transaction.eTypeService)
                     {
                         case ETypeServiceSelect.Deposito:
                             lv_depositos.Visibility = Visibility.Visible;
                             viewModel.Colum3 = "            Digita los últimos cuatro (4) números de la cuenta";
+                            lblTipTitle.Text = "Valor a consignar";
                             break;
                         case ETypeServiceSelect.TarjetaCredito:
                             lv_tarjetaC.Visibility = Visibility.Visible;
                             viewModel.Colum3 = "            Digita los últimos cuatro (4) números de la tarjeta";
+                            lblTipTitle.Text = "Valor a pagar (incluido comisión)";
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
                             lv_estadoC.Visibility = Visibility.Visible;
                             viewModel.Colum3 = "            Digita los últimos cuatro (4) números del crédito";
+                            lblTipTitle.Text = "Valor a pagar (incluido comisión)";
                             break;
                     }
 
@@ -111,11 +111,13 @@ namespace WPFMultired.UserControls
             try
             {
                 viewModel.ViewList.Source = item == null ? viewModel.DataList : viewModel.DataList.Where(x => x.Item2 == item.Item2);
-
-                if (ProductSelect != null)
-                {
-                    ProductSelect.Item3 = GetImage(false);
-                }
+                ProductSelect = item;
+                ProductSelect.Item3 = GetImage(true);
+                txtValorComision.Text = String.Format("{0:C0}", ProductSelect.Item4);
+                transaction.Product = (Product)item.Data;
+                txtValor.IsEnabled = true;
+                btnQuestion.Visibility = Visibility.Visible;
+                valueModel.Val = transaction.Product.Amount;
 
                 switch (transaction.eTypeService)
                 {
@@ -342,8 +344,26 @@ namespace WPFMultired.UserControls
                     lv_estadoC.Visibility = Visibility.Hidden;
                     btnQuestion.Visibility = Visibility.Hidden;
                     transaction.Product = null;
+                    ProductSelect = new ItemList();
+                    string msgAlert = string.Empty;
+                    switch (transaction.eTypeService)
+                    {
+                        case ETypeServiceSelect.Deposito:
+                            msgAlert = "Los datos ingresados del número de cuenta no coinciden y/o el estado del producto no permite realizar operación. Valida la información e inténtalo más tarde.";
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            msgAlert = "Los datos ingresados del número de tarjeta de crédito no coinciden. Valida la información e inténtalo más tarde.";
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            msgAlert = "Los datos ingresados del número de estado de cuenta no coinciden y/o el estado del producto no permite realizar operación. Valida la información e inténtalo más tarde.";
+                            break;
+                        default:
+                            msgAlert = "Los datos ingresados del producto no coinciden. Valida la información e inténtalo más tarde.";
+                            break;
+                    }
 
-                    Utilities.ShowModal("Los datos ingresados del número de cuenta no coinciden. Valida la información e inténtalo más tarde.", EModalType.Error, this);
+                    Utilities.ShowModal(msgAlert, EModalType.Error, this);
+
                 }
                 else
                 {
@@ -360,12 +380,15 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (transaction.Product == null)
+                if (transaction.Product == null && txtCountNumber.Text.Length < 4)
                 {
                     Utilities.ShowModal("Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar.", EModalType.Error, this);
                 }
-                else
-                if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
+                else if (!string.IsNullOrEmpty(txtCountNumber.Text) && transaction.Product == null)
+                {
+                    Utilities.ShowModal("Busca tu producto con el icono de la lupa.", EModalType.Error, this);
+                }
+                else if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
                 {
                     transaction.Amount = valueModel.Val;
                     transaction.Product.AmountUser = valueModel.Val;
@@ -374,22 +397,22 @@ namespace WPFMultired.UserControls
                     {
                         if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito && transaction.Amount < transaction.Product.Amount)
                         {
-                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta quedará en mora.", EModalType.Error, this);
+                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta de crédito  puede quedar en mora.", EModalType.Error, this);
                         }
-                        
+
                         if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta && transaction.Amount < transaction.Product.Amount)
                         {
-                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu crédito quedará en mora.", EModalType.Error, this);
+                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu crédito puede quedar en mora.", EModalType.Error, this);
                         }
 
                         if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
                         {
-                            Utilities.ShowModal("La tarjeta de crédito que vas a cancelar se encuentra en estado prejurídico, los honorarios están calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se véra reflejado en el recibo de la transacción.", EModalType.Error, this);
+                            Utilities.ShowModal("La tarjeta de crédito que vas a cancelar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
                         }
 
                         if (transaction.Product.AccountStateProduct != null && transaction.Product.AccountStateProduct.FLGHON)
                         {
-                            Utilities.ShowModal("El crédito que vas a cancelar se encuentra en estado prejurídico, los honorarios están calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se véra reflejado en el recibo de la transacción.", EModalType.Error, this);
+                            Utilities.ShowModal("El crédito que vas a cancelar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se verá reflejado en el recibo de la transacción..", EModalType.Error, this);
                         }
                     }
 
@@ -406,7 +429,18 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.ShowModal($"Por favor, digita el valor a consignar (mínimo {transaction.Product.AmountMin.ToString("C")} - máximo {transaction.Product.AmountMax.ToString("C")}). El dispositivo recibe montos de dinero redondeados al múltiplo de $100.", EModalType.Error, this);
+                if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta)
+                {
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgAccountState"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+
+                }
+                else
+                {
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgGeneric"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+
+                }
+
+                Utilities.ShowModal(questionMsg, EModalType.Error, this);
             }
             catch (Exception ex)
             {

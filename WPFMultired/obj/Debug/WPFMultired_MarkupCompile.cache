@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\
 WPFMultired
 none
 false
 DEBUG;TRACE
-C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\App.xaml
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\App.xaml
 16-709568041
 
 88-1721374685
-341392059017
+341248889383
 UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\DataListUserControl.xaml;UserControls\DetailUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\PublicityUserControl.xaml;UserControls\ResumeTransactionUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;Windows\Alerts\ModalDetailWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
 
 False

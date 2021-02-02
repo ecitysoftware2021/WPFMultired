@@ -282,12 +282,24 @@
                                     Text="{Binding Item2}"
                                     FontSize="30"
                                     FontFamily="Arial"
+                                    Margin="350,0,150,0"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left" 
+                                    FontWeight="Bold"
+                                />
+
+                                <TextBlock 
+                                    Text="{Binding Item5, StringFormat={}{0:C0}}"
+                                    FontSize="30"
+                                    FontFamily="Arial"
                                     Margin="0,0,150,0"
                                     Foreground="Gray"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right" 
                                     FontWeight="Bold"
                                 />
+
                                 <Image 
                                     Source="{Binding Item3}"
                                     Height="50"
@@ -513,18 +525,22 @@
                 </TextBox.Background>
             </TextBox>
             <TextBlock 
-                Text="Valor a consignar"
+                x:Name="lblTipTitle"
                 Foreground="#FF5D5D5D"
                 Margin="100,0,0,80"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="30"
             />
+            <TextBlock Text="Digite el valor" 
+                        Margin="0,0,180,180"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        FontSize="30"
+                        Foreground="Gray"/>
             <TextBox  
                 x:Name="txtValor" 
-                md:HintAssist.Hint="  Digite el valor"
-                md:HintAssist.IsFloating="True"
-                md:HintAssist.FloatingScale="0.3"
+                
                 Text="{Binding Val, StringFormat={}{0:C0}, UpdateSourceTrigger=PropertyChanged}"
                 Height="50" 
                 Margin="0,0,120,80" 

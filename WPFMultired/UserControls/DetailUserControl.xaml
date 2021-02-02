@@ -73,7 +73,8 @@
                     TextAlignment="Center" 
                 />
                 <TextBlock  
-                    Text="Usted va a consignar dinero en la cuenta"
+                    
+                    x:Name="lblTitle"
                     HorizontalAlignment="Center"
                     Margin="0,100,0,0" 
                     FontSize="35" 
@@ -95,7 +96,8 @@
                     TextAlignment="Center" 
                 />
                 <TextBlock  
-                    Text="Valor a consignar"
+                    
+                    x:Name="lblAmountTitle"
                     HorizontalAlignment="Left"
                     Margin="150,420,0,0" 
                     FontSize="30" 
@@ -110,7 +112,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="150,455,0,0" 
-                    Width="300"
+                    Width="430"
                     Height="3"
                     Stretch="Fill"
                 />
@@ -151,7 +153,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="150,655,0,0" 
-                    Width="300"
+                    Width="430"
                     Height="3"
                     Stretch="Fill"
                 />

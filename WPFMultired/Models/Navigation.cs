@@ -85,7 +85,6 @@ namespace WPFMultired.Models
                     {
                         try
                         {
-                            //TODO:corregir
                             Application.Current.Dispatcher.Invoke((Action)delegate
                             {
                                 WPKeyboard.Keyboard.CloseKeyboard(View);

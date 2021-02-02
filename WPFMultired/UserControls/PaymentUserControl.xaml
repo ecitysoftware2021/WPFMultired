@@ -44,7 +44,7 @@
                 TouchDown="BtnCancell_TouchDown"
             />
             <TextBlock 
-                Text="Dinero ingresado"
+                Text="Ingresa tu dinero"
                 FontSize="40"
                 Width="500"
                 TextAlignment="Center"
