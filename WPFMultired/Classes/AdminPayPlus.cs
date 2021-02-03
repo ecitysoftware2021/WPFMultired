@@ -140,6 +140,7 @@ namespace WPFMultired.Classes
                     await DownloadInformation();
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
                     ValidatePeripherals();
+                    //callbackResult?.Invoke(true);
                 }
                 else
                 {

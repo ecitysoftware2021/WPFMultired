@@ -137,5 +137,43 @@ namespace WPFMultired.UserControls
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
             }
         }
+
+        private void btn_Restart_TouchEnter(object sender, TouchEventArgs e)
+        {
+            TimeToRestart();
+        }
+
+        DispatcherTimer timerRestart = new DispatcherTimer();
+        int restartCounter = 0;
+        private void TimeToRestart()
+        {
+            try
+            {
+
+                timerRestart.Interval = TimeSpan.FromSeconds(1);
+                timerRestart.Tick += RestartTimeTick;
+                timerRestart.Start();
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void RestartTimeTick(object sender, EventArgs e)
+        {
+            restartCounter++;
+            if (restartCounter >= int.Parse(Utilities.GetConfiguration("TimeToRestart")))
+            {
+                Utilities.RestartApp();
+            }
+        }
+
+        private void btn_Restart_TouchLeave(object sender, TouchEventArgs e)
+        {
+            restartCounter = 0;
+            timerRestart.Tick -= RestartTimeTick;
+            timerRestart.Stop();
+        }
     }
 }

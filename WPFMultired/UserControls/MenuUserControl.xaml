@@ -39,6 +39,7 @@
                 Margin="0,120,50,0"
                 TouchDown="Btn_back_TouchDown" 
             />
+            
             <TextBlock 
                 Text="Selecciona la transacción que quieres realizar:"
                 FontFamily="Arial"
@@ -112,6 +113,20 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Image 
+                x:Name="btn_Restart"
+                Source="/Images/Buttons/NewSalir.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                Width="200"
+                Opacity="0"
+                VerticalAlignment="Top"
+                Margin="0,120,150,0"
+                TouchEnter="btn_Restart_TouchEnter"
+                TouchLeave="btn_Restart_TouchLeave"
+            />
         </Grid>
     </Grid>
 </UserControl>
