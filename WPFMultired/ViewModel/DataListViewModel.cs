@@ -346,7 +346,7 @@ namespace WPFMultired.ViewModel
                                 Item2 = product.Code,
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
-                                Item5 = product.Amount,
+                                Item5 = product.AmountTotal,
                                 Item13 = product.ExtraTarjetaCredito.VLRHON,
                                 Item14 = product.ExtraTarjetaCredito.DESHON,
                                 Index = transaction.Products.IndexOf(product),

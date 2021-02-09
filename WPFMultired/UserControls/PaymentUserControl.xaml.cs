@@ -218,7 +218,6 @@ namespace WPFMultired.UserControls
 
                         if (error.Item2.Contains("FATAL"))
                         {
-                            transaction.Observation += MessageResource.NoContinue;
                             transaction.State = ETransactionState.Error;
                             if (error.Item1.Equals("AP"))
                             {
@@ -275,7 +274,6 @@ namespace WPFMultired.UserControls
                         }
                         else
                         {
-                            transaction.Observation += MessageResource.IncompleteMony;
                             Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error, this);
                             SavePay(ETransactionState.Error);
                         }

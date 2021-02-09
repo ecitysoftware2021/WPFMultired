@@ -155,6 +155,7 @@
                 TextAlignment="Left"
                 Margin="0,-15,340,0"
                 FontFamily="Arial"
+                Visibility="Hidden"
                 Foreground="#FF606060"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right" />
