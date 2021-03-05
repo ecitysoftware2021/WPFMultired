@@ -209,7 +209,7 @@ namespace WPFMultired.ViewModel
             try
             {
                 //listdenominationIn.AddRange(_denominations);
-                var itemDenomination = this.Denominations.Where(d => d.Denominacion == denomination).FirstOrDefault();
+                var itemDenomination = this.Denominations.Where(d => d.Denominacion == denomination && d.Code == code).FirstOrDefault();
                 if (itemDenomination == null)
                 {
                     this.Denominations.Add(new DenominationMoney
@@ -247,7 +247,7 @@ namespace WPFMultired.ViewModel
 
                     if (quantity > 0)
                     {
-                        DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination).FirstOrDefault();
+                        DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination && d.Code==code).FirstOrDefault();
                         if (denominationMoney == null)
                         {
                             this.Denominations.Add(new DenominationMoney
