@@ -559,3 +559,4 @@ C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMul
 C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PublicityUserControl.g.cs
 C:\Users\H81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\PublicityUserControl.baml
+C:\Users\David.Cordoba\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache

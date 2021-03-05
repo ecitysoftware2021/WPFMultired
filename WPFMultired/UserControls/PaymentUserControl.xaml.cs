@@ -66,6 +66,7 @@ namespace WPFMultired.UserControls
                 }
 
                 this.DataContext = this.paymentViewModel;
+                AdminPayPlus.ControlPeripherals.ClearValues();
                 ActivateWallet();
             }
             catch (Exception ex)
@@ -153,6 +154,10 @@ namespace WPFMultired.UserControls
                                 if (paymentViewModel.ValorSobrante >= 100)
                                 {
                                     var decimas = paymentViewModel.ValorSobrante % 100;
+                                    if (decimas > 0)
+                                    {
+                                        Utilities.ShowModal($"Solo se puede devolver {string.Format("{0:C0}", paymentViewModel.ValorSobrante - decimas)}, se abonará el excedente {string.Format("{0:C0}", decimas)} al mismo producto.", EModalType.Error, this);
+                                    }
 
                                     if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta
                                      || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
@@ -183,7 +188,7 @@ namespace WPFMultired.UserControls
                                 }
                                 else
                                 {
-                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {string.Format("{0:C0}", paymentViewModel.ValorSobrante)} a la misma cuenta a la que estas consignando.", EModalType.Error, this);
+                                    Utilities.ShowModal($"No se puede devolver el valor restante, se abonará el excedente {string.Format("{0:C0}", paymentViewModel.ValorSobrante)} al mismo producto.", EModalType.Error, this);
                                     SavePay();
                                 }
                             }
@@ -317,8 +322,6 @@ namespace WPFMultired.UserControls
                         this.paymentViewModel.StatePay = true;
                         transaction.Payment = paymentViewModel;
                         transaction.State = statePay;
-
-                        //AdminPayPlus.ControlPeripherals.ClearValues();
 
                         if (transaction.IdTransactionAPi > 0)
                         {
