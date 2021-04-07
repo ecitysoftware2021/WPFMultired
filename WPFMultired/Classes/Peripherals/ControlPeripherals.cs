@@ -54,7 +54,7 @@ namespace WPFMultired.Classes
 
         public Action<Tuple<string, string>> callbackError;//Calback de error
 
-        public Action<string> callbackLog;//Calback de error
+        public Action<string, bool> callbackLog;//Calback de error
 
         public Action<string> callbackMessage;//Calback de mensaje
 
@@ -206,6 +206,14 @@ namespace WPFMultired.Classes
             try
             {
                 string response = _serialPort.ReadLine();
+                AdminPayPlus.SaveLog(new RequestLog
+                {
+                    Reference = "",
+                    Description = "Respuesta del billetero " + response,
+                    State = 1,
+                    Date = DateTime.Now
+                }, ELogType.General);
+
                 if (!string.IsNullOrEmpty(response))
                 {
                     ProcessResponseBills(response.Replace("\r", string.Empty));
@@ -233,19 +241,19 @@ namespace WPFMultired.Classes
                     break;
                 case "ER":
 
-                    foreach (var item in Utilities.ErrorVector)
-                    {
-                        if (message.ToLower().Contains(item.ToLower()))
-                        {
-                            AdminPayPlus.SaveLog(new RequestLog
-                            {
-                                Reference = "",
-                                Description = "Respuesta del billetero " + message,
-                                State = 1,
-                                Date = DateTime.Now
-                            }, ELogType.General);
-                        }
-                    }
+                    //foreach (var item in Utilities.ErrorVector)
+                    //{
+                    //    if (message.ToLower().Contains(item.ToLower()))
+                    //    {
+                    //        AdminPayPlus.SaveLog(new RequestLog
+                    //        {
+                    //            Reference = "",
+                    //            Description = "Respuesta del billetero " + message,
+                    //            State = 1,
+                    //            Date = DateTime.Now
+                    //        }, ELogType.General);
+                    //    }
+                    //}
 
                     ProcessER(response);
                     break;
@@ -546,9 +554,10 @@ namespace WPFMultired.Classes
             decimal enterVal = enterValue;
             if (enterValue >= payValue)
             {
-                //StopAceptance();
-                enterValue = 0;
+                StopAceptance();
+                Thread.Sleep(1500);
                 callbackTotalIn?.Invoke(enterVal);
+                enterValue = 0;
             }
         }
 
@@ -583,11 +592,21 @@ namespace WPFMultired.Classes
                     }
                 }
 
-                if (isBX == 0 || isBX == 2)
+                switch (isBX)
                 {
-                    callbackLog?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"));
-                    typeDispend--;
+                    case 0:
+                        callbackLog?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"), false);
+                        typeDispend--;
+                        break;
+                    case 1:
+                        callbackLog?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"), false);
+                        break;
+                    case 2:
+                        callbackLog?.Invoke(string.Concat(data.Replace("\r", string.Empty), "!"), true);
+                        typeDispend--;
+                        break;
                 }
+
 
                 if (!stateError)
                 {

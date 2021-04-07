@@ -140,7 +140,6 @@ namespace WPFMultired.Classes
                     await DownloadInformation();
                     DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
                     ValidatePeripherals();
-                    //callbackResult?.Invoke(true);
                 }
                 else
                 {
@@ -435,7 +434,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "AdminPayPlus", ex, MessageResource.StandarError);
             }
         }
 
@@ -564,13 +563,26 @@ namespace WPFMultired.Classes
 
 
                             };
+                            int transactionProduct = 38;
+                            switch (transaction.eTypeService)
+                            {
+                                case ETypeServiceSelect.Deposito:
+                                    transactionProduct = 37;
+                                    break;
+                                case ETypeServiceSelect.TarjetaCredito:
+                                    transactionProduct = 36;
+                                    break;
+                                case ETypeServiceSelect.EstadoCuenta:
+                                    transactionProduct = 32;
+                                    break;
+                            }
 
                             data.TRANSACTION_DESCRIPTION.Add(new TRANSACTION_DESCRIPTION
                             {
                                 AMOUNT = transaction.Amount,
                                 TRANSACTION_ID = data.ID,
-                                TRANSACTION_PRODUCT_ID = 1,
-                                DESCRIPTION = string.Concat("Matricula: ", transaction.reference ?? string.Empty),
+                                TRANSACTION_PRODUCT_ID = transactionProduct,
+                                DESCRIPTION = transaction.reference ?? string.Empty,
                                 EXTRA_DATA = string.Concat("Numero de recuperacion: ", transaction.reference),
                                 TRANSACTION_DESCRIPTION_ID = 0,
                                 STATE = true
@@ -593,7 +605,7 @@ namespace WPFMultired.Classes
                                     SaveLog(new RequestLog
                                     {
                                         Reference = transaction.reference,
-                                        Description = string.Concat(MessageResource.NoInsertTransaction, " en su primer intente ")
+                                        Description = string.Concat(MessageResource.NoInsertTransaction, " en su primer intento ")
                                     }, ELogType.General);
 
                                     responseTransaction = await api.CallApi("SaveTransaction", data);
@@ -611,7 +623,7 @@ namespace WPFMultired.Classes
                                         SaveLog(new RequestLog
                                         {
                                             Reference = transaction.reference,
-                                            Description = string.Concat(MessageResource.NoInsertTransaction, " en su segundo intente ")
+                                            Description = string.Concat(MessageResource.NoInsertTransaction, " en su segundo intento ")
                                         }, ELogType.General);
                                     }
                                 }
@@ -631,7 +643,7 @@ namespace WPFMultired.Classes
             }
             catch (Exception ex)
             {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "InitPaypad", ex, MessageResource.StandarError);
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "AdminPayPlus", ex, MessageResource.StandarError);
             }
         }
 

@@ -233,7 +233,7 @@ namespace WPFMultired.ViewModel
             }
         }
 
-        public void SplitDenomination(string data)
+        public void SplitDenomination(string data, bool isBX)
         {
             try
             {
@@ -247,26 +247,43 @@ namespace WPFMultired.ViewModel
 
                     if (quantity > 0)
                     {
-                        DenominationMoney denominationMoney = this.Denominations.Where(d => d.Denominacion == denomination && d.Code==code).FirstOrDefault();
-                        if (denominationMoney == null)
+                        DenominationMoney denominationMoney = Denominations.Where(d => d.Denominacion == denomination && d.Code == code).FirstOrDefault();
+                        if (!isBX)
                         {
-                            this.Denominations.Add(new DenominationMoney
+                            if (denominationMoney == null)
                             {
-                                Denominacion = denomination,
-                                Quantity = quantity,
-                                Total = denomination * quantity,
-                                Code = code
-                            });
+                                Denominations.Add(new DenominationMoney
+                                {
+                                    Denominacion = denomination,
+                                    Quantity = quantity,
+                                    Total = denomination * quantity,
+                                    Code = code
+                                });
+                            }
                         }
                         else
                         {
-                            if (quantity > denominationMoney.Quantity && denominationMoney.Code == "DP")
+                            if (denominationMoney != null)
                             {
-                                this.Denominations.Add(new DenominationMoney
+                                if (quantity > denominationMoney.Quantity && denominationMoney.Code == "DP")
+                                {
+                                    Denominations.Add(new DenominationMoney
+                                    {
+                                        Denominacion = denomination,
+                                        Quantity = quantity - denominationMoney.Quantity,
+                                        Total = denomination * (quantity - denominationMoney.Quantity),
+                                        Code = code,
+                                        Rx = 1
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                Denominations.Add(new DenominationMoney
                                 {
                                     Denominacion = denomination,
-                                    Quantity = quantity - denominationMoney.Quantity,
-                                    Total = denomination * (quantity - denominationMoney.Quantity),
+                                    Quantity = quantity,
+                                    Total = denomination * quantity,
                                     Code = code,
                                     Rx = 1
                                 });

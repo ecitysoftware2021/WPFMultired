@@ -141,9 +141,9 @@ namespace WPFMultired.UserControls
                         }
                     };
 
-                    AdminPayPlus.ControlPeripherals.callbackLog = log =>
+                    AdminPayPlus.ControlPeripherals.callbackLog = (log, isBX) =>
                     {
-                        viewModel.SplitDenomination(log);
+                        viewModel.SplitDenomination(log, isBX);
                         AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                     };
 

@@ -145,7 +145,7 @@ namespace WPFMultired.UserControls
 
                             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-                            AdminPayPlus.ControlPeripherals.StopAceptance();
+                            //AdminPayPlus.ControlPeripherals.StopAceptance();
 
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
@@ -259,9 +259,9 @@ namespace WPFMultired.UserControls
                     }
                 };
 
-                AdminPayPlus.ControlPeripherals.callbackLog = log =>
+                AdminPayPlus.ControlPeripherals.callbackLog = (log, isBK) =>
                 {
-                    paymentViewModel.SplitDenomination(log);
+                    paymentViewModel.SplitDenomination(log, isBK);
                     AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                 };
 
