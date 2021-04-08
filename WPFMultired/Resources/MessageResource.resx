@@ -148,7 +148,7 @@
     <value>Señor usuario estamos Finalizando la transacción. Espere un momento.</value>
   </data>
   <data name="IncompleteMony" xml:space="preserve">
-    <value>No se puede devolver el valor restante, se abonará el excedente al producto.</value>
+    <value>¡Gracias por usar nuestros servicios! Tus vueltos serán abonados al mismo producto.</value>
   </data>
   <data name="InformationError" xml:space="preserve">
     <value>El error se presentó al inicio del cajero</value>
@@ -244,7 +244,7 @@
     <value>Transacción cancelada</value>
   </data>
   <data name="ErrorNoPaper" xml:space="preserve">
-    <value>El dispositivo no puede imprimir el comprobante en este momento, desea continuar</value>
+    <value>No hay papel en la impresora. ¿Deseas continuar?</value>
   </data>
   <data name="EnterId" xml:space="preserve">
     <value>Ingrese el NIT de la empresa</value>
@@ -295,7 +295,7 @@
     <value>Comprobando estado del PayPlus...</value>
   </data>
   <data name="StatePayPlusFail" xml:space="preserve">
-    <value>¡No se puede habilitar el dispositivo: razón {0}!</value>
+    <value>El cajero se encuentra temporalmente fuera de servicio, por favor inténtalo más tarde. {0}</value>
   </data>
   <data name="ValidatePeripherals" xml:space="preserve">
     <value>Validando periférico ...</value>

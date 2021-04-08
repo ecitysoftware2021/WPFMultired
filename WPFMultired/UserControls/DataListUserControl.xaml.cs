@@ -349,16 +349,16 @@ namespace WPFMultired.UserControls
                     switch (transaction.eTypeService)
                     {
                         case ETypeServiceSelect.Deposito:
-                            msgAlert = "Los datos ingresados del número de cuenta no coinciden y/o el estado del producto no permite realizar operación. Valida la información e inténtalo más tarde.";
+                            msgAlert = "Los datos ingresados no son válidos o el estado del producto no permite realizar la transacción.  Valida e intenta nuevamente.";
                             break;
                         case ETypeServiceSelect.TarjetaCredito:
-                            msgAlert = "Los datos ingresados del número de tarjeta de crédito no coinciden. Valida la información e inténtalo más tarde.";
+                            msgAlert = "Los datos ingresados no son válidos o el estado del producto no permite realizar la transacción.  Valida e intenta nuevamente.";
                             break;
                         case ETypeServiceSelect.EstadoCuenta:
-                            msgAlert = "Los datos ingresados del número de estado de cuenta no coinciden y/o el estado del producto no permite realizar operación. Valida la información e inténtalo más tarde.";
+                            msgAlert = "Los datos ingresados no son válidos o el estado del producto no permite realizar la transacción.  Valida e intenta nuevamente.";
                             break;
                         default:
-                            msgAlert = "Los datos ingresados del producto no coinciden. Valida la información e inténtalo más tarde.";
+                            msgAlert = "Los datos ingresados no son válidos o el estado del producto no permite realizar la transacción.  Valida e intenta nuevamente.";
                             break;
                     }
 
@@ -386,7 +386,7 @@ namespace WPFMultired.UserControls
                 }
                 else if (!string.IsNullOrEmpty(txtCountNumber.Text) && transaction.Product == null)
                 {
-                    Utilities.ShowModal("Busca tu producto con el icono de la lupa.", EModalType.Error, this);
+                    Utilities.ShowModal("Recuerda buscar tu producto con el icono de la Lupa.", EModalType.Error, this);
                 }
                 else if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
                 {
@@ -397,22 +397,22 @@ namespace WPFMultired.UserControls
                     {
                         if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito && transaction.Amount < transaction.Product.Amount)
                         {
-                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu tarjeta de crédito  puede quedar en mora.", EModalType.Error, this);
+                            Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
                         }
 
                         if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta && transaction.Amount < transaction.Product.Amount)
                         {
-                            Utilities.ShowModal("Te recordamos que, al no cancelar el valor completo sugerido, tu crédito puede quedar en mora.", EModalType.Error, this);
+                            Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
                         }
 
                         if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
                         {
-                            Utilities.ShowModal("La tarjeta de crédito que vas a cancelar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
+                            Utilities.ShowModal("La tarjeta de crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
                         }
 
                         if (transaction.Product.AccountStateProduct != null && transaction.Product.AccountStateProduct.FLGHON)
                         {
-                            Utilities.ShowModal("El crédito que vas a cancelar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo recálculo, el cual se verá reflejado en el recibo de la transacción..", EModalType.Error, this);
+                            Utilities.ShowModal("El crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
                         }
                     }
 
@@ -434,10 +434,13 @@ namespace WPFMultired.UserControls
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgAccountState"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
 
                 }
+                else if(transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
+                {
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgTarjeta"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+                }
                 else
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgGeneric"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
-
                 }
 
                 Utilities.ShowModal(questionMsg, EModalType.Error, this);

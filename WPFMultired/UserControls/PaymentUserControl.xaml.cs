@@ -156,7 +156,7 @@ namespace WPFMultired.UserControls
                                     var decimas = paymentViewModel.ValorSobrante % 100;
                                     if (decimas > 0)
                                     {
-                                        Utilities.ShowModal($"Solo se puede devolver {string.Format("{0:C0}", paymentViewModel.ValorSobrante - decimas)}, se abonará el excedente {string.Format("{0:C0}", decimas)} al mismo producto.", EModalType.Error, this);
+                                        Utilities.ShowModal($"¡Gracias por usar nuestros servicios! Solo te podemos devolver {string.Format("{0:C0}", paymentViewModel.ValorSobrante - decimas)}, se abonará {string.Format("{0:C0}", decimas)} al mismo producto, no es posible entregar valores menores de $100.", EModalType.Error, this);
                                     }
 
                                     if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta
@@ -173,8 +173,11 @@ namespace WPFMultired.UserControls
                                     }
                                     else
                                     {
-                                        string ms = string.Concat("Su transacción tiene una devolución por valor de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US")));
-                                        string tittle = "Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
+                                        //string ms = string.Concat("Su transacción tiene una devolución por valor de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US")));
+                                        string ms = string.Concat("Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorros a la que estas consignando.",Environment.NewLine,
+                                            "Si tu vuelto es inferior a $100 se abonará automáticamente a la cuenta que estás consignando.");
+                                        //string tittle = "licita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
+                                        string tittle = "";
 
                                         if (!Utilities.ShowModal(ms, EModalType.ReturnMoney, this, false, tittle))
                                         {
