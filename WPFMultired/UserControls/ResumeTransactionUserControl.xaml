@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.RowSpan="6">
             <Image 
-                Source="/Images/Backgrounds/NewInfo.png"
+                Source="/Images/Backgrounds/NewInfo2.png"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 Margin="0,0,0,380"                  
@@ -30,47 +30,108 @@
             />
         </Grid>
         <Grid Grid.Row="1">
-            <!--<TextBlock 
-                Name="tb_name_company"
+            <TextBlock Text="Fecha y hora:"
+                       FontSize="18"
+                       Foreground="#FF606060"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="280,0,0,150"
+                       FontWeight="Bold"/>
+            <TextBlock 
+                Name="tb_date"
                 FontSize="18"
                 TextAlignment="Left"
-                Margin="0,250,290,0"
+                Margin="0,0,290,150"
                 FontFamily="Arial"
+                FontWeight="Bold"
                 Foreground="#FF606060"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right" />-->
-            
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right" />
+
+            <TextBlock Text="Nombre del Titular:"
+                       FontSize="18"
+                       Foreground="#FF606060"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="280,0,0,125"
+                       FontWeight="Bold"/>
             <TextBlock 
                 Name="tb_name_client"
                 FontSize="18"
                 TextAlignment="Left"
-                Margin="0,245,290,0"
+                Margin="0,0,290,125"
+                FontWeight="Bold"
                 FontFamily="Arial"
                 Foreground="#FF606060"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 HorizontalAlignment="Right" />
 
+            <TextBlock Text="Valor ingresado:"
+                       FontSize="18"
+                       Foreground="#FF606060"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="280,0,0,100"
+                       FontWeight="Bold"/>
             <TextBlock 
                 Name="tb_amount_pay"
                 FontSize="18"
                 TextAlignment="Left"
-                Margin="0,380,290,0"
+                Margin="0,330,290,0"
                 FontFamily="Arial"
                 Foreground="#FF606060"
                 FontWeight="Bold"
                 VerticalAlignment="Center"
+                HorizontalAlignment="Right" />
+            
+            <TextBlock Text="Valor de la transacción:"
+                       FontSize="18"
+                       Foreground="#FF606060"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="280,0,0,75"
+                       FontWeight="Bold"/>
+            <TextBlock 
+                Name="tb_amount_tip"
+                FontSize="18"
+                TextAlignment="Left"
+                Margin="0,0,290,75"
+                FontWeight="Bold"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                VerticalAlignment="Bottom"
                 HorizontalAlignment="Right" />
 
             <TextBlock 
                 Name="tb_extra_amount_pay"
                 FontSize="30"
                 TextAlignment="Left"
+                Text="$496888"
                 Margin="0,420,200,0"
                 FontFamily="Arial"
                 Foreground="#FF606060"
                 Visibility="Hidden"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right" />
+
+            <TextBlock Text="Referencia de la transacción:"
+                       FontSize="18"
+                       Foreground="#FF606060"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="280,0,0,50"
+                       FontWeight="Bold"/>
+            <TextBlock 
+                Name="tb_reference"
+                FontSize="18"
+                TextAlignment="Left"
+                Margin="0,0,290,50"
+                FontFamily="Arial"
+                Foreground="#FF606060"
+                FontWeight="Bold"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right" />
+            
         </Grid>
 
         <Grid Grid.Row="2">
@@ -171,27 +232,9 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right" />
 
-            <TextBlock 
-                Name="tb_amount_tip"
-                FontSize="18"
-                TextAlignment="Left"
-                Margin="0,-280,290,0"
-                FontFamily="Arial"
-                Foreground="#FF606060"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right" />
+            
 
-            <TextBlock 
-                Name="tb_reference"
-                FontSize="60"
-                TextAlignment="Left"
-                Margin="0,0,290,0"
-                FontFamily="Arial"
-                Foreground="#FF606060"
-                FontWeight="Bold"
-                Visibility="Hidden"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right" />
+         
 
             <TextBlock 
                 Name="tb_id_transaction"
@@ -201,17 +244,10 @@
                 FontFamily="Arial"
                 Foreground="#FF606060"
                 VerticalAlignment="Center"
+                Visibility="Hidden"
                 HorizontalAlignment="Right" />
 
-            <TextBlock 
-                Name="tb_date"
-                FontSize="18"
-                TextAlignment="Left"
-                Margin="0,0,290,290"
-                FontFamily="Arial"
-                Foreground="#FF606060"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right" />
+            
             <Image 
                 Source="/Images/Buttons/newaceptar2.png"
                 x:Name="btn_acept"

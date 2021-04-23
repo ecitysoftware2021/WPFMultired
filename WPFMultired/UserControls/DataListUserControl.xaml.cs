@@ -432,7 +432,6 @@ namespace WPFMultired.UserControls
                 if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta)
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgAccountState"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
-
                 }
                 else if(transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                 {

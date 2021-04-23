@@ -137,12 +137,12 @@ namespace WPFMultired.Classes.Printer
             try
             {
                 //TODO: si no funciona la impresora, quitar esto
-                if (m_iInit != 0)
-                {
-                    return 1;
-                }
+                //if (m_iInit != 0)
+                //{
+                //    return 1;
+                //}
 
-                m_iStatus = GetStatus();
+                //m_iStatus = GetStatus();
                 return 0;
             }
             catch (Exception ex)

@@ -38,7 +38,8 @@ namespace WPFMultired.UserControls
                 tb_amount_return.Text = string.Format("{0:C0}", transaction.Payment.ValorDispensado);
                 tb_id_transaction.Text = transaction.consecutive.ToString();
                 tb_date.Text = DateTime.Now.ToString();
-                tb_amount_tip.Text = string.Format("{0:C0}", transaction.AmountComission);
+                tb_amount_tip.Text = string.Format("{0:C0}", (transaction.Payment.ValorIngresado - transaction.Payment.ValorDispensado));
+                //tb_amount_tip.Text = string.Format("{0:C0}", transaction.AmountComission);
                 tb_reference.Text = transaction.reference;
                 tb_total.Text = string.Format("{0:C0}", transaction.Payment.ValorIngresado);
                 ConfigurateList();
@@ -56,7 +57,7 @@ namespace WPFMultired.UserControls
                 transaction.Payment.viewList.Source = transaction.Payment.Denominations.Where(d => d.Code == "MA" || d.Code == "AP").ToList();
                 lv_denominations.DataContext = transaction.Payment.viewList;
                 lv_denominations.Items.Refresh();
-                
+
                 InitTimer();
             }
             catch (Exception ex)
