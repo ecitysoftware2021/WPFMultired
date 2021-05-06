@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Reflection;
 using System.Threading;
 using WPFMultired.Classes.UseFull;
 using WPFMultired.Services.Object;
@@ -74,6 +75,7 @@ namespace WPFMultired.Classes
         private decimal enterValue;//Valor ingresado
 
         private decimal deliveryValue;//Valor entregado
+        private bool stopped;//Valor entregado
 
         private decimal dispenserValue;//Valor a dispensar
 
@@ -178,7 +180,7 @@ namespace WPFMultired.Classes
                     AdminPayPlus.SaveLog(new RequestLog
                     {
                         Reference = "",
-                        Description = "Mensaje al billetero " + message,
+                        Description = $"Mensaje al billetero " + message,
                         State = 1,
                         Date = DateTime.Now
                     }, ELogType.General);
@@ -369,6 +371,7 @@ namespace WPFMultired.Classes
             deliveryValue = 0;
             enterValue = 0;
             deliveryVal = 0;
+            stopped = true;
 
             this.callbackTotalIn = null;
             this.callbackTotalOut = null;
@@ -566,7 +569,12 @@ namespace WPFMultired.Classes
         /// </summary>
         public void StopAceptance()
         {
-            SendMessageBills(_AceptanceBillOFF);
+            if (stopped)
+            {
+                stopped = false;
+
+                SendMessageBills(_AceptanceBillOFF);
+            }
         }
         #endregion
 
@@ -614,8 +622,7 @@ namespace WPFMultired.Classes
                     {
                         if (typeDispend == 0)
                         {
-                            timer.CallBackClose = null;
-                            timer.CallBackStop?.Invoke(1);
+                            SetCallbackNull();
                             callbackTotalOut?.Invoke(deliveryVal);
                         }
                     }
@@ -624,8 +631,7 @@ namespace WPFMultired.Classes
                 {
                     if (typeDispend == 0)
                     {
-                        timer.CallBackClose = null;
-                        timer.CallBackStop?.Invoke(1);
+                        SetCallbackNull();
                         callbackOut?.Invoke(deliveryVal);
                     }
                 }
@@ -648,7 +654,7 @@ namespace WPFMultired.Classes
                 {
                     try
                     {
-                        timer.CallBackClose = null;
+                        SetCallbackNull();
                         callbackOut?.Invoke(deliveryVal);
                     }
                     catch (Exception ex)
@@ -660,6 +666,24 @@ namespace WPFMultired.Classes
             catch (Exception ex)
             {
                 callbackError?.Invoke(Tuple.Create("DP", "Error (ActivateTimer), ha ocurrido una exepcion en ActivateTimer " + ex));
+            }
+        }
+
+        private void SetCallbackNull()
+        {
+            try
+            {
+                if (timer != null)
+                {
+                    timer.CallBackStop?.Invoke(1);
+                    timer.CallBackClose = null;
+                    timer.CallBackTimer = null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         #endregion

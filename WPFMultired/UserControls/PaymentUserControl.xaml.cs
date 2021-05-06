@@ -145,8 +145,6 @@ namespace WPFMultired.UserControls
 
                             this.paymentViewModel.ImgCancel = Visibility.Hidden;
 
-                            //AdminPayPlus.ControlPeripherals.StopAceptance();
-
                             if (enterTotal > 0 && paymentViewModel.ValorSobrante > 0)
                             {
                                 this.paymentViewModel.ImgCambio = Visibility.Visible;
