@@ -81,22 +81,6 @@ namespace WPFMultired.Classes
             }
         }
 
-
-        public static void Reset()
-        {
-            try
-            {
-                if (timer != null)
-                {
-                    timer.Stop();
-                    timer.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, "TimerService", ex, MessageResource.StandarError);
-            }
-        }
         private static void TimerTick(object sender, ElapsedEventArgs e)
         {
             try

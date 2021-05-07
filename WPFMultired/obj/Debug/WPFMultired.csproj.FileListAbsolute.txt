@@ -630,3 +630,4 @@ E:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CoreCompileInputs
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csproj.CopyComplete
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.exe
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
+E:\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll

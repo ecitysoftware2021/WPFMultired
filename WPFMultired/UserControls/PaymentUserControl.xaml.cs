@@ -42,8 +42,6 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                InitTimer();
-
                 this.paymentViewModel = new PaymentViewModel
                 {
                     PayValue = transaction.Amount,
@@ -75,38 +73,6 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void InitTimer()
-        {
-            try
-            {
-                TimerService.Close();
-                TimerService.CallBackTimerOut = response =>
-                {
-                    if (Utilities.ShowModal("Expiro el tiempo de la transaccion. ¿Desea ingresar dinero adicional?", EModalType.Information, this))
-                    {
-                        TimerService.Reset();
-                    }
-                    else
-                    {
-                        AdminPayPlus.ControlPeripherals.StopAceptance();
-
-                        AdminPayPlus.ControlPeripherals.callbackLog = null;
-
-                        this.paymentViewModel.ImgContinue = Visibility.Hidden;
-
-                        this.paymentViewModel.ImgCancel = Visibility.Hidden;
-
-                        SavePay();
-                    }
-                };
-
-                TimerService.Start(int.Parse(Utilities.GetConfiguration("DurationAlert")));
-            }
-            catch (Exception ex)
-            {
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
-        }
 
         private void ActivateWallet()
         {
@@ -116,7 +82,6 @@ namespace WPFMultired.UserControls
                 {
                     AdminPayPlus.ControlPeripherals.callbackValueIn = enterValue =>
                     {
-                        TimerService.Reset();
                         if (enterValue.Item1 > 0)
                         {
                             if (!this.paymentViewModel.StatePay)
@@ -138,7 +103,7 @@ namespace WPFMultired.UserControls
 
                     AdminPayPlus.ControlPeripherals.callbackTotalIn = enterTotal =>
                     {
-                        TimerService.Stop();
+                        AdminPayPlus.ControlPeripherals.callbackTotalIn = null;
                         if (!this.paymentViewModel.StatePay)
                         {
                             this.paymentViewModel.ImgContinue = Visibility.Hidden;
@@ -172,7 +137,7 @@ namespace WPFMultired.UserControls
                                     else
                                     {
                                         //string ms = string.Concat("Su transacción tiene una devolución por valor de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US")));
-                                        string ms = string.Concat("Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorros a la que estas consignando.",Environment.NewLine,
+                                        string ms = string.Concat("Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorros a la que estas consignando.", Environment.NewLine,
                                             "Si tu vuelto es inferior a $100 se abonará automáticamente a la cuenta que estás consignando.");
                                         //string tittle = "licita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
                                         string tittle = "";
@@ -253,6 +218,8 @@ namespace WPFMultired.UserControls
             {
                 AdminPayPlus.ControlPeripherals.callbackTotalOut = totalOut =>
                 {
+                    AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
+                    AdminPayPlus.ControlPeripherals.callbackOut = null;
                     if (state)
                     {
                         paymentViewModel.ValorDispensado = totalOut;
@@ -269,7 +236,7 @@ namespace WPFMultired.UserControls
                 AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                 {
                     AdminPayPlus.ControlPeripherals.callbackOut = null;
-                    //AdminPayPlus.ControlPeripherals.callbackResutOut = null;
+                    AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
                     if (state)
                     {
                         paymentViewModel.ValorDispensado = valueOut;
@@ -316,51 +283,49 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Task.Run(() =>
+
+                if (!this.paymentViewModel.StatePay)
                 {
-                    if (!this.paymentViewModel.StatePay)
+                    this.paymentViewModel.StatePay = true;
+                    transaction.Payment = paymentViewModel;
+                    transaction.State = statePay;
+                    AdminPayPlus.ControlPeripherals.ClearValues();
+                    if (transaction.IdTransactionAPi > 0)
                     {
-                        this.paymentViewModel.StatePay = true;
-                        transaction.Payment = paymentViewModel;
-                        transaction.State = statePay;
-
-                        if (transaction.IdTransactionAPi > 0)
+                        Task.Run(() =>
                         {
-                            Task.Run(() =>
+                            this.transaction.Amount = paymentViewModel.ValorIngresado;
+                            var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
+
+                            Utilities.CloseModal();
+                            if (response != null)
                             {
-                                this.transaction.Amount = paymentViewModel.ValorIngresado;
-                                var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
-
-                                Utilities.CloseModal();
-                                if (response != null)
-                                {
-                                    transaction.State = ETransactionState.Success;
-                                }
-                                else
-                                {
-                                    transaction.State = ETransactionState.ErrorService;
-                                }
-                                Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
-                            });
-
-                            Utilities.ShowModal("Te recordamos que este dispositivo envía la información de tu transacción al correo electrónico registrado por el titular de la cuenta.", EModalType.Preload, this);
-                        }
-                        else
-                        {
-                            AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                            Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
-
-                            if (this.paymentViewModel.ValorIngresado > 0)
-                            {
-                                Utilities.navigator.Navigate(UserControlView.ReturnMony, false, this.transaction);
+                                transaction.State = ETransactionState.Success;
                             }
                             else
                             {
-                                Utilities.navigator.Navigate(UserControlView.Main);
+                                transaction.State = ETransactionState.ErrorService;
                             }
+                            Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
+                        });
+
+                        Utilities.ShowModal("Te recordamos que este dispositivo envía la información de tu transacción al correo electrónico registrado por el titular de la cuenta.", EModalType.Preload, this);
+                    }
+                    else
+                    {
+                        AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
+                        Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
+
+                        if (this.paymentViewModel.ValorIngresado > 0)
+                        {
+                            Utilities.navigator.Navigate(UserControlView.ReturnMony, false, this.transaction);
+                        }
+                        else
+                        {
+                            Utilities.navigator.Navigate(UserControlView.Main);
                         }
                     }
-                });
+                }
             }
             catch (Exception ex)
             {
@@ -372,7 +337,6 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                TimerService.Stop();
 
                 this.paymentViewModel.ImgContinue = Visibility.Hidden;
 
@@ -415,7 +379,6 @@ namespace WPFMultired.UserControls
 
         private void BtnConsign_StylusDown(object sender, System.Windows.Input.StylusDownEventArgs e)
         {
-            TimerService.Stop();
 
             this.paymentViewModel.ImgContinue = Visibility.Hidden;
 
@@ -432,8 +395,6 @@ namespace WPFMultired.UserControls
             }
             else
             {
-                TimerService.Reset();
-
                 this.paymentViewModel.ImgContinue = Visibility.Visible;
 
                 this.paymentViewModel.ImgCancel = Visibility.Hidden;
