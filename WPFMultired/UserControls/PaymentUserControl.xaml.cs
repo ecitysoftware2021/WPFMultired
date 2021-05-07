@@ -87,7 +87,12 @@ namespace WPFMultired.UserControls
                             if (!this.paymentViewModel.StatePay)
                             {
                                 paymentViewModel.ValorIngresado += enterValue.Item1;
-                                if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
+                                if (paymentViewModel.ValorIngresado >= paymentViewModel.PayValue)
+                                {
+                                    this.paymentViewModel.ImgContinue = Visibility.Hidden;
+                                    this.paymentViewModel.ImgCancel = Visibility.Hidden;
+                                }
+                                else if (paymentViewModel.ValorIngresado >= transaction.Product.AmountMin)
                                 {
                                     this.paymentViewModel.ImgContinue = Visibility.Visible;
                                     this.paymentViewModel.ImgCancel = Visibility.Hidden;
@@ -283,7 +288,6 @@ namespace WPFMultired.UserControls
         {
             try
             {
-
                 if (!this.paymentViewModel.StatePay)
                 {
                     this.paymentViewModel.StatePay = true;
