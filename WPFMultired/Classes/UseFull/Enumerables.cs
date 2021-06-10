@@ -65,7 +65,8 @@ namespace WPFMultired.Classes
         PrintFile,
         DataList,
         ResumeTransaction,
-        Detail
+        Detail,
+        Fingerprint
     }
 
     public enum ETransactionState
@@ -89,6 +90,7 @@ namespace WPFMultired.Classes
         Deposito = 00011,
         TarjetaCredito = 00014,
         EstadoCuenta = 00013,
+        Retiros = 0000,
     }
 
     public enum ETypeDevice

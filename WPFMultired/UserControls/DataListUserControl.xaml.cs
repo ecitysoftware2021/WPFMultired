@@ -86,6 +86,11 @@ namespace WPFMultired.UserControls
                             viewModel.Colum3 = "            Digita los últimos cuatro (4) números del crédito";
                             lblTipTitle.Text = "Valor a pagar (incluido comisión)";
                             break;
+                        case ETypeServiceSelect.Retiros:
+                            lv_retiros.Visibility = Visibility.Visible;
+                            grdSearch.Visibility = Visibility.Hidden;
+                            lblTipTitle.Text = "Valor a retirar";
+                            break;
                     }
 
                     if (transaction.TypeDocument != "0")
@@ -93,6 +98,7 @@ namespace WPFMultired.UserControls
                         lv_depositos.Visibility = Visibility.Hidden;
                         lv_tarjetaC.Visibility = Visibility.Hidden;
                         lv_estadoC.Visibility = Visibility.Hidden;
+                        lv_retiros.Visibility = Visibility.Hidden;
                     }
 
                     viewModel.ConfigurateDataList(transaction);
@@ -436,6 +442,10 @@ namespace WPFMultired.UserControls
                 else if(transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgTarjeta"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+                }
+                else if (transaction.eTypeService == ETypeServiceSelect.Retiros)
+                {
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgRetiro"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
                 }
                 else
                 {

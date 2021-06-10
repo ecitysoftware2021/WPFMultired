@@ -48,6 +48,10 @@ namespace WPFMultired.UserControls
                     lblTitle.Text = "Vas a pagar al estado de cuenta";
                     lblAmountTitle.Text = "Valor a pagar (incluido comisión)";
                     break;
+                case ETypeServiceSelect.Retiros:
+                    lblTitle.Text = "Vas a retirar dinero de la cuenta";
+                    lblAmountTitle.Text = "Valor a retirar";
+                    break;
             }
         }
 

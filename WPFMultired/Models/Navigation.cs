@@ -75,6 +75,9 @@ namespace WPFMultired.Models
                     case UserControlView.ResumeTransaction:
                         View = new ResumeTransactionUserControl((Transaction)data);
                         break;
+                    case UserControlView.Fingerprint:
+                        View = new LoginFingerprintUserControl((Transaction)data);
+                        break;
                 }
 
                 TimerService.Close();

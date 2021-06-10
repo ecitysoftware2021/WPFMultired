@@ -279,4 +279,24 @@ namespace WPFMultired.Services.Object
         public string DESTOT { get; set; }
         public string VLRTOT { get; set; }
     }
+
+    public class AuthenticationBiomety
+    {
+        public int IdBiometry { get; set; }
+        public int TypeReader { get; set; }
+        public string Identification { get; set; }
+        public long CodSession { get; set; }
+        public string Template { get; set; }
+        public int Validate { get; set; }
+    }
+
+    public class Authentication
+    {
+        public long CodUsuario { get; set; }
+        public string Identification { get; set; }
+        public string Password { get; set; }
+        public int Validate { get; set; }
+    }
+
+}
 }

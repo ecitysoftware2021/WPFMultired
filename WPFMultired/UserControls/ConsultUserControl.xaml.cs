@@ -29,12 +29,16 @@ namespace WPFMultired.UserControls
 
         private ReaderBarCode readerBarCode;
 
+        private bool retiros;
+
         public ConsultUserControl(string company, string typeTransaction)
         {
             InitializeComponent();
 
             try
             {
+                retiros = false;
+
                 grvPublicity.Content = Utilities.UCPublicityBanner;
 
                 if (transaction == null)
@@ -64,13 +68,22 @@ namespace WPFMultired.UserControls
         {
             try
             {
+                //TODO: poner en el config el código correspondiente a codRetiros (actualmente está en 00000)
                 string codDepositos = Utilities.GetConfiguration("CodDepositos");
                 string codEstadoCnt = Utilities.GetConfiguration("CodEstadoCuenta");
                 string codTarjetaCrd = Utilities.GetConfiguration("CodTarjetaCredito");
+                string codRetiros = Utilities.GetConfiguration("CodRetiros");
 
                 if (transaction.CodeTypeTransaction == codDepositos)
                 {
                     transaction.eTypeService = ETypeServiceSelect.Deposito;
+                }
+                else
+                if (transaction.CodeTypeTransaction == codRetiros)
+                {
+                    //TODO: Cambiar el enumerable de ETypeServiceSelect.Retiros y colocar el código correspondiente (actualmente está en 00000)
+                    transaction.eTypeService = ETypeServiceSelect.Retiros;
+                    retiros = true;
                 }
                 else
                 if (transaction.CodeTypeTransaction == codEstadoCnt)
@@ -193,7 +206,14 @@ namespace WPFMultired.UserControls
                         {
                             transaction = (Transaction)response.Data;
                             readerBarCode.Stop();
-                            Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
+                            if (!retiros)
+                            {
+                                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction); 
+                            }
+                            else
+                            {
+                                Utilities.navigator.Navigate(UserControlView.Fingerprint, true, transaction);
+                            }
                         }
                         else
                         {

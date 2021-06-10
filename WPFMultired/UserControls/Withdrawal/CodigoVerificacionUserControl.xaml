@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="WPFMultired.UserControls.Withdrawal.CodigoVerificacionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFMultired.UserControls.Withdrawal"
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
+             Height="1920" 
+             Width="1080" >
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="380" />
+            <RowDefinition Height="280"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock  
+                x:Name="txtHoraActual"
+                HorizontalAlignment="Right"
+                Margin="0,70,70,0" 
+                FontSize="30" 
+                Foreground="Gray"
+                VerticalAlignment="Top"
+                TextAlignment="Center" 
+            />
+            <Image 
+                x:Name="btn_exit"
+                Source="/Images/Buttons/NewSalir.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,50,0"
+                TouchDown="Btn_exit_TouchDown" 
+            />
+            <Image 
+                x:Name="btn_back"
+                Source="/Images/Buttons/NewAtras.png"
+                HorizontalAlignment="Right"
+                Height="80"
+                VerticalAlignment="Top"
+                Margin="0,120,300,0"
+                TouchDown="Btn_back_TouchDown"
+            />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Image 
+                    Source="/Images/Others/iconquestion.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Height="120"
+                    Stretch="Uniform"
+                    Opacity="0.4"
+                    Margin="0,120,0,0"
+                    TouchDown="btn_Accept_TouchDown"
+                />
+
+            <TextBlock 
+                Name="txt_title"
+                FontSize="33"
+                Width="800"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,300,0,0"
+                FontWeight="SemiBold"
+                Text="Para continuar con tu transacción, ingresa el código de verificación que hemos enviado a tu correo electrónico y al número de celular registrado.           O escanea en el lector de código de barras el QR enviado a tu correo electrónico."
+                Foreground="#FF5D5D5D"
+                TextWrapping="Wrap"
+                TextAlignment="Center" 
+             />
+
+            <TextBox  
+                x:Name="txtCodigo" 
+                
+                Height="50" 
+                Margin="0,200,0,0" 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="350"
+                TextAlignment="Right"
+                Foreground="Gray"
+                FontSize="30"
+                FontFamily="Arial" 
+                TouchDown="txtValor_TouchDown"
+                TextChanged="txtValor_TextChanged"
+            >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0.6"/>
+                </TextBox.Background>
+            </TextBox>
+        </Grid>
+    </Grid>
+</UserControl>
