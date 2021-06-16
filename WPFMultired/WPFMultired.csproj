@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WPFMultired</RootNamespace>
     <AssemblyName>WPFMultired</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -33,6 +33,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,11 +61,11 @@
     </Reference>
     <Reference Include="DPUruNet, Version=1.0.0.1, Culture=neutral, PublicKeyToken=7f32ef930fec5e5f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\WPFCootreguaRegistro\WPFCootreguaRegistro\bin\Debug\DPUruNet.dll</HintPath>
+      <HintPath>bin\DLL\DPUruNet.dll</HintPath>
     </Reference>
     <Reference Include="Ecity.DigitalPersona.Reader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\WPFCootreguaRegistro\WPFCootreguaRegistro\bin\Debug\Ecity.DigitalPersona.Reader.dll</HintPath>
+      <HintPath>bin\DLL\Ecity.DigitalPersona.Reader.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
@@ -162,6 +163,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\MR_ControllCash\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MR_FingerprintValidator\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -278,7 +284,7 @@
     <Compile Include="UserControls\DetailUserControl.xaml.cs">
       <DependentUpon>DetailUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\LoginFingerprintUserControl.xaml.cs">
+    <Compile Include="UserControls\Withdrawal\LoginFingerprintUserControl.xaml.cs">
       <DependentUpon>LoginFingerprintUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MenuUserControl.xaml.cs">
@@ -399,6 +405,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ControllCash\WPFMultired.MR_ControllCash.mtrctlbllcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_FingerprintValidator\ValidarHuella.wsdl" />
+    <None Include="Connected Services\MR_FingerprintValidator\WPFMultired.MR_FingerprintValidator.mtrhuellacResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_FingerprintValidator\WPFMultired.MR_FingerprintValidator.mtrhuellacResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_Institutions\consultarInstituciones.wsdl" />
@@ -554,7 +567,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\LoginFingerprintUserControl.xaml">
+    <Page Include="UserControls\Withdrawal\LoginFingerprintUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -615,6 +628,7 @@
     <WCFMetadataStorage Include="Connected Services\MR_CodeQR\" />
     <WCFMetadataStorage Include="Connected Services\MR_ConsultInvoice\" />
     <WCFMetadataStorage Include="Connected Services\MR_ControllCash\" />
+    <WCFMetadataStorage Include="Connected Services\MR_FingerprintValidator\" />
     <WCFMetadataStorage Include="Connected Services\MR_Institutions\" />
     <WCFMetadataStorage Include="Connected Services\MR_Language\" />
     <WCFMetadataStorage Include="Connected Services\MR_ListProducts\" />
@@ -1021,9 +1035,23 @@
   <ItemGroup>
     <Resource Include="Images\Backgrounds\NewInfo2.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Images\Gif\huella.gif" />
+    <None Include="Connected Services\MR_FingerprintValidator\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_FingerprintValidator\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_FingerprintValidator\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\readFinger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Others\fingerFail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

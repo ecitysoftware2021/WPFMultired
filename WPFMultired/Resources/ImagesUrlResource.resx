@@ -141,6 +141,12 @@
   <data name="BtnWithdraw" xml:space="preserve">
     <value>/images/Buttons/btn-withdraw.png</value>
   </data>
+  <data name="Finger" xml:space="preserve">
+    <value>/Images/Others/readFinger.png</value>
+  </data>
+  <data name="fingerFail" xml:space="preserve">
+    <value>/Images/Others/fingerFail.png</value>
+  </data>
   <data name="ImageCheckId" xml:space="preserve">
     <value>/Images/Others/rbtn-id.png</value>
   </data>

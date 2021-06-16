@@ -24,5 +24,20 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void Btn_back_TouchDown(object sender, TouchEventArgs e)
+        {
+
+        }
     }
 }

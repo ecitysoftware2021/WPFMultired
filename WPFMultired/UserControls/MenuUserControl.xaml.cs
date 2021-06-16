@@ -22,7 +22,8 @@ namespace WPFMultired.UserControls
     public partial class MenuUserControl : UserControl
     {
         private DataListViewModel viewModel;
-
+        DispatcherTimer timerRestart = new DispatcherTimer();
+        int restartCounter = 0;
         public MenuUserControl()
         {
             InitializeComponent();
@@ -143,8 +144,7 @@ namespace WPFMultired.UserControls
             TimeToRestart();
         }
 
-        DispatcherTimer timerRestart = new DispatcherTimer();
-        int restartCounter = 0;
+       
         private void TimeToRestart()
         {
             try

@@ -57,7 +57,6 @@
                     Stretch="Uniform"
                     Opacity="0.4"
                     Margin="0,120,0,0"
-                    TouchDown="btn_Accept_TouchDown"
                 />
 
             <TextBlock 
@@ -86,8 +85,6 @@
                 Foreground="Gray"
                 FontSize="30"
                 FontFamily="Arial" 
-                TouchDown="txtValor_TouchDown"
-                TextChanged="txtValor_TextChanged"
             >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">

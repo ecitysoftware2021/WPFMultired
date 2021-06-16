@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://validarhuella.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ValidarHuella" targetNamespace="http://validarhuella.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://validarhuella.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrhuellac" type="tns:mtrhuellac" />
+      <xs:element name="mtrhuellacResponse" type="tns:mtrhuellacResponse" />
+      <xs:complexType name="mtrhuellac">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrhuellacInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrhuellacInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_TIPODOCUMENTO" type="xs:string" />
+          <xs:element name="I_DOCUMENTO" type="xs:string" />
+          <xs:element name="I_TIPOTRANSACCION" type="xs:string" />
+          <xs:element name="I_ACCION" type="xs:string" />
+          <xs:element name="I_HUELLA" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrhuellacResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrhuellacResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrhuellacResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_ENROLLED" type="xs:string" />
+          <xs:element name="O_HAND" type="xs:string" />
+          <xs:element name="O_FINGER" type="xs:string" />
+          <xs:element name="O_ISVALID" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrhuellacResponse">
+    <part name="parameters" element="tns:mtrhuellacResponse" />
+  </message>
+  <message name="mtrhuellac">
+    <part name="parameters" element="tns:mtrhuellac" />
+  </message>
+  <portType name="ValidarHuellaServices">
+    <operation name="mtrhuellac">
+      <input wsam:Action="http://validarhuella.wsbeans.iseries/ValidarHuellaServices/mtrhuellacRequest" message="tns:mtrhuellac" />
+      <output wsam:Action="http://validarhuella.wsbeans.iseries/ValidarHuellaServices/mtrhuellacResponse" message="tns:mtrhuellacResponse" />
+    </operation>
+  </portType>
+  <binding name="ValidarHuellaServicesPortBinding" type="tns:ValidarHuellaServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrhuellac">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ValidarHuella">
+    <port name="ValidarHuellaServicesPort" binding="tns:ValidarHuellaServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/ValidarHuellaService/ValidarHuella" />
+    </port>
+  </service>
+</definitions>

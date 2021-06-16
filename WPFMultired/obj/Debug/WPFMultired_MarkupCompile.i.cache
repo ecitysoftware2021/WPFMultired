@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Santiago.jojoboa\source\repos\WPFMultired\WPFMultired\obj\Debug\
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\
 WPFMultired
 none
 false
 DEBUG;TRACE
-C:\Users\Santiago.jojoboa\source\repos\WPFMultired\WPFMultired\App.xaml
-18-1009104906
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\App.xaml
+18-235551240
 
-911772703562
-37675305989
-UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\DataListUserControl.xaml;UserControls\DetailUserControl.xaml;UserControls\LoginFingerprintUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\PublicityUserControl.xaml;UserControls\ResumeTransactionUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;UserControls\Withdrawal\CodigoVerificacionUserControl.xaml;Windows\Alerts\ModalDetailWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
+92291764743
+37-1692665481
+UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\DataListUserControl.xaml;UserControls\DetailUserControl.xaml;UserControls\Withdrawal\LoginFingerprintUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\PublicityUserControl.xaml;UserControls\ResumeTransactionUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;UserControls\Withdrawal\CodigoVerificacionUserControl.xaml;Windows\Alerts\ModalDetailWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
 
 True
 

@@ -80,6 +80,14 @@ namespace WPFMultired.Classes
                 {
                     model.ImageModal = ImagesUrlResource.AlertInfo;
                 }
+                //else if (type == EModalType.FingerReintent)
+                //{
+                //    model.ImageModal = ImagesUrlResource.fingerReintent;
+                //}
+                //else if (type == EModalType.FingerFail)
+                //{
+                //    model.ImageModal = ImagesUrlResource.fingerFail;
+                //}
 
                 TimerService.Close();
 

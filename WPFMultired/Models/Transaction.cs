@@ -25,6 +25,13 @@ namespace WPFMultired.Models
 
         public string Enrollment { get; set; }
 
+        public string enrolled { get; set; }
+        public string hand { get; set; }
+
+        public string finger { get; set; }
+
+        public string is_valid { get; set; }
+
         public ETypeServiceSelect eTypeService { get; set; }
 
         public bool IsCashBack { get; set; }
@@ -34,7 +41,7 @@ namespace WPFMultired.Models
         public string CodeOTP { get; set; }
 
         public string CodeTransactionAuditory { get; set; }
-
+        public string Action { get; set; }
         public string TypeDocument { get; set; }
 
         public DateTime DateTransaction { get; set; }
@@ -106,5 +113,7 @@ namespace WPFMultired.Models
                 OnPropertyRaised("IdTransactionAPi");
             }
         }
+
+        public string Finger_Byte { get; set; }
     }
 }

@@ -192,50 +192,53 @@ namespace WPFMultired.UserControls
 
         private void Consult()
         {
-            try
+            Task.Run(async () =>
             {
-                Task.Run(async () =>
+                try
                 {
-                    try
+                    var response = new Services.Object.Response();
+                    if (transaction.eTypeService == ETypeServiceSelect.Retiros)
                     {
-                        var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
+                        this.transaction.Action = $"{(int)EFingerAction.Validate}";
+                        this.transaction.Finger_Byte = "null";
+                        response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
+                    }
+                    else
+                    {
+                        response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction);
+                    }
 
-                        Utilities.CloseModal();
+                    Utilities.CloseModal();
 
-                        if (response != null && response.Data != null)
+                    if (response != null && response.Data != null)
+                    {
+                        transaction = (Transaction)response.Data;
+                        readerBarCode.Stop();
+                        if (!retiros)
                         {
-                            transaction = (Transaction)response.Data;
-                            readerBarCode.Stop();
-                            if (!retiros)
-                            {
-                                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction); 
-                            }
-                            else
-                            {
-                                Utilities.navigator.Navigate(UserControlView.Fingerprint, true, transaction);
-                            }
+                            Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
                         }
                         else
                         {
-                            Utilities.ShowModal(response.Message, EModalType.Error, this);
-                            viewModel.Value1 = string.Empty;
+                            Utilities.navigator.Navigate(UserControlView.Fingerprint, true, transaction);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Utilities.CloseModal();
-                        Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                        Utilities.ShowModal(response.Message, EModalType.Error, this);
+                        viewModel.Value1 = string.Empty;
                     }
-                });
+                }
+                catch (Exception ex)
+                {
+                    Utilities.CloseModal();
+                    Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+                }
+            });
 
-                PassBoxIdentification.Password = string.Empty;
-                Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
-            }
-            catch (Exception ex)
-            {
-                Utilities.CloseModal();
-                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-            }
+            PassBoxIdentification.Password = string.Empty;
+            Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
+
         }
 
         private void Cmb_type_id_SelectionChanged(object sender, SelectionChangedEventArgs e)

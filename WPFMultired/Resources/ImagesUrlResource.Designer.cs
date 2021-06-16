@@ -133,6 +133,24 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Images/Others/readFinger.png.
+        /// </summary>
+        internal static string Finger {
+            get {
+                return ResourceManager.GetString("Finger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Images/Others/fingerFail.png.
+        /// </summary>
+        internal static string fingerFail {
+            get {
+                return ResourceManager.GetString("fingerFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Images/Others/rbtn-id.png.
         /// </summary>
         internal static string ImageCheckId {

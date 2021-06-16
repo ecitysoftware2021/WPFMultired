@@ -379,6 +379,19 @@ namespace WPFMultired.ViewModel
                                 VisibilityAPO = product.AccountStateProduct.FLGAPO ? "Visible" : "Hidden"
                             });
                             break;
+                        case ETypeServiceSelect.Retiros:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.AmountTotal,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                            });
+                            break;
                     }
                 }
             }

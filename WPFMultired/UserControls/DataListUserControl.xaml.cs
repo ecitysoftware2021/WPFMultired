@@ -87,7 +87,7 @@ namespace WPFMultired.UserControls
                             lblTipTitle.Text = "Valor a pagar (incluido comisión)";
                             break;
                         case ETypeServiceSelect.Retiros:
-                            lv_retiros.Visibility = Visibility.Visible;
+                            //lv_retiros.Visibility = Visibility.Visible;
                             grdSearch.Visibility = Visibility.Hidden;
                             lblTipTitle.Text = "Valor a retirar";
                             break;
@@ -98,7 +98,7 @@ namespace WPFMultired.UserControls
                         lv_depositos.Visibility = Visibility.Hidden;
                         lv_tarjetaC.Visibility = Visibility.Hidden;
                         lv_estadoC.Visibility = Visibility.Hidden;
-                        lv_retiros.Visibility = Visibility.Hidden;
+                        //lv_retiros.Visibility = Visibility.Hidden;
                     }
 
                     viewModel.ConfigurateDataList(transaction);

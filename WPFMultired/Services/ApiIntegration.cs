@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using WPFMultired.DataModel;
 using System.Globalization;
 using System.IO;
+using WPFMultired.MR_FingerprintValidator;
 
 namespace WPFMultired.Services
 {
@@ -182,7 +183,8 @@ namespace WPFMultired.Services
                     case ETypeService.Report_Invoice:
 
                         return ReportInvoice((Transaction)data);
-
+                    case ETypeService.Validate_Finger:
+                        return FingerValidator((Transaction)data);
                     default:
                         break;
                 }
@@ -196,7 +198,7 @@ namespace WPFMultired.Services
         }
 
         /// <summary>
-        /// #1 Método para buscar los idiomas disponibles para la aplicación
+        /// #0 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
         private Response GetIdioms(string codeEntity)
@@ -729,11 +731,74 @@ namespace WPFMultired.Services
                         var response = client.mtrprotrn(request);
 
                         AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-                       
+
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
                             transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOAUTORI, keyDesencript) ?? string.Empty, 2);
+                            return new Response { Data = transaction };
+                        }
+                        else
+                        {
+                            return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// #9 Método para validar huella
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
+        private Response FingerValidator(Transaction transaction)
+        {
+            try
+            {
+                ValidarHuellaServicesClient client = new ValidarHuellaServicesClient();
+
+                using (var factory = new WebChannelFactory<ValidarHuellaServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+
+                        mtrhuellacInput request = new mtrhuellacInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
+                            I_ACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Action), keyEncript),
+                            I_DOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
+                            I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
+                            I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
+                            I_HUELLA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Finger_Byte), keyEncript)
+                        };
+
+                        AdminPayPlus.SaveErrorControl($"Request FingerValidator: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
+
+                        var response = client.mtrhuellac(request);
+
+                        AdminPayPlus.SaveErrorControl($"Response FingerValidator: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            transaction.is_valid = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_ISVALID, keyDesencript) ?? string.Empty, 2);
+                            transaction.enrolled = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_ENROLLED, keyDesencript) ?? string.Empty, 2);
+                            transaction.finger = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_FINGER, keyDesencript) ?? string.Empty, 2);
+                            transaction.hand = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_HAND, keyDesencript) ?? string.Empty, 2);
                             return new Response { Data = transaction };
                         }
                         else
@@ -859,7 +924,7 @@ namespace WPFMultired.Services
                         var response = client.mtrvalarqc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response GetAdminStatus: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
-        
+
                         if (response != null
                             && !string.IsNullOrEmpty(response.O_CODIGOERROR)
                             && !string.IsNullOrEmpty(response.O_MOVIMIENTO)
@@ -875,6 +940,10 @@ namespace WPFMultired.Services
                                 O_STATUSDISPENSER = bool.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_STATUSDISPENSER, keyDesencript), 2))
                             };
                             return new Response { Data = init };
+                        }
+                        else
+                        {
+                            string error = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
                         }
                     }
                 }
@@ -1235,21 +1304,30 @@ namespace WPFMultired.Services
                                 }
                                 count++;
                             }
-
                             transaction.payer = new PAYER
                             {
                                 NAME = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBRE, keyDesencript), 2),
                                 IDENTIFICATION = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NUMERODOCUMENTO, keyDesencript), 2)
                             };
 
-                            transaction.Type = ETransactionType.Deposit;
-                            transaction.Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORGLOBAL, keyDesencript), 2), new CultureInfo("en-US"));
+                            switch (transaction.eTypeService)
+                            {
+                                case ETypeServiceSelect.Retiros:
+                                    transaction.Type = ETransactionType.Withdrawal;
+                                    break;
+                                default:
+                                    transaction.Type = ETransactionType.Deposit;
+                                    transaction.Amount = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORGLOBAL, keyDesencript), 2), new CultureInfo("en-US"));
+                                    break;
+                            }
+
                             transaction.Observation = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DESOPERACION, keyDesencript), 2);
 
                             return new Response { Data = transaction };
                         }
                         else
                         {
+                            string msg = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
                             return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
@@ -1343,7 +1421,7 @@ namespace WPFMultired.Services
                             transaction.reference = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_REFERENCIA, keyDesencript), 2);
                             transaction.nameentity = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_NOMBREENTIDAD, keyDesencript), 2);
                             transaction.AmountComission = decimal.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORCOMISION, keyDesencript), 2), new CultureInfo("en-US"));
-                            transaction.DatosAdicionales = JsonConvert.DeserializeObject<DATOSADICIONALES> (ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript), 2));
+                            transaction.DatosAdicionales = JsonConvert.DeserializeObject<DATOSADICIONALES>(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript), 2));
                             return new Response { Data = transaction };
                         }
                         else

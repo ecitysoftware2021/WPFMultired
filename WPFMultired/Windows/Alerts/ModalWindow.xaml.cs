@@ -64,7 +64,7 @@ namespace WPFMultired.Windows
                     GifLoadder.Visibility = Visibility.Hidden;
                     //InitTimer();
                 }
-                else if(this.modal.TypeModal == EModalType.MaxAmount)
+                else if (this.modal.TypeModal == EModalType.MaxAmount)
                 {
                     this.BtnFinish.Visibility = Visibility.Visible;
                     this.BtnEnterMony.Visibility = Visibility.Visible;
@@ -99,6 +99,17 @@ namespace WPFMultired.Windows
                     GifLoadder.Visibility = Visibility.Hidden;
                     LblMessage.FontSize = 30;
                 }
+                //else if (this.modal.TypeModal == EModalType.FingerFail || this.modal.TypeModal == EModalType.FingerReintent)
+                //{
+                //    this.BtnFinish.Visibility = Visibility.Hidden;
+                //    this.BtnEnterMony.Visibility = Visibility.Hidden;
+                //    this.BtnOk.Visibility = Visibility.Hidden;
+                //    this.BtnYes.Visibility = Visibility.Hidden;
+                //    this.BtnNo.Visibility = Visibility.Hidden;
+                //    this.LblMessageTouch.Visibility = Visibility.Visible;
+                //    GifLoadder.Visibility = Visibility.Hidden;
+                //    //InitTimer();
+                //}
 
                 GifLoadder.Visibility = Visibility.Hidden;
             }

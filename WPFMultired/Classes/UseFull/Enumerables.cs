@@ -12,11 +12,16 @@ namespace WPFMultired.Classes
         Error = 1,
         Device = 2
     }
-    
+
     public enum ETypeModal
     {
         Question = 0,
         Alert = 1,
+    }
+    public enum EFingerAction
+    {
+        Validate = 22,
+        Authenticate = 93,
     }
 
     public enum EModalType
@@ -28,7 +33,9 @@ namespace WPFMultired.Classes
         Information = 4,
         Preload = 5,
         NoPaper = 6,
-        ReturnMoney = 7
+        ReturnMoney = 7,
+        FingerFail = 8,
+        FingerReintent = 9
     }
 
     public enum EError
@@ -90,7 +97,7 @@ namespace WPFMultired.Classes
         Deposito = 00011,
         TarjetaCredito = 00014,
         EstadoCuenta = 00013,
-        Retiros = 0000,
+        Retiros = 00012,
     }
 
     public enum ETypeDevice
@@ -139,7 +146,8 @@ namespace WPFMultired.Classes
         Validate_Admin_QR = 15,
         Report_Cash = 16,
         Consult_Invoice = 17,
-        Report_Invoice = 18
+        Report_Invoice = 18,
+        Validate_Finger = 19
     }
 
     public enum ETypeDetailModel
