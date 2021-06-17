@@ -71,7 +71,7 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
+                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace WPFMultired.UserControls
         {
             if (transaction.Amount > transaction.Product.ExtraRetiro.VALORMAX)
             {
-                Utilities.navigator.Navigate(UserControlView.ControlMoney, false, transaction);
+                Utilities.navigator.Navigate(UserControlView.ControlMoney, true, transaction);
             }
             else
             {

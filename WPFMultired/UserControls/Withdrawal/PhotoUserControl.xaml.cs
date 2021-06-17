@@ -169,7 +169,12 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             try
             {
-                //TODO:convertir foto a base64
+                Byte[] bytes = File.ReadAllBytes(uriImagen);
+                String file = Convert.ToBase64String(bytes);
+                transaction.Image = file;
+                transaction.ImageName = transaction.reference + ".png";
+                transaction.ImageLength = file.Length;
+                Utilities.navigator.Navigate(UserControlView.TOTPValidator, false, transaction);
             }
             catch (Exception ex)
             {
@@ -195,7 +200,7 @@ namespace WPFMultired.UserControls.Withdrawal
             try
             {
                 StopCamera();
-                Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
+                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
             }
             catch (Exception ex)
             {

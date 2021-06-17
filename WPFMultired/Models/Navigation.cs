@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Ecity.DigitalPersona.ReaderUareU;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WPFMultired.Classes;
 using WPFMultired.Services.Object;
 using WPFMultired.UserControls;
@@ -101,6 +101,9 @@ namespace WPFMultired.Models
                             Application.Current.Dispatcher.Invoke((Action)delegate
                             {
                                 WPKeyboard.Keyboard.CloseKeyboard(View);
+                                EcityReader.CancelCaptureAndCloseReader(EcityReader.OnCaptured);
+                                EcityReader.callbackTemplate = null;
+                                EcityReader.callbackError = null;
                                 View = new MainUserControl();
                             });
                             GC.Collect();

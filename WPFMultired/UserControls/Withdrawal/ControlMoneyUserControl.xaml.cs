@@ -41,7 +41,7 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.Detail, false, transaction);
+                Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
             }
             catch (Exception ex)
             {
@@ -65,14 +65,14 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             transaction.Amount = transaction.Product.ExtraRetiro.VALORMAX;
             transaction.Product.AmountUser = transaction.Product.ExtraRetiro.VALORMAX;
-            Utilities.navigator.Navigate(UserControlView.TOTPValidator, false, transaction);
+            Utilities.navigator.Navigate(UserControlView.Photo, false, transaction);
         }
 
         private void BtnCancell_TouchDown(object sender, TouchEventArgs e)
         {
             try
             {
-                Utilities.navigator.Navigate(UserControlView.DataList, false, transaction);
+                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
             }
             catch (Exception ex)
             {

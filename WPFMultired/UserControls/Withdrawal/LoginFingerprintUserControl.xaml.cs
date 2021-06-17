@@ -66,11 +66,12 @@ namespace WPFMultired.UserControls
                             EcityReader.callbackError = null;
 
                             EcityReader.CancelCaptureAndCloseReader(EcityReader.OnCaptured);
-                            Task.Run(async () =>
+                            Task.Run(() =>
                             {
                                 bool stateFinger = ValidateUser(Template).Result;
                                 if (!stateFinger)
                                 {
+                                    Utilities.CloseModal();
                                     fingerIntents++;
                                     if (fingerIntents < 4)
                                     {
@@ -104,7 +105,7 @@ namespace WPFMultired.UserControls
 
                     Task.Run(async () =>
                     {
-                        Utilities.navigator.Navigate(UserControlView.Menu, true);
+                        Utilities.navigator.Navigate(UserControlView.Main);
                     });
                 }
             }
@@ -148,7 +149,7 @@ namespace WPFMultired.UserControls
                 this.transaction.Action = $"{(int)EFingerAction.Authenticate}";
                 this.transaction.Finger_Byte = template;
                 response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
-                Utilities.CloseModal();
+
 
                 if (response != null && response.Data != null)
                 {

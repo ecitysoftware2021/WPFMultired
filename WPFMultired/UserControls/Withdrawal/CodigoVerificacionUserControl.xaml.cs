@@ -31,7 +31,7 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             InitializeComponent();
 
-            this.transaction = transaction;
+            this.transaction = ts;
 
             grvPublicity.Content = Utilities.UCPublicityBanner;
 
@@ -40,7 +40,11 @@ namespace WPFMultired.UserControls.Withdrawal
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
+            Task.Run(() =>
+            {
+                GenerateTOTP();
+            });
+            Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Error, this);
         }
 
         private void GoTime()
@@ -72,12 +76,26 @@ namespace WPFMultired.UserControls.Withdrawal
 
         private void Btn_exit_TouchDown(object sender, TouchEventArgs e)
         {
-
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.Main);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
 
         private void Btn_back_TouchDown(object sender, TouchEventArgs e)
         {
-
+            try
+            {
+                Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
         }
 
         private void PassBoxIdentification_TouchDown(object sender, TouchEventArgs e)
@@ -106,7 +124,7 @@ namespace WPFMultired.UserControls.Withdrawal
         {
             try
             {
-                TbxIdentification.Visibility = System.Windows.Visibility.Visible;
+                PassBoxIdentification.Visibility = System.Windows.Visibility.Visible;
                 TbxIdentification.Visibility = System.Windows.Visibility.Hidden;
             }
             catch (Exception ex)
@@ -127,15 +145,16 @@ namespace WPFMultired.UserControls.Withdrawal
 
         private void btnNewTOTP_TouchDown(object sender, TouchEventArgs e)
         {
-            totpIntents--;
+
             if (totpIntents > 0)
             {
+                totpIntents--;
                 txt_IntentsTOTP.Text = string.Format(Utilities.GetConfiguration("MsgTOTP"), totpIntents);
                 Task.Run(() =>
                 {
                     GenerateTOTP();
                 });
-                Utilities.ShowModal("Estamos generando el código, espera un momento por favor.", EModalType.Error, this);
+                Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Error, this);
             }
             else
             {
@@ -154,7 +173,7 @@ namespace WPFMultired.UserControls.Withdrawal
                 if (response != null && response.Data != null)
                 {
                     transaction = (Transaction)response.Data;
-                    Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
+                    //TODO:codigo
                 }
                 else
                 {
@@ -180,11 +199,16 @@ namespace WPFMultired.UserControls.Withdrawal
                 {
                     transaction = (Transaction)response.Data;
                     //TODO: ir a formulario de entrega de dinero
-                    // Utilities.navigator.Navigate(UserControlView.ReturnMony, true, transaction);
+                    // Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
                 }
                 else
                 {
                     Utilities.ShowModal(response.Message, EModalType.Error, this);
+                    Dispatcher.BeginInvoke((Action)delegate
+                    {
+                        PassBoxIdentification.Password = string.Empty;
+                        TbxIdentification.Text = string.Empty;
+                    });
                 }
             }
             catch (Exception ex)
