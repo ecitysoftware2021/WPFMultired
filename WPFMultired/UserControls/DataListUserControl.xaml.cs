@@ -62,13 +62,21 @@ namespace WPFMultired.UserControls
                     {
                         Colum1 = transaction.payer.NAME,
                         Amount = transaction.Amount,
-                        //Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
-                        Colum2 = transaction.payer.IDENTIFICATION,
+                        Colum2 = string.Concat("(*******", transaction.payer.IDENTIFICATION.Substring(transaction.payer.IDENTIFICATION.Length - 4), ")"),
+                        //Colum2 = transaction.payer.IDENTIFICATION,
                         Tittle = transaction.Observation,
                         DataList = new List<ItemList>(),
                         ViewList = new CollectionViewSource(),
                     };
                     transaction.Product = null;
+                    if (transaction.TypeDocument != "0")
+                    {
+                        lv_depositos.Visibility = Visibility.Hidden;
+                        lv_tarjetaC.Visibility = Visibility.Hidden;
+                        lv_estadoC.Visibility = Visibility.Hidden;
+                    }
+
+                    viewModel.ConfigurateDataList(transaction);
                     switch (transaction.eTypeService)
                     {
                         case ETypeServiceSelect.Deposito:
@@ -87,24 +95,29 @@ namespace WPFMultired.UserControls
                             lblTipTitle.Text = "Valor a pagar (incluido comisión)";
                             break;
                         case ETypeServiceSelect.Retiros:
-                            //lv_retiros.Visibility = Visibility.Visible;
-                            grdSearch.Visibility = Visibility.Hidden;
+                            grSearch.Visibility = Visibility.Hidden;
                             lblTipTitle.Text = "Valor a retirar";
+                            RefreshView();
                             break;
                     }
 
-                    if (transaction.TypeDocument != "0")
-                    {
-                        lv_depositos.Visibility = Visibility.Hidden;
-                        lv_tarjetaC.Visibility = Visibility.Hidden;
-                        lv_estadoC.Visibility = Visibility.Hidden;
-                        //lv_retiros.Visibility = Visibility.Hidden;
-                    }
 
-                    viewModel.ConfigurateDataList(transaction);
                 }
 
                 this.DataContext = viewModel;
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+        private void RefreshView()
+        {
+            try
+            {
+                viewModel.ViewList.Source = viewModel.DataList;
+                lv_retiros.Visibility = Visibility.Visible;
+                lv_retiros.DataContext = viewModel.ViewList;
             }
             catch (Exception ex)
             {
@@ -221,22 +234,6 @@ namespace WPFMultired.UserControls
             return string.Empty;
         }
 
-        /* private void ShowModal()
-         {
-             try
-             {
-                 transaction.IsCashBack = false;
-                 if (!Utilities.ShowModalDetails(transaction, 
-                     (transaction.Type == ETransactionType.Deposit ? ETypeDetailModel.Payment : ETypeDetailModel.Withdrawal)))
-                 {
-                     //Utilities.ShowModal(MessageResource.NoContinueTransaction,EModalType.Error);
-                 }
-             }
-             catch (Exception ex)
-             {
-                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
-             }
-         }*/
 
         private bool Validar(decimal min, decimal max)
         {
@@ -260,19 +257,19 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                var product = (((Grid)sender).DataContext as ItemList);
+                var product = (((Image)sender).DataContext as ItemList);
 
-                if (((Grid)sender).Tag != null)
+                if (((Image)sender).Tag != null)
                 {
                     ProductSelect.Item3 = GetImage(false);
-
                     product.Item3 = GetImage(true);
 
                     ProductSelect = product;
 
+
                     txtValorComision.Text = String.Format("{0:C0}", product.Item4);
 
-                    transaction.Product = (Product)((Grid)sender).Tag;
+                    transaction.Product = (Product)((Image)sender).Tag;
 
                     txtValor.IsEnabled = true;
 
@@ -386,48 +383,66 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (transaction.Product == null && txtCountNumber.Text.Length < 4)
+                switch (transaction.eTypeService)
                 {
-                    Utilities.ShowModal("Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar.", EModalType.Error, this);
+                    case ETypeServiceSelect.Retiros:
+                        ValidateFields(true);
+                        break;
+                    default:
+                        ValidateFields(false);
+                        break;
                 }
-                else if (!string.IsNullOrEmpty(txtCountNumber.Text) && transaction.Product == null)
-                {
-                    Utilities.ShowModal("Recuerda buscar tu producto con el icono de la Lupa.", EModalType.Error, this);
-                }
-                else if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
-                {
-                    transaction.Amount = valueModel.Val;
-                    transaction.Product.AmountUser = valueModel.Val;
 
-                    if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
-                    {
-                        if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito && transaction.Amount < transaction.Product.Amount)
-                        {
-                            Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
-                        }
-
-                        if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta && transaction.Amount < transaction.Product.Amount)
-                        {
-                            Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
-                        }
-
-                        if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
-                        {
-                            Utilities.ShowModal("La tarjeta de crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
-                        }
-
-                        if (transaction.Product.AccountStateProduct != null && transaction.Product.AccountStateProduct.FLGHON)
-                        {
-                            Utilities.ShowModal("El crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
-                        }
-                    }
-
-                    Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
-                }
             }
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void ValidateFields(bool retiros)
+        {
+            if (transaction.Product == null && txtCountNumber.Text.Length < 4 && !retiros)
+            {
+                Utilities.ShowModal("Digite los últimos (4) dígitos de la cuenta y seleccione un producto para continuar.", EModalType.Error, this);
+            }
+            else if (!string.IsNullOrEmpty(txtCountNumber.Text) && transaction.Product == null && !retiros)
+            {
+                Utilities.ShowModal("Recuerda buscar tu producto con el icono de la Lupa.", EModalType.Error, this);
+            }
+            else if (transaction.Product == null && retiros)
+            {
+                Utilities.ShowModal("Recuerda seleccionar tu producto para retirar.", EModalType.Error, this);
+            }
+            else if (Validar(transaction.Product.AmountMin, transaction.Product.AmountMax))
+            {
+                transaction.Amount = valueModel.Val;
+                transaction.Product.AmountUser = valueModel.Val;
+
+                if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
+                {
+                    if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito && transaction.Amount < transaction.Product.Amount)
+                    {
+                        Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
+                    }
+
+                    if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta && transaction.Amount < transaction.Product.Amount)
+                    {
+                        Utilities.ShowModal("Te sugerimos pagar el valor completo indicado, evita quedar en mora.", EModalType.Error, this);
+                    }
+
+                    if (transaction.Product.ExtraTarjetaCredito != null && transaction.Product.ExtraTarjetaCredito.FLGHON)
+                    {
+                        Utilities.ShowModal("La tarjeta de crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
+                    }
+
+                    if (transaction.Product.AccountStateProduct != null && transaction.Product.AccountStateProduct.FLGHON)
+                    {
+                        Utilities.ShowModal("El crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
+                    }
+                }
+
+                Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
             }
         }
 
@@ -439,17 +454,17 @@ namespace WPFMultired.UserControls
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgAccountState"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
                 }
-                else if(transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
+                else if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgTarjeta"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
                 }
-                else if (transaction.eTypeService == ETypeServiceSelect.Retiros)
-                {
-                    questionMsg = string.Format(Utilities.GetConfiguration("MsgRetiro"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
-                }
-                else
+                else if (transaction.eTypeService == ETypeServiceSelect.Deposito)
                 {
                     questionMsg = string.Format(Utilities.GetConfiguration("MsgGeneric"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+                }
+                else if (transaction.eTypeService == ETypeServiceSelect.Retiros)
+                {
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgRetiros"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
                 }
 
                 Utilities.ShowModal(questionMsg, EModalType.Error, this);
