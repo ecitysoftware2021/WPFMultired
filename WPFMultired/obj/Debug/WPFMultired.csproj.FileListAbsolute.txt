@@ -638,3 +638,10 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.pdb
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerprintUserControl.g.cs
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerprintUserControl.baml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
+E:\GitHub\WPFMultired\WPFMultired\bin\Debug\DPUruNet.dll
+E:\GitHub\WPFMultired\WPFMultired\bin\Debug\Ecity.DigitalPersona.Reader.dll
+E:\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache
+E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerprintUserControl.g.cs
+E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\CodigoVerificacionUserControl.g.cs
+E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerprintUserControl.baml
+E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\CodigoVerificacionUserControl.baml

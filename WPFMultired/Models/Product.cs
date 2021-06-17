@@ -23,6 +23,7 @@ namespace WPFMultired.Models
         public string img { get; set; }
         public AccountStateProduct AccountStateProduct { get; set; }
         public DataExtraTarjetaCredito ExtraTarjetaCredito { get; set; }
+        public DataExtraRetiro ExtraRetiro { get; set; }
     }
 
     public class AccountStateProduct
@@ -58,6 +59,13 @@ namespace WPFMultired.Models
         public bool FLGHON { get; set; }
         public decimal VLRHON { get; set; }
         public string DESHON { get; set; }
+    }
+
+    public class DataExtraRetiro
+    {
+        public string ACCOUNT { get; set; }
+        public decimal VALORMAX { get; set; }
+        public string RELATION { get; set; }
     }
 
 }

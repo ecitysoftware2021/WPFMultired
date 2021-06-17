@@ -350,11 +350,11 @@ namespace WPFMultired.ViewModel
                     Response response = null;
                     if (this.Type == ETypeDetailModel.Withdrawal)
                     {
-                        response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Generate_OTP, transaction);
+                        response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Generate_TOTP, transaction);
                     }
                     else if (this.Type == ETypeDetailModel.CodeOTP)
                     {
-                         response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_OTP, transaction);
+                         response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_TOTP, transaction);
                     }
                     else
                     {

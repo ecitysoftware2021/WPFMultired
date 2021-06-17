@@ -81,7 +81,21 @@ namespace WPFMultired.UserControls
 
         private void btn_Accept_TouchDown(object sender, TouchEventArgs e)
         {
-            SendData();
+            switch (transaction.eTypeService)
+            {
+                case ETypeServiceSelect.Retiros:
+                    ValidateMoneyAndContinueWithdrawal();
+                    break;
+                default:
+                    SendData();
+                    break;
+            }
+
+        }
+        private void ValidateMoneyAndContinueWithdrawal()
+        {
+            //TODO: Llamar al servicio de Multired para saber si hay el dinero que el usuario quiere
+            Utilities.navigator.Navigate(UserControlView.TOTPValidator, false, transaction);
         }
 
         private async void SendData()
@@ -98,7 +112,7 @@ namespace WPFMultired.UserControls
 
                         if (this.transaction.IdTransactionAPi == 0)
                         {
-                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error,this);
+                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error, this);
                             Utilities.navigator.Navigate(UserControlView.Main);
                         }
                         else
@@ -129,7 +143,7 @@ namespace WPFMultired.UserControls
                             Utilities.navigator.Navigate(UserControlView.Pay, false, transaction);
                         }
                     });
-                    Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload,this);
+                    Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
                 }
                 else
                 {

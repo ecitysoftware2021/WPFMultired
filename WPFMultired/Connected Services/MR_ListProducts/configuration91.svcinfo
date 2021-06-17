@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="0aBc6GL7Kw+4bDvDml4ywJjy3GU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="h+P2fs5Hr4LewwOqa9cjGXMx4Qa7ftnLQgFoH/RGQyI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="ConsultarProductosClienteServicesPortBinding">
       <properties>

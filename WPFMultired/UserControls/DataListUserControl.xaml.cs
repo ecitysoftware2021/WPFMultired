@@ -441,6 +441,14 @@ namespace WPFMultired.UserControls
                         Utilities.ShowModal("El crédito que vas a pagar genera honorarios, estos serán calculados sobre el valor a pagar; si modificas el valor, se realizará un nuevo cálculo, el cual se verá reflejado en el recibo de la transacción.", EModalType.Error, this);
                     }
                 }
+                else if (transaction.eTypeService == ETypeServiceSelect.Retiros)
+                {
+                    if (transaction.Amount > transaction.Product.ExtraRetiro.VALORMAX)
+                    {
+                        Utilities.ShowModal(string.Format(Utilities.GetConfiguration("MsgAlertaValorRetiro"), transaction.Product.ExtraRetiro.VALORMAX.ToString("C")), EModalType.Error, this);
+                        return;
+                    }
+                }
 
                 Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
             }

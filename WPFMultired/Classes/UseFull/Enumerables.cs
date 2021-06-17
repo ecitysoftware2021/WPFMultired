@@ -73,7 +73,8 @@ namespace WPFMultired.Classes
         DataList,
         ResumeTransaction,
         Detail,
-        Fingerprint
+        Fingerprint,
+        TOTPValidator
     }
 
     public enum ETransactionState
@@ -134,10 +135,10 @@ namespace WPFMultired.Classes
         Institutions = 1,
         Type_Document = 2,
         Products_Client = 3,
-        Generate_OTP = 4,
+        Generate_TOTP = 4,
         Report_Transaction = 5,
         Report_Transaction_BD = 12,
-        Validate_OTP = 6,
+        Validate_TOTP = 6,
         Idioms = 7,
         Consult_QR = 10,
         Validate_Status_Admin = 11,

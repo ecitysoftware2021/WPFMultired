@@ -6,7 +6,7 @@ using System.ServiceModel.Web;
 using System.Threading.Tasks;
 using WPFMultired.Classes;
 using WPFMultired.Models;
-using WPFMultired.MR_CodeOTP;
+using WPFMultired.MR_CodeTOTP;
 using WPFMultired.MR_CodeQR;
 using WPFMultired.MR_Institutions;
 using WPFMultired.MR_Language;
@@ -14,7 +14,7 @@ using WPFMultired.MR_ListProducts;
 using WPFMultired.MR_ReportTransaction;
 using WPFMultired.MR_TypeDocument;
 using WPFMultired.MR_TypeTransaction;
-using WPFMultired.MR_ValidateOTP;
+using WPFMultired.MR_ValidateTOTP;
 using WPFMultired.MR_ValidateStatusAdmin;
 using WPFMultired.MR_OperationAdmin;
 using WPFMultired.MR_ProcessAdmin;
@@ -140,13 +140,13 @@ namespace WPFMultired.Services
 
                         return GetProductsClient((Transaction)data);
 
-                    case ETypeService.Generate_OTP:
+                    case ETypeService.Generate_TOTP:
 
-                        return GenerateCodeOTP((Transaction)data);
+                        return GenerateCodeTOTP((Transaction)data);
 
-                    case ETypeService.Validate_OTP:
+                    case ETypeService.Validate_TOTP:
 
-                        return ValidateOTP((Transaction)data);
+                        return ValidateTOTP((Transaction)data);
 
                     case ETypeService.Report_Transaction:
 
@@ -542,19 +542,19 @@ namespace WPFMultired.Services
         /// #6 Método para generar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private Response GenerateCodeOTP(Transaction transaction)
+        private Response GenerateCodeTOTP(Transaction transaction)
         {
             try
             {
-                GenerarOTPServicesClient client = new GenerarOTPServicesClient();
+                TOTPMultiRedServicesClient client = new TOTPMultiRedServicesClient();
 
-                using (var factory = new WebChannelFactory<GenerarOTPServicesChannel>())
+                using (var factory = new WebChannelFactory<TOTPMultiRedServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrgenotpInput request = new mtrgenotpInput
+                        mtrgetotpcInput request = new mtrgetotpcInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
@@ -563,29 +563,30 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
-                            I_TIPOTRN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
-                            I_CUENTA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].AcountNumber), keyEncript),
-                            I_SISTEMA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].CodeSystem), keyEncript),
-                            I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
-                            I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
-                            I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Amount.ToString()), keyEncript)
+                            I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Product.CodeSystem), keyEncript),
+                            I_IMAGEN = new iIMAGEN
+                            {
+                                I_IMGDAT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Image), keyEncript),
+                                I_IMGLEN = transaction.ImageLength
+                            },
+                            I_NOMBREIMG = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.ImageName), keyEncript)
                         };
 
-                        AdminPayPlus.SaveErrorControl($"Request GenerateCodeOTP: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Request GenerateCodeTOTP: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
-                        var response = client.mtrgenotp(request);
+                        var response = client.mtrgetotpc(request);
 
-                        AdminPayPlus.SaveErrorControl($"Response GenerateCodeOTP: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+                        AdminPayPlus.SaveErrorControl($"Response GenerateCodeTOTP: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            transaction.CodeOTP = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOTP, keyDesencript), 2);
+                            transaction.CodeTOTP = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_KEYOTP, keyDesencript), 2);
                             return new Response { Data = transaction };
                         }
                         else
                         {
+                            string msg = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
                             return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
@@ -603,19 +604,20 @@ namespace WPFMultired.Services
         /// #7 Método para validar el codigo OTP
         /// </summary>
         /// <returns></returns>
-        private Response ValidateOTP(Transaction transaction)
+        private Response ValidateTOTP(Transaction transaction)
         {
             try
             {
-                ValidarOTPServicesClient client = new ValidarOTPServicesClient();
 
-                using (var factory = new WebChannelFactory<ValidarOTPServicesChannel>())
+                ValidateTOTPMultiRedServicesClient client = new ValidateTOTPMultiRedServicesClient();
+
+                using (var factory = new WebChannelFactory<ValidateTOTPMultiRedServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
 
-                        mtrvalotpInput request = new mtrvalotpInput
+                        mtrvatotpcInput request = new mtrvatotpcInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
@@ -624,19 +626,14 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
-                            I_TIPOTRN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
-                            I_CUENTA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].AcountNumber), keyEncript),
-                            I_SISTEMA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].CodeSystem), keyEncript),
-                            I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
-                            I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
-                            I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Amount.ToString()), keyEncript),
-                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript)
+                            I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Product.CodeSystem), keyEncript),
+                            I_KEYOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTOTP), keyEncript),
+                            I_CODOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TOTP), keyEncript),
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request ValidateOTP: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
-                        var response = client.mtrvalotp(request);
+                        var response = client.mtrvatotpc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response ValidateOTP: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
@@ -722,7 +719,7 @@ namespace WPFMultired.Services
                             I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
                             I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), "00")), keyEncript),
-                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeOTP), keyEncript),
+                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTOTP), keyEncript),
                             I_LISTAREGISTROS = denominations
                         };
 
@@ -1300,6 +1297,9 @@ namespace WPFMultired.Services
                                         break;
                                     case ETypeServiceSelect.EstadoCuenta:
                                         transaction.Products[count].AccountStateProduct = JsonConvert.DeserializeObject<AccountStateProduct>(transaction.Products[count].TypeTransaction);
+                                        break;
+                                    case ETypeServiceSelect.Retiros:
+                                        transaction.Products[count].ExtraRetiro = JsonConvert.DeserializeObject<DataExtraRetiro>(transaction.Products[count].TypeTransaction);
                                         break;
                                 }
                                 count++;

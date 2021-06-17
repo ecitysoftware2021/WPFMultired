@@ -112,7 +112,7 @@ namespace WPFMultired.Windows.Alerts
                                 {
 
                                     transaction.Amount = viewModel.Amount;
-                                    if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
+                                    if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeTOTP))
                                     {
                                         viewModel.Type = ETypeDetailModel.CodeOTP;
                                         SetFocus();
@@ -127,7 +127,7 @@ namespace WPFMultired.Windows.Alerts
                             {
 
                                 transaction.Amount = viewModel.Amount;
-                                if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeOTP))
+                                if (viewModel.CallService(transaction) && !string.IsNullOrEmpty(transaction.CodeTOTP))
                                 {
                                     viewModel.Type = ETypeDetailModel.CodeOTP;
                                     SetFocus();
@@ -143,7 +143,7 @@ namespace WPFMultired.Windows.Alerts
                         viewModel.TxtInput = txt_pass_input.Password;
                         if (!string.IsNullOrEmpty(viewModel.TxtInput))
                         {
-                            transaction.CodeOTP = viewModel.TxtInput;
+                            transaction.CodeTOTP = viewModel.TxtInput;
                             if (viewModel.CallService(transaction))
                             {
                                 SendData();

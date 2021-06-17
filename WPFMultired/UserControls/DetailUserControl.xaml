@@ -18,9 +18,6 @@
             <RowDefinition Height="380" />
             <RowDefinition Height="280" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="3">
-            <ContentControl x:Name="grvPublicity"></ContentControl>
-        </Grid>
         <Grid Grid.Row="0">
             <TextBlock  
                 x:Name="txtHoraActual"
@@ -201,6 +198,9 @@
                 Margin="100,50,0,0"
                 TouchDown="BtnCancell_TouchDown" 
             />
+        </Grid>
+        <Grid Grid.Row="3">
+            <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
     </Grid>
 </UserControl>

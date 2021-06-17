@@ -8,6 +8,7 @@ using WPFMultired.Classes;
 using WPFMultired.Services.Object;
 using WPFMultired.UserControls;
 using WPFMultired.UserControls.Administrator;
+using WPFMultired.UserControls.Withdrawal;
 
 namespace WPFMultired.Models
 {
@@ -77,6 +78,9 @@ namespace WPFMultired.Models
                         break;
                     case UserControlView.Fingerprint:
                         View = new LoginFingerprintUserControl((Transaction)data);
+                        break;
+                    case UserControlView.TOTPValidator:
+                        View = new CodigoVerificacionUserControl((Transaction)data);
                         break;
                 }
 

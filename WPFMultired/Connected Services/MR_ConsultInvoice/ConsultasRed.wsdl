@@ -64,11 +64,11 @@
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrhalleycResponse">
-    <part name="parameters" element="tns:mtrhalleycResponse" />
-  </message>
   <message name="mtrhalleyc">
     <part name="parameters" element="tns:mtrhalleyc" />
+  </message>
+  <message name="mtrhalleycResponse">
+    <part name="parameters" element="tns:mtrhalleycResponse" />
   </message>
   <portType name="ConsultasRedServices">
     <operation name="mtrhalleyc">

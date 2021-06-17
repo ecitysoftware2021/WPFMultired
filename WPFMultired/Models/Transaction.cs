@@ -38,7 +38,7 @@ namespace WPFMultired.Models
 
         public string CodeCompany { get; set; }
 
-        public string CodeOTP { get; set; }
+        public string CodeTOTP { get; set; }
 
         public string CodeTransactionAuditory { get; set; }
         public string Action { get; set; }
@@ -115,5 +115,9 @@ namespace WPFMultired.Models
         }
 
         public string Finger_Byte { get; set; }
+        public string TOTP { get; set; }
+        public string Image { get; set; }
+        public int ImageLength { get; set; }
+        public string ImageName { get; set; }
     }
 }

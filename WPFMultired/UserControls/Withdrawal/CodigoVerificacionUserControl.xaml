@@ -13,10 +13,11 @@
             <ImageBrush ImageSource="/Images/Backgrounds/bgNewVacio2.jpg" Stretch="Uniform"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="380" />
-            <RowDefinition Height="280"/>
+            <RowDefinition Height="200" />
+            <RowDefinition />
+            <RowDefinition Height="252" />
+            <RowDefinition Height="464" />
+            <RowDefinition Height="280" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock  
@@ -73,19 +74,43 @@
                 TextAlignment="Center" 
              />
 
-            <TextBox  
-                x:Name="txtCodigo" 
-                
-                Height="50" 
-                Margin="0,200,0,0" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Width="350"
-                TextAlignment="Right"
-                Foreground="Gray"
-                FontSize="30"
-                FontFamily="Arial" 
-            >
+            <PasswordBox 
+                    Name="PassBoxIdentification"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Margin="0,0,0,50"
+                    HorizontalContentAlignment="Center"
+                    FontSize="25"
+                    Height="80"
+                    Foreground="Gray"
+                    TouchDown="PassBoxIdentification_TouchDown"
+                >
+                <PasswordBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </PasswordBox.Resources>
+                <PasswordBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0.6"/>
+                </PasswordBox.Background>
+            </PasswordBox>
+            <TextBox 
+                    Name="TbxIdentification"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    FontFamily="Arial"
+                    FontWeight="Medium"
+                    Margin="0,0,0,50"
+                    HorizontalContentAlignment="Center"
+                    FontSize="25"
+                    Height="80"
+                    IsEnabled="False"
+                    Foreground="Gray"
+                    Visibility="Hidden"
+                    BorderBrush="#FF1D1B1B"
+                >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -95,6 +120,54 @@
                     <SolidColorBrush Color="White" Opacity="0.6"/>
                 </TextBox.Background>
             </TextBox>
+            <Image 
+                    Source="/Images/others/ojo.png"
+                    x:Name="btn_show_id"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Bottom" 
+                    Margin="550,0,0,70"                  
+                    Width="50"
+                    TouchEnter="Btn_show_id_TouchEnter"
+                    TouchLeave="Btn_show_id_TouchLeave"
+                />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Image 
+                Name="btn_Accept"
+                Source="/Images/Buttons/NewAceptar2.png"
+                Stretch="Uniform"
+                Height="100"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,0,200,0"
+                TouchDown="btn_Accept_TouchDown" 
+            />
+            <Image 
+                x:Name="btnNewTOTP"
+                Source="/Images/Buttons/NewTOTP.png"
+                Stretch="Uniform"
+                Height="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="200,0,0,0"
+                TouchDown="btnNewTOTP_TouchDown" 
+            />
+            <TextBlock 
+                Name="txt_IntentsTOTP"
+                FontSize="33"
+                Width="800"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,0"
+                FontWeight="SemiBold"
+                Text="Recuerda que tienes 2 intentos más para generar un nuevo código de verificación."
+                Foreground="#FF5D5D5D"
+                TextWrapping="Wrap"
+                TextAlignment="Center" 
+             />
+        </Grid>
+        <Grid Grid.Row="3">
+            <ContentControl x:Name="grvPublicity"></ContentControl>
         </Grid>
     </Grid>
 </UserControl>

@@ -387,6 +387,7 @@ namespace WPFMultired.ViewModel
                                 Item3 = product.img,
                                 Item4 = product.AmountCommission,
                                 Item5 = product.AmountTotal,
+                                Item7 = product.ExtraRetiro.RELATION,
                                 Index = transaction.Products.IndexOf(product),
                                 Data = product,
                                 ImageSourse = ImagesUrlResource.ImageOnSelectOption,

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://totpmultired.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="TOTPMultiRed" targetNamespace="http://totpmultired.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://totpmultired.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrgetotpc" type="tns:mtrgetotpc" />
+      <xs:element name="mtrgetotpcResponse" type="tns:mtrgetotpcResponse" />
+      <xs:complexType name="mtrgetotpc">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrgetotpcInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgetotpcInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_KEYRED" type="xs:string" />
+          <xs:element name="I_NOMBREIMG" type="xs:string" />
+          <xs:element name="I_IMAGEN" type="tns:iIMAGEN" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iIMAGEN">
+        <xs:sequence>
+          <xs:element name="I_IMGLEN" type="xs:int" />
+          <xs:element name="I_IMGDAT" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgetotpcResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrgetotpcResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrgetotpcResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_KEYOTP" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrgetotpcResponse">
+    <part name="parameters" element="tns:mtrgetotpcResponse" />
+  </message>
+  <message name="mtrgetotpc">
+    <part name="parameters" element="tns:mtrgetotpc" />
+  </message>
+  <portType name="TOTPMultiRedServices">
+    <operation name="mtrgetotpc">
+      <input wsam:Action="http://totpmultired.wsbeans.iseries/TOTPMultiRedServices/mtrgetotpcRequest" message="tns:mtrgetotpc" />
+      <output wsam:Action="http://totpmultired.wsbeans.iseries/TOTPMultiRedServices/mtrgetotpcResponse" message="tns:mtrgetotpcResponse" />
+    </operation>
+  </portType>
+  <binding name="TOTPMultiRedServicesPortBinding" type="tns:TOTPMultiRedServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrgetotpc">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="TOTPMultiRed">
+    <port name="TOTPMultiRedServicesPort" binding="tns:TOTPMultiRedServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/TOTPMultiRedService/TOTPMultiRed" />
+    </port>
+  </service>
+</definitions>

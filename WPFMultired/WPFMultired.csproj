@@ -147,7 +147,7 @@
     <Compile Include="Classes\Printer\PrintProperties.cs" />
     <Compile Include="Classes\Printer\PrintService.cs" />
     <Compile Include="Classes\Utilities.cs" />
-    <Compile Include="Connected Services\MR_CodeOTP\Reference.cs">
+    <Compile Include="Connected Services\MR_CodeTOTP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -222,7 +222,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\MR_ValidateOTP\Reference.cs">
+    <Compile Include="Connected Services\MR_ValidateTOTP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -379,18 +379,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\MR_CodeOTP\generarOTP.wsdl" />
-    <None Include="Connected Services\MR_CodeOTP\WPFMultired.MR_CodeOTP.mtrgenotpResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MR_CodeOTP\WPFMultired.MR_CodeOTP.mtrgenotpResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Connected Services\MR_CodeTOTP\TOTPMultiRed.wsdl" />
     <None Include="Connected Services\MR_CodeQR\QRDecode.wsdl" />
     <None Include="Connected Services\MR_CodeQR\WPFMultired.MR_CodeQR.mtrctlaqrcResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_CodeQR\WPFMultired.MR_CodeQR.mtrctlaqrcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_CodeTOTP\WPFMultired.MR_CodeTOTP.mtrgetotpcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_CodeTOTP\WPFMultired.MR_CodeTOTP.mtrgetotpcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ConsultInvoice\ConsultasRed.wsdl" />
@@ -484,18 +484,18 @@
     <None Include="Connected Services\MR_ValidateAdminQR\WPFMultired.MR_ValidateAdminQR.mtrvaladmcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\MR_ValidateOTP\validarOTP.wsdl" />
-    <None Include="Connected Services\MR_ValidateOTP\WPFMultired.MR_ValidateOTP.mtrvalotpResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MR_ValidateOTP\WPFMultired.MR_ValidateOTP.mtrvalotpResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Connected Services\MR_ValidateTOTP\ValidateTOTPMultiRed.wsdl" />
     <None Include="Connected Services\MR_ValidateStatusAdmin\ValidateStatusAdmin.wsdl" />
     <None Include="Connected Services\MR_ValidateStatusAdmin\WPFMultired.MR_ValidateStatusAdmin.mtrvalarqcResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MR_ValidateStatusAdmin\WPFMultired.MR_ValidateStatusAdmin.mtrvalarqcResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ValidateTOTP\WPFMultired.MR_ValidateTOTP.mtrvatotpcResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_ValidateTOTP\WPFMultired.MR_ValidateTOTP.mtrvatotpcResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="DataContext\DB_Local.db" />
@@ -624,7 +624,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\MR_CodeOTP\" />
+    <WCFMetadataStorage Include="Connected Services\MR_CodeTOTP\" />
     <WCFMetadataStorage Include="Connected Services\MR_CodeQR\" />
     <WCFMetadataStorage Include="Connected Services\MR_ConsultInvoice\" />
     <WCFMetadataStorage Include="Connected Services\MR_ControllCash\" />
@@ -639,7 +639,7 @@
     <WCFMetadataStorage Include="Connected Services\MR_TypeDocument\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeTransaction\" />
     <WCFMetadataStorage Include="Connected Services\MR_ValidateAdminQR\" />
-    <WCFMetadataStorage Include="Connected Services\MR_ValidateOTP\" />
+    <WCFMetadataStorage Include="Connected Services\MR_ValidateTOTP\" />
     <WCFMetadataStorage Include="Connected Services\MR_ValidateStatusAdmin\" />
   </ItemGroup>
   <ItemGroup>
@@ -679,13 +679,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_CodeOTP\configuration91.svcinfo" />
+    <None Include="Connected Services\MR_CodeTOTP\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_CodeOTP\configuration.svcinfo" />
+    <None Include="Connected Services\MR_CodeTOTP\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_CodeOTP\Reference.svcmap">
+    <None Include="Connected Services\MR_CodeTOTP\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -739,13 +739,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_ValidateOTP\configuration91.svcinfo" />
+    <None Include="Connected Services\MR_ValidateTOTP\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_ValidateOTP\configuration.svcinfo" />
+    <None Include="Connected Services\MR_ValidateTOTP\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MR_ValidateOTP\Reference.svcmap">
+    <None Include="Connected Services\MR_ValidateTOTP\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -1052,6 +1052,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Others\fingerFail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\NewTOTP.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
