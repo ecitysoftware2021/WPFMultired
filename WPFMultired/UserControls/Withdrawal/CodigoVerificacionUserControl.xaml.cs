@@ -198,8 +198,7 @@ namespace WPFMultired.UserControls.Withdrawal
                 if (response != null && response.Data != null)
                 {
                     transaction = (Transaction)response.Data;
-                    //TODO: ir a formulario de entrega de dinero
-                    // Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
+                     Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
                 }
                 else
                 {

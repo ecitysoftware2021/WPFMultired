@@ -322,81 +322,77 @@ namespace WPFMultired.ViewModel
         {
             try
             {
-
-                for (int i = 0; i < 3; i++)
+                foreach (var product in transaction.Products)
                 {
-                    foreach (var product in transaction.Products)
+                    switch (transaction.eTypeService)
                     {
-                        switch (transaction.eTypeService)
-                        {
-                            case ETypeServiceSelect.Deposito:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.Amount,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption
-                                });
-                                break;
-                            case ETypeServiceSelect.TarjetaCredito:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.AmountTotal,
-                                    Item13 = product.ExtraTarjetaCredito.VLRHON,
-                                    Item14 = product.ExtraTarjetaCredito.DESHON,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption,
-                                    VisibilityHON = product.ExtraTarjetaCredito.FLGHON ? "Visible" : "Hidden",
-                                });
-                                break;
-                            case ETypeServiceSelect.EstadoCuenta:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.AmountTotal,
-                                    Item7 = product.AccountStateProduct.DESAPO,
-                                    Item8 = product.AccountStateProduct.DESCRE,
-                                    Item9 = product.AccountStateProduct.DESPAP,
-                                    Item10 = product.AccountStateProduct.VLRAPO,
-                                    Item11 = product.AccountStateProduct.VLRCRE,
-                                    Item12 = product.AccountStateProduct.VLRPAP,
-                                    Item13 = product.AccountStateProduct.VLRHON,
-                                    Item14 = product.AccountStateProduct.DESHON,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption,
-                                    VisibilityHON = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden",
-                                    VisibilityPAP = product.AccountStateProduct.FLGPAP ? "Visible" : "Hidden",
-                                    VisibilityAPO = product.AccountStateProduct.FLGAPO ? "Visible" : "Hidden"
-                                });
-                                break;
-                            case ETypeServiceSelect.Retiros:
-                                _dataList.Add(new ItemList
-                                {
-                                    Item1 = product.Description,
-                                    Item2 = product.Code,
-                                    Item3 = product.img,
-                                    Item4 = product.AmountCommission,
-                                    Item5 = product.AmountTotal,
-                                    Item7 = product.ExtraRetiro.RELATION,
-                                    Index = transaction.Products.IndexOf(product),
-                                    Data = product,
-                                    ImageSourse = ImagesUrlResource.ImageOnSelectOption,
-                                });
-                                break;
-                        } 
+                        case ETypeServiceSelect.Deposito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.Amount,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption
+                            });
+                            break;
+                        case ETypeServiceSelect.TarjetaCredito:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.AmountTotal,
+                                Item13 = product.ExtraTarjetaCredito.VLRHON,
+                                Item14 = product.ExtraTarjetaCredito.DESHON,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                                VisibilityHON = product.ExtraTarjetaCredito.FLGHON ? "Visible" : "Hidden",
+                            });
+                            break;
+                        case ETypeServiceSelect.EstadoCuenta:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.AmountTotal,
+                                Item7 = product.AccountStateProduct.DESAPO,
+                                Item8 = product.AccountStateProduct.DESCRE,
+                                Item9 = product.AccountStateProduct.DESPAP,
+                                Item10 = product.AccountStateProduct.VLRAPO,
+                                Item11 = product.AccountStateProduct.VLRCRE,
+                                Item12 = product.AccountStateProduct.VLRPAP,
+                                Item13 = product.AccountStateProduct.VLRHON,
+                                Item14 = product.AccountStateProduct.DESHON,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                                VisibilityHON = product.AccountStateProduct.FLGHON ? "Visible" : "Hidden",
+                                VisibilityPAP = product.AccountStateProduct.FLGPAP ? "Visible" : "Hidden",
+                                VisibilityAPO = product.AccountStateProduct.FLGAPO ? "Visible" : "Hidden"
+                            });
+                            break;
+                        case ETypeServiceSelect.Retiros:
+                            _dataList.Add(new ItemList
+                            {
+                                Item1 = product.Description,
+                                Item2 = product.Code,
+                                Item3 = product.img,
+                                Item4 = product.AmountCommission,
+                                Item5 = product.AmountTotal,
+                                Item7 = product.ExtraRetiro.RELATION,
+                                Index = transaction.Products.IndexOf(product),
+                                Data = product,
+                                ImageSourse = ImagesUrlResource.ImageOnSelectOption,
+                            });
+                            break;
                     }
                 }
             }
