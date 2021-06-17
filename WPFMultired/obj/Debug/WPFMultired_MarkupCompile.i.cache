@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\GitHub\WPFMultired\WPFMultired\obj\Debug\
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\
 WPFMultired
 none
 false
 DEBUG;TRACE
-E:\GitHub\WPFMultired\WPFMultired\App.xaml
-18-235551240
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\App.xaml
+201519275243
+11-114032193
+961762683984
+1562146677942
+UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\DataListUserControl.xaml;UserControls\DetailUserControl.xaml;UserControls\Withdrawal\ControlMoneyUserControl.xaml;UserControls\Withdrawal\LoginFingerprintUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\PublicityUserControl.xaml;UserControls\ResumeTransactionUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;UserControls\Withdrawal\CodigoVerificacionUserControl.xaml;UserControls\Withdrawal\PhotoUserControl.xaml;Windows\Alerts\ModalDetailWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
 
-92167373171
-371922473209
-UserControls\Administrator\AdministratorUserControl.xaml;UserControls\Administrator\ConfigurateUserControl.xaml;UserControls\Administrator\LoginAdministratorUserControl.xaml;UserControls\DataListUserControl.xaml;UserControls\DetailUserControl.xaml;UserControls\Withdrawal\LoginFingerprintUserControl.xaml;UserControls\MenuUserControl.xaml;UserControls\PublicityUserControl.xaml;UserControls\ResumeTransactionUserControl.xaml;UserControls\ReturnMonyUserControl.xaml;UserControls\ConsultUserControl.xaml;UserControls\MainUserControl.xaml;UserControls\PaymentUserControl.xaml;UserControls\SussesUserControl.xaml;UserControls\Withdrawal\CodigoVerificacionUserControl.xaml;Windows\Alerts\ModalDetailWindow.xaml;Windows\MasterWindow.xaml;Windows\Alerts\ModalWindow.xaml;
-
-False
+True
 

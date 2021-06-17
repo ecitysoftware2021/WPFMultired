@@ -94,8 +94,14 @@ namespace WPFMultired.UserControls
         }
         private void ValidateMoneyAndContinueWithdrawal()
         {
-            //TODO: Llamar al servicio de Multired para saber si hay el dinero que el usuario quiere
-            Utilities.navigator.Navigate(UserControlView.TOTPValidator, false, transaction);
+            if (transaction.Amount > transaction.Product.ExtraRetiro.VALORMAX)
+            {
+                Utilities.navigator.Navigate(UserControlView.ControlMoney, false, transaction);
+            }
+            else
+            {
+                Utilities.navigator.Navigate(UserControlView.Photo, false, transaction);
+            }
         }
 
         private async void SendData()

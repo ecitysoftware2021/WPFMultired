@@ -494,6 +494,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <TextBlock Text="Selecciona el producto."
+                                       Foreground="Gray"
+                                       FontSize="30"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                        Margin="0,-50,0,0"/>
             <ListView 
                 x:Name="lv_retiros" 
                 Margin="0,10,0,0"
@@ -501,6 +507,9 @@
                 BorderBrush="Transparent"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Top"
+                Height="400"
+                Width="900"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ItemsSource="{Binding}" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
@@ -530,22 +539,18 @@
                             Orientation="Vertical" 
                             VerticalAlignment="Stretch" 
                             HorizontalAlignment="Stretch">
-                            <TextBlock Text="Selecciona el producto."
-                                       Foreground="Gray"
-                                       FontSize="30"
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold"/>
+                           
                             <Grid
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Top"
                                 Margin="0,0,0,0"
-                                Width="1030"
-                                Height="200">
+                                Width="800"
+                                Height="80">
                                 <Image 
                                     Source="{Binding Item3}"
                                     Height="60"
                                     Stretch="Uniform"
-                                    Margin="200,0,0,0"
+                                    Margin="100,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top" 
                                     Tag="{Binding Data}"
@@ -555,7 +560,7 @@
                                     Text="{Binding Item1}"
                                     FontSize="30"
                                     FontFamily="Arial"
-                                    Margin="260,10,0,0"
+                                    Margin="180,10,0,0"
                                     Foreground="Gray"
                                     FontWeight="DemiBold"
                                     VerticalAlignment="Top"
@@ -567,7 +572,7 @@
                                     FontSize="30"
                                     FontFamily="Arial"
                                     FontWeight="DemiBold"
-                                    Margin="0,10,200,0"
+                                    Margin="0,10,250,0"
                                     Foreground="Gray"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Right" 
@@ -578,8 +583,9 @@
                                     FontSize="30"
                                     FontFamily="Arial"
                                     FontWeight="DemiBold"
-                                    Margin="0,10,150,0"
+                                    Margin="0,10,100,0"
                                     Foreground="Gray"
+                                    TextDecorations="Underline"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Right" 
                                 />

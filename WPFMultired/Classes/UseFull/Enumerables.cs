@@ -74,7 +74,9 @@ namespace WPFMultired.Classes
         ResumeTransaction,
         Detail,
         Fingerprint,
-        TOTPValidator
+        TOTPValidator,
+        ControlMoney,
+        Photo
     }
 
     public enum ETransactionState

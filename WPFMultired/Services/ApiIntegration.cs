@@ -566,7 +566,7 @@ namespace WPFMultired.Services
                             I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Product.CodeSystem), keyEncript),
                             I_IMAGEN = new iIMAGEN
                             {
-                                I_IMGDAT = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Image), keyEncript),
+                                I_IMGDAT = transaction.Image,
                                 I_IMGLEN = transaction.ImageLength
                             },
                             I_NOMBREIMG = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.ImageName), keyEncript)

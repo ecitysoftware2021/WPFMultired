@@ -82,6 +82,12 @@ namespace WPFMultired.Models
                     case UserControlView.TOTPValidator:
                         View = new CodigoVerificacionUserControl((Transaction)data);
                         break;
+                    case UserControlView.ControlMoney:
+                        View = new ControlMoneyUserControl((Transaction)data);
+                        break;
+                    case UserControlView.Photo:
+                        View = new PhotoUserControl((Transaction)data);
+                        break;
                 }
 
                 TimerService.Close();
