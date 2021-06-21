@@ -711,3 +711,4 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\sv\ZedGraph.res
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\tr\ZedGraph.resources.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\zh-tw\ZedGraph.resources.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\obj\Debug\WPFMultired.csprojAssemblyReference.cache

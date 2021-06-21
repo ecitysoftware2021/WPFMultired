@@ -68,7 +68,6 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                //TODO: poner en el config el código correspondiente a codRetiros (actualmente está en 00000)
                 string codDepositos = Utilities.GetConfiguration("CodDepositos");
                 string codEstadoCnt = Utilities.GetConfiguration("CodEstadoCuenta");
                 string codTarjetaCrd = Utilities.GetConfiguration("CodTarjetaCredito");
@@ -81,7 +80,6 @@ namespace WPFMultired.UserControls
                 else
                 if (transaction.CodeTypeTransaction == codRetiros)
                 {
-                    //TODO: Cambiar el enumerable de ETypeServiceSelect.Retiros y colocar el código correspondiente (actualmente está en 00000)
                     transaction.eTypeService = ETypeServiceSelect.Retiros;
                     retiros = true;
                 }

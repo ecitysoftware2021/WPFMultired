@@ -307,12 +307,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ImagesUrlResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\ApiIntegration.cs" />
-    <Compile Include="Services\Object\DataPayPlus.cs" />
-    <Compile Include="Services\Object\Log.cs" />
-    <Compile Include="Services\Object\Response.cs" />
-    <Compile Include="Services\Object\ResponseApi.cs" />
-    <Compile Include="Services\Object\Request.cs" />
+    <Compile Include="UserControls\Services\ApiIntegration.cs" />
+    <Compile Include="UserControls\Services\Object\DataPayPlus.cs" />
+    <Compile Include="UserControls\Services\Object\Log.cs" />
+    <Compile Include="UserControls\Services\Object\Response.cs" />
+    <Compile Include="UserControls\Services\Object\ResponseApi.cs" />
+    <Compile Include="UserControls\Services\Object\Request.cs" />
     <Compile Include="UserControls\Administrator\AdministratorUserControl.xaml.cs">
       <DependentUpon>AdministratorUserControl.xaml</DependentUpon>
     </Compile>
@@ -380,12 +380,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MessageResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Api.cs" />
+    <Compile Include="UserControls\Services\Api.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Services\Object\RequestApi.cs" />
+    <Compile Include="UserControls\Services\Object\RequestApi.cs" />
     <Compile Include="Windows\Alerts\ModalDetailWindow.xaml.cs">
       <DependentUpon>ModalDetailWindow.xaml</DependentUpon>
     </Compile>

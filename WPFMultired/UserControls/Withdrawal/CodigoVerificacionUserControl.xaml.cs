@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -198,7 +200,7 @@ namespace WPFMultired.UserControls.Withdrawal
                 if (response != null && response.Data != null)
                 {
                     transaction = (Transaction)response.Data;
-                     Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
+                    SendData();
                 }
                 else
                 {
@@ -209,6 +211,90 @@ namespace WPFMultired.UserControls.Withdrawal
                         TbxIdentification.Text = string.Empty;
                     });
                 }
+            }
+            catch (Exception ex)
+            {
+                Utilities.CloseModal();
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private async void SendData()
+        {
+            try
+            {
+                if (transaction.Amount > 0)
+                {
+                    Task.Run(async () =>
+                    {
+                        await AdminPayPlus.SaveTransactions(this.transaction, false);
+
+                        if (this.transaction.IdTransactionAPi == 0)
+                        {
+                            Utilities.ShowModal(MessageResource.NoProccessInformation, EModalType.Error, this);
+                            Utilities.navigator.Navigate(UserControlView.Main);
+                        }
+                        else
+                        {
+                            RecaudoFactura();
+                        }
+                    });
+                    Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+        }
+
+        private void RecaudoFactura()
+        {
+
+            try
+            {
+                //var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, this.transaction).Result;
+                //Utilities.CloseModal();
+
+                //if (response != null && response.Data != null)
+                //{
+                //    transaction = (Transaction)response.Data;
+                //    Task.Run(() =>
+                //    {
+                //        CLSGrabador.IniciarGrabacion(new DataVidio
+                //        {
+                //            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                //            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                //            transactionID = transaction.IdTransactionAPi,
+                //            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                //            selectedCamera = 0,
+                //            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                //        });
+                //        Thread.Sleep(500);
+                //        CLSGrabador.IniciarGrabacion(new DataVidio
+                //        {
+                //            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                //            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                //            transactionID = transaction.IdTransactionAPi,
+                //            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                //            selectedCamera = 1,
+                //            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                //        });
+                //    });
+                //    Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
+                //}
+                //else
+                //{
+                //    Utilities.ShowModal(response.Message, EModalType.Error, this);
+                //    Dispatcher.BeginInvoke((Action)delegate
+                //    {
+                //        Utilities.navigator.Navigate(UserControlView.Main);
+                //    });
+                //}
             }
             catch (Exception ex)
             {
