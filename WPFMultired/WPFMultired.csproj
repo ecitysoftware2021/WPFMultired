@@ -251,6 +251,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MR_RetirosRed\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MR_TypeDocument\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -514,6 +519,13 @@
     <None Include="Connected Services\MR_ReportTransaction\WPFMultired.MR_ReportTransaction.mtrprotrnResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\MR_RetirosRed\RetirosRed.wsdl" />
+    <None Include="Connected Services\MR_RetirosRed\WPFMultired.MR_RetirosRed.mtrretirocResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MR_RetirosRed\WPFMultired.MR_RetirosRed.mtrretirocResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\MR_TypeDocument\TiposDocumentos.wsdl" />
     <None Include="Connected Services\MR_TypeDocument\WPFMultired.MR_TypeDocument.mtrdoctrncResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -695,6 +707,7 @@
     <WCFMetadataStorage Include="Connected Services\MR_OperationAdmin\" />
     <WCFMetadataStorage Include="Connected Services\MR_ProcessAdmin\" />
     <WCFMetadataStorage Include="Connected Services\MR_ReportTransaction\" />
+    <WCFMetadataStorage Include="Connected Services\MR_RetirosRed\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeDocument\" />
     <WCFMetadataStorage Include="Connected Services\MR_TypeTransaction\" />
     <WCFMetadataStorage Include="Connected Services\MR_ValidateAdminQR\" />
@@ -1118,6 +1131,18 @@
   <ItemGroup>
     <Resource Include="Images\Buttons\No.png" />
     <Resource Include="Images\Buttons\Si.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_RetirosRed\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_RetirosRed\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MR_RetirosRed\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

@@ -46,7 +46,7 @@ namespace WPFMultired.UserControls.Withdrawal
             {
                 GenerateTOTP();
             });
-            Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Error, this);
+            Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Preload, this);
         }
 
         private void GoTime()
@@ -141,7 +141,7 @@ namespace WPFMultired.UserControls.Withdrawal
             {
                 ValidateTOTP();
             });
-            Utilities.ShowModal("Estamos validando el código, espera un momento por favor.", EModalType.Error, this);
+            Utilities.ShowModal("Estamos validando el código, espera un momento por favor.", EModalType.Preload, this);
 
         }
 
@@ -156,7 +156,7 @@ namespace WPFMultired.UserControls.Withdrawal
                 {
                     GenerateTOTP();
                 });
-                Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Error, this);
+                Utilities.ShowModal("Estamos generando el código OTP, espera un momento por favor.", EModalType.Preload, this);
             }
             else
             {
@@ -175,7 +175,8 @@ namespace WPFMultired.UserControls.Withdrawal
                 if (response != null && response.Data != null)
                 {
                     transaction = (Transaction)response.Data;
-                    //TODO:codigo
+
+
                 }
                 else
                 {
@@ -236,7 +237,7 @@ namespace WPFMultired.UserControls.Withdrawal
                         }
                         else
                         {
-                            RecaudoFactura();
+                            NotificarRetiro();
                         }
                     });
                     Utilities.ShowModal("Estamos procesando la información, por favor espera un momento.", EModalType.Preload, this);
@@ -252,49 +253,48 @@ namespace WPFMultired.UserControls.Withdrawal
             }
         }
 
-        private void RecaudoFactura()
+        private void NotificarRetiro()
         {
-
             try
             {
-                //var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, this.transaction).Result;
-                //Utilities.CloseModal();
+                var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Create_Transaction_Retiro, this.transaction).Result;
+                Utilities.CloseModal();
 
-                //if (response != null && response.Data != null)
-                //{
-                //    transaction = (Transaction)response.Data;
-                //    Task.Run(() =>
-                //    {
-                //        CLSGrabador.IniciarGrabacion(new DataVidio
-                //        {
-                //            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
-                //            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
-                //            transactionID = transaction.IdTransactionAPi,
-                //            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
-                //            selectedCamera = 0,
-                //            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
-                //        });
-                //        Thread.Sleep(500);
-                //        CLSGrabador.IniciarGrabacion(new DataVidio
-                //        {
-                //            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
-                //            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
-                //            transactionID = transaction.IdTransactionAPi,
-                //            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
-                //            selectedCamera = 1,
-                //            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
-                //        });
-                //    });
-                //    Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
-                //}
-                //else
-                //{
-                //    Utilities.ShowModal(response.Message, EModalType.Error, this);
-                //    Dispatcher.BeginInvoke((Action)delegate
-                //    {
-                //        Utilities.navigator.Navigate(UserControlView.Main);
-                //    });
-                //}
+                if (response != null && response.Data != null)
+                {
+                    transaction = (Transaction)response.Data;
+
+                    Task.Run(() =>
+                    {
+                        CLSGrabador.IniciarGrabacion(new DataVidio
+                        {
+                            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                            transactionID = transaction.IdTransactionAPi,
+                            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                            selectedCamera = 0,
+                            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                        });
+                        Thread.Sleep(500);
+                        CLSGrabador.IniciarGrabacion(new DataVidio
+                        {
+                            paypadID = AdminPayPlus.DataConfiguration.ID_PAYPAD.Value,
+                            mailAlert = $"'{Utilities.GetConfiguration("Email")}'",
+                            transactionID = transaction.IdTransactionAPi,
+                            RecorderRoute = Utilities.GetConfiguration("RecorderRoute"),
+                            selectedCamera = 1,
+                            videoPath = $"'{Utilities.GetConfiguration("VideoRoute")}'"
+                        });
+                    });
+                    Utilities.navigator.Navigate(UserControlView.ReturnMony, false, transaction);
+                }
+                else
+                {
+                    Utilities.ShowModal(response.Message, EModalType.Error, this);
+
+                    Utilities.navigator.Navigate(UserControlView.Main);
+
+                }
             }
             catch (Exception ex)
             {

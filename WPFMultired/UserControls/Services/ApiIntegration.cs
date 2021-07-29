@@ -29,6 +29,7 @@ using WPFMultired.DataModel;
 using System.Globalization;
 using System.IO;
 using WPFMultired.MR_FingerprintValidator;
+using WPFMultired.MR_RetirosRed;
 
 namespace WPFMultired.Services
 {
@@ -123,6 +124,9 @@ namespace WPFMultired.Services
                     case ETypeService.Validate_Status_Admin:
 
                         return GetAdminStatus();
+                    case ETypeService.Create_Transaction_Retiro:
+
+                        return CreateTransactionRetiro((Transaction)data);
 
                     case ETypeService.Type_Transaction:
 
@@ -1225,6 +1229,65 @@ namespace WPFMultired.Services
             return null;
         }
 
+        private Response CreateTransactionRetiro(Transaction data)
+        {
+            try
+            {
+                RetirosRedServicesClient client = new RetirosRedServicesClient();
+
+                using (var factory = new WebChannelFactory<RetirosRedServicesChannel>())
+                {
+                    using (new OperationContextScope((IClientChannel)client.InnerChannel))
+                    {
+                        SetHeaderRequest();
+
+                        mtrretirocInput request = new mtrretirocInput
+                        {
+                            I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
+                            I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
+                            I_ENTIDADORIGEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+                            I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
+                            I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
+                            I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript),
+
+                            I_KEYASM = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.IdTransactionAPi.ToString()), keyEncript),
+                            I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.Product.CodeSystem), keyEncript),
+                            I_VALORDEVUELTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(data.Amount.ToString()), keyEncript),
+                            I_VALORRECAUDADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+                        };
+
+                        AdminPayPlus.SaveErrorControl($"Request CreateTransactionRetiro: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
+
+                        var response = client.mtrretiroc(request);
+
+                        AdminPayPlus.SaveErrorControl($"Response CreateTransactionRetiro: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
+
+                        var Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2);
+                        if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
+                            int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
+                        {
+                            data.Amount=Convert.ToDecimal( ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2));
+                            
+                            return new Response { Data = data };
+                        }
+                        else
+                        {
+                            return new Response { Data = null, Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
+                        }
+
+                        //"2021-07-23-11.15.55.1551215781252021-07-23-16.15.55.157868"
+                        //"2021-07-23-11.25.48.8893354218752021-07-23-16.25.48.891508"
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
+            }
+            return null;
+        }
+
         /// <summary>
         /// #NN Método para validar el QR
         /// </summary>
@@ -1407,8 +1470,6 @@ namespace WPFMultired.Services
                         AdminPayPlus.SaveErrorControl($"Request ReportInvoice: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
                         var response = client.mtrrecfacc(request);
-                        var ggggggg = Encryptor.Decrypt(response.O_APROBACION, keyDesencript);
-                        var jhjhjh = Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript);
                         AdminPayPlus.SaveErrorControl($"Response ReportInvoice: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
 

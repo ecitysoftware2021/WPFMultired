@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://retirosred.wsbeans.iseries/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="RetirosRed" targetNamespace="http://retirosred.wsbeans.iseries/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://retirosred.wsbeans.iseries/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mtrretiroc" type="tns:mtrretiroc" />
+      <xs:element name="mtrretirocResponse" type="tns:mtrretirocResponse" />
+      <xs:complexType name="mtrretiroc">
+        <xs:sequence>
+          <xs:element name="arg0" type="tns:mtrretirocInput" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrretirocInput">
+        <xs:sequence>
+          <xs:element name="I_TERMINAL" type="xs:string" />
+          <xs:element name="I_DIRECCIONIP" type="xs:string" />
+          <xs:element name="I_TIMESTAMP" type="xs:string" />
+          <xs:element name="I_CANAL" type="xs:string" />
+          <xs:element name="I_LENGUAJE" type="xs:string" />
+          <xs:element name="I_ENTIDADORIGEN" type="xs:string" />
+          <xs:element name="I_INSTITUCION" type="xs:string" />
+          <xs:element name="I_KEYASM" type="xs:string" />
+          <xs:element name="I_KEYRED" type="xs:string" />
+          <xs:element name="I_VALORRECAUDADO" type="xs:string" />
+          <xs:element name="I_VALORDEVUELTO" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrretirocResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:mtrretirocResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mtrretirocResult">
+        <xs:sequence>
+          <xs:element name="O_CODIGOERROR" type="xs:string" />
+          <xs:element name="O_MENSAJEERROR" type="xs:string" />
+          <xs:element name="O_NUMERODOCUMENTO" type="xs:string" />
+          <xs:element name="O_NOMBRE" type="xs:string" />
+          <xs:element name="O_REFERENCIA" type="xs:string" />
+          <xs:element name="O_FECHATRANSACCION" type="xs:string" />
+          <xs:element name="O_APROBACION" type="xs:string" />
+          <xs:element name="O_VALORTOTAL" type="xs:string" />
+          <xs:element name="O_VALORRECAUDADO" type="xs:string" />
+          <xs:element name="O_VALOREXCESO" type="xs:string" />
+          <xs:element name="O_VALORCOMISION" type="xs:string" />
+          <xs:element name="O_LLAVEMULTIRED" type="xs:string" />
+          <xs:element name="O_NOMBREENTIDAD" type="xs:string" />
+          <xs:element name="O_DATOSADICIONALES" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="mtrretirocResponse">
+    <part name="parameters" element="tns:mtrretirocResponse" />
+  </message>
+  <message name="mtrretiroc">
+    <part name="parameters" element="tns:mtrretiroc" />
+  </message>
+  <portType name="RetirosRedServices">
+    <operation name="mtrretiroc">
+      <input wsam:Action="http://retirosred.wsbeans.iseries/RetirosRedServices/mtrretirocRequest" message="tns:mtrretiroc" />
+      <output wsam:Action="http://retirosred.wsbeans.iseries/RetirosRedServices/mtrretirocResponse" message="tns:mtrretirocResponse" />
+    </operation>
+  </portType>
+  <binding name="RetirosRedServicesPortBinding" type="tns:RetirosRedServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="mtrretiroc">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="RetirosRed">
+    <port name="RetirosRedServicesPort" binding="tns:RetirosRedServicesPortBinding">
+      <soap:address location="http://181.57.139.181:10035/web/services/RetirosRedService/RetirosRed" />
+    </port>
+  </service>
+</definitions>

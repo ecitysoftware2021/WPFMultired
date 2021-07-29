@@ -150,7 +150,8 @@ namespace WPFMultired.Classes
         Report_Cash = 16,
         Consult_Invoice = 17,
         Report_Invoice = 18,
-        Validate_Finger = 19
+        Validate_Finger = 19,
+        Create_Transaction_Retiro = 20
     }
 
     public enum ETypeDetailModel
