@@ -178,7 +178,7 @@ namespace WPFMultired.UserControls
 
                                 Utilities.CloseModal();
 
-                                if (response != null)
+                                if (response.Data != null)
                                 {
                                     transaction = (Transaction)response.Data;
                                     transaction.State = ETransactionState.Success;
