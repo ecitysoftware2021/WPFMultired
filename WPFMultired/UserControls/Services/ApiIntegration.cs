@@ -1267,7 +1267,15 @@ namespace WPFMultired.Services
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            data.Amount=Convert.ToDecimal( ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2));
+                            try
+                            {
+                                data.Amount=Convert.ToDecimal( ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2));
+                            }
+                            catch (Exception ex)
+                            {
+                                string Amount = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2).Split('.')[0];
+                                data.Amount = Convert.ToDecimal(Amount);
+                            }
                             
                             return new Response { Data = data };
                         }

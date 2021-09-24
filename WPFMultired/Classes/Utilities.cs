@@ -550,6 +550,8 @@ namespace WPFMultired.Classes
         {
             try
             {
+                string total = Total.ToString();
+                Total = Convert.ToDecimal(total.Replace(",", string.Empty));
                 decimal roundTotal = 0;
                 roundTotal = Math.Floor(Total / 100) * 100;
                 return roundTotal;

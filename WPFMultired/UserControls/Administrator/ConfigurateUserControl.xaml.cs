@@ -78,7 +78,7 @@ namespace WPFMultired.UserControls.Administrator
                 }
                 else
                 {
-                    //Utilities.navigator.Navigate(UserControlView.Main);
+                    Utilities.navigator.Navigate(UserControlView.Main);
                      Finish(result);
                 }
             }
