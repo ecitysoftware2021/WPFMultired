@@ -81,6 +81,10 @@ namespace WPFMultired.UserControls
                                // {
                                     Utilities.navigator.Navigate(UserControlView.Main);
                             }
+                            else
+                            {
+                                Utilities.navigator.Navigate(UserControlView.Main);
+                            }
                         }
                     });
                     GC.Collect();
