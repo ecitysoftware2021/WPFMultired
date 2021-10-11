@@ -259,7 +259,7 @@ namespace WPFMultired.UserControls
         private void Btn_consult_TouchDown(object sender, TouchEventArgs e)
         {
             try
-            {
+                {
                 viewModel.Value1 = PassBoxIdentification.Password;
                 if (ValidateFields())
                 {

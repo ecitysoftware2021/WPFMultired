@@ -25,11 +25,8 @@ namespace WPFMultired.UserControls
         public ReturnMonyUserControl(Transaction transaction)
         {
             InitializeComponent();
-
             this.transaction = transaction;
-
             grvPublicity.Content = Utilities.UCPublicityBanner;
-
             OrganizeValues();
         }
 
@@ -150,6 +147,7 @@ namespace WPFMultired.UserControls
                     AdminPayPlus.ControlPeripherals.StartDispenser(transaction.Payment.ValorSobrante);
                 });
             }
+            
             catch (Exception ex)
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, MessageResource.StandarError);
@@ -174,6 +172,8 @@ namespace WPFMultired.UserControls
                             if (this.viewModel.ValorDispensado >= transaction.Payment.ValorSobrante)
                             {
                                 transaction.Amount = viewModel.ValorDispensado;
+                                //transaction.Products[0].Code.Replace()
+
                                 var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
 
                                 Utilities.CloseModal();

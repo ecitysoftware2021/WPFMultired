@@ -30,6 +30,7 @@ using System.Globalization;
 using System.IO;
 using WPFMultired.MR_FingerprintValidator;
 using WPFMultired.MR_RetirosRed;
+using Newtonsoft.Json.Linq;
 
 namespace WPFMultired.Services
 {
@@ -467,6 +468,8 @@ namespace WPFMultired.Services
             try
             {
                 ConsultarProductosClienteServicesClient client = new ConsultarProductosClienteServicesClient();
+        
+
 
                 using (var factory = new WebChannelFactory<ConsultarProductosClienteServicesChannel>())
                 {
@@ -483,20 +486,26 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
-                            I_NUMERODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
-                            I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
-                            I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
+                            
+                            //I_NUMERODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
+                            //I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
+                            //I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request GetProductsClient: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
                         var response = client.mtrprocli(request);
+                        //var response = client1.mtrrecfacc(request);
+
+                        var rsError = int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2));
+
 
                         AdminPayPlus.SaveErrorControl($"Response GetProductsClient: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0 &&
                             response.O_LISTAREGISTROS.O_RTNCON > 0)
+
                         {
                             transaction.Products = new List<Product>();
                             foreach (var item in response.O_LISTAREGISTROS.LIST)
@@ -668,46 +677,54 @@ namespace WPFMultired.Services
         {
             try
             {
-                ProcesarTransaccionServicesClient client = new ProcesarTransaccionServicesClient();
+
+                //ProcesarTransaccionServicesClient client = new ProcesarTransaccionServicesClient();
+                RecaudoFacturasServicesClient client = new RecaudoFacturasServicesClient();
+
 
                 using (var factory = new WebChannelFactory<ProcesarTransaccionServicesChannel>())
                 {
                     using (new OperationContextScope((IClientChannel)client.InnerChannel))
                     {
                         SetHeaderRequest();
-                        WPFMultired.MR_ReportTransaction.iLISTAREGISTROS denominations = null;
+                        WPFMultired.MR_NotificInvoice.iLISTAREGISTROS denominations = null;
 
                         if (transaction.Payment.Denominations != null)
                         {
-                            denominations = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROS
+                            denominations = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROS
                             {
                                 I_RTNCON = transaction.Payment.Denominations.Count,
-                                LIST = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
+                                LIST = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROSLIST[transaction.Payment.Denominations.Count]
                             };
                             var index = 0;
 
                             foreach (var denomination in transaction.Payment.Denominations)
                             {
-                                denominations.LIST[index] = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROSLIST
+                                denominations.LIST[index] = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROSLIST
                                 {
-                                    I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString())), keyEncript),
-                                    I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString())), keyEncript),
-                                    I_MONEDA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
-                                    I_TIPMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
+                                    I_CANTID = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Quantity.ToString()), keyEncript),
+                                    I_DENOMI = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Format("{0:C2}", denomination.Denominacion.ToString()).Replace("$", "")), keyEncript),
+                                    I_CODMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CodMon")), keyEncript),
+                                    I_TIPOMB = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "M"), keyEncript),
+                                    I_TIPDEV = Encryptor.Encrypt(ConcatOrSplitTimeStamp(denomination.Rx == 1 ? "5" : denomination.Code == "AP" ? "1" : denomination.Code == "DP" ? "2" : denomination.Code == "MA" ? "3" : "4"), keyEncript)
+                                    //I_CANDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Quantity.ToString())), keyEncript),
+                                    //I_CODDEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(denomination.Denominacion.ToString())), keyEncript),
+                                    //I_MONEDA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetConfiguration("CuerrenId")), keyEncript),
+                                    //I_TIPMON = Encryptor.Encrypt(ConcatOrSplitTimeStamp((denomination.Code == "DP" || denomination.Code == "AP") ? "B" : "A"), keyEncript),
                                 };
                                 index++;
                             }
                         }
                         else
                         {
-                            denominations = new WPFMultired.MR_ReportTransaction.iLISTAREGISTROS
+                            denominations = new WPFMultired.MR_NotificInvoice.iLISTAREGISTROS
                             {
                                 I_RTNCON = 0,
                                 LIST = { }
                             };
                         }
 
-                        mtrprotrnInput request = new mtrprotrnInput
+                        mtrrecfaccInput request = new mtrrecfaccInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
                             I_DIRECCIONIP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(Utilities.GetIpPublish()), keyEncript),
@@ -716,27 +733,26 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
-                            I_TIPOTRN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
-                            I_CUENTA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].AcountNumber), keyEncript),
-                            I_SISTEMA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].CodeSystem), keyEncript),
-                            I_PRODUCTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Products[0].Code), keyEncript),
-                            I_REFERENCIA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
-                            I_TOKEN = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.consecutive), keyEncript),
-                            I_VALOR = Encryptor.Encrypt(ConcatOrSplitTimeStamp(string.Concat(transaction.Amount.ToString(), "00")), keyEncript),
-                            I_CODIGOTP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTOTP), keyEncript),
-                            I_LISTAREGISTROS = denominations
+
+                            I_KEYASM = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.IdTransactionAPi.ToString()), keyEncript),
+                            I_KEYRED = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Product.CodeSystem), keyEncript),
+                            I_VALORDEVUELTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Amount.ToString()), keyEncript),
+                            I_VALORRECAUDADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
+
+                            I_LISTAREGISTROS = denominations,
+                           
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request ReportTransaction: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
 
-                        var response = client.mtrprotrn(request);
+                        var response = client.mtrrecfacc(request);
 
                         AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
-                            transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOAUTORI, keyDesencript) ?? string.Empty, 2);
+                            transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_APROBACION, keyDesencript) ?? string.Empty, 2);
                             return new Response { Data = transaction };
                         }
                         else
@@ -917,7 +933,7 @@ namespace WPFMultired.Services
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)    
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request GetAdminStatus: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
@@ -1269,7 +1285,8 @@ namespace WPFMultired.Services
                         {
                             try
                             {
-                                data.Amount=Convert.ToDecimal( ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2));
+                                var mount = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2);
+                                data.Amount= decimal.Parse(mount);
                             }
                             catch (Exception ex)
                             {
@@ -1343,6 +1360,12 @@ namespace WPFMultired.Services
 
                             foreach (var item in response.LISTAREGISTROS.LIST)
                             {
+                                //var mount = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRTOT, keyDesencript), 2).Split('.')[0].ToString().Replace(',', '.');
+                                //var max = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMAX, keyDesencript), 2).Split('.')[0].ToString().Replace(',', '.');
+                                //var min = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_MONMIN, keyDesencript), 2).Split('.')[0].ToString().Replace(',', '.');
+                                //var monuntTotal = (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRREC, keyDesencript), 2)[0]).ToString().Replace(',', '.');
+                                //var mounComision = (ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_VLRCOM, keyDesencript), 2)[0]).ToString().Replace(',', '.');
+
                                 transaction.Products.Add(new Product
                                 {
                                     Code = ConcatOrSplitTimeStamp(Encryptor.Decrypt(item.O_REFCLI, keyDesencript), 2),
@@ -1370,7 +1393,17 @@ namespace WPFMultired.Services
                                         transaction.Products[count].AccountStateProduct = JsonConvert.DeserializeObject<AccountStateProduct>(transaction.Products[count].TypeTransaction);
                                         break;
                                     case ETypeServiceSelect.Retiros:
+                                        ////JsonConvert.DeserializeObject(transaction.Products[count].TypeTransaction);
+                                        //var z = transaction.Products[count].TypeTransaction;
+                                        //var w = JObject.Parse(z.ToString());
+                                        //var wasaa = w.Property("VALORMAX").Value.ToString().Split('.')[0].Replace(',', '.').Replace('}' , ' ').TrimEnd();
+                                        //var Data = new DataExtraRetiro {
+                                        //    ACCOUNT = w.Property("ACCOUNT").Value.ToString(),
+                                        //    RELATION = w.Property("RELATION").Value.ToString(),
+                                        //    VALORMAX = decimal.Parse(wasaa)
+                                        //};
                                         transaction.Products[count].ExtraRetiro = JsonConvert.DeserializeObject<DataExtraRetiro>(transaction.Products[count].TypeTransaction);
+                                        //transaction.Products[count].ExtraRetiro = Data;
                                         break;
                                 }
                                 count++;

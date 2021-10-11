@@ -7,6 +7,7 @@ using WPFMultired.Models;
 
 namespace WPFMultired.Services
 {
+    //TODO: JOJOA 
     public class Request
     {
         public string I_CANAL { get; set; }

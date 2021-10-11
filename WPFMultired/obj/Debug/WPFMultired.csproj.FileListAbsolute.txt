@@ -567,14 +567,6 @@ E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerp
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\CodigoVerificacionUserControl.g.cs
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\LoginFingerprintUserControl.baml
 E:\GitHub\WPFMultired\WPFMultired\obj\Debug\UserControls\Withdrawal\CodigoVerificacionUserControl.baml
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Dapper.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignColors.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignThemes.Wpf.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newtonsoft.Json.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.dll
-C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\x64\concrt140.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\x64\cvextern.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\x64\msvcp140.dll
@@ -595,6 +587,7 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\swresample-2.dl
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\swscale-4.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Accord.dll.config
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe.config
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.exe
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPFMultired.pdb
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Accord.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Accord.Video.dll
@@ -603,6 +596,7 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\AForge.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\AForge.Video.DirectShow.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\AForge.Video.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\CommonServiceLocator.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Dapper.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\DPUruNet.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Ecity.DigitalPersona.Reader.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Emgu.CV.UI.dll
@@ -613,7 +607,13 @@ C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\GalaSoft.MvvmLi
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\GalaSoft.MvvmLight.Platform.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Ghostscript.NET.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignColors.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Newtonsoft.Json.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Data.SQLite.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WpfAnimatedGif.dll
+C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\WPKeyboard.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\ZedGraph.dll
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Accord.xml
 C:\Users\H-81\Documents\GitHub\WPFMultired\WPFMultired\bin\Debug\Accord.Video.xml

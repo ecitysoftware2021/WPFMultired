@@ -59,7 +59,7 @@ namespace WPFMultired.Classes
             try
             {
                 ModalModel model = new ModalModel
-                {
+                {       
                     Tittle = tittle,
                     Messaje = message,
                     TypeModal = type,

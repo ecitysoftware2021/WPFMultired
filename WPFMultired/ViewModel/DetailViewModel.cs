@@ -436,6 +436,17 @@ namespace WPFMultired.ViewModel
                     OptionsList = (List<TypeDocument>)response.Data;
                     //OptionsEntries.Source = OptionsList;
                 }
+                else
+                {
+                    var Mokup = Utilities.ConverJson<List<TypeDocument>>(Utilities.GetConfiguration("PathTypeDocument"));
+
+                    if (response != null && Mokup.Count > 0)
+                    {
+                        OptionsList.Clear();
+                        OptionsList = Mokup;
+                    }
+                    Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name,null , MessageResource.StandarError);
+                }
             }
             catch (Exception ex)
             {

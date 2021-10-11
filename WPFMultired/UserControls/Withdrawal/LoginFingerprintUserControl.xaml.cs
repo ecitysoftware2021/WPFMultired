@@ -123,15 +123,24 @@ namespace WPFMultired.UserControls
                 var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction).Result;
                 Utilities.CloseModal();
 
-                if (response != null && response.Data != null)
+                if (response!=null)
                 {
-                    transaction = (Transaction)response.Data;
-                    Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
+                    if (response.Data != null)
+                    {
+                        transaction = (Transaction)response.Data;
+                        Utilities.navigator.Navigate(UserControlView.DataList, true, transaction);
+                    }
+                    else
+                    {
+                        Utilities.ShowModal(response.Message, EModalType.Error, this);
+                        Utilities.navigator.Navigate(UserControlView.Main);
+                    }
                 }
                 else
                 {
-                    Utilities.ShowModal(response.Message, EModalType.Error, this);
+                    Utilities.ShowModal(MessageResource.ComunicationServerFail, EModalType.Error, this);
                     Utilities.navigator.Navigate(UserControlView.Main);
+                  
                 }
             }
             catch (Exception ex)
@@ -159,7 +168,7 @@ namespace WPFMultired.UserControls
                 else
                 {
                     return false;
-                    //Utilities.ShowModal(response.Message, EModalType.Error, this);
+                    Utilities.ShowModal(response.Message, EModalType.Error, this);
                 }
             }
             catch (Exception ex)
@@ -220,6 +229,7 @@ namespace WPFMultired.UserControls
 
         private void btn_Restart_TouchEnter(object sender, TouchEventArgs e)
         {
+
             TimeToRestart();
         }
 

@@ -1,27 +1,56 @@
-[
-  {
-    "Type": 1,
-    "Key": "C",
-    "Value": "Cedula de ciudadania"
-  },
-  {
-    "Type": 1,
-    "Key": "E",
-    "Value": "Cedula de extranjeria"
-  },
-  {
-    "Type": 1,
-    "Key": "P",
-    "Value": "Pasaporte"
-  },
-  {
-    "Type": 1,
-    "Key": "I",
-    "Value": "Tarjeta de identidad"
-  },
-  {
-    "Type": 2,
-    "Key": "N",
-    "Value": "NIT"
-  }
-]
+{"dataComplementary":
+{"DurationAlert":"10000",
+"TipoOperacion":"01",
+"CodigoUnico":"010601557",
+"NAME_PAYPAD":"Pay+ Pereira",
+"LAST_NAME_PAYPAD":"Pereira",
+"NAME_APLICATION":"WPFCCPereira.exe",
+"NIT":"891.400.669-6",
+"ProductName":"Certificados Electrónicos",
+"DirectoryFile":"C:/CertificadosElectronicos",
+"PathTypeDocument":null,"CuantityItemsList":"5",
+"ClientPlataform":null,"IntentsDownload":"3",
+"PrinterName":"Xerox Phaser 3330",
+"UrlBackground":null},
+"dataIntegration":
+{"desarrollo":
+{"UserAPI":"1cero1",
+"PassAPI":"1cero1per2020*",
+"basseAddressIntegration":"https://siidesarrollo.confecamaras.co/librerias/wsRestSII/v1/","GetTokenIntegration":null,
+"ConsultFileMercantil":null,
+"LiquidateNormalRenewal":null,
+"SearchFiles":null,
+"SendTransaction":null,
+"SendPay":null,
+"ConsultSettled":null,
+"ConsultReceipt":null,
+"BuyCancel":null,
+"CodeCompany":null,
+"OperadorControl":null,
+"EmailControl":null,
+"IdControl":null,
+"NameControl":null,
+"Proyect":null,
+"TypeTransaction":null,
+"CodificationService":null,
+"PhoneControl":null,
+"MethodPayment":null},
+"produccion":
+{"UserAPI":"dispenpant",
+"PassAPI":"E9k58R1ekhjikhyDokR7",
+"basseAddressIntegration":"https://siipereira.confecamaras.co/librerias/wsRestSII/v1/",
+"GetTokenIntegration":null,
+"ConsultFileMercantil":null,
+"LiquidateNormalRenewal":null,
+"SearchFiles":null,
+"SendTransaction":null,
+"SendPay":null,
+"ConsultSettled":null,
+"ConsultReceipt":null,
+"BuyCancel":null,
+"CodeCompany":null,
+"OperadorControl":null,
+"EmailControl":null,
+"IdControl":null,
+"NameControl":null,
+"Proyect":null,"TypeTransaction":null,"CodificationService":null,"PhoneControl":null,"MethodPayment":null},"ambiente":{"UserAPI":null,"PassAPI":null,"basseAddressIntegration":null,"GetTokenIntegration":"solicitarToken","ConsultFileMercantil":"consultarExpedienteMercantil","LiquidateNormalRenewal":"liquidarRenovacionNormal","SearchFiles":"busquedaExpedientes","SendTransaction":"reportarTransaccion","SendPay":"reportarPago","GetDiscount":"aplicar1756Liquidacion","ConsultSettled":"consultarRadicado","ConsultReceipt":"consultarRecibo","BuyCancel":"CamaraComercio/BuyCancel","CodeCompany":"27","OperadorControl":"KIOSKO01","EmailControl":"jnietot@gmail.com","IdControl":"79048506","NameControl":"KIOSKO 1 CERO1","Proyect":"1","TypeTransaction":"certificadosvirtuales","CodificationService":"S","PhoneControl":"3106896601","MethodPayment":"01"}}}

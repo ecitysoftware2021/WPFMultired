@@ -61,6 +61,15 @@ namespace WPFMultired.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .\Mokups\Mockup_Type_Documents.json.
+        /// </summary>
+        internal static string Mokups {
+            get {
+                return ResourceManager.GetString("Mokups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .\Admin\Info.txt.
         /// </summary>
         internal static string PathInfo {

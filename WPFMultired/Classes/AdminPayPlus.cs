@@ -404,7 +404,7 @@ namespace WPFMultired.Classes
             }
             return null;
         }
-
+        
         public async static void SaveLog(object log, ELogType type)
         {
             try
@@ -539,6 +539,12 @@ namespace WPFMultired.Classes
                     {
                         transaction.consecutive = (await GetConsecutive()).ToString();
                     }
+                    else if (!getConsecutive)
+                    {
+                        transaction.consecutive = transaction.reference;
+                        
+                    }
+
 
                     if ((getConsecutive && int.Parse(transaction.consecutive) > 0) || !getConsecutive)
                     {
@@ -561,7 +567,6 @@ namespace WPFMultired.Classes
                                 STATE = 0,
                                 DESCRIPTION = "Transaccion iniciada",
                                 TRANSACTION_REFERENCE = transaction.reference
-
 
                             };
                             int transactionProduct = 38;
