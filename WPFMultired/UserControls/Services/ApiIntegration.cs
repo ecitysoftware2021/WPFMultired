@@ -749,10 +749,22 @@ namespace WPFMultired.Services
 
                         AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
+                        var Data = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript) ?? string.Empty, 2);
+                       
+                        
+
+                        JObject X =  JObject.Parse(Data);
+                        string Datos = X.Property("VLRTOT").Value.ToString().Split('$')[1].Replace('}', ' ').Trim();
+
+
                         if (response != null && !string.IsNullOrEmpty(response.O_CODIGOERROR) &&
                             int.Parse(ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_CODIGOERROR, keyDesencript), 2)) == 0)
                         {
+
+                            transaction.Product.VLRTOT = Datos;
                             transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_APROBACION, keyDesencript) ?? string.Empty, 2);
+                           
+                            
                             return new Response { Data = transaction };
                         }
                         else

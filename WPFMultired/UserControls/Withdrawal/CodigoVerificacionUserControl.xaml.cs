@@ -258,6 +258,7 @@ namespace WPFMultired.UserControls.Withdrawal
             try
             {
                 var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Create_Transaction_Retiro, this.transaction).Result;
+                
                 Utilities.CloseModal();
 
                 if (response != null && response.Data != null)

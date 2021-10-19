@@ -14,6 +14,9 @@ namespace WPFMultired.Models
         public decimal AmountMax { get; set; }
         public decimal AmountMin { get; set; }
         public decimal Amount { get; set; }
+        public decimal DESTOT { get; set; }
+        public string VLRTOT { get; set; }
+
         public decimal AmountUser { get; set; }
         public string TypeTransaction { get; set; }
         public decimal AmountTotal { get; set; }
@@ -46,6 +49,8 @@ namespace WPFMultired.Models
         public string SEGPAP { get; set; }
         public decimal VLRPAP { get; set; }
         public string DESPAP { get; set; }
+        public decimal DESTOT { get; set; }
+        public decimal VLRTOT { get; set; }
 
     }
 
@@ -66,6 +71,9 @@ namespace WPFMultired.Models
         public string ACCOUNT { get; set; }
         public decimal VALORMAX { get; set; }
         public string RELATION { get; set; }
+
+        public decimal DESTOT { get; set; }
+        public decimal VLRTOT { get; set; }
     }
 
 }
