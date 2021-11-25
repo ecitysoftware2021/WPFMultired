@@ -59,14 +59,20 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                Task.Run(() =>
+                Task.Run(async() =>
                 {
                     while (_validatePaypad)
                     {
-                        AdminPayPlus.ValidatePaypad();
+
+                        //TODO: AdminPayPlus.ValidatePaypad ya esta validado no entiendo por que validan 2 veces
+                        //var rsult = await AdminPayPlus.ValidatePaypad();
+
+                        //if (rsult == true) 
+                        //{
+                        //    _validatePaypad = false;
+                        //}
 
                         ValidateVersion();
-
                         Thread.Sleep(int.Parse(Utilities.GetConfiguration("DurationAlert")));
                     }
                 });
@@ -87,6 +93,8 @@ namespace WPFMultired.UserControls
                     Utilities.ShowModal(MessageResource.UpdateAplication, EModalType.Error, this, true);
                     Utilities.UpdateApp();
                 }
+                else _validatePaypad = false;
+
             }
             catch (Exception ex)
             {

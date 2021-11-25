@@ -65,6 +65,7 @@ namespace WPFMultired.Classes.Printer
             }
             catch (Exception EX)
             {
+
             }
             StatePrint = false;
             return status;
@@ -125,6 +126,7 @@ namespace WPFMultired.Classes.Printer
             }
             catch (Exception ex)
             {
+
             }
         }
     }

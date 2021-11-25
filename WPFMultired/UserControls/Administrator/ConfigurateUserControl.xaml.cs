@@ -79,7 +79,7 @@ namespace WPFMultired.UserControls.Administrator
                 else
                 {
                     Utilities.navigator.Navigate(UserControlView.Main);
-                     Finish(result);
+                    Finish(result);
                 }
             }
             catch (Exception ex)

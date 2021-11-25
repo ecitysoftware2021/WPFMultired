@@ -52,7 +52,7 @@ namespace WPFMultired.Models
                     case UserControlView.Pay:
                         View = new PaymentUserControl((Transaction)data);
                         break;
-                    case UserControlView.ReturnMony:
+                    case UserControlView.ReturnMony:    
                         View = new ReturnMonyUserControl((Transaction)data);
                         break;
                     case UserControlView.Login:

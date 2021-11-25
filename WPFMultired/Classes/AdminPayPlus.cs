@@ -138,8 +138,10 @@ namespace WPFMultired.Classes
                 if (await ValidatePaypad())
                 {
                     await DownloadInformation();
-                    DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
-                    ValidatePeripherals();
+                    //DescriptionStatusPayPlus = MessageResource.ValidatePeripherals;
+                    
+                    //ValidatePeripherals();
+                    
                     callbackResult?.Invoke(true);
                 }
                 else
@@ -171,7 +173,7 @@ namespace WPFMultired.Classes
                         config.ID_SESSION = Convert.ToInt32(result.Session);
                         config.TOKEN_API = result.Token;
 
-                        if (SqliteDataAccess.UpdateConfiguration(config))
+                        if (await SqliteDataAccess.UpdateConfiguration(config))
                         {
                             _dataConfiguration = config;
                             return true;
@@ -194,8 +196,9 @@ namespace WPFMultired.Classes
         {
             try
             {
-
                 var responseInit = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
+             
+                if(responseInit!= null) {
                 DATAINIT validateStatus = (responseInit.Data as DATAINIT);
                 _dataPayPlus.StateAceptance = validateStatus.O_STATUSACEPTADOR;
                 _dataPayPlus.StateDispenser = validateStatus.O_STATUSDISPENSER;
@@ -264,6 +267,7 @@ namespace WPFMultired.Classes
                 {
                     return true;
                 }
+
                 SaveLog(new RequestLog
                 {
                     Reference = "Mensaje Inicial",
@@ -271,8 +275,8 @@ namespace WPFMultired.Classes
                     State = 6,
                     Date = DateTime.Now
                 }, ELogType.General);
-                SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
-
+                    SaveErrorControl(MessageResource.NoGoInitial, _dataPayPlus.Message, EError.Aplication, ELevelError.Strong);
+                }
             }
             catch (Exception ex)
             {
@@ -443,7 +447,7 @@ namespace WPFMultired.Classes
         {
             try
             {
-                Task.Run(() =>
+                Task.Run(async() =>
                 {
                     if (_dataConfiguration != null)
                     {
@@ -486,7 +490,7 @@ namespace WPFMultired.Classes
                             }
                         };
 
-                        api.CallApi("SaveErrorConsole", consoleErro);
+                        await api.CallApi("SaveErrorConsole", consoleErro);
                     }
                 });
             }
@@ -633,7 +637,8 @@ namespace WPFMultired.Classes
                                         }, ELogType.General);
                                     }
                                 }
-                                transaction.TransactionId = SqliteDataAccess.SaveTransaction(data);
+                                
+                                transaction.TransactionId = await SqliteDataAccess.SaveTransaction(data);
                             }
                         }
                         else
@@ -690,7 +695,7 @@ namespace WPFMultired.Classes
             {
                 if (transaction != null)
                 {
-                    TRANSACTION tRANSACTION = SqliteDataAccess.UpdateTransaction(transaction);
+                    TRANSACTION tRANSACTION = await SqliteDataAccess.UpdateTransaction(transaction);
 
                     if (tRANSACTION != null)
                     {

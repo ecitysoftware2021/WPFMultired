@@ -124,7 +124,7 @@ namespace WPFMultired.Services
                 {
                     case ETypeService.Validate_Status_Admin:
 
-                        return GetAdminStatus();
+                        return await GetAdminStatus();
                     case ETypeService.Create_Transaction_Retiro:
 
                         return CreateTransactionRetiro((Transaction)data);
@@ -926,7 +926,7 @@ namespace WPFMultired.Services
         /// #1 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
-        private Response GetAdminStatus()
+        private async Task<Response> GetAdminStatus()
         {
             try
             {

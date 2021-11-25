@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using WPFMultired.DataModel;
 using WPFMultired.Models;
 using WPFMultired.Resources;
@@ -59,14 +60,14 @@ namespace WPFMultired.Classes.DB
             }
         }
 
-        public static bool UpdateConfiguration(CONFIGURATION_PAYDAD config)
+        public static async Task<bool> UpdateConfiguration(CONFIGURATION_PAYDAD config)
         {
             try
             {
                 if (config != null)
                 {
                     var configuration = Execute<object>("DELETE FROM CONFIGURATION_PAYDAD", null);
-                    Execute<CONFIGURATION_PAYDAD>("INSERT INTO CONFIGURATION_PAYDAD (" +
+                    await Execute<CONFIGURATION_PAYDAD>("INSERT INTO CONFIGURATION_PAYDAD (" +
                                 "USER_API, " +
                                 "PASSWORD_API," +
                                 "USER, " +
@@ -93,13 +94,13 @@ namespace WPFMultired.Classes.DB
             return false;
         }
 
-        public static int SaveTransaction(TRANSACTION transaction)
+        public static async Task<int> SaveTransaction(TRANSACTION transaction)
         {
             try
             {
                 if (transaction != null)
                 {
-                    var idTransaccion = Execute<ITRANSACTION>("INSERT INTO 'TRANSACTION' (" +
+                    var idTransaccion = await Execute<ITRANSACTION>("INSERT INTO 'TRANSACTION' (" +
                            "TRANSACTION_ID, " +
                            "PAYPAD_ID," +
                            "TYPE_TRANSACTION_ID, " +
@@ -164,7 +165,7 @@ namespace WPFMultired.Classes.DB
                         foreach (var description in transaction.TRANSACTION_DESCRIPTION)
                         {
                             description.TRANSACTION_ID = idTransaccion;
-                            Execute<TRANSACTION_DESCRIPTION>(query, description);
+                            await Execute<TRANSACTION_DESCRIPTION>(query, description);
                         }
 
                         return GetTRANSACTION((int)transaction.TRANSACTION_ID).ID;
@@ -179,7 +180,7 @@ namespace WPFMultired.Classes.DB
             return 0;
         }
 
-        public static TRANSACTION UpdateTransaction(Transaction transaction)
+        public static async Task<TRANSACTION> UpdateTransaction(Transaction transaction)
         {
             try
             {
@@ -203,7 +204,7 @@ namespace WPFMultired.Classes.DB
                             data.STATE_NOTIFICATION = 1;
                         }
 
-                        Execute<TRANSACTION>("UPDATE 'TRANSACTION' SET INCOME_AMOUNT = @INCOME_AMOUNT, " +
+                        await Execute<TRANSACTION>("UPDATE 'TRANSACTION' SET INCOME_AMOUNT = @INCOME_AMOUNT, " +
                                     "RETURN_AMOUNT = @RETURN_AMOUNT, " +
                                     "DESCRIPTION = @DESCRIPTION, " +
                                     "STATE_TRANSACTION_ID = @STATE_TRANSACTION_ID, " +
@@ -224,11 +225,11 @@ namespace WPFMultired.Classes.DB
             return null;
         }
 
-        public static void UpdateTransactionState(TRANSACTION tRANSACTION)
+        public static async Task UpdateTransactionState(TRANSACTION tRANSACTION)
         {
             try
             {
-                Execute<TRANSACTION>(string.Concat("UPDATE 'TRANSACTION' SET STATE = ", tRANSACTION.STATE, " WHERE ID = ", tRANSACTION.ID), null);
+                await Execute<TRANSACTION>(string.Concat("UPDATE 'TRANSACTION' SET STATE = ", tRANSACTION.STATE, " WHERE ID = ", tRANSACTION.ID), null);
             }
             catch (Exception ex)
             {
@@ -327,13 +328,13 @@ namespace WPFMultired.Classes.DB
             return null;
         }
 
-        public static bool InsetConsoleError(PAYPAD_CONSOLE_ERROR error)
+        public static async Task<bool> InsetConsoleError(PAYPAD_CONSOLE_ERROR error)
         {
             try
             {
                 if (error != null)
                 {
-                    Execute<PAYPAD_CONSOLE_ERROR>("INSERT INTO PAYPAD_CONSOLE_ERROR (" +
+                    await Execute<PAYPAD_CONSOLE_ERROR>("INSERT INTO PAYPAD_CONSOLE_ERROR (" +
                        "PAYPAD_ID, " +
                        "ERROR_ID," +
                        "ERROR_LEVEL_ID, " +
@@ -363,13 +364,13 @@ namespace WPFMultired.Classes.DB
             return false;
         }
 
-        public static int SaveTransactionDetail(RequestTransactionDetails detail, int state)
+        public static async Task<int> SaveTransactionDetail(RequestTransactionDetails detail, int state)
         {
             try
             {
                 if (detail != null)
                 {
-                    return Execute<TRANSACTION_DETAIL>("INSERT INTO TRANSACTION_DETAIL (" +
+                    return await Execute<TRANSACTION_DETAIL>("INSERT INTO TRANSACTION_DETAIL (" +
                                "TRANSACTION_ID, " +
                                "CODE," +
                                "DENOMINATION, " +
@@ -474,7 +475,7 @@ namespace WPFMultired.Classes.DB
             return result;
         }
 
-        public static int Execute<T>(string query, T data)
+        public static async Task <int> Execute<T>(string query, T data)
         {
             object result = 0;
             try
@@ -485,11 +486,11 @@ namespace WPFMultired.Classes.DB
                     {
                         if (data == null)
                         {
-                            result = (int)connection.Execute(query);
+                            result = await connection.ExecuteAsync(query);
                         }
                         else
                         {
-                            result = connection.Execute(query, data);
+                            result =  await connection.ExecuteAsync(query, data);
                         }
                     }
                     catch (InvalidOperationException ex)
