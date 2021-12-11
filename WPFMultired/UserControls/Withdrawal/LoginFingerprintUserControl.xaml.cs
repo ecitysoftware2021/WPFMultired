@@ -1,5 +1,6 @@
 ﻿using Ecity.DigitalPersona.ReaderUareU;
 using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -156,7 +157,7 @@ namespace WPFMultired.UserControls
             {
                 var response = new Services.Object.Response();
                 this.transaction.Action = $"{(int)EFingerAction.Authenticate}";
-                this.transaction.Finger_Byte = template;
+                this.transaction.I_HUELLA = template;
                 response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
 
 

@@ -812,7 +812,7 @@ namespace WPFMultired.Services
                             I_DOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
                             I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
-                            I_HUELLA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Finger_Byte), keyEncript)
+                            I_HUELLA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.I_HUELLA), keyEncript)
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request FingerValidator: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);

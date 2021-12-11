@@ -86,7 +86,7 @@
     </Reference>
     <Reference Include="Ecity.DigitalPersona.Reader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DLL\Ecity.DigitalPersona.Reader.dll</HintPath>
+      <HintPath>..\..\Digital_Persona_Ecity_Reader\Ecity.DigitalPersona.Reader\Ecity.DigitalPersona.Reader\bin\Debug\Ecity.DigitalPersona.Reader.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI, Version=3.3.0.2824, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EMGU.CV.3.3.0.2824\lib\net35\Emgu.CV.UI.dll</HintPath>

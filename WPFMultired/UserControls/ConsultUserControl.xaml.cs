@@ -198,7 +198,7 @@ namespace WPFMultired.UserControls
                     if (transaction.eTypeService == ETypeServiceSelect.Retiros)
                     {
                         this.transaction.Action = $"{(int)EFingerAction.Validate}";
-                        this.transaction.Finger_Byte = "null";
+                        //this.transaction.I_HUELLA = byte[];
                         response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
                     }
                     else

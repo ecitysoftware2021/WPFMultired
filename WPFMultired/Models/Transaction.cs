@@ -114,7 +114,7 @@ namespace WPFMultired.Models
             }
         }
 
-        public string Finger_Byte { get; set; }
+        public string I_HUELLA { get; set; }
         public string TOTP { get; set; }
         public string Image { get; set; }
         public int ImageLength { get; set; }
