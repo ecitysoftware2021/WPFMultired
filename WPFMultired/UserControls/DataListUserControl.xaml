@@ -494,12 +494,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock Text="Selecciona el producto."
-                                       Foreground="Gray"
-                                       FontSize="30"
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold"
-                                        Margin="0,-50,0,0"/>
+            
             <ListView 
                 x:Name="lv_retiros" 
                 Margin="0,10,0,0"

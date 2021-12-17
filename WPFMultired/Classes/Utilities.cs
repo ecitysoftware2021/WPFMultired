@@ -32,6 +32,8 @@ namespace WPFMultired.Classes
         public static System.Windows.Controls.UserControl UCPublicityBanner;
 
         private static ModalWindow modal { get; set; }
+
+        public static string modalMensaje { get; set; }
         #endregion
         public static string GetConfiguration(string key, bool decodeString = false)
         {

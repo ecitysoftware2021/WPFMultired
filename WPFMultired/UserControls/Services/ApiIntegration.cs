@@ -124,7 +124,7 @@ namespace WPFMultired.Services
                 {
                     case ETypeService.Validate_Status_Admin:
 
-                        return GetAdminStatus();
+                        return await GetAdminStatus();
                     case ETypeService.Create_Transaction_Retiro:
 
                         return CreateTransactionRetiro((Transaction)data);
@@ -468,7 +468,7 @@ namespace WPFMultired.Services
             try
             {
                 ConsultarProductosClienteServicesClient client = new ConsultarProductosClienteServicesClient();
-        
+
 
 
                 using (var factory = new WebChannelFactory<ConsultarProductosClienteServicesChannel>())
@@ -486,7 +486,7 @@ namespace WPFMultired.Services
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataPayPlus.IdiomId.ToString()), keyEncript),
                             I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeCompany), keyEncript),
-                            
+
                             //I_NUMERODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             //I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
                             //I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript)
@@ -740,7 +740,7 @@ namespace WPFMultired.Services
                             I_VALORRECAUDADO = Encryptor.Encrypt(ConcatOrSplitTimeStamp("0"), keyEncript),
 
                             I_LISTAREGISTROS = denominations,
-                           
+
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request ReportTransaction: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
@@ -750,10 +750,10 @@ namespace WPFMultired.Services
                         AdminPayPlus.SaveErrorControl($"Response ReportTransaction: {JsonConvert.SerializeObject(response)} LLave: {keyDesencript}", "", EError.Api, ELevelError.Mild);
 
                         var Data = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_DATOSADICIONALES, keyDesencript) ?? string.Empty, 2);
-                       
-                        
 
-                        JObject X =  JObject.Parse(Data);
+
+
+                        JObject X = JObject.Parse(Data);
                         string Datos = X.Property("VLRTOT").Value.ToString().Split('$')[1].Replace('}', ' ').Trim();
 
 
@@ -763,8 +763,8 @@ namespace WPFMultired.Services
 
                             transaction.Product.VLRTOT = Datos;
                             transaction.CodeTransactionAuditory = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_APROBACION, keyDesencript) ?? string.Empty, 2);
-                           
-                            
+
+
                             return new Response { Data = transaction };
                         }
                         else
@@ -798,7 +798,6 @@ namespace WPFMultired.Services
                     {
                         SetHeaderRequest();
 
-
                         mtrhuellacInput request = new mtrhuellacInput
                         {
                             I_CANAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(codeCanal), keyEncript),
@@ -812,7 +811,12 @@ namespace WPFMultired.Services
                             I_DOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.reference), keyEncript),
                             I_TIPODOCUMENTO = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.TypeDocument.ToString()), keyEncript),
                             I_TIPOTRANSACCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.CodeTypeTransaction), keyEncript),
-                            I_HUELLA = Encryptor.Encrypt(ConcatOrSplitTimeStamp(transaction.Finger_Byte), keyEncript)
+                            I_HUELLA = new iHUELLA
+                            {
+                                I_HUELEN =
+                                Convert.ToInt32(transaction.Finger_Byte is null ? "0" : transaction.Finger_Byte.Length.ToString()),
+                                I_HUEDAT = transaction.Finger_Byte is null ? "0" : transaction.Finger_Byte
+                            }
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request FingerValidator: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
@@ -832,6 +836,7 @@ namespace WPFMultired.Services
                         }
                         else
                         {
+                            var error = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
                             return new Response { Message = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript), 2) };
                         }
                     }
@@ -926,7 +931,7 @@ namespace WPFMultired.Services
         /// #1 Método para buscar los idiomas disponibles para la aplicación
         /// </summary>
         /// <returns></returns>
-        private Response GetAdminStatus()
+        private async Task<Response> GetAdminStatus()
         {
             try
             {
@@ -945,7 +950,7 @@ namespace WPFMultired.Services
                             I_TERMINAL = Encryptor.Encrypt(ConcatOrSplitTimeStamp(AdminPayPlus.DataConfiguration.ID_PAYPAD.ToString()), keyEncript),
                             I_TIMESTAMP = Encryptor.Encrypt(ConcatOrSplitTimeStamp(((long)(DateTime.UtcNow - timerSeed).TotalMilliseconds).ToString()), keyEncript),
                             I_LENGUAJE = Encryptor.Encrypt(ConcatOrSplitTimeStamp("2"), keyEncript),
-                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)    
+                            I_INSTITUCION = Encryptor.Encrypt(ConcatOrSplitTimeStamp(sourceEntity), keyEncript)
                         };
 
                         AdminPayPlus.SaveErrorControl($"Request GetAdminStatus: {JsonConvert.SerializeObject(request)}  LLave: {keyEncript}", "", EError.Aplication, ELevelError.Mild);
@@ -972,7 +977,7 @@ namespace WPFMultired.Services
                         }
                         else
                         {
-                            string error = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
+                            Utilities.modalMensaje = Encryptor.Decrypt(response.O_MENSAJEERROR, keyDesencript);
                         }
                     }
                 }
@@ -1298,14 +1303,14 @@ namespace WPFMultired.Services
                             try
                             {
                                 var mount = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2);
-                                data.Amount= decimal.Parse(mount);
+                                data.Amount = decimal.Parse(mount);
                             }
                             catch (Exception ex)
                             {
                                 string Amount = ConcatOrSplitTimeStamp(Encryptor.Decrypt(response.O_VALORTOTAL, keyDesencript), 2).Split('.')[0];
                                 data.Amount = Convert.ToDecimal(Amount);
                             }
-                            
+
                             return new Response { Data = data };
                         }
                         else

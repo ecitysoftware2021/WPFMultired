@@ -55,7 +55,7 @@ namespace WPFMultired.MR_FingerprintValidator {
         
         private string i_ACCIONField;
         
-        private string i_HUELLAField;
+        private iHUELLA i_HUELLAField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -191,13 +191,59 @@ namespace WPFMultired.MR_FingerprintValidator {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public string I_HUELLA {
+        public iHUELLA I_HUELLA {
             get {
                 return this.i_HUELLAField;
             }
             set {
                 this.i_HUELLAField = value;
                 this.RaisePropertyChanged("I_HUELLA");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://validarhuella.wsbeans.iseries/")]
+    public partial class iHUELLA : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int i_HUELENField;
+        
+        private string i_HUEDATField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int I_HUELEN {
+            get {
+                return this.i_HUELENField;
+            }
+            set {
+                this.i_HUELENField = value;
+                this.RaisePropertyChanged("I_HUELEN");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string I_HUEDAT {
+            get {
+                return this.i_HUEDATField;
+            }
+            set {
+                this.i_HUEDATField = value;
+                this.RaisePropertyChanged("I_HUEDAT");
             }
         }
         

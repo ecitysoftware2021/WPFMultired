@@ -1,5 +1,6 @@
 ﻿using Ecity.DigitalPersona.ReaderUareU;
 using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -123,7 +124,7 @@ namespace WPFMultired.UserControls
                 var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Consult_Invoice, this.transaction).Result;
                 Utilities.CloseModal();
 
-                if (response!=null)
+                if (response != null)
                 {
                     if (response.Data != null)
                     {
@@ -140,7 +141,7 @@ namespace WPFMultired.UserControls
                 {
                     Utilities.ShowModal(MessageResource.ComunicationServerFail, EModalType.Error, this);
                     Utilities.navigator.Navigate(UserControlView.Main);
-                  
+
                 }
             }
             catch (Exception ex)
@@ -157,8 +158,8 @@ namespace WPFMultired.UserControls
                 var response = new Services.Object.Response();
                 this.transaction.Action = $"{(int)EFingerAction.Authenticate}";
                 this.transaction.Finger_Byte = template;
-                response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
 
+                response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Validate_Finger, this.transaction);
 
                 if (response != null && response.Data != null)
                 {

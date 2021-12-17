@@ -22,7 +22,13 @@
           <xs:element name="I_DOCUMENTO" type="xs:string" />
           <xs:element name="I_TIPOTRANSACCION" type="xs:string" />
           <xs:element name="I_ACCION" type="xs:string" />
-          <xs:element name="I_HUELLA" type="xs:string" />
+          <xs:element name="I_HUELLA" type="tns:iHUELLA" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iHUELLA">
+        <xs:sequence>
+          <xs:element name="I_HUELEN" type="xs:int" />
+          <xs:element name="I_HUEDAT" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="mtrhuellacResponse">
@@ -42,11 +48,11 @@
       </xs:complexType>
     </xs:schema>
   </types>
-  <message name="mtrhuellacResponse">
-    <part name="parameters" element="tns:mtrhuellacResponse" />
-  </message>
   <message name="mtrhuellac">
     <part name="parameters" element="tns:mtrhuellac" />
+  </message>
+  <message name="mtrhuellacResponse">
+    <part name="parameters" element="tns:mtrhuellacResponse" />
   </message>
   <portType name="ValidarHuellaServices">
     <operation name="mtrhuellac">
