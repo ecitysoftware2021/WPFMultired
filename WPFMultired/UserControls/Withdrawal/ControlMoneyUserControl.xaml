@@ -84,7 +84,7 @@
                     Text="¿Deseas continuar?"
                     HorizontalAlignment="Center"
                     Margin="0,0,0,100" 
-                    FontSize="35" 
+                    FontSize="30" 
                     Foreground="Gray"
                     FontFamily="Myriad Pro"
                     TextWrapping="Wrap"

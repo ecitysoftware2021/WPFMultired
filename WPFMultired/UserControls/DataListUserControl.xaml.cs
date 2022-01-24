@@ -239,7 +239,15 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                if (string.IsNullOrEmpty(txtValor.Text) || valueModel.Val <= 0 || valueModel.Val < min || valueModel.Val > max)
+                var valorDivididoEn10 = Convert.ToDecimal(valueModel.Val) % 10000;
+
+                if (string.IsNullOrEmpty(txtValor.Text) ||
+                    valueModel.Val <= 0 ||
+                    valueModel.Val < min ||
+                    valueModel.Val > max ||
+                    (valorDivididoEn10 != 0 &&
+                    transaction.eTypeService == ETypeServiceSelect.Deposito)
+                    )
                 {
                     ShowErrorMs();
                     return false;
@@ -461,7 +469,7 @@ namespace WPFMultired.UserControls
                 }
                 else if (transaction.eTypeService == ETypeServiceSelect.Deposito)
                 {
-                    questionMsg = string.Format(Utilities.GetConfiguration("MsgGeneric"), string.Format("{0:C0}", transaction.Product.AmountMin), string.Format("{0:C0}", transaction.Product.AmountMax));
+                    questionMsg = string.Format(Utilities.GetConfiguration("MsgGeneric"), string.Format("{0:C0}", 10000), string.Format("{0:C0}", transaction.Product.AmountMax));
                 }
                 else if (transaction.eTypeService == ETypeServiceSelect.Retiros)
                 {

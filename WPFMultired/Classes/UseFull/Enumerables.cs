@@ -76,17 +76,18 @@ namespace WPFMultired.Classes
         Fingerprint,
         TOTPValidator,
         ControlMoney,
-        Photo
+        Photo,
+        Voucher
     }
 
     public enum ETransactionState
     {
         Initial = 1,
         Success = 2,
-        CancelError = 6,
         Cancel = 3,
+        ErrorService = 4,
         Error = 5,
-        ErrorService = 4
+        CancelError = 6
     }
 
     public enum ETransactionType

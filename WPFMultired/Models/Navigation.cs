@@ -37,7 +37,6 @@ namespace WPFMultired.Models
         {
             try
             {
-                //Mouse.Synchronize();
                 switch (newWindow)
                 {
                     case UserControlView.Main:
@@ -47,7 +46,7 @@ namespace WPFMultired.Models
                         View = new ConsultUserControl((string)data, (string)complement);
                         break;
                     case UserControlView.PaySuccess:
-                        View = new SussesUserControl((Transaction)data);
+                        View = new SuccessUserControl((Transaction)data);
                         break;
                     case UserControlView.Pay:
                         View = new PaymentUserControl((Transaction)data);
@@ -87,6 +86,9 @@ namespace WPFMultired.Models
                         break;
                     case UserControlView.Photo:
                         View = new PhotoUserControl((Transaction)data);
+                        break;
+                    case UserControlView.Voucher:
+                        View = new VoucherUserControl((Transaction)data);
                         break;
                 }
 

@@ -16,7 +16,6 @@ namespace WPFMultired.Classes
         private TimerGeneric timer;
         #endregion
 
-
         #region SerialPorts
         private SerialPort _serialPort;//Puerto billeteros
 
@@ -461,16 +460,7 @@ namespace WPFMultired.Classes
                         typeDispend = 1;
                     }
 
-                    //if (amountBills > 0)
-                    //{
-                    //DispenserMoney(((int)(amountBills / _dividerBills)).ToString());
                     DispenserMoney(dispenserValue.ToString());
-                    //}
-
-                    //if (amountCoins > 0)
-                    //{
-                    //    SendMessageCoins(_DispenserCoinOn + ((int)(amountCoins / _dividerCoins)).ToString());
-                    //}
                 }
             }
             catch (Exception ex)
@@ -614,7 +604,6 @@ namespace WPFMultired.Classes
                         typeDispend--;
                         break;
                 }
-
 
                 if (!stateError)
                 {

@@ -333,6 +333,9 @@
     <Compile Include="UserControls\DetailUserControl.xaml.cs">
       <DependentUpon>DetailUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\VoucherUserControl.xaml.cs">
+      <DependentUpon>VoucherUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Withdrawal\ControlMoneyUserControl.xaml.cs">
       <DependentUpon>ControlMoneyUserControl.xaml</DependentUpon>
     </Compile>
@@ -360,8 +363,8 @@
     <Compile Include="UserControls\PaymentUserControl.xaml.cs">
       <DependentUpon>PaymentUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SussesUserControl.xaml.cs">
-      <DependentUpon>SussesUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\SuccessUserControl.xaml.cs">
+      <DependentUpon>SuccessUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Withdrawal\CodigoVerificacionUserControl.xaml.cs">
       <DependentUpon>CodigoVerificacionUserControl.xaml</DependentUpon>
@@ -630,6 +633,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\VoucherUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Withdrawal\ControlMoneyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -666,7 +673,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\SussesUserControl.xaml">
+    <Page Include="UserControls\SuccessUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1152,6 +1159,15 @@
     <Resource Include="Images\Publish2\7.jpg" />
     <Resource Include="Images\Publish2\8.jpg" />
     <Resource Include="Images\Publish2\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icono-Factura.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconQuestion.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TextBorder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

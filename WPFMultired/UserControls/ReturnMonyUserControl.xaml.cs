@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabador.Transaccion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -27,10 +28,10 @@ namespace WPFMultired.UserControls
             InitializeComponent();
             this.transaction = transaction;
             grvPublicity.Content = Utilities.UCPublicityBanner;
-            OrganizeValues();
+            _ = OrganizeValuesAsync();
         }
 
-        private void OrganizeValues()
+        private async Task OrganizeValuesAsync()
         {
             try
             {
@@ -63,7 +64,7 @@ namespace WPFMultired.UserControls
 
                 this.DataContext = this.viewModel;
 
-                ReturnMoney();
+                await ReturnMoneyAsync();
             }
             catch (Exception ex)
             {
@@ -71,12 +72,37 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private void ReturnMoney()
+        private async Task ReturnMoneyAsync()
         {
             try
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
+                    AdminPayPlus.ControlPeripherals.StartDispenser(transaction.Payment.ValorSobrante);
+
+                    AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
+                    {
+                        AdminPayPlus.ControlPeripherals.callbackOut = null;
+                        if (!this.viewModel.StatePay)
+                        {
+                            viewModel.ValorDispensado += valueOut;
+
+                            if (viewModel.ValorDispensado != viewModel.ValorSobrante)
+                            {
+                                if (transaction.Type != ETransactionType.Withdrawal)
+                                {
+                                    transaction.State = ETransactionState.CancelError;
+                                }
+                                else
+                                {
+                                    transaction.State = ETransactionState.Error;
+                                }
+                            }
+
+                            FinishCancelPay();
+                        }
+                    };
+
                     AdminPayPlus.ControlPeripherals.callbackTotalOut = totalOut =>
                     {
                         if (!this.viewModel.StatePay)
@@ -91,6 +117,12 @@ namespace WPFMultired.UserControls
 
                             FinishCancelPay();
                         }
+                    };
+
+                    AdminPayPlus.ControlPeripherals.callbackLog = (log, isBX) =>
+                    {
+                        viewModel.SplitDenomination(log, isBX);
+                        AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
                     };
 
                     AdminPayPlus.ControlPeripherals.callbackError = error =>
@@ -115,36 +147,6 @@ namespace WPFMultired.UserControls
                             AdminPayPlus.SaveLog(log, ELogType.Device);
                         };
                     };
-
-                    AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
-                    {
-                        AdminPayPlus.ControlPeripherals.callbackOut = null;
-                        if (!this.viewModel.StatePay)
-                        {
-                            viewModel.ValorDispensado += valueOut;
-
-                            if (viewModel.ValorDispensado != viewModel.ValorSobrante)
-                            {
-                                if (transaction.Type != ETransactionType.Withdrawal)
-                                {
-                                    transaction.State = ETransactionState.CancelError;
-                                }
-                                else
-                                {
-                                    transaction.State = ETransactionState.Error;
-                                }
-                            }
-                            FinishCancelPay();
-                        }
-                    };
-
-                    AdminPayPlus.ControlPeripherals.callbackLog = (log, isBX) =>
-                    {
-                        viewModel.SplitDenomination(log, isBX);
-                        AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
-                    };
-
-                    AdminPayPlus.ControlPeripherals.StartDispenser(transaction.Payment.ValorSobrante);
                 });
             }
             
@@ -169,32 +171,33 @@ namespace WPFMultired.UserControls
                     {
                         Task.Run(async () =>
                         {
-                            if (this.viewModel.ValorDispensado >= transaction.Payment.ValorSobrante)
+                            transaction.Amount = viewModel.ValorDispensado;
+                            transaction.DateTransaction = DateTime.Now;
+
+                            var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
+
+                            Utilities.CloseModal();
+
+                            if (response.Data != null)
                             {
-                                transaction.Amount = viewModel.ValorDispensado;
-                                //transaction.Products[0].Code.Replace()
-
-                                var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
-
-                                Utilities.CloseModal();
-
-                                if (response.Data != null)
+                                if (this.viewModel.ValorDispensado >= transaction.Payment.ValorSobrante)
                                 {
                                     transaction = (Transaction)response.Data;
-                                    transaction.State = ETransactionState.Success;
                                 }
                                 else
                                 {
-                                    AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
-                                    Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
-                                    transaction.State = ETransactionState.ErrorService;
+                                    transaction.StateNotification = 1;
+                                    Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error, this);
                                 }
+
+                                transaction.State = ETransactionState.Success;
                             }
                             else
                             {
-                                Utilities.CloseModal();
-                                transaction.StateNotification = 1;
-                                Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error, this);
+                                // Error en el servicio "Reportar transaccion"
+                                AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
+                                Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
+                                transaction.State = ETransactionState.ErrorService;
                             }
 
                             if (transaction.IdTransactionAPi > 0)
@@ -216,15 +219,25 @@ namespace WPFMultired.UserControls
                     {
                         transaction.StateNotification = 1;
 
-                        AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Cash, transaction);
+                        Task<Response> Task_Report_Cash = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Cash, transaction);
 
-                        AdminPayPlus.UpdateTransaction(transaction);
+                        if (!Task_Report_Cash.IsFaulted)
+                        {
+                            AdminPayPlus.UpdateTransaction(transaction);
 
-                        Utilities.PrintVoucher(this.transaction);
+                            Utilities.PrintVoucher(this.transaction);
 
-                        Thread.Sleep(8000);
+                            Thread.Sleep(8000);
 
-                        Utilities.navigator.Navigate(UserControlView.Main);
+                            Utilities.navigator.Navigate(UserControlView.Main);
+                        }
+                        else
+                        {
+                            AdminPayPlus.SaveErrorControl(MessageResource.NoInsertTransaction, this.transaction.TransactionId.ToString(), EError.Api, ELevelError.Strong);
+                            Utilities.ShowModal(MessageResource.NoInsertTransaction, EModalType.Error, this);
+                            transaction.State = ETransactionState.ErrorService;
+                        }
+
                     }
                 }
             }

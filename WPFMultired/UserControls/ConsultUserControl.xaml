@@ -64,7 +64,7 @@
                 Foreground="#FF5D5D5D"
                 TextWrapping="Wrap"
                 TextAlignment="Center"
-                Text="Para iniciar, ingresa el número de identificación de la persona a la cual le realizarás la transacción" 
+                Text="Para iniciar, ingresa tu número de identificación" 
              />
         </Grid>
         <Grid Grid.Row="2" Name="gd_payer" Margin="50,0,50,0">

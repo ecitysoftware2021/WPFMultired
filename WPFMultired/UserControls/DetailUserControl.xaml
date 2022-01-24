@@ -92,6 +92,15 @@
                     VerticalAlignment="Center"
                     TextAlignment="Center" 
                 />
+                <Image 
+                    Source="../Images/Others/lineGreen.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,270,0,0" 
+                    Width="430"
+                    Height="3"
+                    Stretch="Fill"
+                />
                 <TextBlock  
                     
                     x:Name="lblAmountTitle"

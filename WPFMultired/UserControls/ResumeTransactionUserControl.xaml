@@ -232,10 +232,6 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right" />
 
-            
-
-         
-
             <TextBlock 
                 Name="tb_id_transaction"
                 FontSize="18"
@@ -247,7 +243,6 @@
                 Visibility="Hidden"
                 HorizontalAlignment="Right" />
 
-            
             <Image 
                 Source="/Images/Buttons/newaceptar2.png"
                 x:Name="btn_acept"

@@ -58,13 +58,6 @@ namespace WPFMultired.Classes
             get { return _controlPeripherals; }
         }
 
-        //private static CLSGrabador _recorder;
-
-        //public static CLSGrabador Recorder
-        //{
-        //    get { return _recorder; }
-        //}
-
         private static ApiIntegration _apiIntegration;
 
         public static ApiIntegration ApiIntegration
@@ -194,7 +187,6 @@ namespace WPFMultired.Classes
         {
             try
             {
-
                 var responseInit = await ApiIntegration.CallService(ETypeService.Validate_Status_Admin, null);
                 DATAINIT validateStatus = (responseInit.Data as DATAINIT);
                 _dataPayPlus.StateAceptance = validateStatus.O_STATUSACEPTADOR;
