@@ -239,15 +239,12 @@ namespace WPFMultired.UserControls
         {
             try
             {
-                var valorDivididoEn10 = Convert.ToDecimal(valueModel.Val) % 10000;
-
-                if (string.IsNullOrEmpty(txtValor.Text) ||
+                if (
+                    string.IsNullOrEmpty(txtValor.Text) ||
                     valueModel.Val <= 0 ||
                     valueModel.Val < min ||
-                    valueModel.Val > max ||
-                    (valorDivididoEn10 != 0 &&
+                    valueModel.Val > max &&
                     transaction.eTypeService == ETypeServiceSelect.Deposito)
-                    )
                 {
                     ShowErrorMs();
                     return false;
@@ -450,7 +447,6 @@ namespace WPFMultired.UserControls
                     }
                 }
                
-
                 Utilities.navigator.Navigate(UserControlView.Detail, true, transaction);
             }
         }

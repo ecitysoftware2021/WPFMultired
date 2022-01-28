@@ -78,8 +78,6 @@ namespace WPFMultired.UserControls
             {
                 await Task.Run(() =>
                 {
-                    AdminPayPlus.ControlPeripherals.StartDispenser(transaction.Payment.ValorSobrante);
-
                     AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
                     {
                         AdminPayPlus.ControlPeripherals.callbackOut = null;
@@ -147,6 +145,8 @@ namespace WPFMultired.UserControls
                             AdminPayPlus.SaveLog(log, ELogType.Device);
                         };
                     };
+
+                    AdminPayPlus.ControlPeripherals.StartDispenser(transaction.Payment.ValorSobrante);
                 });
             }
             
@@ -172,7 +172,6 @@ namespace WPFMultired.UserControls
                         Task.Run(async () =>
                         {
                             transaction.Amount = viewModel.ValorDispensado;
-                            transaction.DateTransaction = DateTime.Now;
 
                             var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Transaction, transaction);
 

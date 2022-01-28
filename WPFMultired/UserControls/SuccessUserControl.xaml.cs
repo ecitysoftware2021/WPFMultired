@@ -39,24 +39,36 @@ namespace WPFMultired.UserControls
 
         private void presentarTransaccion()
         {
-            if(transaction.CodeTypeTransaction == Utilities.GetConfiguration("CodDepositos"))
+            actualizarCamposTransversales();
+
+            if (transaction.eTypeService == ETypeServiceSelect.Retiros)
+            {
+                valorTransaccion.Text = string.Format("{0:C0}", transaction.Amount);
+                numeroAprobacionTransaccion.Text = transaction.CodeTransactionAuditory;
+            }
+            else if (transaction.eTypeService == ETypeServiceSelect.Deposito)
             {
                 var valorConsignacion = transaction.Payment.ValorIngresado - transaction.Payment.ValorDispensado;
 
-                fechaTransaccion.Text = transaction.DateTransaction.ToString();
-                nombreTitularTransaccion.Text = transaction.payer.NAME;
                 valorTransaccion.Text = string.Format("{0:C0}", valorConsignacion);
-                valorComisionTransaccion.Text = string.Format("{0:C0}", transaction.Product.AmountCommission);
+                numeroAprobacionTransaccion.Text = transaction.DatosAdicionales.NROAPR;
+            } else if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta)
+            {
+                valorTransaccion.Text = string.Format("{0:C0}", transaction.Amount);
                 numeroAprobacionTransaccion.Text = transaction.DatosAdicionales.NROAPR;
             }
-            else if (transaction.CodeTypeTransaction == Utilities.GetConfiguration("CodRetiros"))
+            else if (transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
             {
-                fechaTransaccion.Text = transaction.DateTransaction.ToString();
-                nombreTitularTransaccion.Text = transaction.payer.NAME;
-                valorTransaccion.Text = string.Format("{0:C0}", transaction.Amount);
-                valorComisionTransaccion.Text = string.Format("{0:C0}", transaction.Product.AmountCommission);
-                numeroAprobacionTransaccion.Text = transaction.CodeTransactionAuditory;
+
             }
+            
+        }
+
+        public void actualizarCamposTransversales()
+        {
+            fechaTransaccion.Text = transaction.DateTransaction.ToString();
+            nombreTitularTransaccion.Text = transaction.payer.NAME;
+            valorComisionTransaccion.Text = string.Format("{0:C0}", transaction.Product.AmountCommission);
         }
 
         private void Btn_aceptar_TouchDown(object sender, TouchEventArgs e)

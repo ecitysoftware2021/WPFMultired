@@ -322,13 +322,15 @@ namespace WPFMultired.Classes
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPR, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROAPR, x = (xMax - transaction.DatosAdicionales.NROAPR.Length * multiplier), y = y });
 
-                        //Descripcion producto
+                        // Descripcion producto (Numero de producto)
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESPRO, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = transaction.DatosAdicionales.NROPRO, x = (xMax - transaction.DatosAdicionales.NROPRO.Length * multiplier), y = y });
 
+                        // Valor credito
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESAPL, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLRAPL), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLRAPL).Length * multiplier), y = y });
 
+                        // Excedente abonado cuenta de ahorros
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESEXC, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLREXC), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLREXC).Length * multiplier), y = y });
 
@@ -344,21 +346,26 @@ namespace WPFMultired.Classes
                             data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLRAPO), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLRAPO).Length * multiplier), y = y });
                         }
 
+                        // Honorarios
                         if (transaction.DatosAdicionales.FLGHON)
                         {
                             data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESHON, x = xKey, y = y += sum });
                             data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLRHON), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLRHON).Length * multiplier), y = y });
                         }
+
+                        // Comision
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESCOM, x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLRCOM), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLRCOM).Length * multiplier), y = y });
 
-
+                        // Total
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = transaction.DatosAdicionales.DESTOT, x = xKey, y = y += 30 });
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = string.Format("{0:C2}", transaction.DatosAdicionales.VLRTOT), x = (xMax - string.Format("{0:C2}", transaction.DatosAdicionales.VLRTOT).Length * multiplier), y = y });
 
+                        // Total ingresado
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Total ingresado:", x = xKey, y = y += 30 });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.Payment.ValorIngresado), x = (xMax - string.Format("{0:C2}", transaction.Payment.ValorIngresado).Length * multiplier), y = y });
 
+                        // Total devuelto
                         data.Add(new DataPrinter { brush = color, font = fontKey, value = "Valor devuelto:", x = xKey, y = y += sum });
                         data.Add(new DataPrinter { brush = color, font = fontValue, value = string.Format("{0:C2}", transaction.Payment.ValorDispensado), x = (xMax - string.Format("{0:C2}", transaction.Payment.ValorDispensado).Length * multiplier), y = y });
                     }

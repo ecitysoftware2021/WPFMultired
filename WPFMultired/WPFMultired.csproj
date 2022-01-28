@@ -437,6 +437,7 @@
     <EmbeddedResource Include="Resources\MessageResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Connected Services\MR_CodeTOTP\TOTPMultiRed.wsdl" />
     <None Include="Connected Services\MR_CodeQR\QRDecode.wsdl" />

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -107,7 +106,7 @@ namespace WPFMultired.UserControls
                         }
                     };
 
-                    AdminPayPlus.ControlPeripherals.callbackTotalIn = async enterTotal =>
+                    AdminPayPlus.ControlPeripherals.callbackTotalIn = enterTotal =>
                     {
                         AdminPayPlus.ControlPeripherals.callbackTotalIn = null;
                         if (!this.paymentViewModel.StatePay)
@@ -131,17 +130,26 @@ namespace WPFMultired.UserControls
                                     if (transaction.eTypeService == ETypeServiceSelect.EstadoCuenta
                                      || transaction.eTypeService == ETypeServiceSelect.TarjetaCredito)
                                     {
-                                        await ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                        if (paymentViewModel.ValorSobrante < 100)
+                                        {
+                                            SavePay();
+                                        }
+                                        else
+                                        {
+                                            ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                        }
                                     }
                                     else
                                     {
+                                        //string ms = string.Concat("Su transacción tiene una devolución por valor de ", paymentViewModel.ValorSobrante.ToString("C", new CultureInfo("en-US")));
                                         string ms = string.Concat("Solicita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorros a la que estas consignando.", Environment.NewLine,
                                             "Si tu vuelto es inferior a $100 se abonará automáticamente a la cuenta que estás consignando.");
+                                        //string tittle = "licita vueltos a la máquina o abona el vuelto a la misma cuenta de ahorro a la que estás consignando.";
                                         string tittle = "";
 
                                         if (!Utilities.ShowModal(ms, EModalType.ReturnMoney, this, false, tittle))
                                         {
-                                            await ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
+                                            ReturnMoney(paymentViewModel.ValorSobrante - decimas, true);
                                         }
                                         else
                                         {
@@ -209,22 +217,36 @@ namespace WPFMultired.UserControls
             }
         }
 
-        private async Task ReturnMoney(decimal returnValue, bool state)
+        private void ReturnMoney(decimal returnValue, bool state)
         {
             try
             {
-                await Task.Run(() =>
+                AdminPayPlus.ControlPeripherals.callbackTotalOut = totalOut =>
                 {
-                    AdminPayPlus.ControlPeripherals.StartDispenser(returnValue);
-
-                    AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
+                    AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
+                    AdminPayPlus.ControlPeripherals.callbackOut = null;
+                    if (state)
                     {
-                        AdminPayPlus.ControlPeripherals.callbackOut = null;
-                        AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
+                        paymentViewModel.ValorDispensado = totalOut;
+                        SavePay();
+                    }
+                };
 
-                        paymentViewModel.ValorDispensado += valueOut;
+                AdminPayPlus.ControlPeripherals.callbackLog = (log, isBK) =>
+                {
+                    paymentViewModel.SplitDenomination(log, isBK);
+                    AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
+                };
 
-                        if (paymentViewModel.ValorDispensado == returnValue)
+                AdminPayPlus.ControlPeripherals.callbackOut = valueOut =>
+                {
+                    AdminPayPlus.ControlPeripherals.callbackOut = null;
+                    AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
+                    if (state)
+                    {
+                        paymentViewModel.ValorDispensado = valueOut;
+
+                        if (paymentViewModel.ValorDispensado == paymentViewModel.ValorSobrante)
                         {
                             SavePay();
                         }
@@ -233,25 +255,10 @@ namespace WPFMultired.UserControls
                             Utilities.ShowModal(MessageResource.IncompleteMony, EModalType.Error, this);
                             SavePay(ETransactionState.Error);
                         }
-                    };
+                    }
+                };
 
-                    AdminPayPlus.ControlPeripherals.callbackTotalOut = totalOut =>
-                    {
-                        AdminPayPlus.ControlPeripherals.callbackTotalOut = null;
-                        AdminPayPlus.ControlPeripherals.callbackOut = null;
-                        if (state)
-                        {
-                            paymentViewModel.ValorDispensado += totalOut;
-                            SavePay();
-                        }
-                    };
-
-                    AdminPayPlus.ControlPeripherals.callbackLog = (log, isBK) =>
-                    {
-                        paymentViewModel.SplitDenomination(log, isBK);
-                        AdminPayPlus.SaveDetailsTransaction(transaction.IdTransactionAPi, 0, 0, 0, string.Empty, log);
-                    };
-                });
+                AdminPayPlus.ControlPeripherals.StartDispenser(returnValue);
             }
             catch (Exception ex)
             {
@@ -286,30 +293,27 @@ namespace WPFMultired.UserControls
                     this.paymentViewModel.StatePay = true;
                     transaction.Payment = paymentViewModel;
                     transaction.State = statePay;
-                    transaction.DateTransaction = DateTime.Now;
-
                     AdminPayPlus.ControlPeripherals.ClearValues();
-
                     if (transaction.IdTransactionAPi > 0)
                     {
-                        await Task.Run(async () =>
+                        Task.Run(() =>
                         {
                             this.transaction.Amount = paymentViewModel.ValorIngresado;
-                            var response = await AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
+                            var response = AdminPayPlus.ApiIntegration.CallService(ETypeService.Report_Invoice, transaction);
 
-                            if (response.Data != null)
+                            Utilities.CloseModal();
+                            if (response != null)
                             {
-                                transaction = (Transaction)response.Data;
-
                                 transaction.State = ETransactionState.Success;
                             }
                             else
                             {
                                 transaction.State = ETransactionState.ErrorService;
                             }
-
-                            Utilities.navigator.Navigate(UserControlView.PaySuccess, false, this.transaction);
+                            Utilities.navigator.Navigate(UserControlView.ResumeTransaction, false, this.transaction);
                         });
+
+                        Utilities.ShowModal("Te recordamos que este dispositivo envía la información de tu transacción al correo electrónico registrado por el titular de la cuenta.", EModalType.Preload, this);
                     }
                     else
                     {

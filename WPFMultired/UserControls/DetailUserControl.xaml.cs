@@ -81,6 +81,8 @@ namespace WPFMultired.UserControls
 
         private void btn_Accept_TouchDown(object sender, TouchEventArgs e)
         {
+            transaction.DateTransaction = DateTime.Now;
+
             switch (transaction.eTypeService)
             {
                 case ETypeServiceSelect.Retiros:
@@ -92,6 +94,7 @@ namespace WPFMultired.UserControls
             }
 
         }
+
         private void ValidateMoneyAndContinueWithdrawal()
         {
             if (transaction.Amount > transaction.Product.ExtraRetiro.VALORMAX)
